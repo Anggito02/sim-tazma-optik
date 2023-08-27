@@ -45,6 +45,8 @@ class AuthController extends Controller {
      */
     public function login(Request $request) {
         try {
+            $resultData = $this->loginServiceProvider->login($request);
+
             return response()->json([
                 'success' => true,
                 'message' => 'User logged in successfully',

@@ -8,15 +8,11 @@ use Illuminate\Http\Request;
 use App\DTO\UserDTO;
 use Exception;
 
-use App\Utils\Auth\UserDataValidator;
 use App\Repositories\Auth\RegisterRepository;
 
 
 class RegisterServiceProvider {
     public function __construct(
-        // Validator
-        private UserDataValidator $userDataValidator,
-
         // Repository
         private RegisterRepository $registerRepository
     ) {}
@@ -28,23 +24,21 @@ class RegisterServiceProvider {
      */
     public function register(Request $request) {
         try {
-            $username = $request->username;
-            $email = $request->email;
-            $password = $request->password;
-            $role = 'user';
-
-            $this->userDataValidator->validateUsername($username);
-            $this->userDataValidator->validateEmail($email);
-            $this->userDataValidator->validatePassword($password);
+            // Validate user data
+            $request->validate([
+                'username' => 'required|alpha_dash|unique:users|min:4|max:20',
+                'email' => 'required|email:dns|unique:users',
+                'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'min:8', 'max:20'],
+            ]);
 
             // Hash password
-            $hashedPassword = Hash::make($password);
+            $hashedPassword = Hash::make($request->password);
 
             $userDTO = new UserDTO(
-                $email,
+                $request->email,
                 $hashedPassword,
-                $username,
-                $role
+                $request->username,
+                'user'
             );
 
             // Add user to database
