@@ -44,7 +44,11 @@ class RegisterServiceProvider {
             // Add user to database
             $this->registerRepository->register($userDTO);
 
-            return $userDTO;
+            return ([
+                'username' => $userDTO->getUsername(),
+                'email' => $userDTO->getEmail(),
+                'role' => $userDTO->getRole()
+            ]);
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

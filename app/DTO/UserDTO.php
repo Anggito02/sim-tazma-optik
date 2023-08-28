@@ -43,6 +43,14 @@ class UserDTO {
     public function setRole(string $role): void {
         $this->role = $role;
     }
+
+    public function getToken(): string {
+        return $this->token;
+    }
+
+    public function setToken(string $token): void {
+        $this->token = $token;
+    }
 }
 
 ?>

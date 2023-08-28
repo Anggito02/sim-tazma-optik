@@ -39,7 +39,12 @@ class LoginServiceProvider {
             // Get user from database
             $validUserDTO = $this->loginRepository->login($userDTO);
 
-            return $validUserDTO;
+            return ([
+                'username' => $validUserDTO->getUsername(),
+                'email' => $validUserDTO->getEmail(),
+                'role' => $validUserDTO->getRole(),
+                'token' => $validUserDTO->getToken()
+            ]);
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }
