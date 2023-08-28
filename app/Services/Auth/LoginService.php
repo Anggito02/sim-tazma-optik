@@ -10,7 +10,7 @@ use Exception;
 
 use App\Repositories\Auth\LoginRepository;
 
-class LoginServiceProvider {
+class LoginService {
     public function __construct(
         // Repository
         private LoginRepository $loginRepository

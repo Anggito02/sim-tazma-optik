@@ -11,7 +11,7 @@ use Exception;
 use App\Repositories\Auth\RegisterRepository;
 
 
-class RegisterServiceProvider {
+class RegisterService {
     public function __construct(
         // Repository
         private RegisterRepository $registerRepository

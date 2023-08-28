@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\Services\Auth\RegisterServiceProvider;
-use App\Services\Auth\LoginServiceProvider;
+use App\Services\Auth\RegisterService;
+use App\Services\Auth\LoginService;
 
 class AuthController extends Controller {
     // Service Providers Contructs
     public function __construct(
-        private RegisterServiceProvider $registerServiceProvider,
-        private LoginServiceProvider $loginServiceProvider
+        private RegisterService $registerService,
+        private LoginService $loginService
     ) {}
 
     /**
@@ -22,7 +22,7 @@ class AuthController extends Controller {
      */
     public function register(Request $request) {
         try {
-            $resultData = $this->registerServiceProvider->register($request);
+            $resultData = $this->registerService->register($request);
 
             return response()->json([
                 'status' => 'success',
@@ -44,7 +44,7 @@ class AuthController extends Controller {
      */
     public function login(Request $request) {
         try {
-            $resultData = $this->loginServiceProvider->login($request);
+            $resultData = $this->loginService->login($request);
 
             return response()->json([
                 'status' => 'success',
