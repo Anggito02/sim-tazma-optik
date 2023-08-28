@@ -33,15 +33,13 @@ class LoginService {
                 null,
                 $request->email,
                 $request->password,
-                null,
-                'user'
             );
 
             // Get user from database
             $validUserDTO = $this->loginRepository->login($userDTO);
 
             return ([
-                'username' => $validUserDTO->getUsername(),
+                'employee_name' => $validUserDTO->getEmployeeName(),
                 'email' => $validUserDTO->getEmail(),
                 'role' => $validUserDTO->getRole(),
                 'token' => $validUserDTO->getToken()

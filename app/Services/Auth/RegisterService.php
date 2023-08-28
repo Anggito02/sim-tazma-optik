@@ -26,9 +26,19 @@ class RegisterService {
         try {
             // Validate user data
             $request->validate([
-                'username' => 'required|alpha_dash|unique:users|min:4|max:20',
                 'email' => 'required|email:dns|unique:users',
                 'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'min:8', 'max:20'],
+                'employee_name' => 'required',
+                'nik' => 'required',
+                'photo' => 'required',
+                'gender' => 'required',
+                'address' => 'required',
+                'phone' => 'required',
+                'department' => 'required',
+                'section' => 'required',
+                'position' => 'required',
+                'group' => 'required',
+                'domicile' => 'required',
             ]);
 
             // Hash password
@@ -38,17 +48,27 @@ class RegisterService {
                 null,
                 $request->email,
                 $hashedPassword,
-                $request->username,
-                'user'
+                $request->employee_name,
+                $request->nik,
+                $request->photo,
+                $request->gender,
+                $request->address,
+                $request->phone,
+                $request->department,
+                $request->section,
+                $request->position,
+                'user',
+                $request->group,
+                $request->domicile,
             );
 
             // Add user to database
-            $this->registerRepository->register($userDTO);
+            $userResult = $this->registerRepository->register($userDTO);
 
             return ([
-                'username' => $userDTO->getUsername(),
-                'email' => $userDTO->getEmail(),
-                'role' => $userDTO->getRole()
+                'employee_name' => $userResult->getEmployeeName(),
+                'email' => $userResult->getEmail(),
+                'role' => $userResult->getRole()
             ]);
         } catch (Exception $error) {
             throw new Exception($error->getMessage());

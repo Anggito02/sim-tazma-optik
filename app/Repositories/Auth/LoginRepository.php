@@ -31,8 +31,18 @@ class LoginRepository {
                 $user->id,
                 $user->email,
                 $user->password,
-                $user->username,
+                $user->employee_name,
+                $user->nik,
+                $user->photo,
+                $user->gender,
+                $user->address,
+                $user->phone,
+                $user->department,
+                $user->section,
+                $user->position,
                 $user->role,
+                $user->group,
+                $user->domicile,
                 $token
             );
         } catch (Exception $error) {
