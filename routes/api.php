@@ -24,11 +24,20 @@ Route::controller(AuthController::class)->group(function() {
 Route::get('/token-test', function() {
     try {
         return response()->json([
+            'status' => 'success',
             'message' => 'Token is valid'
         ]);
     } catch (Exception $error) {
         return response()->json([
+            'status' => 'error',
             'message' => $error->getMessage()
         ]);
     }
 })->middleware('auth:sanctum');
+
+Route::any('{any}', function () {
+    return response()->json([
+        'status' => 'error',
+        'message' => 'Method Not Allowed'
+    ])->setStatusCode(405);
+})->where('any', '.*');
