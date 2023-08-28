@@ -12,30 +12,49 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">ROOM TYPE MANAGEMENT</h6>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn-sm btn-success float-right" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Add New
-                </button>
+            <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
 
-                <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
+                data-target="#exampleModalCenter">
+                Add New
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Data</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Save Data</button>
-                    </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">New Data</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="">
+                                @csrf
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Warna</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type="submit" class="btn btn-success" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            {{-- <button type="button" class="btn btn-success">Save</button> --}}
+                        </div>
                     </div>
                 </div>
-                </div>
+            </div>
+
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -44,65 +63,122 @@
                         <tr>
                             <th>No</th>
                             <th>Warna</th>
-                            <th>Update</th>
-                            <th>Delete</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>No</th>
                             <th>Warna</th>
-                            <th>Update</th>
-                            <th>Delete</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                            <tr>
-                                <td>damas</td>
-                                <td>BROWN</td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
+                        <tr>
+                            <td>1</td>
+                            <td>BROWN</td>
+                            <td>
+                                <!-- Button trigger modal Edit -->
+                                <button type="button" class="btn-sm btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                    <i class="fa fa-edit"></i>
+                                </button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <!-- Modal -->
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="post">
-                                                <table class="table table-bordered">
-                                                    <tr>
-                                                        <th>Warna</th>
-                                                        <td><input type="text" name="warna" class="form-control"></td>
-                                                    </tr>
-                                                </table>
-                                            
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success">Update</button>
-                                        </div>
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post">
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <th>Warna</th>
+                                                            <td><input type="text" name="warna" class="form-control">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-success">Update</button>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                <!-- Button trigger modal Delete -->
+                                <button type="button" class="btn-sm btn-danger" data-toggle="modal"
+                                    data-target="#exampleModalCenterDelete">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">No</button>
+                                                <button type="button" class="btn btn-danger">Yes</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </td>
-                                <td>
-                                    <a onclick="return confirm('Are you sure?')" href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
+                                </div>
+
+                                {{-- <button type="button" class="btn-sm btn-danger" data-target="#deleteModal"
+                                    data-toggle="modal"><i class="fa fa-trash"></i></button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="deleteModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    id="close-modal" >No</button>
+                                                <button type="button" class="btn btn-danger">Yes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                            </td>
+
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    
+
 </div>
 <!-- /.container-fluid -->
 @endsection
