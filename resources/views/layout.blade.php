@@ -11,6 +11,7 @@
 
     <title>dHotel</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="{{ asset('vendor\fontawesome-free\css\all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -18,7 +19,6 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link rel="stylesheet" href="{{ asset('vendor\datatables\dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css\sb-admin-2.min.css') }}">
 
 </head>
@@ -413,6 +413,13 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js\sb-admin-2.js') }}"></script>
 
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
