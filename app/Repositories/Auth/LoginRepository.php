@@ -28,6 +28,7 @@ class LoginRepository {
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return new UserDTO(
+                $user->id,
                 $user->email,
                 $user->password,
                 $user->username,

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,14 @@ use App\Http\Controllers\AuthController;
 Route::controller(AuthController::class)->group(function() {
     Route::post('/register', 'register')->name('register');
     Route::post('/login', 'login')->name('login');
+});
+
+Route::controller(EmployeeController::class)->group(function() {
+    Route::get('/employee/one', 'getEmployee')->name('getEmployee');
+    Route::get('/employee/all', 'getAllEmployees')->name('getAllEmployee');
+    Route::post('/employee/add', 'addEmployee')->name('addEmployee');
+    Route::delete('/employee/delete', 'deleteEmployee')->name('deleteEmployee');
+    Route::put('/employee/edit', 'editEmployee')->name('editEmployee');
 });
 
 Route::get('/token-test', function() {

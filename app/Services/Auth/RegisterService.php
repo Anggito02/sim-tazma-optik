@@ -35,6 +35,7 @@ class RegisterService {
             $hashedPassword = Hash::make($request->password);
 
             $userDTO = new UserDTO(
+                null,
                 $request->email,
                 $hashedPassword,
                 $request->username,

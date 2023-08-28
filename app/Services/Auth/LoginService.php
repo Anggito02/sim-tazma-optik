@@ -30,6 +30,7 @@ class LoginService {
             ]);
 
             $userDTO = new UserDTO(
+                null,
                 $request->email,
                 $request->password,
                 null,
