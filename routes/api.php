@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\EmployeeController;
 
 /*
@@ -28,6 +29,14 @@ Route::controller(EmployeeController::class)->group(function() {
     Route::post('/employee/add', 'addEmployee')->name('addEmployee');
     Route::delete('/employee/delete', 'deleteEmployee')->name('deleteEmployee');
     Route::put('/employee/edit', 'editEmployee')->name('editEmployee');
+});
+
+Route::controller(ColorController::class)->group(function() {
+    Route::get('/color/one', 'getColor')->name('getColor');
+    Route::get('/color/all', 'getAllColor')->name('getAllColors');
+    Route::post('/color/add', 'addColor')->name('addColor');
+    Route::delete('/color/delete', 'deleteColor')->name('deleteColor');
+    Route::put('/color/edit', 'editColor')->name('editColor');
 });
 
 Route::get('/token-test', function() {
