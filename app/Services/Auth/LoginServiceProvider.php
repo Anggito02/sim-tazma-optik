@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 use App\DTO\UserDTO;
 use Exception;
 
+use App\Repositories\Auth\LoginRepository;
+
 class LoginServiceProvider {
     public function __construct(
-
+        // Repository
+        private LoginRepository $loginRepository
     ) {}
 
     /**
@@ -20,16 +23,23 @@ class LoginServiceProvider {
      */
     public function login(Request $request) {
         try {
-            $hashedPassword = Hash::make($request->password);
+            // Validate user data
+            $request->validate([
+                'email' => 'required|email:dns',
+                'password' => 'required',
+            ]);
 
             $userDTO = new UserDTO(
                 $request->email,
-                $hashedPassword,
-                $request->username,
+                $request->password,
+                null,
                 'user'
             );
 
-            return $userDTO;
+            // Get user from database
+            $validUserDTO = $this->loginRepository->login($userDTO);
+
+            return $validUserDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

@@ -50,7 +50,7 @@ class AuthController extends Controller {
             return response()->json([
                 'success' => true,
                 'message' => 'User logged in successfully',
-                'data' => $request->all()
+                'data' => $resultData
             ]);
         } catch (Exception $error) {
             return response()->json([

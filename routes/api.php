@@ -16,10 +16,19 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(AuthController::class)->group(function() {
+    Route::post('/register', 'register')->name('register');
+    Route::post('/login', 'login')->name('login');
 });
 
-
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::get('/token-test', function() {
+    try {
+        return response()->json([
+            'message' => 'Token is valid'
+        ]);
+    } catch (Exception $error) {
+        return response()->json([
+            'message' => $error->getMessage()
+        ]);
+    }
+})->middleware('auth:sanctum');
