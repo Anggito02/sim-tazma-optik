@@ -21,6 +21,11 @@ class DeleteEmployeeService {
      */
     public function deleteEmployee(Request $request) {
         try {
+            // Validate request
+            $request->validate([
+                'id' => 'required',
+            ]);
+
             $employeeDTO = $this->employeeRepository->deleteEmployee($request->id);
 
             return $employeeDTO;

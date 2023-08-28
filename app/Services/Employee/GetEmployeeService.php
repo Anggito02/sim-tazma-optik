@@ -21,6 +21,11 @@ class GetEmployeeService {
      */
     public function getEmployee(Request $request) {
         try {
+            // Validate request
+            $request->validate([
+                'id' => 'required',
+            ]);
+
             $employeeDTO = $this->employeeRepository->getEmployee($request->id);
 
             return $employeeDTO;

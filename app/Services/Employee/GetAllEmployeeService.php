@@ -21,7 +21,13 @@ class GetAllEmployeeService {
      */
     public function getAllEmployees(Request $request) {
         try {
-            $employeeDTO = $this->employeeRepository->getAllEmployees();
+            // Validate request
+            $request->validate([
+                'page' => 'required',
+                'limit' => 'required',
+            ]);
+
+            $employeeDTO = $this->employeeRepository->getAllEmployees($request->page, $request->limit);
 
             return $employeeDTO;
         } catch (Exception $error) {

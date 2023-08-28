@@ -12,10 +12,11 @@ class GetAllEmployeeRepository {
      * Get all employees
      * @return array of employeeDTOs
      */
-    public function getAllEmployees() {
+    public function getAllEmployees(int $page, int $limit) {
         try {
-            $employees = Employee::all();
-            $employeeDTOs = array();
+            $employees = Employee::paginate($limit, ['*'], 'page', $page);
+
+            $employeeDTOs = [];
             foreach ($employees as $employee) {
                 $employeeDTO = new EmployeeDTO(
                     $employee->id,
@@ -29,6 +30,7 @@ class GetAllEmployeeRepository {
                     $employee->plant,
                     $employee->status,
                 );
+
                 array_push($employeeDTOs, $employeeDTO);
             }
 

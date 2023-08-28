@@ -21,6 +21,19 @@ class AddEmployeeService {
      */
     public function addEmployee(Request $request) {
         try {
+            // Validate request
+            $request->validate([
+                'username' => 'required',
+                'nik' => 'required',
+                'employee_name' => 'required',
+                'department' => 'required',
+                'section' => 'required',
+                'position' => 'required',
+                'role' => 'required',
+                'plant' => 'required',
+                'status' => 'required',
+            ]);
+
             $employeeDTO = new EmployeeDTO(
                 null,
                 $request->username,

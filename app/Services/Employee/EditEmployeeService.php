@@ -21,6 +21,20 @@ class EditEmployeeService {
      */
     public function editEmployee(Request $request) {
         try {
+            // Validate request
+            $request->validate([
+                'id' => 'required',
+                'username' => 'required',
+                'nik' => 'required',
+                'employee_name' => 'required',
+                'department' => 'required',
+                'section' => 'required',
+                'position' => 'required',
+                'role' => 'required',
+                'plant' => 'required',
+                'status' => 'required',
+            ]);
+
             $employeeDTO = new EmployeeDTO(
                 $request->id,
                 $request->username,
