@@ -25,16 +25,15 @@ class AuthController extends Controller {
             $resultData = $this->registerServiceProvider->register($request);
 
             return response()->json([
-                'success' => true,
+                'status' => 'success',
                 'message' => 'User registered successfully',
                 'data' => $resultData
-            ]);
+            ])->setStatusCode(201);
         } catch (Exception $error) {
             return response()->json([
-                'success' => false,
-                'message' => 'User registration failed',
-                'data' => $error->getMessage()
-            ]);
+                'status' => 'error',
+                'message' => $error->getMessage(),
+            ])->setStatusCode(400);
         }
     }
 
@@ -48,16 +47,36 @@ class AuthController extends Controller {
             $resultData = $this->loginServiceProvider->login($request);
 
             return response()->json([
-                'success' => true,
+                'status' => 'success',
                 'message' => 'User logged in successfully',
                 'data' => $resultData
-            ]);
+            ])->setStatusCode(200);
         } catch (Exception $error) {
             return response()->json([
-                'success' => false,
-                'message' => 'User login failed',
-                'data' => $error->getMessage()
-            ]);
+                'status' => 'error',
+                'message' => $error->getMessage(),
+            ])->setStatusCode(401);
+        }
+    }
+
+    /**
+     * Logout user
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request) {
+        try {
+            $request->user()->currentAccessToken()->delete();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User logged out successfully',
+            ])->setStatusCode(200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $error->getMessage(),
+            ])->setStatusCode(401);
         }
     }
 }

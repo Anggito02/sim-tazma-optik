@@ -18,7 +18,7 @@ class LoginRepository {
             $user = User::where('email', $userDTO->email)->first();
 
             if (!$user) {
-                throw new Exception('User not found');
+                throw new Exception('Invalid credentials');
             }
 
             if (!password_verify($userDTO->password, $user->password)) {
