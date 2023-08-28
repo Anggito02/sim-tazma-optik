@@ -16,12 +16,20 @@ class RegisterRepository {
     public function register(UserDTO $userDTO) {
         try {
             $user = new User();
-
             $user->email = $userDTO->email;
             $user->password = $userDTO->password;
-            $user->username = $userDTO->username;
+            $user->employee_name = $userDTO->employee_name;
+            $user->nik = $userDTO->nik;
+            $user->photo = $userDTO->photo;
+            $user->gender = $userDTO->gender;
+            $user->address = $userDTO->address;
+            $user->phone = $userDTO->phone;
+            $user->department = $userDTO->department;
+            $user->section = $userDTO->section;
+            $user->position = $userDTO->position;
             $user->role = $userDTO->role;
-
+            $user->group = $userDTO->group;
+            $user->domicile = $userDTO->domicile;
             $user->save();
 
             return $userDTO;
