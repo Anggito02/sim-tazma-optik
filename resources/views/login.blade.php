@@ -38,7 +38,8 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">TAZMA OPTIK</h1>
                                     </div>
-                                    <form class="user">
+                                    <form method="post" class="user" action="/login">
+                                        @csrf
                                         <div class="form-group">
                                             <input name="email" type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"

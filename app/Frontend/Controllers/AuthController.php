@@ -20,7 +20,7 @@ class AuthController extends Controller{
             'password' => $password
         ];
 
-        $response = Http::withHeaders($headers)->post('http://localhost:8000/api/login', $api_request);
+        $response = Http::withHeaders($headers)->get('http://localhost:8000/api/login');
         // $response = Http::get('https://google.com');
         $data = $response->json();
 
