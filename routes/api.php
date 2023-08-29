@@ -19,6 +19,9 @@ use App\Models\Color;
 |
 */
 
+/* User Info Routes */
+Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('auth:sanctum')->name('getUserInfo');
+
 Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Employee Routes */
     Route::get('/employee/one', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
