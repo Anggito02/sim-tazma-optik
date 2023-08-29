@@ -12,12 +12,12 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
+            <h6 class="m-0 font-weight-bold text-primary">EMPLOYEE INFORMATION SHEET</h6>
 
             <!-- Button trigger modal Add New-->
             <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
                 data-target="#exampleModalCenter">
-                Add New
+                New Employee
             </button>
 
             <!-- Modal -->
@@ -26,7 +26,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">New Data</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">New Data Employee</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -36,7 +36,51 @@
                                 @csrf
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th>Warna</th>
+                                        <th>NIK</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employee Name</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Gender</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Photo</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mail</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Departement</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Section</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Position</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Group</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Domisili Kerja</th>
                                         <td><input type="text" name="title" class="form-control" /></td>
                                     </tr>
                                     <tr>
@@ -102,7 +146,62 @@
                                                     @method('PUT')
                                                     <table class="table table-bordered">
                                                         <tr>
-                                                            <th>Warna</th>
+                                                            <th>NIK</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Employee Name</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Gender</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Photo</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Address</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Phone</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Mail</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Departement</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Section</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Position</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Group</th>
+                                                            <td><input type="text" name="title" value="" class="form-control" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Domisili Kerja</th>
                                                             <td><input type="text" name="title" value="" class="form-control" />
                                                             </td>
                                                         </tr>
