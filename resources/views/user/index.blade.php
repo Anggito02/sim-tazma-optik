@@ -1,5 +1,6 @@
 @extends('layout')
 @section('content')
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -12,12 +13,12 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">WARNA SHEET</h6>
+            <h6 class="m-0 font-weight-bold text-primary">USERS INFORMATION SHEET</h6>
 
-            <!-- Button trigger modal Add New-->
+            <!-- Button trigger modal -->
             <button type="button" class="btn-sm btn-success float-right" data-toggle="modal"
                 data-target="#exampleModalCenter">
-                New Warna
+                New User
             </button>
 
             <!-- Modal -->
@@ -26,7 +27,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">New Data Warna</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">New Data User</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -36,10 +37,38 @@
                                 @csrf
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th>Warna</th>
+                                        <th>Username</th>
                                         <td><input type="text" name="title" class="form-control" /></td>
                                     </tr>
                                     <tr>
+                                        <th>NIK</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employee Name</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    <tr>
+                                    <tr>
+                                        <th>Department</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    <tr>
+                                    <tr>
+                                        <th>Section</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Position</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>User Role</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Plant</th>
+                                        <td><input type="text" name="title" class="form-control" /></td>
+                                    </tr>
+
                                         <td colspan="2">
                                             <input type="submit" class="btn btn-success" />
                                         </td>
@@ -62,69 +91,84 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Warna</th>
+                            <th>Username</th>
+                            <th>NIK</th>
+                            <th>Employee Name</th>
+                            <th>Department</th>
+                            <th>Section</th>
+                            <th>Position</th>
+                            <th>User Role</th>
+                            <th>Plant</th>
                             <th>Detail</th>
                             <th>Delete</th>
+                            <th>Status Active</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>No</th>
-                            <th>Warna</th>
+                            <th>Username</th>
+                            <th>NIK</th>
+                            <th>Employee Name</th>
+                            <th>Department</th>
+                            <th>Section</th>
+                            <th>Position</th>
+                            <th>User Role</th>
+                            <th>Plant</th>
                             <th>Detail</th>
                             <th>Delete</th>
+                            <th>Status Active</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>BROWN</td>
+                            <td>Teddy123</td>
+                            <td>123456789</td>
+                            <td>Teddy</td>
+                            <td>SALES</td>
+                            <td>SALES & PURCHASED</td>
+                            <td>SALES HEAD</td>
+                            <td>Administrator</td>
+                            <td>KPS-IA|CENTRAL</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
-                                <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
+                                <button type="button" class="btn-sm btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Data</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Data</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="post" action="">
-                                                    @csrf
-                                                    @method('PUT')
+                                                <form method="post">
                                                     <table class="table table-bordered">
                                                         <tr>
                                                             <th>Warna</th>
-                                                            <td><input type="text" name="title" value="" class="form-control" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2">
-                                                                <input type="submit" class="btn btn-primary" />
+                                                            <td><input type="text" name="warna" class="form-control">
                                                             </td>
                                                         </tr>
                                                     </table>
+
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                {{-- <button type="button" class="btn btn-success">Save</button> --}}
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-success">Update</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </td>
                             <td>
                                 <!-- Button trigger modal Delete -->
@@ -157,6 +201,9 @@
                                     </div>
                                 </div>
                             </td>
+                            <td>
+                                Active
+                            </td>
 
                         </tr>
                     </tbody>
@@ -167,4 +214,6 @@
 
 </div>
 <!-- /.container-fluid -->
+
+
 @endsection

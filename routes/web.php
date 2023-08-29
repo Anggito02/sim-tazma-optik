@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/warna', function () {
+    return view('warna.index');
+});
+
+Route::get('/user', function () {
+    return view('user.index');
+});
+
+Route::get('/employee', function () {
     return view('employee.index');
 });

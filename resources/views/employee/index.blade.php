@@ -37,51 +37,51 @@
                                 <table class="table table-bordered">
                                     <tr>
                                         <th>NIK</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Employee Name</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Gender</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Photo</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Address</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Phone</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Mail</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Departement</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Section</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Position</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Group</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th>Domisili Kerja</th>
-                                        <td><input type="text" name="title" class="form-control" /></td>
+                                        <td><input type="text" name="title" value="" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
@@ -106,21 +106,56 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Warna</th>
-                            <th>Action</th>
+                            <th>NIK</th>
+                            <th>Employee Name</th>
+                            <th>Gender</th>
+                            <th>Photo</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Mail</th>
+                            <th>Departement</th>
+                            <th>Section</th>
+                            <th>Position</th>
+                            <th>Group</th>
+                            <th>Domisili Kerja</th>
+                            <th>Detail</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>No</th>
-                            <th>Warna</th>
-                            <th>Action</th>
+                            <th>NIK</th>
+                            <th>Employee Name</th>
+                            <th>Gender</th>
+                            <th>Photo</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Mail</th>
+                            <th>Departement</th>
+                            <th>Section</th>
+                            <th>Position</th>
+                            <th>Group</th>
+                            <th>Domisili Kerja</th>
+                            <th>Detail</th>
+                            <th>Delete</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>BROWN</td>
+                            <td>123456</td>
+                            <td>Divisi Informatika</td>
+                            <td>Laki - Laki</td>
+                            <td></td>
+                            <td>PT. KARYA PUTRA SANGKURIANG</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>ADMIN</td>
+                            <td>ADMIN</td>
+                            <td>ADMINISTRATOR</td>
+                            <td>ADMIN</td>
+                            <td>BANDUNG</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-primary" data-toggle="modal"
@@ -222,6 +257,8 @@
                                     </div>
                                 </div>
 
+                            </td>
+                            <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete">
@@ -251,7 +288,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </td>
 
                         </tr>
