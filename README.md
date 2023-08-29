@@ -37,4 +37,4 @@ Repositori ini digunakan untuk menyimpan proyek Sistem Informasi Manajemen Tazma
     ```bash
     php artisan serve --port=8001
     ```
-7. Buka aplikasi di browser dengan alamat `http://localhost:8001`.
+7. Buka aplikasi di browser dengan alamat http://localhost:8001.
