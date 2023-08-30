@@ -4,9 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,13 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::post('/vendor/add', [VendorController::class, 'addVendor'])->name('addVendor');
     Route::delete('/vendor/delete', [VendorController::class, 'deleteVendor'])->name('deleteVendor');
     Route::put('/vendor/edit', [VendorController::class, 'editVendor'])->name('editVendor');
+
+    /* Brand Routes */
+    Route::get('/brand/one', [BrandController::class, 'getBrand'])->name('getBrand');
+    Route::get('/brand/all', [BrandController::class, 'getAllBrand'])->name('getAllBrand');
+    Route::post('/brand/add', [BrandController::class, 'addBrand'])->name('addBrand');
+    Route::delete('/brand/delete', [BrandController::class, 'deleteBrand'])->name('deleteBrand');
+    Route::put('/brand/edit', [BrandController::class, 'editBrand'])->name('editBrand');
 // });
 
 Route::middleware('guest')->group(function() {
