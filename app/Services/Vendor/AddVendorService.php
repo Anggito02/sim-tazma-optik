@@ -23,14 +23,14 @@ class AddVendorService {
         try {
             // Validate request
             $request->validate([
-                'kode_vendor' => 'required|unique:vendor,kode_vendor',
-                'npwp_vendor' => 'required|unique:vendor,npwp_vendor',
-                'nama_vendor' => 'required|unique:vendor,nama_vendor',
+                'kode_vendor' => 'required|unique:vendors,kode_vendor',
+                'npwp_vendor' => 'required|unique:vendors,npwp_vendor',
+                'nama_vendor' => 'required|unique:vendors,nama_vendor',
                 'alamat_vendor' => 'required',
                 'init_date_supply' => 'required',
                 'pic_vendor' => 'required',
-                'no_telepon_vendor' => 'required|unique:vendor,no_telepon_vendor',
-                'no_telepon_pic' => 'required',
+                'no_telp_vendor' => 'required|unique:vendors,no_telp_vendor',
+                'no_telp_pic' => 'required|unique:vendors,no_telp_pic',
             ]);
 
             $vendorDTO = new VendorDTO(
@@ -42,9 +42,8 @@ class AddVendorService {
                 $request->init_date_supply,
                 null,
                 $request->pic_vendor,
-                $request->no_telepon_vendor,
-                $request->no_telepon_pic,
-                null,
+                $request->no_telp_vendor,
+                $request->no_telp_pic,
             );
 
             $vendorDTO = $this->addVendorRepository->addVendor($vendorDTO);

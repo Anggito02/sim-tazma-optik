@@ -31,8 +31,8 @@ class EditVendorService {
                 'init_date_supply' => 'required',
                 'last_date_supply' => 'required',
                 'pic_vendor' => 'required',
-                'no_telepon_vendor' => 'required',
-                'no_telepon_pic' => 'required',
+                'no_telp_vendor' => 'required',
+                'no_telp_pic' => 'required',
                 'status_blacklist' => 'required',
             ]);
 
@@ -45,8 +45,8 @@ class EditVendorService {
                 $request->init_date_supply,
                 $request->last_date_supply,
                 $request->pic_vendor,
-                $request->no_telepon_vendor,
-                $request->no_telepon_pic,
+                $request->no_telp_vendor,
+                $request->no_telp_pic,
                 $request->status_blacklist,
             );
 
