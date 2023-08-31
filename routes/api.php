@@ -9,6 +9,7 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\BranchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,13 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::post('/brand/add', [BrandController::class, 'addBrand'])->name('addBrand');
     Route::delete('/brand/delete', [BrandController::class, 'deleteBrand'])->name('deleteBrand');
     Route::put('/brand/edit', [BrandController::class, 'editBrand'])->name('editBrand');
+
+    /* Branch Routes */
+    Route::get('/branch/one', [BranchController::class, 'getBranch'])->name('getBranch');
+    Route::get('/branch/all', [BranchController::class, 'getAllBranch'])->name('getAllBranch');
+    Route::post('/branch/add', [BranchController::class, 'addBranch'])->name('addBranch');
+    Route::delete('/branch/delete', [BranchController::class, 'deleteBranch'])->name('deleteBranch');
+    Route::put('/branch/edit', [BranchController::class, 'editBranch'])->name('editBranch');
 // });
 
 Route::middleware('guest')->group(function() {

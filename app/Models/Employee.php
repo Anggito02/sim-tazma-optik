@@ -25,4 +25,9 @@ class Employee extends Model
         'plant',
         'status',
     ];
+
+    public function branch()
+    {
+        return $this->hasMany(Branch::class, 'id', 'employee_id_pic_branch');
+    }
 }

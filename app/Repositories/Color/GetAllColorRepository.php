@@ -10,6 +10,8 @@ use App\Models\Color;
 class GetAllColorRepository {
     /**
      * Get all color
+     * @param int $page
+     * @param int $limit
      * @return ColorDTO
      */
     public function getAllColor(int $page, int $limit) {

@@ -10,6 +10,8 @@ use App\Models\Employee;
 class GetAllEmployeeRepository {
     /**
      * Get all employees
+     * @param int $page
+     * @param int $limit
      * @return array of employeeDTOs
      */
     public function getAllEmployees(int $page, int $limit) {
