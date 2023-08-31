@@ -10,6 +10,8 @@ use App\Models\Brand;
 class GetAllBrandRepository {
     /**
      * Get all brand
+     * @param int $page
+     * @param int $limit
      * @return BrandDTO
      */
     public function getAllBrand(int $page, int $limit) {
