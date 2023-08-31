@@ -53,4 +53,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function branch()
+    {
+        return $this->hasMany(Branch::class, 'id', 'employee_id_pic_branch');
+    }
 }
