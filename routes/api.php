@@ -33,6 +33,9 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::post('/employee/add', [EmployeeController::class, 'addEmployee'])->name('addEmployee');
     Route::delete('/employee/delete', [EmployeeController::class, 'deleteEmployee'])->name('deleteEmployee');
     Route::put('/employee/edit', [EmployeeController::class, 'editEmployee'])->name('editEmployee');
+    // === //
+    Route::get('/employee/branch/all', [EmployeeController::class, 'getAllBranchById'])->name('getAllBranchById');
+
 
     /* Color Routes */
     Route::get('/color/one', [ColorController::class, 'getColor'])->name('getColor');
@@ -41,6 +44,7 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::delete('/color/delete', [ColorController::class, 'deleteColor'])->name('deleteColor');
     Route::put('/color/edit', [ColorController::class, 'editColor'])->name('editColor');
 
+
     /* Vendor Routes */
     Route::get('/vendor/one', [VendorController::class, 'getVendor'])->name('getVendor');
     Route::get('/vendor/all', [VendorController::class, 'getAllVendor'])->name('getAllVendor');
@@ -48,12 +52,14 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::delete('/vendor/delete', [VendorController::class, 'deleteVendor'])->name('deleteVendor');
     Route::put('/vendor/edit', [VendorController::class, 'editVendor'])->name('editVendor');
 
+
     /* Brand Routes */
     Route::get('/brand/one', [BrandController::class, 'getBrand'])->name('getBrand');
     Route::get('/brand/all', [BrandController::class, 'getAllBrand'])->name('getAllBrand');
     Route::post('/brand/add', [BrandController::class, 'addBrand'])->name('addBrand');
     Route::delete('/brand/delete', [BrandController::class, 'deleteBrand'])->name('deleteBrand');
     Route::put('/brand/edit', [BrandController::class, 'editBrand'])->name('editBrand');
+
 
     /* Branch Routes */
     Route::get('/branch/one', [BranchController::class, 'getBranch'])->name('getBranch');
@@ -85,6 +91,6 @@ Route::get('/token-test', function() {
 Route::any('{any}', function () {
     return response()->json([
         'status' => 'error',
-        'message' => 'Method Not Allowed'
-    ])->setStatusCode(405);
+        'message' => 'Not found'
+    ])->setStatusCode(404);
 })->where('any', '.*');

@@ -12,15 +12,19 @@ use App\Services\Employee\AddEmployeeService;
 use App\Services\Employee\DeleteEmployeeService;
 use App\Services\Employee\EditEmployeeService;
 
+use App\Services\Employee\GetAllBranchByIdService;
+
 class EmployeeController extends Controller
 {
-    // Service Providers Contructs
     public function __construct(
+        // Service Providers Contructs
         private GetEmployeeService $getEmployeeService,
         private GetAllEmployeeService $getAllEmployeeService,
         private AddEmployeeService $addEmployeeService,
         private DeleteEmployeeService $deleteEmployeeService,
-        private EditEmployeeService $editEmployeeService
+        private EditEmployeeService $editEmployeeService,
+
+        private GetAllBranchByIdService $getAllBranchByIdService
     ) {}
 
     /**
@@ -130,6 +134,30 @@ class EmployeeController extends Controller
                 'status' => 'error',
                 'message' => $error->getMessage(),
             ])->setStatusCode(400);
+        }
+    }
+
+    /* ========== */
+
+    /**
+     * Get all branch by employee id
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllBranchById(Request $request) {
+        try {
+            $resultData = $this->getAllBranchByIdService->getAllBranchById($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Branch retrieved successfully',
+                'data' => $resultData
+            ])->setStatusCode(200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $error->getMessage(),
+            ])->setStatusCode(404);
         }
     }
 }
