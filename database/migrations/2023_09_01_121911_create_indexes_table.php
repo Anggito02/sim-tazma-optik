@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('indices', function (Blueprint $table) {
+        Schema::create('indexes', function (Blueprint $table) {
             $table->id();
+            $table->double('value');
             $table->timestamps();
         });
     }
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('indices');
+        Schema::dropIfExists('indexes');
     }
 };
