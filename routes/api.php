@@ -11,6 +11,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\LensCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,12 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::delete('/index/delete', [IndexController::class, 'deleteIndex'])->name('deleteIndex');
     Route::put('/index/edit', [IndexController::class, 'editIndex'])->name('editIndex');
 
+    /* Lens Category Controllers */
+    Route::get('/lens-category/one', [LensCategoryController::class, 'getLensCategory'])->name('getLensCategory');
+    Route::get('/lens-category/all', [LensCategoryController::class, 'getAllLensCategory'])->name('getAllLensCategory');
+    Route::post('/lens-category/add', [LensCategoryController::class, 'addLensCategory'])->name('addLensCategory');
+    Route::delete('/lens-category/delete', [LensCategoryController::class, 'deleteLensCategory'])->name('deleteLensCategory');
+    Route::put('/lens-category/edit', [LensCategoryController::class, 'editLensCategory'])->name('editLensCategory');
 
 // });
 
