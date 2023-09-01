@@ -108,4 +108,26 @@ class IndexController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Edit index
+     * @param Request $request
+     * @return IndexDTO
+     */
+    public function editIndex(Request $request) {
+        try {
+            $indexDTO = $this->editIndexService->editIndex($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Index edited successfully',
+                'data' => $indexDTO,
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $error->getMessage(),
+            ], 500);
+        }
+    }
 }
