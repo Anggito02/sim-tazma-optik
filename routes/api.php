@@ -10,6 +10,9 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\LensCategoryController;
+use App\Http\Controllers\FrameCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +70,28 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::post('/branch/add', [BranchController::class, 'addBranch'])->name('addBranch');
     Route::delete('/branch/delete', [BranchController::class, 'deleteBranch'])->name('deleteBranch');
     Route::put('/branch/edit', [BranchController::class, 'editBranch'])->name('editBranch');
+
+    /* Index Routes */
+    Route::get('/index/one', [IndexController::class, 'getIndex'])->name('getIndex');
+    Route::get('/index/all', [IndexController::class, 'getAllIndex'])->name('getAllIndex');
+    Route::post('/index/add', [IndexController::class, 'addIndex'])->name('addIndex');
+    Route::delete('/index/delete', [IndexController::class, 'deleteIndex'])->name('deleteIndex');
+    Route::put('/index/edit', [IndexController::class, 'editIndex'])->name('editIndex');
+
+    /* Lens Category Controllers */
+    Route::get('/lens-category/one', [LensCategoryController::class, 'getLensCategory'])->name('getLensCategory');
+    Route::get('/lens-category/all', [LensCategoryController::class, 'getAllLensCategory'])->name('getAllLensCategory');
+    Route::post('/lens-category/add', [LensCategoryController::class, 'addLensCategory'])->name('addLensCategory');
+    Route::delete('/lens-category/delete', [LensCategoryController::class, 'deleteLensCategory'])->name('deleteLensCategory');
+    Route::put('/lens-category/edit', [LensCategoryController::class, 'editLensCategory'])->name('editLensCategory');
+
+    /* Frame Category Controllers */
+    Route::get('/frame-category/one', [FrameCategoryController::class, 'getFrameCategory'])->name('getFrameCategory');
+    Route::get('/frame-category/all', [FrameCategoryController::class, 'getAllFrameCategory'])->name('getAllFrameCategory');
+    Route::post('/frame-category/add', [FrameCategoryController::class, 'addFrameCategory'])->name('addFrameCategory');
+    Route::delete('/frame-category/delete', [FrameCategoryController::class, 'deleteFrameCategory'])->name('deleteFrameCategory');
+    Route::put('/frame-category/edit', [FrameCategoryController::class, 'editFrameCategory'])->name('editFrameCategory');
+
 // });
 
 Route::middleware('guest')->group(function() {
