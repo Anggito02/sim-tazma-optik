@@ -25,11 +25,18 @@ use App\Http\Controllers\FrameCategoryController;
 |
 */
 
-/* User Info Routes */
-Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('auth:sanctum')->name('getUserInfo');
+Route::middleware(['auth:sanctum'])->group(function() {
+    /* User Info Routes */
+    Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('auth:sanctum')->name('getUserInfo');
+
+    /* Auth Routes */
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
 
 /* Administrator Routes */
-// Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
+Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
+
     /* Employee Routes */
     Route::get('/employee/one', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
     Route::get('/employee/all', [EmployeeController::class, 'getAllEmployees'])->name('getAllEmployee');
@@ -92,14 +99,14 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::delete('/frame-category/delete', [FrameCategoryController::class, 'deleteFrameCategory'])->name('deleteFrameCategory');
     Route::put('/frame-category/edit', [FrameCategoryController::class, 'editFrameCategory'])->name('editFrameCategory');
 
-// });
+});
 
 Route::middleware('guest')->group(function() {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
 
-Route::get('/token-test', function() {
+Route::post('/token-test', function() {
     try {
         return response()->json([
             'status' => 'success',

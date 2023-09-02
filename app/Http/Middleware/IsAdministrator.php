@@ -20,6 +20,8 @@ class IsAdministrator
                 'status' => 'error',
                 'message' => 'You are not authorized to access this resource'
             ])->setStatusCode(403);
+        } else {
+            return $next($request);
         }
     }
 }
