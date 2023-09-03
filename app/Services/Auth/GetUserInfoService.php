@@ -8,6 +8,7 @@ use Exception;
 use App\DTO\UserDTO;
 
 use App\Repositories\Auth\GetUserInfoRepository;
+use Illuminate\Support\Facades\Storage;
 
 class GetUserInfoService {
     public function __construct(
@@ -22,7 +23,15 @@ class GetUserInfoService {
         try {
             $user_id = $request->user()->id;
             $user_email = $request->user()->email;
-            $user_photo = $request->user()->photo;
+            // get user photo path
+            $user_photo_path = $request->user()->photo;
+
+            // get user photo
+            if ($user_photo_path) {
+                $user_photo = Storage::get(public_path('images') . '/' . $user_photo_path);
+            } else {
+                $user_photo = null;
+            }
             $user_role = $request->user()->role;
             $user_employee_name = $request->user()->employee_name;
 

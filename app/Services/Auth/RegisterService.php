@@ -30,7 +30,7 @@ class RegisterService {
                 'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'min:8', 'max:20'],
                 'employee_name' => 'required',
                 'nik' => 'required|unique:users',
-                'photo' => 'required',
+                'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'gender' => 'required',
                 'address' => 'required',
                 'phone' => 'required|unique:users',
@@ -41,6 +41,19 @@ class RegisterService {
                 'domicile' => 'required',
             ]);
 
+            // Upload photo
+            if ($request->hasFile('photo')) {
+                $photo = $request->file('photo');
+                $photoNameLowercased = strtolower($photo->getClientOriginalName());
+                $photoNameUnderscored = str_replace(' ', '_', $photoNameLowercased);
+                $photoName = time() . '_' . $photoNameUnderscored.'.'.$photo->getClientOriginalExtension();
+
+                $photo->move(public_path('images'), $photoName);
+
+                // Get image path
+                $imagePath = public_path('images') . '/' . $photoName;
+            }
+
             // Hash password
             $hashedPassword = Hash::make($request->password);
 
@@ -50,7 +63,7 @@ class RegisterService {
                 $hashedPassword,
                 $request->employee_name,
                 $request->nik,
-                $request->photo,
+                $imagePath,
                 $request->gender,
                 $request->address,
                 $request->phone,
