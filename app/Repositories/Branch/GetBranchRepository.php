@@ -17,7 +17,17 @@ class GetBranchRepository {
         try {
             $branch = Branch::find($id);
 
-            return $branch;
+            $branchDTO = new BranchDTO(
+                $branch->id,
+                $branch->name,
+                $branch->address,
+                $branch->phone,
+                $branch->email,
+                $branch->created_at,
+                $branch->updated_at
+            );
+
+            return $branchDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }
