@@ -25,11 +25,18 @@ use App\Http\Controllers\FrameCategoryController;
 |
 */
 
-/* User Info Routes */
-Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('auth:sanctum')->name('getUserInfo');
+Route::middleware(['auth:sanctum'])->group(function() {
+    /* User Info Routes */
+    Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('auth:sanctum')->name('getUserInfo');
+
+    /* Auth Routes */
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
 
 /* Administrator Routes */
-// Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
+Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
+
     /* Employee Routes */
     Route::get('/employee/one', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
     Route::get('/employee/all', [EmployeeController::class, 'getAllEmployees'])->name('getAllEmployee');
@@ -37,7 +44,7 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::delete('/employee/delete', [EmployeeController::class, 'deleteEmployee'])->name('deleteEmployee');
     Route::put('/employee/edit', [EmployeeController::class, 'editEmployee'])->name('editEmployee');
     // === //
-    Route::get('/employee/branch/all', [EmployeeController::class, 'getAllBranchById'])->name('getAllBranchById');
+    Route::get('/employee/branch/all', [EmployeeController::class, 'getAllBranchByEmployeeId'])->name('getAllBranchByEmployeeId');
 
 
     /* Color Routes */
@@ -71,6 +78,9 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::delete('/branch/delete', [BranchController::class, 'deleteBranch'])->name('deleteBranch');
     Route::put('/branch/edit', [BranchController::class, 'editBranch'])->name('editBranch');
 
+    // === //
+    Route::get('/branch/employee/one', [BranchController::class, 'getEmployeeByBranchId'])->name('getEmployeeByBranchId');
+
     /* Index Routes */
     Route::get('/index/one', [IndexController::class, 'getIndex'])->name('getIndex');
     Route::get('/index/all', [IndexController::class, 'getAllIndex'])->name('getAllIndex');
@@ -92,14 +102,14 @@ Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('a
     Route::delete('/frame-category/delete', [FrameCategoryController::class, 'deleteFrameCategory'])->name('deleteFrameCategory');
     Route::put('/frame-category/edit', [FrameCategoryController::class, 'editFrameCategory'])->name('editFrameCategory');
 
-// });
+});
 
 Route::middleware('guest')->group(function() {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
 
-Route::get('/token-test', function() {
+Route::post('/token-test', function() {
     try {
         return response()->json([
             'status' => 'success',
