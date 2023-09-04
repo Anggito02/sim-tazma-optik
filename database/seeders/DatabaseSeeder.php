@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             BranchSeeder::class,
             IndexSeeder::class,
+            LensCategorySeeder::class,
+            FrameCategorySeeder::class,
         ]);
     }
 }
