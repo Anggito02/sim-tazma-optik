@@ -44,7 +44,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/employee/delete', [EmployeeController::class, 'deleteEmployee'])->name('deleteEmployee');
     Route::put('/employee/edit', [EmployeeController::class, 'editEmployee'])->name('editEmployee');
     // === //
-    Route::get('/employee/branch/all', [EmployeeController::class, 'getAllBranchById'])->name('getAllBranchById');
+    Route::get('/employee/branch/all', [EmployeeController::class, 'getAllBranchByEmployeeId'])->name('getAllBranchByEmployeeId');
 
 
     /* Color Routes */
