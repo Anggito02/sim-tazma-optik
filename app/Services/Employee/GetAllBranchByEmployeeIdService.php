@@ -8,18 +8,18 @@ use Illuminate\Http\Request;
 use App\DTO\EmployeeDTO;
 use App\DTO\BranchDTO;
 
-use App\Repositories\Employee\GetAllBranchByIdRepository;
+use App\Repositories\Employee\GetAllBranchByEmployeeIdRepository;
 
-class GetAllBranchByIdService {
+class GetAllBranchByEmployeeIdService {
     public function __construct(
-        private GetAllBranchByIdRepository $employeeRepository
+        private GetAllBranchByEmployeeIdRepository $employeeRepository
     ) {}
 
     /**
      * Get all branch by employee id
      * @return EmployeeDTO
      */
-    public function getAllBranchById(Request $request) {
+    public function getAllBranchByEmployeeId(Request $request) {
         try {
             // Validate request
             $request->validate([
@@ -28,7 +28,7 @@ class GetAllBranchByIdService {
                 'limit' => 'required',
             ]);
 
-            $branchDTO = $this->employeeRepository->getAllBranchById($request->id, $request->page, $request->limit);
+            $branchDTO = $this->employeeRepository->getAllBranchByEmployeeId($request->id, $request->page, $request->limit);
 
             return $branchDTO;
         } catch (Exception $error) {

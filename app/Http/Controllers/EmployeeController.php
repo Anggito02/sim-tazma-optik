@@ -12,7 +12,7 @@ use App\Services\Employee\AddEmployeeService;
 use App\Services\Employee\DeleteEmployeeService;
 use App\Services\Employee\EditEmployeeService;
 
-use App\Services\Employee\GetAllBranchByIdService;
+use App\Services\Employee\GetAllBranchByEmployeeIdService;
 
 class EmployeeController extends Controller
 {
@@ -24,7 +24,7 @@ class EmployeeController extends Controller
         private DeleteEmployeeService $deleteEmployeeService,
         private EditEmployeeService $editEmployeeService,
 
-        private GetAllBranchByIdService $getAllBranchByIdService
+        private GetAllBranchByEmployeeIdService $getAllBranchByEmployeeIdService
     ) {}
 
     /**
@@ -144,9 +144,9 @@ class EmployeeController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAllBranchById(Request $request) {
+    public function getAllBranchByEmployeeId(Request $request) {
         try {
-            $resultData = $this->getAllBranchByIdService->getAllBranchById($request);
+            $resultData = $this->getAllBranchByEmployeeIdService->getAllBranchByEmployeeId($request);
 
             return response()->json([
                 'status' => 'success',
