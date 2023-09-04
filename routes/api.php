@@ -78,6 +78,9 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/branch/delete', [BranchController::class, 'deleteBranch'])->name('deleteBranch');
     Route::put('/branch/edit', [BranchController::class, 'editBranch'])->name('editBranch');
 
+    // === //
+    Route::get('/branch/employee/one', [BranchController::class, 'getEmployeeByBranchId'])->name('getEmployeeByBranchId');
+
     /* Index Routes */
     Route::get('/index/one', [IndexController::class, 'getIndex'])->name('getIndex');
     Route::get('/index/all', [IndexController::class, 'getAllIndex'])->name('getAllIndex');

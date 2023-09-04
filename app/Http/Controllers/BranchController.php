@@ -12,6 +12,8 @@ use App\Services\Branch\DeleteBranchService;
 use App\Services\Branch\GetAllBranchService;
 use App\Services\Branch\GetBranchService;
 
+use App\Services\Branch\GetEmployeeByBranchIdService;
+
 class BranchController extends Controller
 {
     // Service Providers Constructs
@@ -21,6 +23,9 @@ class BranchController extends Controller
         private DeleteBranchService $deleteBranchService,
         private GetAllBranchService $getAllBranchService,
         private GetBranchService $getBranchService,
+
+
+        private GetEmployeeByBranchIdService $getEmployeeByBranchIdService
     ) {}
 
     /**
@@ -133,6 +138,31 @@ class BranchController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Edit branch failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /* ========== */
+
+    /**
+     * Get employee by branch id
+     * @param Request $request
+     * @return BranchDTO
+     */
+    public function getEmployeeByBranchId(Request $request) {
+        try {
+            $branchDTO = $this->getEmployeeByBranchIdService->getEmployeeByBranchId($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Get employee by branch id success',
+                'data' => $branchDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get employee by branch id failed',
                 'data' => $error->getMessage()
             ], 400);
         }
