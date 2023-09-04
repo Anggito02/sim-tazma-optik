@@ -9,13 +9,13 @@ use App\DTO\BranchDTO;
 
 use App\Models\Branch;
 
-class GetAllBranchByIdRepository {
+class GetAllBranchByEmployeeIdRepository {
     /**
      * Get all branch by employee id
      * @param int $id
      * @return BranchDTO
      */
-    public function getAllBranchById(int $id, int $page, int $limit) {
+    public function getAllBranchByEmployeeId(int $id, int $page, int $limit) {
         try {
             $branches = Branch::where('employee_id_pic_branch', $id)->paginate($limit, ['*'], 'page', $page);
 
