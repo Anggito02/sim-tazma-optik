@@ -23,15 +23,15 @@ class AddEmployeeService {
         try {
             // Validate request
             $request->validate([
-                'username' => 'required',
-                'nik' => 'required',
-                'employee_name' => 'required',
+                'username' => 'required|unique:employees,username',
+                'nik' => 'required|unique:employees,nik',
+                'employee_name' => 'required|unique:employees,nik',
                 'department' => 'required',
                 'section' => 'required',
                 'position' => 'required',
                 'role' => 'required',
                 'plant' => 'required',
-                'status' => 'required',
+                'status' => 'required|in:active,inactive',
             ]);
 
             $employeeDTO = new EmployeeDTO(
