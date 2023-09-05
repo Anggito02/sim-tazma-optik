@@ -80,6 +80,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
 
     // === //
     Route::get('/branch/employee/one', [BranchController::class, 'getEmployeeByBranchId'])->name('getEmployeeByBranchId');
+    Route::get('/branchWith/employee/all', [BranchController::class, 'getAllBranchWithEmployee'])->name('getAllBranchWithEmployee');
 
     /* Index Routes */
     Route::get('/index/one', [IndexController::class, 'getIndex'])->name('getIndex');
