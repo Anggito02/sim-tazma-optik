@@ -31,7 +31,7 @@ class RegisterService {
                 'employee_name' => 'required',
                 'nik' => 'required|unique:users, nik',
                 'photo' => 'required',
-                'gender' => 'required',
+                'gender' => 'required|in:laki-laki,perempuan',
                 'address' => 'required',
                 'phone' => 'required|unique:users, phone',
                 'department' => 'required',

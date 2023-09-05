@@ -24,7 +24,7 @@ class AddLensCategoryService {
         try {
             // Validate request
             $request->validate([
-                'nama_kategori' => 'required',
+                'nama_kategori' => 'required|unique:lens_categories,nama_kategori',
             ]);
 
             $lensCategoryDTO = new LensCategoryDTO(

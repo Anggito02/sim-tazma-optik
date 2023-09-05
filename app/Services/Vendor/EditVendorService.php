@@ -23,7 +23,7 @@ class EditVendorService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:vendors,id',
                 'kode_vendor' => 'required',
                 'npwp_vendor' => 'required',
                 'nama_vendor' => 'required',

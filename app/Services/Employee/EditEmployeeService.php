@@ -23,7 +23,7 @@ class EditEmployeeService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:employees,id',
                 'username' => 'required',
                 'nik' => 'required',
                 'employee_name' => 'required',
@@ -32,7 +32,7 @@ class EditEmployeeService {
                 'position' => 'required',
                 'role' => 'required',
                 'plant' => 'required',
-                'status' => 'required',
+                'status' => 'required|in:active,inactive',
             ]);
 
             $employeeDTO = new EmployeeDTO(
