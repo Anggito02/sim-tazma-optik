@@ -10,15 +10,11 @@ use App\Models\Branch;
 use App\Models\Employee;
 
 class GetAllBranchWithEmployeeRepository {
-    public function __construct(
-        private BranchDTO $branchDTO
-    ) {}
-
     /**
      * Get all branch with employee
      * @param int $page
      * @param int $limit
-     * @return BranchDTO, employee_name
+     * @return array BranchDTO,employee_name
      */
     public function getAllBranchWithEmployee(int $page, int $limit) {
         try {

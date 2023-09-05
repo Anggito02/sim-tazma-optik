@@ -173,7 +173,7 @@ class BranchController extends Controller
     /**
      * Get all branch with employee
      * @param Request $request
-     * @return BranchDTO
+     * @return array BranchDTO, employee_name
      */
     public function getAllBranchWithEmployee(Request $request) {
         try {
