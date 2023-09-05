@@ -17,7 +17,7 @@ class GetAllBranchWithEmployeeService {
     /**
      * Get all branch with employee name
      * @param Request $request
-     * @return BranchDTO, employee_name
+     * @return array BranchDTO, employee_name
      */
     public function getAllBranchWithEmployee(Request $request) {
         try {
