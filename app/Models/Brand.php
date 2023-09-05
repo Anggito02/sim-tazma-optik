@@ -18,4 +18,19 @@ class Brand extends Model
         'nama_brand',
         'deskripsi',
     ];
+
+    public function itemsFrame()
+    {
+        return $this->hasMany(Item::class, 'frame_brand_id');
+    }
+
+    public function itemsBrand()
+    {
+        return $this->hasMany(Item::class, 'lensa_brand_id');
+    }
+
+    public function itemsAksesoris()
+    {
+        return $this->hasMany(Item::class, 'aksesoris_brand_id');
+    }
 }

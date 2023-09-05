@@ -27,4 +27,8 @@ class Vendor extends Model
         'status_blacklist',
     ];
 
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'frame_vendor_id');
+    }
 }

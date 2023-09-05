@@ -17,4 +17,9 @@ class FrameCategory extends Model
     protected $fillable = [
         'nama_kategori',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'frame_frame_category_id');
+    }
 }
