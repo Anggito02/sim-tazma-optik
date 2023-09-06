@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('coas', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_coa');
+            $table->string('deskripsi');
+            $table->integer('kategori');
             $table->timestamps();
         });
     }

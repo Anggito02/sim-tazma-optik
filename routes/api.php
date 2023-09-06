@@ -13,6 +13,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensCategoryController;
 use App\Http\Controllers\FrameCategoryController;
+use App\Http\Controllers\CoaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +103,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/frame-category/add', [FrameCategoryController::class, 'addFrameCategory'])->name('addFrameCategory');
     Route::delete('/frame-category/delete', [FrameCategoryController::class, 'deleteFrameCategory'])->name('deleteFrameCategory');
     Route::put('/frame-category/edit', [FrameCategoryController::class, 'editFrameCategory'])->name('editFrameCategory');
+
+    /* Coa Controllers */
+    Route::get('/coa/one', [CoaController::class, 'getCoa'])->name('getCoa');
+    Route::get('/coa/all', [CoaController::class, 'getAllCoa'])->name('getAllCoa');
+    Route::post('/coa/add', [CoaController::class, 'addCoa'])->name('addCoa');
+    Route::delete('/coa/delete', [CoaController::class, 'deleteCoa'])->name('deleteCoa');
+    Route::put('/coa/edit', [CoaController::class, 'editCoa'])->name('editCoa');
 
 });
 
