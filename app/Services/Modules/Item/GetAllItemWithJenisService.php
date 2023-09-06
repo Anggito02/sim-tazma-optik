@@ -7,31 +7,30 @@ use Illuminate\Http\Request;
 
 use App\DTO\Modules\ItemDTO;
 
-use App\Repositories\Modules\Item\GetItemRepository;
+use App\Repositories\Modules\Item\GetAllItemWithJenisRepository;
 
-class GetItemService {
+class GetAllItemWithJenisService {
     public function __construct(
-        private GetItemRepository $itemRepository
+        private GetAllItemWithJenisRepository $itemRepository
     ) {}
 
     /**
-     * Get item
+     * Get all item
      * @param Request $request
      * @return ItemDTO
      */
-    public function getItem(Request $request) {
+    public function getAllItem(Request $request) {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'jenis_item' => 'required',
+                'page' => 'required',
+                'limit' => 'required',
             ]);
 
-            $id = $request->id;
-
-            $itemDTO = $this->itemRepository->getItem($id);
+            $itemDTO = $this->itemRepository->getAllItem($request->jenis_item, $request->page, $request->limit);
 
             return $itemDTO;
-
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

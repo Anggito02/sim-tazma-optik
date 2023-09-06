@@ -14,6 +14,8 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensCategoryController;
 use App\Http\Controllers\FrameCategoryController;
 
+use App\Http\Controllers\Modules\ItemController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -102,6 +104,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/frame-category/add', [FrameCategoryController::class, 'addFrameCategory'])->name('addFrameCategory');
     Route::delete('/frame-category/delete', [FrameCategoryController::class, 'deleteFrameCategory'])->name('deleteFrameCategory');
     Route::put('/frame-category/edit', [FrameCategoryController::class, 'editFrameCategory'])->name('editFrameCategory');
+
+    /* Item Controllers */
+    Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
+    Route::get('/item/allWithJenis', [ItemController::class, 'getAllItem'])->name('getAllItem');
+    Route::post('/item/add', [ItemController::class, 'addItem'])->name('addItem');
+    Route::delete('/item/delete', [ItemController::class, 'deleteItem'])->name('deleteItem');
+    Route::put('/item/edit', [ItemController::class, 'editItem'])->name('editItem');
 
 });
 
