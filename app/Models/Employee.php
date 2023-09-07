@@ -28,6 +28,6 @@ class Employee extends Model
 
     public function branch()
     {
-        return $this->hasMany(Branch::class, 'id', 'employee_id_pic_branch');
+        return $this->hasMany(Branch::class, 'employee_id_pic_branch');
     }
 }
