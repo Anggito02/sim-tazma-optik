@@ -51,7 +51,7 @@ class RegisterService {
                 $photo = $request->file('photo');
                 $photoNameLowercased = strtolower($photo->getClientOriginalName());
                 $photoNameUnderscored = str_replace(' ', '_', $photoNameLowercased);
-                $photoName = time() . '_' . $photoNameUnderscored.'.'.$photo->getClientOriginalExtension();
+                $photoName = time() . '_' . $photoNameUnderscored;
 
                 $photo->move(public_path('images'), $photoName);
 
