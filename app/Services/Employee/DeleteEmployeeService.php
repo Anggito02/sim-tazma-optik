@@ -5,7 +5,7 @@ namespace App\Services\Employee;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\EmployeeDTO;
+use App\DTO\UserDTO;
 
 use App\Repositories\Employee\DeleteEmployeeRepository;
 
@@ -17,7 +17,7 @@ class DeleteEmployeeService {
     /**
      * Delete employee
      * @param Request $request
-     * @return EmployeeDTO
+     * @return UserDTO
      */
     public function deleteEmployee(Request $request) {
         try {
@@ -26,9 +26,9 @@ class DeleteEmployeeService {
                 'id' => 'required',
             ]);
 
-            $employeeDTO = $this->employeeRepository->deleteEmployee($request->id);
+            $userDTO = $this->employeeRepository->deleteEmployee($request->id);
 
-            return $employeeDTO;
+            return $userDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }
