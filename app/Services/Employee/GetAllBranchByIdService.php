@@ -5,19 +5,19 @@ namespace App\Services\Employee;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\EmployeeDTO;
+use App\DTO\UserDTO;
 use App\DTO\BranchDTO;
 
-use App\Repositories\Employee\GetAllBranchByIdRepository;
+use App\Repositories\Employee\GetAllBranchByUserIdRepository;
 
 class GetAllBranchByIdService {
     public function __construct(
-        private GetAllBranchByIdRepository $employeeRepository
+        private GetAllBranchByUserIdRepository $employeeRepository
     ) {}
 
     /**
      * Get all branch by employee id
-     * @return EmployeeDTO
+     * @return UserDTO
      */
     public function getAllBranchById(Request $request) {
         try {

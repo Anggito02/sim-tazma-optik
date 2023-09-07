@@ -4,31 +4,36 @@ namespace App\Repositories\Employee;
 
 use Exception;
 
-use App\DTO\EmployeeDTO;
-use App\Models\Employee;
+use App\DTO\UserDTO;
+use App\Models\User;
 
 class EditEmployeeRepository {
     /**
      * Edit employee
-     * @param EmployeeDTO $employeeDTO
-     * @return EmployeeDTO
+     * @param UserDTO $userDTO
+     * @return UserDTO
      */
-    public function editEmployee(EmployeeDTO $employeeDTO) {
+    public function editEmployee(UserDTO $userDTO) {
         try {
-            $employee = Employee::find($employeeDTO->id);
+            $employee = User::find($userDTO->id);
 
-            $employee->username = $employeeDTO->username;
-            $employee->nik = $employeeDTO->nik;
-            $employee->employee_name = $employeeDTO->employee_name;
-            $employee->department = $employeeDTO->department;
-            $employee->section = $employeeDTO->section;
-            $employee->position = $employeeDTO->position;
-            $employee->role = $employeeDTO->role;
-            $employee->plant = $employeeDTO->plant;
-            $employee->status = $employeeDTO->status;
+            $employee->email = $userDTO->email;
+            $employee->password = $userDTO->password;
+            $employee->username = $userDTO->username;
+            $employee->nik = $userDTO->nik;
+            $employee->employee_name = $userDTO->employee_name;
+            $employee->photo = $userDTO->photo;
+            $employee->department = $userDTO->department;
+            $employee->section = $userDTO->section;
+            $employee->position = $userDTO->position;
+            $employee->role = $userDTO->role;
+            $employee->plant = $userDTO->plant;
+            $employee->status = $userDTO->status;
+            $employee->group = $userDTO->group;
+            $employee->domicile = $userDTO->domicile;
             $employee->save();
 
-            return $employeeDTO;
+            return $userDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

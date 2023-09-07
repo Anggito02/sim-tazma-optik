@@ -4,14 +4,14 @@ namespace App\Repositories\Employee;
 
 use Exception;
 
-use App\DTO\EmployeeDTO;
+use App\DTO\UserDTO;
 use App\DTO\BranchDTO;
 
 use App\Models\Branch;
 
-class GetAllBranchByIdRepository {
+class GetAllBranchByUserIdRepository {
     /**
-     * Get all branch by employee id
+     * Get all branch by user id
      * @param int $id
      * @return BranchDTO
      */

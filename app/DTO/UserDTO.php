@@ -7,8 +7,9 @@ class UserDTO {
         public ?int $id,
         public string $email,
         public ?string $password = null,
-        public ?string $employee_name = null,
+        public ?string $username = null,
         public ?string $nik = null,
+        public ?string $employee_name = null,
         public ?string $photo = null,
         public ?string $gender = null,
         public ?string $address = null,
@@ -17,6 +18,8 @@ class UserDTO {
         public ?string $section = null,
         public ?string $position = null,
         public ?string $role = 'user',
+        public ?string $plant = null,
+        public ?string $status = null,
         public ?string $group = null,
         public ?string $domicile = null,
         public ?string $token = null
@@ -45,6 +48,14 @@ class UserDTO {
 
     public function setPassword(string $password): void {
         $this->password = $password;
+    }
+
+    public function getUsername(): string {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): void {
+        $this->username = $username;
     }
 
     public function getEmployeeName(): string {
@@ -126,6 +137,22 @@ class UserDTO {
 
     public function setRole(string $role): void {
         $this->role = $role;
+    }
+
+    public function getPlant(): string {
+        return $this->plant;
+    }
+
+    public function setPlant(string $plant): void {
+        $this->plant = $plant;
+    }
+
+    public function getStatus(): string {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): void {
+        $this->status = $status;
     }
 
     public function getGroup(): string {

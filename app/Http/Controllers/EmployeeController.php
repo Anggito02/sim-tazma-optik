@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 use App\Services\Employee\GetEmployeeService;
 use App\Services\Employee\GetAllEmployeeService;
-use App\Services\Employee\AddEmployeeService;
 use App\Services\Employee\DeleteEmployeeService;
 use App\Services\Employee\EditEmployeeService;
 
@@ -20,7 +19,6 @@ class EmployeeController extends Controller
         // Service Providers Contructs
         private GetEmployeeService $getEmployeeService,
         private GetAllEmployeeService $getAllEmployeeService,
-        private AddEmployeeService $addEmployeeService,
         private DeleteEmployeeService $deleteEmployeeService,
         private EditEmployeeService $editEmployeeService,
 
@@ -68,28 +66,6 @@ class EmployeeController extends Controller
                 'status' => 'error',
                 'message' => $error->getMessage(),
             ])->setStatusCode(404);
-        }
-    }
-
-    /**
-     * Add employee
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function addEmployee(Request $request) {
-        try {
-            $resultData = $this->addEmployeeService->addEmployee($request);
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Employee added successfully',
-                'data' => $resultData
-            ])->setStatusCode(201);
-        } catch (Exception $error) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $error->getMessage(),
-            ])->setStatusCode(400);
         }
     }
 

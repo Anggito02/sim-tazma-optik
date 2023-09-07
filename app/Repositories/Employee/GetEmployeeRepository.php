@@ -4,33 +4,41 @@ namespace App\Repositories\Employee;
 
 use Exception;
 
-use App\DTO\EmployeeDTO;
-use App\Models\Employee;
+use App\DTO\UserDTO;
+use App\Models\User;
 
 class GetEmployeeRepository {
     /**
      * Get employee by id
      * @param int $id
-     * @return EmployeeDTO
+     * @return UserDTO
      */
     public function getEmployee(int $id) {
         try {
-            $employee = Employee::find($id);
+            $employee = User::find($id);
 
-            $employeeDTO = new EmployeeDTO(
+            $userDTO = new UserDTO(
                 $employee->id,
+                $employee->email,
+                null,
                 $employee->username,
                 $employee->nik,
                 $employee->employee_name,
+                $employee->photo,
+                $employee->gender,
+                $employee->address,
+                $employee->phone,
                 $employee->department,
                 $employee->section,
                 $employee->position,
                 $employee->role,
                 $employee->plant,
                 $employee->status,
+                $employee->group,
+                $employee->domicile
             );
 
-            return $employeeDTO;
+            return $userDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }
