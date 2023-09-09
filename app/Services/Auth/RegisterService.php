@@ -28,18 +28,36 @@ class RegisterService {
             $request->validate([
                 'email' => 'required|email:dns|unique:users',
                 'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'min:8', 'max:20'],
-                'employee_name' => 'required',
+                'username' => 'required|unique:users',
                 'nik' => 'required|unique:users',
-                'photo' => 'required',
-                'gender' => 'required',
+                'employee_name' => 'required',
+                'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'gender' => 'required|in:laki-laki,perempuan',
                 'address' => 'required',
                 'phone' => 'required|unique:users',
                 'department' => 'required',
                 'section' => 'required',
                 'position' => 'required',
+                'role' => 'required',
+                'plant' => 'required',
+                'status' => 'required',
                 'group' => 'required',
                 'domicile' => 'required',
             ]);
+
+            // Upload photo
+            $imagePath = "";
+            if ($request->hasFile('photo')) {
+                $photo = $request->file('photo');
+                $photoNameLowercased = strtolower($photo->getClientOriginalName());
+                $photoNameUnderscored = str_replace(' ', '_', $photoNameLowercased);
+                $photoName = time() . '_' . $photoNameUnderscored;
+
+                $photo->move(public_path('images'), $photoName);
+
+                // Get image path
+                $imagePath = 'images/' . $photoName;
+            }
 
             // Hash password
             $hashedPassword = Hash::make($request->password);
@@ -48,9 +66,10 @@ class RegisterService {
                 null,
                 $request->email,
                 $hashedPassword,
-                $request->employee_name,
+                $request->username,
                 $request->nik,
-                $request->photo,
+                $request->employee_name,
+                $imagePath,
                 $request->gender,
                 $request->address,
                 $request->phone,
@@ -58,6 +77,8 @@ class RegisterService {
                 $request->section,
                 $request->position,
                 'user',
+                $request->plant,
+                $request->status,
                 $request->group,
                 $request->domicile,
             );
@@ -68,7 +89,7 @@ class RegisterService {
             return ([
                 'employee_name' => $userResult->getEmployeeName(),
                 'email' => $userResult->getEmail(),
-                'role' => $userResult->getRole()
+                'role' => $userResult->getRole(),
             ]);
         } catch (Exception $error) {
             throw new Exception($error->getMessage());

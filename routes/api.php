@@ -41,7 +41,6 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Employee Routes */
     Route::get('/employee/one', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
     Route::get('/employee/all', [EmployeeController::class, 'getAllEmployees'])->name('getAllEmployee');
-    Route::post('/employee/add', [EmployeeController::class, 'addEmployee'])->name('addEmployee');
     Route::delete('/employee/delete', [EmployeeController::class, 'deleteEmployee'])->name('deleteEmployee');
     Route::put('/employee/edit', [EmployeeController::class, 'editEmployee'])->name('editEmployee');
     // === //

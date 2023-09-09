@@ -4,39 +4,47 @@ namespace App\Repositories\Employee;
 
 use Exception;
 
-use App\DTO\EmployeeDTO;
-use App\Models\Employee;
+use App\DTO\UserDTO;
+use App\Models\User;
 
 class GetAllEmployeeRepository {
     /**
      * Get all employees
      * @param int $page
      * @param int $limit
-     * @return array of employeeDTOs
+     * @return array of userDTO
      */
     public function getAllEmployees(int $page, int $limit) {
         try {
-            $employees = Employee::paginate($limit, ['*'], 'page', $page);
+            $employees = User::paginate($limit, ['*'], 'page', $page);
 
-            $employeeDTOs = [];
+            $userDTOs = [];
             foreach ($employees as $employee) {
-                $employeeDTO = new EmployeeDTO(
+                $userDTO = new UserDTO(
                     $employee->id,
+                    $employee->email,
+                    null,
                     $employee->username,
                     $employee->nik,
                     $employee->employee_name,
+                    $employee->photo,
+                    $employee->gender,
+                    $employee->address,
+                    $employee->phone,
                     $employee->department,
                     $employee->section,
                     $employee->position,
                     $employee->role,
                     $employee->plant,
                     $employee->status,
+                    $employee->group,
+                    $employee->domicile
                 );
 
-                array_push($employeeDTOs, $employeeDTO);
+                array_push($userDTOs, $userDTO);
             }
 
-            return $employeeDTOs;
+            return $userDTOs;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

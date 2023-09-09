@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('alamat');
 
             // Foreign Keys
-            // Employee
-            $table->foreignId('employee_id_pic_branch')->constrained('employees')->onDelete('cascade')->onUpdate('cascade');
+            // User
+            $table->foreignId('employee_id_pic_branch')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });
