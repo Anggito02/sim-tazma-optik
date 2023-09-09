@@ -23,7 +23,7 @@ class DeleteEmployeeService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required|exists:employees,id',
+                'id' => 'required|exists:users,id',
             ]);
 
             $userDTO = $this->employeeRepository->deleteEmployee($request->id);

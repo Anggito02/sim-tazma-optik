@@ -134,6 +134,6 @@ Route::post('/token-test', function() {
 Route::any('{any}', function () {
     return response()->json([
         'status' => 'error',
-        'message' => 'Not found'
+        'message' => 'Endpoint not found'
     ])->setStatusCode(404);
 })->where('any', '.*');
