@@ -22,8 +22,8 @@ class GetAllVendorService {
     public function getAllVendor(Request $request) {
         try {
             $request->validate([
-                'page' => 'required',
-                'limit' => 'required',
+                'page' => 'required|gt:0',
+                'limit' => 'required|gt:0',
             ]);
 
             $vendorDTO = $this->vendorRepository->getAllVendor($request->page, $request->limit);

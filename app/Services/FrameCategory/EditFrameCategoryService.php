@@ -24,7 +24,7 @@ class EditFrameCategoryService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:frame_categories,id',
                 'nama_kategori' => 'required',
             ]);
 

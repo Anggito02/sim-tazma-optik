@@ -26,7 +26,7 @@ class RegisterService {
         try {
             // Validate user data
             $request->validate([
-                'email' => 'required|email:dns|unique:users',
+                'email' => 'required|email:dns|unique:users, email',
                 'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'min:8', 'max:20'],
                 'username' => 'required|unique:users',
                 'nik' => 'required|unique:users',
@@ -34,7 +34,7 @@ class RegisterService {
                 'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'gender' => 'required|in:laki-laki,perempuan',
                 'address' => 'required',
-                'phone' => 'required|unique:users',
+                'phone' => 'required|unique:users, phone',
                 'department' => 'required',
                 'section' => 'required',
                 'position' => 'required',

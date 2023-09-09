@@ -24,7 +24,7 @@ class GetEmployeeService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:employees,id',
             ]);
 
             $userDTO = $this->employeeRepository->getEmployee($request->id);

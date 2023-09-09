@@ -23,7 +23,7 @@ class GetVendorService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:vendors,id',
             ]);
 
             $id = $request->id;

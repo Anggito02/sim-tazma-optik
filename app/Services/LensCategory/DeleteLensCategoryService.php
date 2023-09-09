@@ -24,7 +24,7 @@ class DeleteLensCategoryService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:lens_categories,id',
             ]);
 
             $id = $request->id;

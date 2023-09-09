@@ -23,7 +23,7 @@ class EditCoaService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:coas,id',
                 'kode_coa' => 'required',
                 'deskripsi' => 'required',
                 'kategori' => 'required',

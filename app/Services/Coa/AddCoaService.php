@@ -17,6 +17,13 @@ class AddCoaService {
      */
     public function addCoa(Request $request) {
         try {
+            // Validate request
+            $request->validate([
+                'kode_coa' => 'required|unique:coas,kode_coa',
+                'deskripsi' => 'required',
+                'kategori' => 'required',
+            ]);
+
             $coaDTO = new CoaDTO(
                 null,
                 $request->kode_coa,

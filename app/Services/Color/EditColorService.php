@@ -23,7 +23,7 @@ class EditColorService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:colors,id',
                 'color_name' => 'required',
             ]);
 

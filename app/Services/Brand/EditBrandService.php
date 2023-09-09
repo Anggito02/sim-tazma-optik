@@ -23,7 +23,7 @@ class EditBrandService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:brands,id',
                 'nama_brand' => 'required',
                 'deskripsi' => 'required',
             ]);

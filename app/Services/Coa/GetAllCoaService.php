@@ -22,8 +22,8 @@ class GetAllCoaService {
         try {
             // Validate request
             $request->validate([
-                'page' => 'required',
-                'limit' => 'required',
+                'page' => 'required|gt:0',
+                'limit' => 'required|gt:0',
             ]);
 
             $coaDTO = $this->coaRepository->getAllCoa($request->page, $request->limit);

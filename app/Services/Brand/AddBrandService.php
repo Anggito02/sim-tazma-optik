@@ -23,7 +23,7 @@ class AddBrandService {
         try {
             // Validate request
             $request->validate([
-                'nama_brand' => 'required',
+                'nama_brand' => 'required|unique:brands,nama_brand',
                 'deskripsi' => 'required',
             ]);
 

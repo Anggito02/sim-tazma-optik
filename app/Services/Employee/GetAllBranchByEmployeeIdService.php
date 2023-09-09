@@ -23,9 +23,9 @@ class GetAllBranchByEmployeeIdService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
-                'page' => 'required',
-                'limit' => 'required',
+                'id' => 'required|exists:employees,id',
+                'page' => 'required|gt:0',
+                'limit' => 'required|gt:0',
             ]);
 
             $branchDTO = $this->employeeRepository->getAllBranchByEmployeeId($request->id, $request->page, $request->limit);

@@ -24,7 +24,7 @@ class AddFrameCategoryService {
         try {
             // Validate request
             $request->validate([
-                'nama_kategori' => 'required',
+                'nama_kategori' => 'required|unique:frame_categories,nama_kategori',
             ]);
 
             $frameCategoryDTO = new FrameCategoryDTO(
