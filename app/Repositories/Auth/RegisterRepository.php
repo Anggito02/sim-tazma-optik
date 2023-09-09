@@ -21,7 +21,7 @@ class RegisterRepository {
             $user->username = $userDTO->username;
             $user->nik = $userDTO->nik;
             $user->employee_name = $userDTO->employee_name;
-            $user->photo = $userDTO->photo;
+            // $user->photo = $userDTO->photo;
             $user->gender = $userDTO->gender;
             $user->address = $userDTO->address;
             $user->phone = $userDTO->phone;

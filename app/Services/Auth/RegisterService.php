@@ -69,6 +69,7 @@ class RegisterService {
                 $request->username,
                 $request->nik,
                 $request->employee_name,
+                null,
                 // $imagePath,
                 $request->gender,
                 $request->address,
