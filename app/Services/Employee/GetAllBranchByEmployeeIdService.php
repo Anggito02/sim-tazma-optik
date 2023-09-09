@@ -23,7 +23,7 @@ class GetAllBranchByEmployeeIdService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required|exists:employees,id',
+                'id' => 'required|exists:users,id',
                 'page' => 'required|gt:0',
                 'limit' => 'required|gt:0',
             ]);

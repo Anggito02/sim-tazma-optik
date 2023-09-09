@@ -4,36 +4,44 @@ namespace App\Repositories\Branch;
 
 use Exception;
 
-use App\DTO\EmployeeDTO;
+use App\DTO\UserDTO;
 use App\Models\Branch;
-use App\Models\Employee;
+use App\Models\User;
 
 class GetEmployeeByBranchIdRepository {
     /**
      * Get employee by branch id
      * @param int $id
-     * @return EmployeeDTO
+     * @return UserDTO
      */
     public function getEmployeeByBranchId(int $id) {
         try {
             $branch = Branch::find($id);
 
-            $employee = $branch->employee;
+            $employee = $branch->user;
 
-            $employeeDTO = new EmployeeDTO(
+            $userDTO = new UserDTO(
                 $employee->id,
+                $employee->email,
+                null,
                 $employee->username,
                 $employee->nik,
                 $employee->employee_name,
+                $employee->photo,
+                $employee->gender,
+                $employee->address,
+                $employee->phone,
                 $employee->department,
                 $employee->section,
                 $employee->position,
                 $employee->role,
                 $employee->plant,
                 $employee->status,
+                $employee->group,
+                $employee->domicile
             );
 
-            return $employeeDTO;
+            return $userDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }
