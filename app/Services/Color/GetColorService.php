@@ -23,7 +23,7 @@ class GetColorService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:colors,id',
             ]);
 
             $colorDTO = new ColorDTO(

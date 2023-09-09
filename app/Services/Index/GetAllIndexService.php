@@ -22,8 +22,8 @@ class GetAllIndexService {
         try {
             // Validate request
             $request->validate([
-                'page' => 'required',
-                'limit' => 'required',
+                'page' => 'required|gt:0',
+                'limit' => 'required|gt:0',
             ]);
 
             $indexDTO = $this->indexRepository->getAllIndex($request->page, $request->limit);

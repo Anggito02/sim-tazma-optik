@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('password');
-            $table->text('employee_name');
+            $table->string('username');
             $table->string('nik')->unique();
+            $table->text('employee_name');
             $table->string('photo')->nullable();
             $table->enum('gender', ['laki-laki', 'perempuan']);
             $table->text('address');
@@ -25,6 +26,8 @@ return new class extends Migration
             $table->string('section');
             $table->string('position');
             $table->string('role')->default('user');
+            $table->string('plant');
+            $table->string('status');
             $table->string('group');
             $table->string('domicile');
             $table->timestamp('email_verified_at')->nullable();

@@ -23,7 +23,7 @@ class DeleteBrandService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:brands,id',
             ]);
 
             $id = $request->id;

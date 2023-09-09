@@ -24,7 +24,7 @@ class EditLensCategoryService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:lens_categories,id',
                 'nama_kategori' => 'required',
             ]);
 

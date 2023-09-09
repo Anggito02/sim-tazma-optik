@@ -23,7 +23,7 @@ class AddIndexService {
         try {
             // Validate request
             $request->validate([
-                'value' => 'required',
+                'value' => 'required|unique:indices,value',
             ]);
 
             $indexDTO = new IndexDTO(

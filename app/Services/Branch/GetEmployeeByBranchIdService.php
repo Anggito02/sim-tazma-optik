@@ -24,7 +24,7 @@ class GetEmployeeByBranchIdService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required'
+                'id' => 'required|exists:branches,id'
             ]);
 
             $employeeDTO = $this->branchRepository->getEmployeeByBranchId($request->id);

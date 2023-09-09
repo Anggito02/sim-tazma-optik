@@ -22,6 +22,6 @@ class Branch extends Model
 
     public function employee()
     {
-        return $this->belongsTo(Employee::class, 'employee_id_pic_branch', 'id');
+        return $this->belongsTo(User::class, 'employee_id_pic_branch');
     }
 }

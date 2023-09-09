@@ -18,7 +18,7 @@ class GetEmployeeByBranchIdRepository {
         try {
             $branch = Branch::find($id);
 
-            $employee = Employee::find($branch->employee_id_pic_branch);
+            $employee = $branch->employee;
 
             $employeeDTO = new EmployeeDTO(
                 $employee->id,

@@ -30,10 +30,11 @@ class LoginRepository {
             return new UserDTO(
                 $user->id,
                 $user->email,
-                $user->password,
-                $user->employee_name,
+                null,
+                $user->username,
                 $user->nik,
-                $user->photo,
+                $user->employee_name,
+                null,
                 $user->gender,
                 $user->address,
                 $user->phone,
@@ -41,6 +42,8 @@ class LoginRepository {
                 $user->section,
                 $user->position,
                 $user->role,
+                $user->plant,
+                $user->status,
                 $user->group,
                 $user->domicile,
                 $token

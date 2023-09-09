@@ -23,10 +23,10 @@ class AddBranchService {
         try {
             // Validate request
             $request->validate([
-                'kode_branch' => 'required',
+                'kode_branch' => 'required|unique:branches, kode_branch',
                 'nama_branch' => 'required',
                 'alamat' => 'required',
-                'employee_id_pic_branch' => 'required',
+                'employee_id_pic_branch' => 'required|exists:employees, id',
             ]);
 
             $branchDTO = new BranchDTO(
