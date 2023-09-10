@@ -20,8 +20,8 @@ class GetAllBranchWithEmployeeRepository {
         try {
             // inner join branch and employee
             $branches = DB::table('branches')
-                ->join('employees', 'branches.employee_id_pic_branch', '=', 'employees.id')
-                ->select('branches.*', 'employees.employee_name')
+                ->join('users', 'branches.employee_id_pic_branch', '=', 'users.id')
+                ->select('branches.*', 'users.employee_name')
                 ->paginate($limit, ['*'], 'page', $page);
 
             $branchDTOs = [];

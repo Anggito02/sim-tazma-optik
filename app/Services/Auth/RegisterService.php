@@ -31,7 +31,7 @@ class RegisterService {
                 'username' => 'required|unique:users',
                 'nik' => 'required|unique:users',
                 'employee_name' => 'required',
-                'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                // 'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'gender' => 'required|in:laki-laki,perempuan',
                 'address' => 'required',
                 'phone' => 'required|unique:users, phone',
@@ -46,18 +46,18 @@ class RegisterService {
             ]);
 
             // Upload photo
-            $imagePath = "";
-            if ($request->hasFile('photo')) {
-                $photo = $request->file('photo');
-                $photoNameLowercased = strtolower($photo->getClientOriginalName());
-                $photoNameUnderscored = str_replace(' ', '_', $photoNameLowercased);
-                $photoName = time() . '_' . $photoNameUnderscored;
+            // $imagePath = "";
+            // if ($request->hasFile('photo')) {
+            //     $photo = $request->file('photo');
+            //     $photoNameLowercased = strtolower($photo->getClientOriginalName());
+            //     $photoNameUnderscored = str_replace(' ', '_', $photoNameLowercased);
+            //     $photoName = time() . '_' . $photoNameUnderscored;
 
-                $photo->move(public_path('images'), $photoName);
+            //     $photo->move(public_path('images'), $photoName);
 
-                // Get image path
-                $imagePath = 'images/' . $photoName;
-            }
+            //     // Get image path
+            //     $imagePath = 'images/' . $photoName;
+            // }
 
             // Hash password
             $hashedPassword = Hash::make($request->password);
@@ -69,7 +69,8 @@ class RegisterService {
                 $request->username,
                 $request->nik,
                 $request->employee_name,
-                $imagePath,
+                null,
+                // $imagePath,
                 $request->gender,
                 $request->address,
                 $request->phone,

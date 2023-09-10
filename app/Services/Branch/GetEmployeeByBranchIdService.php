@@ -18,7 +18,7 @@ class GetEmployeeByBranchIdService {
     /**
      * Get employee by branch id
      * @param Request $request
-     * @return EmployeeDTO
+     * @return UserDTO
      */
     public function getEmployeeByBranchId(Request $request) {
         try {
@@ -27,9 +27,9 @@ class GetEmployeeByBranchIdService {
                 'id' => 'required|exists:branches,id'
             ]);
 
-            $employeeDTO = $this->branchRepository->getEmployeeByBranchId($request->id);
+            $userDTO = $this->branchRepository->getEmployeeByBranchId($request->id);
 
-            return $employeeDTO;
+            return $userDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

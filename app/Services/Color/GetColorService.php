@@ -20,6 +20,7 @@ class GetColorService {
      * @return ColorDTO
      */
     public function getColor(Request $request) {
+        dd($request);
         try {
             // Validate request
             $request->validate([
