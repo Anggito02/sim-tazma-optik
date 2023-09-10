@@ -15,6 +15,8 @@ use App\Http\Controllers\LensCategoryController;
 use App\Http\Controllers\FrameCategoryController;
 use App\Http\Controllers\CoaController;
 
+use App\Http\Controllers\Modules\ItemController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -109,6 +111,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/coa/add', [CoaController::class, 'addCoa'])->name('addCoa');
     Route::delete('/coa/delete', [CoaController::class, 'deleteCoa'])->name('deleteCoa');
     Route::put('/coa/edit', [CoaController::class, 'editCoa'])->name('editCoa');
+
+    /* Item Controllers */
+    Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
+    Route::get('/item/allWithJenis', [ItemController::class, 'getAllItem'])->name('getAllItem');
+    Route::post('/item/add', [ItemController::class, 'addItem'])->name('addItem');
+    Route::delete('/item/delete', [ItemController::class, 'deleteItem'])->name('deleteItem');
+    Route::put('/item/edit', [ItemController::class, 'editItem'])->name('editItem');
 
 });
 

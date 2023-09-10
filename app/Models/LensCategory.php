@@ -12,4 +12,9 @@ class LensCategory extends Model
     protected $fillable = [
         'nama_kategori',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'lensa_lens_category_id');
+    }
 }
