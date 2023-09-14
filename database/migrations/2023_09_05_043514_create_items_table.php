@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('lensa_jenis_produk')->nullable();
             $table->string('lensa_kategori_lensa')->nullable();
             $table->bigInteger('lensa_harga_beli')->nullable();
+            $table->bigInteger('lensa_harga_jual')->nullable();
 
             // Accessory
             $table->string('aksesoris_nama_item')->nullable();

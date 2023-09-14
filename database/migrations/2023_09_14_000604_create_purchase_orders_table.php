@@ -21,7 +21,7 @@ return new class extends Migration
             $table->double('diskon');
             $table->boolean('status_po');
             $table->boolean('status_penerimaan');
-            $table->boleaan('status_pembayaran');
+            $table->boolean('status_pembayaran');
 
             // Foreign Keys
             // Vendor
