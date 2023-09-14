@@ -38,6 +38,7 @@ class AddItemService {
                 'lensa_jenis_produk' => 'required_if:jenis_item,lensa',
                 'lensa_kategori_lensa' => 'required_if:jenis_item,lensa',
                 'lensa_harga_beli' => 'required_if:jenis_item,lensa',
+                'lensa_harga_jual' => 'required_if:jenis_item,lensa',
 
                 // Accessory
                 'aksesoris_nama_item' => 'required_if:jenis_item,aksesori',
@@ -75,6 +76,7 @@ class AddItemService {
                 $request->lensa_jenis_produk,
                 $request->lensa_kategori_lensa,
                 $request->lensa_harga_beli,
+                $request->lensa_harga_jual,
 
                 // Accessory
                 $request->aksesoris_nama_item,

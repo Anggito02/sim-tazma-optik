@@ -20,6 +20,7 @@ class ItemDTO {
         public ?string $lensa_jenis_produk,
         public ?string $lensa_kategori_lensa,
         public ?string $lensa_harga_beli,
+        public ?string $lensa_harga_jual,
 
         // Accessory
         public ?string $aksesoris_nama_item,
@@ -130,6 +131,14 @@ class ItemDTO {
 
     public function setLensaHargaBeli(?string $lensa_harga_beli): void {
         $this->lensa_harga_beli = $lensa_harga_beli;
+    }
+
+    public function getLensaHargaJual(): ?string {
+        return $this->lensa_harga_jual;
+    }
+
+    public function setLensaHargaJual(?string $lensa_harga_jual): void {
+        $this->lensa_harga_jual = $lensa_harga_jual;
     }
 
     public function getAksesorisNamaItem(): ?string {
