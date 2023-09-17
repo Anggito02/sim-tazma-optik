@@ -17,6 +17,7 @@ use App\Http\Controllers\CoaController;
 
 use App\Http\Controllers\Modules\ItemController;
 use App\Http\Controllers\Modules\PurchaseOrderController;
+use App\Http\Controllers\Modules\ReceiveOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,6 +127,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/purchase-order/add', [PurchaseOrderController::class, 'addPurchaseOrder'])->name('addPurchaseOrder');
     Route::delete('/purchase-order/delete', [PurchaseOrderController::class, 'deletePurchaseOrder'])->name('deletePurchaseOrder');
     Route::put('/purchase-order/edit', [PurchaseOrderController::class, 'editPurchaseOrder'])->name('editPurchaseOrder');
+
+    /* Receive Order Controllers */
+    Route::get('/receive-order/one', [ReceiveOrderController::class, 'getReceiveOrder'])->name('getReceiveOrder');
+    Route::get('/receive-order/all', [ReceiveOrderController::class, 'getAllReceiveOrder'])->name('getAllReceiveOrder');
+    Route::post('/receive-order/add', [ReceiveOrderController::class, 'addReceiveOrder'])->name('addReceiveOrder');
+    Route::delete('/receive-order/delete', [ReceiveOrderController::class, 'deleteReceiveOrder'])->name('deleteReceiveOrder');
+    Route::put('/receive-order/edit', [ReceiveOrderController::class, 'editReceiveOrder'])->name('editReceiveOrder');
 
 });
 
