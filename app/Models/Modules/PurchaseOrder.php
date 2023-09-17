@@ -36,6 +36,9 @@ class PurchaseOrder extends Model
         'made_by',
         'checked_by',
         'approved_by',
+
+        // Receive Order
+        'receive_order_id',
     ];
 
     // Vendor
@@ -64,5 +67,13 @@ class PurchaseOrder extends Model
     public function approvedBy()
     {
         return $this->belongsTo(User::class, 'approved_by');
+    }
+
+    /* ========== */
+
+    // Receive Order
+    public function receiveOrder()
+    {
+        return $this->hasOne(ReceiveOrder::class, 'purchase_order_id');
     }
 }
