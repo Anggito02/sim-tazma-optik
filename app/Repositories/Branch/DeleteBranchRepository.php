@@ -10,7 +10,7 @@ use App\Models\Branch;
 class DeleteBranchRepository {
     /**
      * Delete branch
-     * @param BranchDTO $branchDTO
+     * @param int $id
      * @return BranchDTO
      */
     public function deleteBranch(int $id) {

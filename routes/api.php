@@ -16,6 +16,7 @@ use App\Http\Controllers\FrameCategoryController;
 use App\Http\Controllers\CoaController;
 
 use App\Http\Controllers\Modules\ItemController;
+use App\Http\Controllers\Modules\PurchaseOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,6 +119,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/item/add', [ItemController::class, 'addItem'])->name('addItem');
     Route::delete('/item/delete', [ItemController::class, 'deleteItem'])->name('deleteItem');
     Route::put('/item/edit', [ItemController::class, 'editItem'])->name('editItem');
+
+    /* Purchase Order Controllers */
+    Route::get('/purchase-order/one', [PurchaseOrderController::class, 'getPurchaseOrder'])->name('getPurchaseOrder');
+    Route::get('/purchase-order/all', [PurchaseOrderController::class, 'getAllPurchaseOrder'])->name('getAllPurchaseOrder');
+    Route::post('/purchase-order/add', [PurchaseOrderController::class, 'addPurchaseOrder'])->name('addPurchaseOrder');
+    Route::delete('/purchase-order/delete', [PurchaseOrderController::class, 'deletePurchaseOrder'])->name('deletePurchaseOrder');
+    Route::put('/purchase-order/edit', [PurchaseOrderController::class, 'editPurchaseOrder'])->name('editPurchaseOrder');
 
 });
 
