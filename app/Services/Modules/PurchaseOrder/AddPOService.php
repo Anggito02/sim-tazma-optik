@@ -24,7 +24,7 @@ class AddPOService {
             // Validate request
             $request->validate([
                 'nomor_po' => 'required|unique:purchase_orders,nomor_po',
-                'qty' => 'required',
+                'qty' => 'required|gt:0',
                 'unit' => 'required',
                 'harga_beli_satuan' => 'required',
                 'harga_jual_satuan' => 'required',

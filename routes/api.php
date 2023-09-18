@@ -121,11 +121,11 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/item/edit', [ItemController::class, 'editItem'])->name('editItem');
 
     /* Purchase Order Controllers */
-    Route::get('/purchase-order/one', [PurchaseOrderController::class, 'getPurchaseOrder'])->name('getPurchaseOrder');
-    Route::get('/purchase-order/all', [PurchaseOrderController::class, 'getAllPurchaseOrder'])->name('getAllPurchaseOrder');
-    Route::post('/purchase-order/add', [PurchaseOrderController::class, 'addPurchaseOrder'])->name('addPurchaseOrder');
-    Route::delete('/purchase-order/delete', [PurchaseOrderController::class, 'deletePurchaseOrder'])->name('deletePurchaseOrder');
-    Route::put('/purchase-order/edit', [PurchaseOrderController::class, 'editPurchaseOrder'])->name('editPurchaseOrder');
+    Route::get('/purchase-order/one', [PurchaseOrderController::class, 'getPO'])->name('getPO');
+    Route::get('/purchase-order/all', [PurchaseOrderController::class, 'getAllPO'])->name('getAllPO');
+    Route::post('/purchase-order/add', [PurchaseOrderController::class, 'addPO'])->name('addPO');
+    Route::delete('/purchase-order/delete', [PurchaseOrderController::class, 'deletePO'])->name('deletePO');
+    Route::put('/purchase-order/edit', [PurchaseOrderController::class, 'editPO'])->name('editPO');
 
     /* Receive Order Controllers */
     Route::get('/receive-order/one', [ReceiveOrderController::class, 'getReceiveOrder'])->name('getReceiveOrder');
