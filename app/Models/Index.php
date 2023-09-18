@@ -12,4 +12,9 @@ class Index extends Model
     protected $fillable = [
         'value',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'lensa_index_id');
+    }
 }

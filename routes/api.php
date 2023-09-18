@@ -15,6 +15,10 @@ use App\Http\Controllers\LensCategoryController;
 use App\Http\Controllers\FrameCategoryController;
 use App\Http\Controllers\CoaController;
 
+use App\Http\Controllers\Modules\ItemController;
+use App\Http\Controllers\Modules\PurchaseOrderController;
+use App\Http\Controllers\Modules\ReceiveOrderController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -79,7 +83,6 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/branch/edit', [BranchController::class, 'editBranch'])->name('editBranch');
 
     // === //
-    Route::get('/branch/employee/one', [BranchController::class, 'getEmployeeByBranchId'])->name('getEmployeeByBranchId');
     Route::get('/branchWith/employee/all', [BranchController::class, 'getAllBranchWithEmployee'])->name('getAllBranchWithEmployee');
 
     /* Index Routes */
@@ -109,6 +112,27 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/coa/add', [CoaController::class, 'addCoa'])->name('addCoa');
     Route::delete('/coa/delete', [CoaController::class, 'deleteCoa'])->name('deleteCoa');
     Route::put('/coa/edit', [CoaController::class, 'editCoa'])->name('editCoa');
+
+    /* Item Controllers */
+    Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
+    Route::get('/item/allWithJenis', [ItemController::class, 'getAllItem'])->name('getAllItem');
+    Route::post('/item/add', [ItemController::class, 'addItem'])->name('addItem');
+    Route::delete('/item/delete', [ItemController::class, 'deleteItem'])->name('deleteItem');
+    Route::put('/item/edit', [ItemController::class, 'editItem'])->name('editItem');
+
+    /* Purchase Order Controllers */
+    Route::get('/purchase-order/one', [PurchaseOrderController::class, 'getPO'])->name('getPO');
+    Route::get('/purchase-order/all', [PurchaseOrderController::class, 'getAllPO'])->name('getAllPO');
+    Route::post('/purchase-order/add', [PurchaseOrderController::class, 'addPO'])->name('addPO');
+    Route::delete('/purchase-order/delete', [PurchaseOrderController::class, 'deletePO'])->name('deletePO');
+    Route::put('/purchase-order/edit', [PurchaseOrderController::class, 'editPO'])->name('editPO');
+
+    /* Receive Order Controllers */
+    Route::get('/receive-order/one', [ReceiveOrderController::class, 'getReceiveOrder'])->name('getReceiveOrder');
+    Route::get('/receive-order/all', [ReceiveOrderController::class, 'getAllReceiveOrder'])->name('getAllReceiveOrder');
+    Route::post('/receive-order/add', [ReceiveOrderController::class, 'addReceiveOrder'])->name('addReceiveOrder');
+    Route::delete('/receive-order/delete', [ReceiveOrderController::class, 'deleteReceiveOrder'])->name('deleteReceiveOrder');
+    Route::put('/receive-order/edit', [ReceiveOrderController::class, 'editReceiveOrder'])->name('editReceiveOrder');
 
 });
 
