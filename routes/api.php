@@ -83,7 +83,6 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/branch/edit', [BranchController::class, 'editBranch'])->name('editBranch');
 
     // === //
-    Route::get('/branch/employee/one', [BranchController::class, 'getEmployeeByBranchId'])->name('getEmployeeByBranchId');
     Route::get('/branchWith/employee/all', [BranchController::class, 'getAllBranchWithEmployee'])->name('getAllBranchWithEmployee');
 
     /* Index Routes */

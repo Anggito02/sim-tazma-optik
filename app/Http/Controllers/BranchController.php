@@ -25,8 +25,6 @@ class BranchController extends Controller
         private GetAllBranchService $getAllBranchService,
         private GetBranchService $getBranchService,
 
-
-        private GetEmployeeByBranchIdService $getEmployeeByBranchIdService,
         private GetAllBranchWithEmployeeService $getAllBranchWithEmployeeService
     ) {}
 
@@ -146,29 +144,6 @@ class BranchController extends Controller
     }
 
     /* ========== */
-
-    /**
-     * Get employee by branch id
-     * @param Request $request
-     * @return BranchDTO
-     */
-    public function getEmployeeByBranchId(Request $request) {
-        try {
-            $branchDTO = $this->getEmployeeByBranchIdService->getEmployeeByBranchId($request);
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Get employee by branch id success',
-                'data' => $branchDTO
-            ], 200);
-        } catch (Exception $error) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Get employee by branch id failed',
-                'data' => $error->getMessage()
-            ], 400);
-        }
-    }
 
     /**
      * Get all branch with employee
