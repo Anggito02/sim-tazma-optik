@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Branch;
+use App\Models\Modules\Item;
 use App\Models\Vendor;
 use Illuminate\Database\Seeder;
 
@@ -23,5 +24,6 @@ class DatabaseSeeder extends Seeder
 
         Branch::factory(10)->create();
         Vendor::factory(40)->create();
+        Item::factory(100)->create();
     }
 }

@@ -30,6 +30,7 @@ class Item extends Model
         'lensa_jenis_produk',
         'lensa_kategori_lensa',
         'lensa_harga_beli',
+        'lensa_harga_jual',
 
         // Accessory
         'aksesoris_nama_item',

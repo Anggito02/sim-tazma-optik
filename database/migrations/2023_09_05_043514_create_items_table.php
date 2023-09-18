@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('lensa_jenis_produk')->nullable();
             $table->string('lensa_kategori_lensa')->nullable();
             $table->bigInteger('lensa_harga_beli')->nullable();
+            $table->bigInteger('lensa_harga_jual')->nullable();
 
             // Accessory
             $table->string('aksesoris_nama_item')->nullable();
@@ -38,34 +39,34 @@ return new class extends Migration
             // Foreign Keys
             // FRAME //
             // Frame Category
-            $table->foreignId('frame_frame_category_id')->constrained('frame_categories')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('frame_frame_category_id')->nullable()->constrained('frame_categories')->onDelete('cascade')->onUpdate('cascade');
 
             // Frame Brand
-            $table->foreignId('frame_brand_id')->constrained('brands')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('frame_brand_id')->nullable()->constrained('brands')->onDelete('cascade')->onUpdate('cascade');
 
             // Frame Vendor
-            $table->foreignId('frame_vendor_id')->constrained('vendors')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('frame_vendor_id')->nullable()->constrained('vendors')->onDelete('cascade')->onUpdate('cascade');
 
             // Frame Color
-            $table->foreignId('frame_color_id')->constrained('colors')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('frame_color_id')->nullable()->constrained('colors')->onDelete('cascade')->onUpdate('cascade');
 
             // ========== //
 
             // LENS //
             // Lens Category
-            $table->foreignId('lensa_lens_category_id')->constrained('lens_categories')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('lensa_lens_category_id')->nullable()->constrained('lens_categories')->onDelete('cascade')->onUpdate('cascade');
 
             // Lens Brand
-            $table->foreignId('lensa_brand_id')->constrained('brands')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('lensa_brand_id')->nullable()->constrained('brands')->onDelete('cascade')->onUpdate('cascade');
 
             // Lens Index
-            $table->foreignId('lensa_index_id')->constrained('indices')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('lensa_index_id')->nullable()->constrained('indices')->onDelete('cascade')->onUpdate('cascade');
 
             // ========== //
 
             // ACCESSORY //
             // Accessory Brand
-            $table->foreignId('aksesoris_brand_id')->constrained('brands')->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('aksesoris_brand_id')->nullable()->constrained('brands')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

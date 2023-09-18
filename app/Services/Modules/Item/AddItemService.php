@@ -24,7 +24,7 @@ class AddItemService {
             // Validate request
             $request->validate([
                 'kode_item' => 'required|unique:items,kode_item',
-                'jenis_item' => 'required|in:frame,lensa,aksesori',
+                'jenis_item' => 'required|in:frame,lensa,aksesoris',
                 'deskripsi' => 'required',
 
                 // Frame
@@ -38,9 +38,10 @@ class AddItemService {
                 'lensa_jenis_produk' => 'required_if:jenis_item,lensa',
                 'lensa_kategori_lensa' => 'required_if:jenis_item,lensa',
                 'lensa_harga_beli' => 'required_if:jenis_item,lensa',
+                'lensa_harga_jual' => 'required_if:jenis_item,lensa',
 
                 // Accessory
-                'aksesoris_nama_item' => 'required_if:jenis_item,aksesori',
+                'aksesoris_nama_item' => 'required_if:jenis_item,aksesoris',
 
                 // Foreign Keys
                 // FRAME //
@@ -55,7 +56,7 @@ class AddItemService {
                 'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indexes,id',
 
                 // ACCESSORY //
-                'aksesoris_brand_id' => 'required_if:jenis_item,aksesori|exists:brands,id',
+                'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id',
             ]);
 
             $itemDTO = new ItemDTO(
@@ -75,6 +76,7 @@ class AddItemService {
                 $request->lensa_jenis_produk,
                 $request->lensa_kategori_lensa,
                 $request->lensa_harga_beli,
+                $request->lensa_harga_jual,
 
                 // Accessory
                 $request->aksesoris_nama_item,

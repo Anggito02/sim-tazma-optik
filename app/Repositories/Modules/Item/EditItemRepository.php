@@ -32,6 +32,7 @@ class EditItemRepository {
             $item->lensa_jenis_produk = $itemDTO->lensa_jenis_produk;
             $item->lensa_kategori_lensa = $itemDTO->lensa_kategori_lensa;
             $item->lensa_harga_beli = $itemDTO->lensa_harga_beli;
+            $item->lensa_harga_jual = $itemDTO->lensa_harga_jual;
 
             // Accessory
             $item->aksesoris_nama_item = $itemDTO->aksesoris_nama_item;
