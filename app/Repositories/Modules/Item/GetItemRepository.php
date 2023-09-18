@@ -30,6 +30,7 @@ class GetItemRepository {
                 $item->lensa_jenis_produk,
                 $item->lensa_kategori_lensa,
                 $item->lensa_harga_beli,
+                $item->lensa_harga_jual,
                 $item->aksesoris_nama_item,
                 $item->aksesoris_kategori,
                 $item->aksesoris_harga_beli,
