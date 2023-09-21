@@ -28,7 +28,7 @@ class Item extends Model
 
         // Lens
         'lensa_jenis_produk',
-        'lensa_kategori_lensa',
+        'lensa_jenis_lensa',
         'lensa_harga_beli',
         'lensa_harga_jual',
 
