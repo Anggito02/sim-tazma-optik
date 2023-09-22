@@ -24,7 +24,6 @@ class EditPOService {
             // Validate request
             $request->validate([
                 'id' => 'required',
-                'nomor_po' => 'required|unique:purchase_orders,nomor_po',
                 'qty' => 'required',
                 'unit' => 'required',
                 'harga_beli_satuan' => 'required',
@@ -44,7 +43,7 @@ class EditPOService {
 
             $poDTO = new PurchaseOrderDTO(
                 $request->id,
-                $request->nomor_po,
+                null,
                 $request->qty,
                 $request->unit,
                 $request->harga_beli_satuan,

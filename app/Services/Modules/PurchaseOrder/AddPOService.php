@@ -9,9 +9,13 @@ use App\DTO\Modules\PurchaseOrderDTO;
 
 use App\Repositories\Modules\PurchaseOrder\AddPORepository;
 
+use App\Services\Modules\PurchaseOrder\GeneratePoNumberService;
+
 class AddPOService {
     public function __construct(
-        private AddPORepository $poRepository
+        private AddPORepository $poRepository,
+
+        private GeneratePoNumberService $generatePoNumberService
     ) {}
 
     /**
@@ -23,7 +27,6 @@ class AddPOService {
         try {
             // Validate request
             $request->validate([
-                'nomor_po' => 'required|unique:purchase_orders,nomor_po',
                 'qty' => 'required|gt:0',
                 'unit' => 'required',
                 'harga_beli_satuan' => 'required',
@@ -41,9 +44,12 @@ class AddPOService {
                 'approved_by' => 'required|exists:users,id',
             ]);
 
+            // Auto numbering PO
+            $nomor_po = $this->generatePoNumberService->generatePoNumber();
+
             $poDTO = new PurchaseOrderDTO(
                 null,
-                $request->nomor_po,
+                $nomor_po,
                 $request->qty,
                 $request->unit,
                 $request->harga_beli_satuan,

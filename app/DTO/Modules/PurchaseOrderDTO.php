@@ -5,7 +5,7 @@ namespace App\DTO\Modules;
 class PurchaseOrderDTO {
     public function __construct(
         public ?int $id,
-        public string $nomor_po,
+        public ?string $nomor_po,
         public int $qty,
         public string $unit,
         public int $harga_beli_satuan,

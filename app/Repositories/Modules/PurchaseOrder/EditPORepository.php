@@ -16,7 +16,6 @@ class EditPORepository {
     public function editPurchaseOrder(PurchaseOrderDTO $PoDto) {
         try {
             $po = PurchaseOrder::find($PoDto->id);
-            $po->nomor_po = $PoDto->getNomorPo();
             $po->qty = $PoDto->getQty();
             $po->unit = $PoDto->getUnit();
             $po->harga_beli_satuan = $PoDto->getHargaBeliSatuan();
