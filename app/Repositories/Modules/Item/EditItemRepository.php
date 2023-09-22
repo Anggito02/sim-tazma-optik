@@ -18,7 +18,6 @@ class EditItemRepository {
             $item = Item::find($itemDTO->id);
 
             $item->jenis_item = $itemDTO->jenis_item;
-            $item->kode_item = $itemDTO->kode_item;
             $item->deskripsi = $itemDTO->deskripsi;
 
             // Frame
@@ -30,7 +29,7 @@ class EditItemRepository {
 
             // Lens
             $item->lensa_jenis_produk = $itemDTO->lensa_jenis_produk;
-            $item->lensa_kategori_lensa = $itemDTO->lensa_kategori_lensa;
+            $item->lensa_jenis_lensa = $itemDTO->lensa_jenis_lensa;
             $item->lensa_harga_beli = $itemDTO->lensa_harga_beli;
             $item->lensa_harga_jual = $itemDTO->lensa_harga_jual;
 

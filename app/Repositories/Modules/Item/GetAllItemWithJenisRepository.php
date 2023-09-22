@@ -38,7 +38,7 @@ class GetAllItemWithJenisRepository {
 
                     // Lens
                     $item->lensa_jenis_produk,
-                    $item->lensa_kategori_lensa,
+                    $item->lensa_jenis_lensa,
                     $item->lensa_harga_beli,
                     $item->lensa_harga_jual,
 

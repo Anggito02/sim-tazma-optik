@@ -35,12 +35,15 @@ class EditItemService {
 
                 // Lens
                 'lensa_jenis_produk' => 'required_if:jenis_item,lensa',
-                'lensa_kategori_lensa' => 'required_if:jenis_item,lensa',
+                'lensa_jenis_lensa' => 'required_if:jenis_item,lensa',
                 'lensa_harga_beli' => 'required_if:jenis_item,lensa',
                 'lensa_harga_jual' => 'required_if:jenis_item,lensa',
 
                 // Accessory
                 'aksesoris_nama_item' => 'required_if:jenis_item,aksesoris',
+                'aksesoris_kategori' => 'required_if:jenis_item,aksesoris',
+                'aksesoris_harga_beli' => 'required_if:jenis_item,aksesoris',
+                'aksesoris_harga_jual' => 'required_if:jenis_item,aksesoris',
 
                 // Foreign Keys
                 // FRAME //
@@ -60,7 +63,7 @@ class EditItemService {
             $itemDto = new ItemDTO(
                 $request->id,
                 $request->jenis_item,
-                $request->kode_item,
+                null,
                 $request->deskripsi,
 
                 // Frame
@@ -72,7 +75,7 @@ class EditItemService {
 
                 // Lens
                 $request->lensa_jenis_produk,
-                $request->lensa_kategori_lensa,
+                $request->lensa_jenis_lensa,
                 $request->lensa_harga_beli,
                 $request->lensa_harga_jual,
 

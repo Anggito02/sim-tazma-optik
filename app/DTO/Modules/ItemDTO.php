@@ -5,9 +5,9 @@ namespace App\DTO\Modules;
 class ItemDTO {
     public function __construct(
         public ?int $id,
-        public string $jenis_item,
-        public string $kode_item,
-        public string $deskripsi,
+        public ?string $jenis_item,
+        public ?string $kode_item,
+        public ?string $deskripsi,
 
         // Frame
         public ?string $frame_sku_vendor,
@@ -18,7 +18,7 @@ class ItemDTO {
 
         // Lens
         public ?string $lensa_jenis_produk,
-        public ?string $lensa_kategori_lensa,
+        public ?string $lensa_jenis_lensa,
         public ?string $lensa_harga_beli,
         public ?string $lensa_harga_jual,
 
@@ -117,12 +117,12 @@ class ItemDTO {
         $this->lensa_jenis_produk = $lensa_jenis_produk;
     }
 
-    public function getLensaKategoriLensa(): ?string {
-        return $this->lensa_kategori_lensa;
+    public function getLensaJenisLensa(): ?string {
+        return $this->lensa_jenis_lensa;
     }
 
-    public function setLensaKategoriLensa(?string $lensa_kategori_lensa): void {
-        $this->lensa_kategori_lensa = $lensa_kategori_lensa;
+    public function setLensaJenisLensa(?string $lensa_kategori_lensa): void {
+        $this->lensa_jenis_lensa = $lensa_kategori_lensa;
     }
 
     public function getLensaHargaBeli(): ?string {

@@ -29,7 +29,7 @@ class AddItemRepository {
 
             // Lens
             $newItem->lensa_jenis_produk = $itemDTO->getLensaJenisProduk();
-            $newItem->lensa_kategori_lensa = $itemDTO->getLensaKategoriLensa();
+            $newItem->lensa_jenis_lensa = $itemDTO->getLensaJenisLensa();
             $newItem->lensa_harga_beli = $itemDTO->getLensaHargaBeli();
             $newItem->lensa_harga_jual = $itemDTO->getLensaHargaJual();
 

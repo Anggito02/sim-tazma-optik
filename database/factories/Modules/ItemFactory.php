@@ -30,7 +30,7 @@ class ItemFactory extends Factory
 
             // Lens
             'lensa_jenis_produk' => $this->faker->randomElement(['LIGHT D CLEAR', 'LIGHT D BLUEGARD', 'LIGHT D PHOTOFUSION', 'LIGHT 3D CLEAR', 'LIGHT 3D BLUEGARD', 'LIGHT 3D PHOTOFUSION', 'LIGHT 3Dve CLEAR', 'LIGHT 3Dve BLUEGARD', 'LIGHT 3Dve PHOTOFUSION', 'LIGHT 3Dv CLEAR', 'LIGHT 3Dv BLUEGARD', 'LIGHT 3Dv PHOTOFUSION']),
-            'lensa_kategori_lensa' => $this->faker->randomElement(['High', 'Mid', 'Low']),
+            'lensa_jenis_lensa' => $this->faker->randomElement(['PR', 'SV', 'KT', 'DT', 'FT']),
             'lensa_harga_beli' => $this->faker->numberBetween(100000, 1000000),
 
             // Accessory
