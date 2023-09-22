@@ -5,7 +5,7 @@ namespace App\DTO\Modules;
 class ReceiveOrderDTO {
     public function __construct(
         public ?int $id,
-        public string $nomor_receive_order,
+        public ?string $nomor_receive_order,
         public int $receive_qty,
         public int $not_good_qty,
         public string $tanggal_penerimaan,
