@@ -24,7 +24,6 @@ class EditReceiveOrderService {
             // Validate Request
             $request->validate([
                 'id' => 'required|exists:receive_orders,id',
-                'nomor_receive_order' => 'required',
                 'receive_qty' => 'required',
                 'not_good_qty' => 'required',
                 'tanggal_penerimaan' => 'required',
@@ -39,7 +38,7 @@ class EditReceiveOrderService {
 
             $receiveOrderDTO = new ReceiveOrderDTO(
                 $request->id,
-                $request->nomor_receive_order,
+                null,
                 $request->receive_qty,
                 $request->not_good_qty,
                 $request->tanggal_penerimaan,

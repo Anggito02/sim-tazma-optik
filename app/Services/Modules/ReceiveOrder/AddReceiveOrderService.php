@@ -9,7 +9,15 @@ use App\DTO\Modules\ReceiveOrderDTO;
 
 use App\Repositories\Modules\ReceiveOrder\AddReceiveOrderRepository;
 
+use App\Services\Modules\ReceiveOrder\GenerateReceiveOrderNumberService;
+
 class AddReceiveOrderService {
+    public function __construct(
+        private AddReceiveOrderRepository $receiveOrderRepository,
+
+        private GenerateReceiveOrderNumberService $generateReceiveOrderNumberService
+    ) {}
+
     /**
      * Add Receive Order
      * @param Request $request
@@ -19,7 +27,6 @@ class AddReceiveOrderService {
         try {
             // Validate request
             $request->validate([
-                'nomor_receive_order' => 'required|unique:receive_orders,nomor_receive_order',
                 'receive_qty' => 'required|gt:0',
                 'not_good_qty' => 'required|gt:0',
                 'tanggal_penerimaan' => 'required',
@@ -30,9 +37,12 @@ class AddReceiveOrderService {
                 'approved_by' => 'required'
             ]);
 
+            // Auto numbering RO
+            $nomor_receive_order = $this->generateReceiveOrderNumberService->generateReceiveOrderNumber();
+
             $receiveOrderDTO = new ReceiveOrderDTO(
                 null,
-                $request->nomor_receive_order,
+                $nomor_receive_order,
                 $request->receive_qty,
                 $request->not_good_qty,
                 $request->tanggal_penerimaan,
@@ -43,7 +53,7 @@ class AddReceiveOrderService {
                 $request->approved_by
             );
 
-            $receiveOrderDTO = (new AddReceiveOrderRepository)->addReceiveOrder($receiveOrderDTO);
+            $receiveOrderDTO = $this->receiveOrderRepository->addReceiveOrder($receiveOrderDTO);
 
             return $receiveOrderDTO;
         } catch (Exception $error) {
