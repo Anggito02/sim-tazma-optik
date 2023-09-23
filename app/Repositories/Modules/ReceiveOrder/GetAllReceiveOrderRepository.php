@@ -24,10 +24,7 @@ class GetAllReceiveOrderRepository {
                 $receiveOrderDTO = new ReceiveOrderDTO(
                     $receiveOrder->id,
                     $receiveOrder->nomor_receive_order,
-                    $receiveOrder->receive_qty,
-                    $receiveOrder->not_good_qty,
                     $receiveOrder->tanggal_penerimaan,
-                    $receiveOrder->status_invoice,
 
                     $receiveOrder->purchase_order_id,
 

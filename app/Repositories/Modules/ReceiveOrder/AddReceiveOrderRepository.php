@@ -17,10 +17,7 @@ class AddReceiveOrderRepository {
         try {
             $newReceiveOrder = new ReceiveOrder();
             $newReceiveOrder->nomor_receive_order = $receiveOrderDTO->getNomorReceiveOrder();
-            $newReceiveOrder->receive_qty = $receiveOrderDTO->getReceiveQty();
-            $newReceiveOrder->not_good_qty = $receiveOrderDTO->getNotGoodQty();
             $newReceiveOrder->tanggal_penerimaan = $receiveOrderDTO->getTanggalPenerimaan();
-            $newReceiveOrder->status_invoice = $receiveOrderDTO->getStatusInvoice();
 
             $newReceiveOrder->purchase_order_id = $receiveOrderDTO->getPurchaseOrderId();
 

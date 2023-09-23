@@ -27,10 +27,7 @@ class AddReceiveOrderService {
         try {
             // Validate request
             $request->validate([
-                'receive_qty' => 'required|gt:0',
-                'not_good_qty' => 'required|gt:0',
                 'tanggal_penerimaan' => 'required',
-                'status_invoice' => 'required',
                 'purchase_order_id' => 'required',
                 'received_by' => 'required',
                 'checked_by' => 'required',
@@ -40,13 +37,13 @@ class AddReceiveOrderService {
             // Auto numbering RO
             $nomor_receive_order = $this->generateReceiveOrderNumberService->generateReceiveOrderNumber();
 
+            // Get current datetime
+            $tanggal_penerimaan = date('Y-m-d H:i:s');
+
             $receiveOrderDTO = new ReceiveOrderDTO(
                 null,
                 $nomor_receive_order,
-                $request->receive_qty,
-                $request->not_good_qty,
-                $request->tanggal_penerimaan,
-                $request->status_invoice,
+                $tanggal_penerimaan,
                 $request->purchase_order_id,
                 $request->received_by,
                 $request->checked_by,

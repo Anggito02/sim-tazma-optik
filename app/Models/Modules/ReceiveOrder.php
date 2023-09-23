@@ -16,10 +16,7 @@ class ReceiveOrder extends Model
      */
     protected $fillable = [
         'nomor_receive_order',
-        'receive_qty',
-        'not_good_qty',
         'tanggal_penerimaan',
-        'status_invoice',
 
         // Foreign Keys
         // Purchase Order
