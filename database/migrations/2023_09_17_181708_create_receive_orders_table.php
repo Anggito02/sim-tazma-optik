@@ -14,10 +14,7 @@ return new class extends Migration
         Schema::create('receive_orders', function (Blueprint $table) {
             $table->id();
             $table->string('nomor_receive_order');
-            $table->integer('receive_qty');
-            $table->integer('not_good_qty');
-            $table->date('tanggal_penerimaan');
-            $table->boolean('status_invoice');
+            $table->dateTime('tanggal_penerimaan');
 
             // Foreign Keys
             // Purchase Order

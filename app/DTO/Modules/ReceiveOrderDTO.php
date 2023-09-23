@@ -6,14 +6,11 @@ class ReceiveOrderDTO {
     public function __construct(
         public ?int $id,
         public ?string $nomor_receive_order,
-        public int $receive_qty,
-        public int $not_good_qty,
-        public string $tanggal_penerimaan,
-        public bool $status_invoice,
+        public ?string $tanggal_penerimaan,
 
         // Foreign Keys
         // Purchase Order
-        public int $purchase_order_id,
+        public ?int $purchase_order_id,
 
         // Employee
         public int $received_by,
@@ -30,36 +27,12 @@ class ReceiveOrderDTO {
         $this->nomor_receive_order = $nomor_receive_order;
     }
 
-    public function getReceiveQty(): int {
-        return $this->receive_qty;
-    }
-
-    public function setReceiveQty(int $receive_qty): void {
-        $this->receive_qty = $receive_qty;
-    }
-
-    public function getNotGoodQty(): int {
-        return $this->not_good_qty;
-    }
-
-    public function setNotGoodQty(int $not_good_qty): void {
-        $this->not_good_qty = $not_good_qty;
-    }
-
     public function getTanggalPenerimaan(): string {
         return $this->tanggal_penerimaan;
     }
 
     public function setTanggalPenerimaan(string $tanggal_penerimaan): void {
         $this->tanggal_penerimaan = $tanggal_penerimaan;
-    }
-
-    public function getStatusInvoice(): bool {
-        return $this->status_invoice;
-    }
-
-    public function setStatusInvoice(bool $status_invoice): void {
-        $this->status_invoice = $status_invoice;
     }
 
     public function getPurchaseOrderId(): int {
