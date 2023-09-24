@@ -28,25 +28,22 @@ class GetAllItemWithJenisRepository {
                     $item->jenis_item,
                     $item->kode_item,
                     $item->deskripsi,
+                    $item->stok,
+                    $item->harga_beli,
+                    $item->harga_jual,
 
                     // Frame
                     $item->frame_sku_vendor,
                     $item->frame_sub_kategori,
                     $item->frame_kode,
-                    $item->frame_harga_beli,
-                    $item->frame_harga_jual,
 
                     // Lens
                     $item->lensa_jenis_produk,
                     $item->lensa_jenis_lensa,
-                    $item->lensa_harga_beli,
-                    $item->lensa_harga_jual,
 
                     // Accessory
                     $item->aksesoris_nama_item,
                     $item->aksesoris_kategori,
-                    $item->aksesoris_harga_beli,
-                    $item->aksesoris_harga_jual,
 
                     // Foreign Keys
                     // FRAME //
