@@ -2,7 +2,7 @@
 
 namespace App\DTO\Modules;
 
-class PurchaseOrderDetail {
+class PurchaseOrderDetailDTO {
     public function __construct(
         public ?int $id,
         public int $received_qty,
