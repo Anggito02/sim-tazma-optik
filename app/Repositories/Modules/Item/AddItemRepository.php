@@ -19,25 +19,22 @@ class AddItemRepository {
             $newItem->kode_item = $itemDTO->getKodeItem();
             $newItem->jenis_item = $itemDTO->getJenisItem();
             $newItem->deskripsi = $itemDTO->getDeskripsi();
+            $newItem->stok = $itemDTO->getStok();
+            $newItem->harga_beli = $itemDTO->getHargaBeli();
+            $newItem->harga_jual = $itemDTO->getHargaJual();
 
             // Frame
             $newItem->frame_sku_vendor = $itemDTO->getFrameSkuVendor();
             $newItem->frame_sub_kategori = $itemDTO->getFrameSubKategori();
             $newItem->frame_kode = $itemDTO->getFrameKode();
-            $newItem->frame_harga_beli = $itemDTO->getFrameHargaBeli();
-            $newItem->frame_harga_jual = $itemDTO->getFrameHargaJual();
 
             // Lens
             $newItem->lensa_jenis_produk = $itemDTO->getLensaJenisProduk();
             $newItem->lensa_jenis_lensa = $itemDTO->getLensaJenisLensa();
-            $newItem->lensa_harga_beli = $itemDTO->getLensaHargaBeli();
-            $newItem->lensa_harga_jual = $itemDTO->getLensaHargaJual();
 
             // Accessory
             $newItem->aksesoris_nama_item = $itemDTO->getAksesorisNamaItem();
             $newItem->aksesoris_kategori = $itemDTO->getAksesorisKategori();
-            $newItem->aksesoris_harga_beli = $itemDTO->getAksesorisHargaBeli();
-            $newItem->aksesoris_harga_jual = $itemDTO->getAksesorisHargaJual();
 
             // Foreign Keys
             $newItem->frame_frame_category_id = $itemDTO->getFrameFrameCategoryId();

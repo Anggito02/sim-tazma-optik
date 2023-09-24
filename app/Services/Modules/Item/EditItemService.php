@@ -26,24 +26,22 @@ class EditItemService {
                 'id' => 'required|exists:items,id',
                 'jenis_item' => 'required|in:frame,lensa,aksesoris',
                 'deskripsi' => 'required',
+                'stok' => 'required',
+                'harga_beli' => 'required',
+                'harga_jual' => 'required',
 
                 // Frame
                 'frame_sku_vendor' => 'required_if:jenis_item,frame',
                 'frame_sub_kategori' => 'required_if:jenis_item,frame',
                 'frame_kode' => 'required_if:jenis_item,frame',
-                'frame_harga_beli' => 'required_if:jenis_item,frame',
 
                 // Lens
                 'lensa_jenis_produk' => 'required_if:jenis_item,lensa',
                 'lensa_jenis_lensa' => 'required_if:jenis_item,lensa',
-                'lensa_harga_beli' => 'required_if:jenis_item,lensa',
-                'lensa_harga_jual' => 'required_if:jenis_item,lensa',
 
                 // Accessory
                 'aksesoris_nama_item' => 'required_if:jenis_item,aksesoris',
                 'aksesoris_kategori' => 'required_if:jenis_item,aksesoris',
-                'aksesoris_harga_beli' => 'required_if:jenis_item,aksesoris',
-                'aksesoris_harga_jual' => 'required_if:jenis_item,aksesoris',
 
                 // Foreign Keys
                 // FRAME //
@@ -65,25 +63,22 @@ class EditItemService {
                 $request->jenis_item,
                 null,
                 $request->deskripsi,
+                $request->stok,
+                $request->harga_beli,
+                $request->harga_jual,
 
                 // Frame
                 $request->frame_sku_vendor,
                 $request->frame_sub_kategori,
                 $request->frame_kode,
-                $request->frame_harga_beli,
-                $request->frame_harga_jual,
 
                 // Lens
                 $request->lensa_jenis_produk,
                 $request->lensa_jenis_lensa,
-                $request->lensa_harga_beli,
-                $request->lensa_harga_jual,
 
                 // Accessory
                 $request->aksesoris_nama_item,
                 $request->aksesoris_kategori,
-                $request->aksesoris_harga_beli,
-                $request->aksesoris_harga_jual,
 
                 // Foreign Keys
                 // FRAME //

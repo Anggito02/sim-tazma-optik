@@ -16,25 +16,22 @@ return new class extends Migration
             $table->enum('jenis_item', ['frame', 'lensa', 'aksesoris']);
             $table->string('kode_item')->unique();
             $table->text('deskripsi');
+            $table->integer('stok');
+            $table->bigInteger('harga_beli');
+            $table->bigInteger('harga_jual');
 
             // Frame
             $table->string('frame_sku_vendor')->nullable();
             $table->string('frame_sub_kategori')->nullable();
             $table->string('frame_kode')->nullable();
-            $table->bigInteger('frame_harga_beli')->nullable();
-            $table->bigInteger('frame_harga_jual')->nullable();
 
             // Lens
             $table->string('lensa_jenis_produk')->nullable();
             $table->string('lensa_jenis_lensa')->nullable();
-            $table->bigInteger('lensa_harga_beli')->nullable();
-            $table->bigInteger('lensa_harga_jual')->nullable();
 
             // Accessory
             $table->string('aksesoris_nama_item')->nullable();
             $table->string('aksesoris_kategori')->nullable();
-            $table->bigInteger('aksesoris_harga_beli')->nullable();
-            $table->bigInteger('aksesoris_harga_jual')->nullable();
 
             // Foreign Keys
             // FRAME //

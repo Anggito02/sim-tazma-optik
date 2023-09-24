@@ -8,25 +8,22 @@ class ItemDTO {
         public ?string $jenis_item,
         public ?string $kode_item,
         public ?string $deskripsi,
+        public string $stok,
+        public string $harga_beli,
+        public string $harga_jual,
 
         // Frame
         public ?string $frame_sku_vendor,
         public ?string $frame_sub_kategori,
         public ?string $frame_kode,
-        public ?string $frame_harga_beli,
-        public ?string $frame_harga_jual,
 
         // Lens
         public ?string $lensa_jenis_produk,
         public ?string $lensa_jenis_lensa,
-        public ?string $lensa_harga_beli,
-        public ?string $lensa_harga_jual,
 
         // Accessory
         public ?string $aksesoris_nama_item,
         public ?string $aksesoris_kategori,
-        public ?string $aksesoris_harga_beli,
-        public ?string $aksesoris_harga_jual,
 
         // Foreign Keys
         // FRAME //
@@ -69,6 +66,30 @@ class ItemDTO {
         $this->deskripsi = $deskripsi;
     }
 
+    public function getStok(): string {
+        return $this->stok;
+    }
+
+    public function setStok(string $stok): void {
+        $this->stok = $stok;
+    }
+
+    public function getHargaBeli(): string {
+        return $this->harga_beli;
+    }
+
+    public function setHargaBeli(string $harga_beli): void {
+        $this->harga_beli = $harga_beli;
+    }
+
+    public function getHargaJual(): string {
+        return $this->harga_jual;
+    }
+
+    public function setHargaJual(string $harga_jual): void {
+        $this->harga_jual = $harga_jual;
+    }
+
     public function getFrameSkuVendor(): ?string {
         return $this->frame_sku_vendor;
     }
@@ -93,22 +114,6 @@ class ItemDTO {
         $this->frame_kode = $frame_kode;
     }
 
-    public function getFrameHargaBeli(): ?string {
-        return $this->frame_harga_beli;
-    }
-
-    public function setFrameHargaBeli(?string $frame_harga_beli): void {
-        $this->frame_harga_beli = $frame_harga_beli;
-    }
-
-    public function getFrameHargaJual(): ?string {
-        return $this->frame_harga_jual;
-    }
-
-    public function setFrameHargaJual(?string $frame_harga_jual): void {
-        $this->frame_harga_jual = $frame_harga_jual;
-    }
-
     public function getLensaJenisProduk(): ?string {
         return $this->lensa_jenis_produk;
     }
@@ -125,22 +130,6 @@ class ItemDTO {
         $this->lensa_jenis_lensa = $lensa_kategori_lensa;
     }
 
-    public function getLensaHargaBeli(): ?string {
-        return $this->lensa_harga_beli;
-    }
-
-    public function setLensaHargaBeli(?string $lensa_harga_beli): void {
-        $this->lensa_harga_beli = $lensa_harga_beli;
-    }
-
-    public function getLensaHargaJual(): ?string {
-        return $this->lensa_harga_jual;
-    }
-
-    public function setLensaHargaJual(?string $lensa_harga_jual): void {
-        $this->lensa_harga_jual = $lensa_harga_jual;
-    }
-
     public function getAksesorisNamaItem(): ?string {
         return $this->aksesoris_nama_item;
     }
@@ -155,22 +144,6 @@ class ItemDTO {
 
     public function setAksesorisKategori(?string $aksesoris_kategori): void {
         $this->aksesoris_kategori = $aksesoris_kategori;
-    }
-
-    public function getAksesorisHargaBeli(): ?string {
-        return $this->aksesoris_harga_beli;
-    }
-
-    public function setAksesorisHargaBeli(?string $aksesoris_harga_beli): void {
-        $this->aksesoris_harga_beli = $aksesoris_harga_beli;
-    }
-
-    public function getAksesorisHargaJual(): ?string {
-        return $this->aksesoris_harga_jual;
-    }
-
-    public function setAksesorisHargaJual(?string $aksesoris_harga_jual): void {
-        $this->aksesoris_harga_jual = $aksesoris_harga_jual;
     }
 
     public function getFrameFrameCategoryId(): ?int {
