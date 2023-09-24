@@ -57,10 +57,18 @@ class PurchaseOrder extends Model
     }
 
     /* ========== */
+    /* Other relationship */
+    /* ========== */
 
     // Receive Order
     public function receiveOrder()
     {
         return $this->hasOne(ReceiveOrder::class, 'purchase_order_id');
+    }
+
+    // Purchase Order Detail
+    public function purchaseOrderDetails()
+    {
+        return $this->hasMany(PurchaseOrderDetail::class, 'purchase_order_id');
     }
 }

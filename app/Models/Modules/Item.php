@@ -82,4 +82,14 @@ class Item extends Model
         return $this->belongsTo(Brand::class, 'aksesoris_brand_id');
     }
 
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    // Purchase Order Detail
+    public function purchaseOrderDetails()
+    {
+        return $this->hasMany(PurchaseOrderDetail::class, 'item_id');
+    }
+
 }
