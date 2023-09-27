@@ -17,17 +17,24 @@ class PriceLogProcedureRepository {
         int $harga_lama,
         int $harga_baru,
         string $metode_perubahan,
-        int $item_id
+        int $item_id,
+        ?int $purchase_order_id
         ) {
         try {
+            if ($purchase_order_id == null) {
+                $purchase_order_id = 'NULL';
+            }
+
             $sqlStatement = "CALL item_price_logging_procedure(
                 '$tipe_harga_berubah',
                 '$tanggal_berubah',
                 $harga_lama,
                 $harga_baru,
                 '$metode_perubahan',
-                $item_id
+                $item_id,
+                $purchase_order_id
             )";
+
             DB::statement($sqlStatement);
 
         } catch (Exception $error) {

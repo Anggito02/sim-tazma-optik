@@ -75,7 +75,8 @@ class EditItemService {
                     $itemDTO->harga_beli,
                     $request->harga_beli,
                     'manual',
-                    $request->id
+                    $request->id,
+                    null
                 );
             }
 
@@ -86,7 +87,8 @@ class EditItemService {
                     $itemDTO->harga_jual,
                     $request->harga_jual,
                     'manual',
-                    $request->id
+                    $request->id,
+                    null
                 );
             }
 
@@ -98,7 +100,8 @@ class EditItemService {
                     $itemDTO->stok,
                     $request->stok,
                     $bentuk_perubahan,
-                    $request->id
+                    $request->id,
+                    null
                 );
             }
 

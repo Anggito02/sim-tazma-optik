@@ -18,7 +18,8 @@ return new class extends Migration
                 IN stok_lama INT,
                 IN stok_baru INT,
                 IN bentuk_perubahan VARCHAR(255),
-                IN item_id BIGINT
+                IN item_id BIGINT,
+                IN purchase_order_id BIGINT
             )
             BEGIN
                 INSERT INTO item_stock_loggings (
@@ -26,14 +27,16 @@ return new class extends Migration
                     stok_lama,
                     stok_baru,
                     bentuk_perubahan,
-                    item_id
+                    item_id,
+                    purchase_order_id
                 )
                 VALUES (
                     tanggal_berubah,
                     stok_lama,
                     stok_baru,
                     bentuk_perubahan,
-                    item_id
+                    item_id,
+                    purchase_order_id
                 );
             END;
         ');
@@ -44,6 +47,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP PROCEDURE IF EXISTS `price_logging_procedure`');
+        DB::unprepared('DROP PROCEDURE IF EXISTS `item_stock_logging_procedure`');
     }
 };
