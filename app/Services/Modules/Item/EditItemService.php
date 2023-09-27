@@ -8,10 +8,14 @@ use Illuminate\Http\Request;
 use App\DTO\Modules\ItemDTO;
 
 use App\Repositories\Modules\Item\EditItemRepository;
+use App\Repositories\Modules\Item\GetItemRepository;
+use App\Repositories\Modules\Item\PriceLogProcedureRepository;
 
 class EditItemService {
     public function __construct(
-        private EditItemRepository $itemRepository
+        private EditItemRepository $editItemRepository,
+        private GetItemRepository $getItemRepository,
+        private PriceLogProcedureRepository $priceLogProcedureRepository
     ) {}
 
     /**
@@ -58,6 +62,31 @@ class EditItemService {
                 'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id',
             ]);
 
+            // cek jika harga_beli / harga_jual berubah
+            $itemDTO = $this->getItemRepository->getItem($request->id);
+
+            if ((int)$itemDTO->harga_beli != $request->harga_beli) {
+                $this->priceLogProcedureRepository->priceLogProcedure(
+                    'harga_beli',
+                    date('Y-m-d H:i:s'),
+                    $itemDTO->harga_beli,
+                    $request->harga_beli,
+                    'manual',
+                    $request->id
+                );
+            }
+
+            if ((int)$itemDTO->harga_jual != $request->harga_jual) {
+                $this->priceLogProcedureRepository->priceLogProcedure(
+                    'harga_jual',
+                    date('Y-m-d H:i:s'),
+                    $itemDTO->harga_jual,
+                    $request->harga_jual,
+                    'manual',
+                    $request->id
+                );
+            }
+
             $itemDto = new ItemDTO(
                 $request->id,
                 $request->jenis_item,
@@ -96,7 +125,7 @@ class EditItemService {
                 $request->aksesoris_brand_id,
             );
 
-            return $this->itemRepository->editItem($itemDto);
+            return $this->editItemRepository->editItem($itemDto);
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }
