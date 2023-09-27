@@ -10,12 +10,15 @@ use App\DTO\Modules\ItemDTO;
 use App\Repositories\Modules\Item\EditItemRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
 use App\Repositories\Modules\Item\PriceLogProcedureRepository;
+use App\Repositories\Modules\Item\StockLogProcedureRepository;
 
 class EditItemService {
     public function __construct(
         private EditItemRepository $editItemRepository,
         private GetItemRepository $getItemRepository,
-        private PriceLogProcedureRepository $priceLogProcedureRepository
+
+        private PriceLogProcedureRepository $priceLogProcedureRepository,
+        private StockLogProcedureRepository $stockLogProcedureRepository
     ) {}
 
     /**
@@ -62,9 +65,9 @@ class EditItemService {
                 'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id',
             ]);
 
-            // cek jika harga_beli / harga_jual berubah
             $itemDTO = $this->getItemRepository->getItem($request->id);
 
+            // cek jika harga_beli / harga_jual berubah
             if ((int)$itemDTO->harga_beli != $request->harga_beli) {
                 $this->priceLogProcedureRepository->priceLogProcedure(
                     'harga_beli',
@@ -83,6 +86,18 @@ class EditItemService {
                     $itemDTO->harga_jual,
                     $request->harga_jual,
                     'manual',
+                    $request->id
+                );
+            }
+
+            // cek jika stok berubah
+            if ((int)$itemDTO->stok != $request->stok) {
+                $bentuk_perubahan = (int)$itemDTO->stok > $request->stok ? 'pengurangan' : 'penambahan';
+                $this->stockLogProcedureRepository->stockLogProcedure(
+                    date('Y-m-d H:i:s'),
+                    $itemDTO->stok,
+                    $request->stok,
+                    $bentuk_perubahan,
                     $request->id
                 );
             }

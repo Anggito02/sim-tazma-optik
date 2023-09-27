@@ -5,27 +5,25 @@ namespace App\Repositories\Modules\Item;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class PriceLogProcedureRepository {
+class StockLogProcedureRepository {
     /**
-     * Get price log procedure
+     * Get stock log procedure
      * @param int $item_id
      * @return array
      */
-    public function priceLogProcedure(
-        string $tipe_harga_berubah,
+    public function stockLogProcedure(
         string $tanggal_berubah,
-        int $harga_lama,
-        int $harga_baru,
-        string $metode_perubahan,
+        int $stok_lama,
+        int $stok_baru,
+        string $bentuk_perubahan,
         int $item_id
         ) {
         try {
-            $sqlStatement = "CALL item_price_logging_procedure(
-                '$tipe_harga_berubah',
+            $sqlStatement = "CALL item_stock_logging_procedure(
                 '$tanggal_berubah',
-                $harga_lama,
-                $harga_baru,
-                '$metode_perubahan',
+                $stok_lama,
+                $stok_baru,
+                '$bentuk_perubahan',
                 $item_id
             )";
             DB::statement($sqlStatement);

@@ -13,29 +13,26 @@ return new class extends Migration
     public function up(): void
     {
         DB::unprepared('
-            CREATE PROCEDURE item_price_logging_procedure(
-                IN tipe_harga_berubah VARCHAR(255),
+            CREATE PROCEDURE item_stock_logging_procedure(
                 IN tanggal_berubah DATETIME,
-                IN harga_lama BIGINT,
-                IN harga_baru BIGINT,
-                IN metode_perubahan VARCHAR(255),
+                IN stok_lama INT,
+                IN stok_baru INT,
+                IN bentuk_perubahan VARCHAR(255),
                 IN item_id BIGINT
             )
             BEGIN
-                INSERT INTO item_price_loggings (
-                    tipe_harga_berubah,
+                INSERT INTO item_stock_loggings (
                     tanggal_berubah,
-                    harga_lama,
-                    harga_baru,
-                    metode_perubahan,
+                    stok_lama,
+                    stok_baru,
+                    bentuk_perubahan,
                     item_id
                 )
                 VALUES (
-                    tipe_harga_berubah,
                     tanggal_berubah,
-                    harga_lama,
-                    harga_baru,
-                    metode_perubahan,
+                    stok_lama,
+                    stok_baru,
+                    bentuk_perubahan,
                     item_id
                 );
             END;
@@ -47,6 +44,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP PROCEDURE IF EXISTS `item_logging_procedure`');
+        DB::unprepared('DROP PROCEDURE IF EXISTS `price_logging_procedure`');
     }
 };
