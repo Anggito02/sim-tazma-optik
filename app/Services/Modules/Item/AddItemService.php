@@ -23,25 +23,27 @@ class AddItemService {
         try {
             // Validate request
             $request->validate([
-                'kode_item' => 'required|unique:items,kode_item',
                 'jenis_item' => 'required|in:frame,lensa,aksesoris',
                 'deskripsi' => 'required',
+
+                // Kebutuhan penamaan otomatis
+                'nama_brand_item' => 'required',
+                'warna_item' => 'required_if:jenis_item,frame',
+
+                'index_lensa' => 'required_if:jenis_item,lensa',
 
                 // Frame
                 'frame_sku_vendor' => 'required_if:jenis_item,frame',
                 'frame_sub_kategori' => 'required_if:jenis_item,frame',
                 'frame_kode' => 'required_if:jenis_item,frame',
-                'frame_harga_beli' => 'required_if:jenis_item,frame',
-                'frame_harga_jual' => 'required_if:jenis_item,frame',
 
                 // Lens
                 'lensa_jenis_produk' => 'required_if:jenis_item,lensa',
-                'lensa_kategori_lensa' => 'required_if:jenis_item,lensa',
-                'lensa_harga_beli' => 'required_if:jenis_item,lensa',
-                'lensa_harga_jual' => 'required_if:jenis_item,lensa',
+                'lensa_jenis_lensa' => 'required_if:jenis_item,lensa',
 
                 // Accessory
                 'aksesoris_nama_item' => 'required_if:jenis_item,aksesoris',
+                'aksesoris_kategori' => 'required_if:jenis_item,aksesoris',
 
                 // Foreign Keys
                 // FRAME //
@@ -53,36 +55,52 @@ class AddItemService {
                 // LENS //
                 'lensa_lens_category_id' => 'required_if:jenis_item,lensa|exists:lens_categories,id',
                 'lensa_brand_id' => 'required_if:jenis_item,lensa|exists:brands,id',
-                'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indexes,id',
+                'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indices,id',
 
                 // ACCESSORY //
                 'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id',
             ]);
 
+            // Auto naming kode_item
+            $kode_item = "";
+            if ($request->jenis_item == 'frame') {
+                $kode_item = $request->nama_brand_item.'-'.$request->frame_sku_vendor.'-';
+
+                $kode_warna = explode(" ", $request->warna_item);
+                foreach ($kode_warna as $warna) {
+                    $kode_item .= substr($warna, 0, 2);
+                }
+            }
+
+            if ($request->jenis_item == 'lensa') {
+                $kode_item = $request->nama_brand_item.'-'.$request->lensa_jenis_produk.'-'.$request->index_lensa.'-'.$request->lensa_jenis_lensa;
+            }
+
+            if ($request->jenis_item == 'aksesoris') {
+                $kode_item = $request->aksesoris_nama_item.'-'.$request->nama_brand_item.'-'.$request->aksesoris_kategori;
+            }
+
             $itemDTO = new ItemDTO(
                 null,
                 $request->jenis_item,
-                $request->kode_item,
+                $kode_item,
                 $request->deskripsi,
+                0,
+                0,
+                0,
 
                 // Frame
                 $request->frame_sku_vendor,
                 $request->frame_sub_kategori,
                 $request->frame_kode,
-                $request->frame_harga_beli,
-                $request->frame_harga_jual,
 
                 // Lens
                 $request->lensa_jenis_produk,
-                $request->lensa_kategori_lensa,
-                $request->lensa_harga_beli,
-                $request->lensa_harga_jual,
+                $request->lensa_jenis_lensa,
 
                 // Accessory
                 $request->aksesoris_nama_item,
                 $request->aksesoris_kategori,
-                $request->aksesoris_harga_beli,
-                $request->aksesoris_harga_jual,
 
                 // Foreign Keys
                 // FRAME //

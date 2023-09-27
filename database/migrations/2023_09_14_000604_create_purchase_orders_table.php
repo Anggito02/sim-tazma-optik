@@ -14,11 +14,7 @@ return new class extends Migration
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
             $table->string('nomor_po');
-            $table->integer('qty');
-            $table->string('unit');
-            $table->integer('harga_beli_satuan');
-            $table->integer('harga_jual_satuan');
-            $table->double('diskon');
+            $table->dateTime('tanggal_dibuat');
             $table->boolean('status_po');
             $table->boolean('status_penerimaan');
             $table->boolean('status_pembayaran');
@@ -26,9 +22,6 @@ return new class extends Migration
             // Foreign Keys
             // Vendor
             $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade')->onUpdate('cascade');
-
-            // Item
-            $table->foreignId('item_id')->constrained('items')->onDelete('cascade')->onUpdate('cascade');
 
             // Employee
             $table->foreignId('made_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');

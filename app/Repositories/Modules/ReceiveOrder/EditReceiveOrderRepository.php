@@ -16,13 +16,6 @@ class EditReceiveOrderRepository {
     public function editReceiveOrder(ReceiveOrderDTO $receiveOrderDTO) {
         try {
             $receiveOrder = ReceiveOrder::find($receiveOrderDTO->id);
-            $receiveOrder->nomor_receive_order = $receiveOrderDTO->getNomorReceiveOrder();
-            $receiveOrder->receive_qty = $receiveOrderDTO->getReceiveQty();
-            $receiveOrder->not_good_qty = $receiveOrderDTO->getNotGoodQty();
-            $receiveOrder->tanggal_penerimaan = $receiveOrderDTO->getTanggalPenerimaan();
-            $receiveOrder->status_invoice = $receiveOrderDTO->getStatusInvoice();
-
-            $receiveOrder->purchase_order_id = $receiveOrderDTO->getPurchaseOrderId();
 
             $receiveOrder->received_by = $receiveOrderDTO->getReceivedBy();
             $receiveOrder->checked_by = $receiveOrderDTO->getCheckedBy();

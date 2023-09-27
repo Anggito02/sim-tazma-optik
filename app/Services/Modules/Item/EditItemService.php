@@ -8,10 +8,17 @@ use Illuminate\Http\Request;
 use App\DTO\Modules\ItemDTO;
 
 use App\Repositories\Modules\Item\EditItemRepository;
+use App\Repositories\Modules\Item\GetItemRepository;
+use App\Repositories\Modules\Item\PriceLogProcedureRepository;
+use App\Repositories\Modules\Item\StockLogProcedureRepository;
 
 class EditItemService {
     public function __construct(
-        private EditItemRepository $itemRepository
+        private EditItemRepository $editItemRepository,
+        private GetItemRepository $getItemRepository,
+
+        private PriceLogProcedureRepository $priceLogProcedureRepository,
+        private StockLogProcedureRepository $stockLogProcedureRepository
     ) {}
 
     /**
@@ -26,21 +33,22 @@ class EditItemService {
                 'id' => 'required|exists:items,id',
                 'jenis_item' => 'required|in:frame,lensa,aksesoris',
                 'deskripsi' => 'required',
+                'stok' => 'required',
+                'harga_beli' => 'required',
+                'harga_jual' => 'required',
 
                 // Frame
                 'frame_sku_vendor' => 'required_if:jenis_item,frame',
                 'frame_sub_kategori' => 'required_if:jenis_item,frame',
                 'frame_kode' => 'required_if:jenis_item,frame',
-                'frame_harga_beli' => 'required_if:jenis_item,frame',
 
                 // Lens
                 'lensa_jenis_produk' => 'required_if:jenis_item,lensa',
-                'lensa_kategori_lensa' => 'required_if:jenis_item,lensa',
-                'lensa_harga_beli' => 'required_if:jenis_item,lensa',
-                'lensa_harga_jual' => 'required_if:jenis_item,lensa',
+                'lensa_jenis_lensa' => 'required_if:jenis_item,lensa',
 
                 // Accessory
                 'aksesoris_nama_item' => 'required_if:jenis_item,aksesoris',
+                'aksesoris_kategori' => 'required_if:jenis_item,aksesoris',
 
                 // Foreign Keys
                 // FRAME //
@@ -57,30 +65,67 @@ class EditItemService {
                 'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id',
             ]);
 
+            $itemDTO = $this->getItemRepository->getItem($request->id);
+
+            // cek jika harga_beli / harga_jual berubah
+            if ((int)$itemDTO->harga_beli != $request->harga_beli) {
+                $this->priceLogProcedureRepository->priceLogProcedure(
+                    'harga_beli',
+                    date('Y-m-d H:i:s'),
+                    $itemDTO->harga_beli,
+                    $request->harga_beli,
+                    'manual',
+                    $request->id,
+                    null
+                );
+            }
+
+            if ((int)$itemDTO->harga_jual != $request->harga_jual) {
+                $this->priceLogProcedureRepository->priceLogProcedure(
+                    'harga_jual',
+                    date('Y-m-d H:i:s'),
+                    $itemDTO->harga_jual,
+                    $request->harga_jual,
+                    'manual',
+                    $request->id,
+                    null
+                );
+            }
+
+            // cek jika stok berubah
+            if ((int)$itemDTO->stok != $request->stok) {
+                $bentuk_perubahan = (int)$itemDTO->stok > $request->stok ? 'pengurangan' : 'penambahan';
+                $this->stockLogProcedureRepository->stockLogProcedure(
+                    date('Y-m-d H:i:s'),
+                    $itemDTO->stok,
+                    $request->stok,
+                    $bentuk_perubahan,
+                    $request->id,
+                    null
+                );
+            }
+
             $itemDto = new ItemDTO(
                 $request->id,
                 $request->jenis_item,
-                $request->kode_item,
+                null,
                 $request->deskripsi,
+                $request->stok,
+                $request->harga_beli,
+                $request->harga_jual,
 
                 // Frame
                 $request->frame_sku_vendor,
                 $request->frame_sub_kategori,
                 $request->frame_kode,
-                $request->frame_harga_beli,
-                $request->frame_harga_jual,
 
                 // Lens
                 $request->lensa_jenis_produk,
-                $request->lensa_kategori_lensa,
-                $request->lensa_harga_beli,
-                $request->lensa_harga_jual,
+                $request->lensa_jenis_lensa,
 
                 // Accessory
                 $request->aksesoris_nama_item,
                 $request->aksesoris_kategori,
-                $request->aksesoris_harga_beli,
-                $request->aksesoris_harga_jual,
 
                 // Foreign Keys
                 // FRAME //
@@ -98,7 +143,7 @@ class EditItemService {
                 $request->aksesoris_brand_id,
             );
 
-            return $this->itemRepository->editItem($itemDto);
+            return $this->editItemRepository->editItem($itemDto);
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

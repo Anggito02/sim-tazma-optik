@@ -17,7 +17,19 @@ class GetReceiveOrderRepository {
         try {
             $receiveOrder = ReceiveOrder::find($id);
 
-            return $receiveOrder;
+            $receiveOrderDTO = new ReceiveOrderDTO(
+                $receiveOrder->id,
+                $receiveOrder->nomor_receive_order,
+                $receiveOrder->tanggal_penerimaan,
+
+                $receiveOrder->purchase_order_id,
+
+                $receiveOrder->received_by,
+                $receiveOrder->checked_by,
+                $receiveOrder->approved_by,
+            );
+
+            return $receiveOrderDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

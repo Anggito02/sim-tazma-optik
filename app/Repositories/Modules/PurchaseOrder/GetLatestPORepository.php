@@ -5,34 +5,45 @@ namespace App\Repositories\Modules\PurchaseOrder;
 use Exception;
 
 use App\DTO\Modules\PurchaseOrderDTO;
+
 use App\Models\Modules\PurchaseOrder;
 
-class GetPORepository {
+class GetLatestPORepository {
     /**
-     * Get Purchase Order
-     * @param int $id
+     * Get latest PO
      * @return PurchaseOrderDTO
      */
-    public function getPurchaseOrder(int $id) {
+    public function getLatestPO() {
         try {
-            $po = PurchaseOrder::find($id);
+            $po = PurchaseOrder::latest()->first();
+
+            if (!$po) {
+                return null;
+            }
 
             $poDTO = new PurchaseOrderDTO(
                 $po->id,
                 $po->nomor_po,
-                $po->tanggal_dibuat,
+                $po->qty,
+                $po->unit,
+                $po->harga_beli_satuan,
+                $po->harga_jual_satuan,
+                $po->diskon,
                 $po->status_po,
                 $po->status_penerimaan,
                 $po->status_pembayaran,
+
+                // Foreign Keys
                 $po->vendor_id,
+                $po->item_id,
                 $po->made_by,
                 $po->checked_by,
                 $po->approved_by,
             );
 
             return $poDTO;
-        } catch (Exception $error) {
-            throw new Exception($error->getMessage());
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
         }
     }
 }

@@ -18,25 +18,22 @@ class Item extends Model
         'jenis_item',
         'kode_item',
         'deskripsi',
+        'stok',
+        'harga_beli',
+        'harga_jual',
 
         // Frame
         'frame_sku_vendor',
         'frame_sub_kategori',
         'frame_kode',
-        'frame_harga_beli',
-        'frame_harga_jual',
 
         // Lens
         'lensa_jenis_produk',
-        'lensa_kategori_lensa',
-        'lensa_harga_beli',
-        'lensa_harga_jual',
+        'lensa_jenis_lensa',
 
         // Accessory
         'aksesoris_nama_item',
         'aksesoris_kategori',
-        'aksesoris_harga_beli',
-        'aksesoris_harga_jual',
     ];
 
     // Frame
@@ -80,6 +77,16 @@ class Item extends Model
     public function accessoryBrand()
     {
         return $this->belongsTo(Brand::class, 'aksesoris_brand_id');
+    }
+
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    // Purchase Order Detail
+    public function purchaseOrderDetails()
+    {
+        return $this->hasMany(PurchaseOrderDetail::class, 'item_id');
     }
 
 }

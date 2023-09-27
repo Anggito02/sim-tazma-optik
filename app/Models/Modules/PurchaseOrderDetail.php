@@ -5,7 +5,7 @@ namespace App\Models\Modules;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ReceiveOrder extends Model
+class PurchaseOrderDetail extends Model
 {
     use HasFactory;
 
@@ -15,17 +15,19 @@ class ReceiveOrder extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'nomor_receive_order',
-        'tanggal_penerimaan',
+        'received_qty',
+        'not_good_qty',
+        'unit',
+        'harga_beli_satuan',
+        'harga_jual_satuan',
+        'diskon',
 
         // Foreign Keys
         // Purchase Order
         'purchase_order_id',
 
-        // Employee
-        'received_by',
-        'checked_by',
-        'approved_by',
+        // Item
+        'item_id',
     ];
 
     // Purchase Order
@@ -34,19 +36,9 @@ class ReceiveOrder extends Model
         return $this->belongsTo(PurchaseOrder::class, 'purchase_order_id');
     }
 
-    // Employee
-    public function receivedBy()
+    // Item
+    public function item()
     {
-        return $this->belongsTo(User::class, 'received_by');
-    }
-
-    public function checkedBy()
-    {
-        return $this->belongsTo(User::class, 'checked_by');
-    }
-
-    public function approvedBy()
-    {
-        return $this->belongsTo(User::class, 'approved_by');
+        return $this->belongsTo(Item::class, 'item_id');
     }
 }

@@ -11,20 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('receive_orders', function (Blueprint $table) {
+        Schema::create('purchase_order_details', function (Blueprint $table) {
             $table->id();
-            $table->string('nomor_receive_order');
-            $table->dateTime('tanggal_penerimaan');
+            $table->integer('received_qty');
+            $table->integer('not_good_qty');
+            $table->string('unit');
+            $table->bigInteger('harga_beli_satuan');
+            $table->bigInteger('harga_jual_satuan');
+            $table->double('diskon');
 
             // Foreign Keys
             // Purchase Order
             $table->foreignId('purchase_order_id')->constrained('purchase_orders')->onDelete('cascade')->onUpdate('cascade');
 
-            // Employee
-            $table->foreignId('received_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('checked_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('approved_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-
+            // Item
+            $table->foreignId('item_id')->constrained('items')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('receive_orders');
+        Schema::dropIfExists('purchase_order_details');
     }
 };

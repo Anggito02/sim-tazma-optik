@@ -16,11 +16,7 @@ class PurchaseOrder extends Model
      */
     protected $fillable = [
         'nomor_po',
-        'qty',
-        'unit',
-        'harga_beli_satuan',
-        'harga_jual_satuan',
-        'diskon',
+        'tanggal_dibuat',
         'status_po',
         'status_penerimaan',
         'status_pembayaran',
@@ -28,9 +24,6 @@ class PurchaseOrder extends Model
         // Foreign Keys
         // Vendor
         'vendor_id',
-
-        // Item
-        'item_id',
 
         // Employee
         'made_by',
@@ -45,12 +38,6 @@ class PurchaseOrder extends Model
     public function vendor()
     {
         return $this->belongsTo(Vendor::class, 'vendor_id');
-    }
-
-    // Item
-    public function item()
-    {
-        return $this->belongsTo(Item::class, 'item_id');
     }
 
     // Employee
@@ -70,10 +57,18 @@ class PurchaseOrder extends Model
     }
 
     /* ========== */
+    /* Other relationship */
+    /* ========== */
 
     // Receive Order
     public function receiveOrder()
     {
         return $this->hasOne(ReceiveOrder::class, 'purchase_order_id');
+    }
+
+    // Purchase Order Detail
+    public function purchaseOrderDetails()
+    {
+        return $this->hasMany(PurchaseOrderDetail::class, 'purchase_order_id');
     }
 }
