@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('purchase_order_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('received_qty');
-            $table->integer('not_good_qty');
+            $table->integer('pre_order_qty');
+            $table->integer('received_qty')->nullable();
+            $table->integer('not_good_qty')->nullable();
             $table->string('unit');
             $table->bigInteger('harga_beli_satuan');
             $table->bigInteger('harga_jual_satuan');

@@ -16,8 +16,7 @@ class AddPODetailRepository {
     public function addPurchaseOrderDetail(PurchaseOrderDetailDTO $poDetailDto) {
         try {
             $poDetail = new PurchaseOrderDetail();
-            $poDetail->received_qty = $poDetailDto->getReceivedQty();
-            $poDetail->not_good_qty = $poDetailDto->getNotGoodQty();
+            $poDetail->pre_order_qty = $poDetailDto->getPreOrderQty();
             $poDetail->unit = $poDetailDto->getUnit();
             $poDetail->harga_beli_satuan = $poDetailDto->getHargaBeliSatuan();
             $poDetail->harga_jual_satuan = $poDetailDto->getHargaJualSatuan();

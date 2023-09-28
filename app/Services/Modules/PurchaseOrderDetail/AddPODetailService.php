@@ -30,8 +30,7 @@ class AddPODetailService {
         try {
             // Validate request
             $request->validate([
-                'received_qty' => 'required|gte:0',
-                'not_good_qty' => 'required|gte:0',
+                'pre_order_qty' => 'required|gte:0',
                 'unit' => 'required',
                 'harga_beli_satuan' => 'required|gte:0',
                 'harga_jual_satuan' => 'required|gte:0',
@@ -42,8 +41,9 @@ class AddPODetailService {
 
             $poDetailDTO = new PurchaseOrderDetailDTO(
                 null,
-                $request->received_qty,
-                $request->not_good_qty,
+                $request->pre_order_qty,
+                null,
+                null,
                 $request->unit,
                 $request->harga_beli_satuan,
                 $request->harga_jual_satuan,
@@ -78,16 +78,6 @@ class AddPODetailService {
                     $request->purchase_order_id
                 );
             }
-
-            // update stok log
-            $this->stockLogProcedureRepository->stockLogProcedure(
-                date('Y-m-d H:i:s'),
-                $itemDTO->stok,
-                $itemDTO->stok + $request->received_qty,
-                'penambahan',
-                $request->item_id,
-                $request->purchase_order_id
-            );
 
             $poDetailDTO = $this->poDetailRepository->addPurchaseOrderDetail($poDetailDTO);
 

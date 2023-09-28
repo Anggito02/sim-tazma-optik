@@ -15,6 +15,7 @@ class PurchaseOrderDetail extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'pre_order_qty',
         'received_qty',
         'not_good_qty',
         'unit',

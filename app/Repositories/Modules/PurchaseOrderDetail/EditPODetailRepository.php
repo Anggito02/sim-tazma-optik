@@ -16,6 +16,7 @@ class EditPODetailRepository {
     public function editPurchaseOrderDetail(PurchaseOrderDetailDTO $poDetailDto) {
         try {
             $poDetail = PurchaseOrderDetail::find($poDetailDto->id);
+            $poDetail->pre_order_qty = $poDetailDto->getPreOrderQty();
             $poDetail->received_qty = $poDetailDto->getReceivedQty();
             $poDetail->not_good_qty = $poDetailDto->getNotGoodQty();
             $poDetail->unit = $poDetailDto->getUnit();

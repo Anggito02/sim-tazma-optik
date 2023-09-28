@@ -32,8 +32,7 @@ class EditPODetailService {
             // Validate request
             $request->validate([
                 'id' => 'required|exists:purchase_order_details,id',
-                'received_qty' => 'required|gte:0',
-                'not_good_qty' => 'required|gte:0',
+                'pre_order_qty' => 'required|gte:0',
                 'unit' => 'required',
                 'harga_beli_satuan' => 'required|gte:0',
                 'harga_jual_satuan' => 'required|gte:0',
@@ -44,6 +43,7 @@ class EditPODetailService {
 
             $poDetailDTO = new PurchaseOrderDetailDTO(
                 $request->id,
+                $request->pre_order_qty,
                 $request->received_qty,
                 $request->not_good_qty,
                 $request->unit,
