@@ -24,10 +24,7 @@ class GetLatestReceiveOrderRepository {
             $roDTO = new ReceiveOrderDTO(
                 $ro->id,
                 $ro->nomor_receive_order,
-                $ro->receive_qty,
-                $ro->not_good_qty,
                 $ro->tanggal_penerimaan,
-                $ro->status_invoice,
 
                 // Foreign Keys
                 // Purchase Order
@@ -38,6 +35,8 @@ class GetLatestReceiveOrderRepository {
                 $ro->checked_by,
                 $ro->approved_by,
             );
+
+            return $roDTO;
 
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
