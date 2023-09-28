@@ -23,6 +23,7 @@ class GetAllPODetailRepository {
             foreach ($poDetails as $poDetail) {
                 $poDetailDTO = new PurchaseOrderDetailDTO(
                     $poDetail->id,
+                    $poDetail->pre_order_qty,
                     $poDetail->received_qty,
                     $poDetail->not_good_qty,
                     $poDetail->unit,
