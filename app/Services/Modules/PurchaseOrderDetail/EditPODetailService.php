@@ -32,13 +32,12 @@ class EditPODetailService {
             // Validate request
             $request->validate([
                 'id' => 'required|exists:purchase_order_details,id',
-                'pre_order_qty' => 'required|gte:0',
-                'unit' => 'required',
+                'pre_order_qty' => 'gte:0',
                 'harga_beli_satuan' => 'required|gte:0',
                 'harga_jual_satuan' => 'required|gte:0',
-                'diskon' => 'required|gte:0',
-                'purchase_order_id' => 'required|exists:purchase_orders,id',
-                'item_id' => 'required|exists:items,id',
+                'diskon' => 'gte:0',
+                'purchase_order_id' => 'exists:purchase_orders,id',
+                'item_id' => 'exists:items,id',
             ]);
 
             $poDetailDTO = new PurchaseOrderDetailDTO(
