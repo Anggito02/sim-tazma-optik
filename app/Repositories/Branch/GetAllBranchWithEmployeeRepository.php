@@ -5,10 +5,6 @@ namespace App\Repositories\Branch;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-use App\DTO\BranchDTO;
-use App\Models\Branch;
-use App\Models\Employee;
-
 class GetAllBranchWithEmployeeRepository {
     /**
      * Get all branch with employee
