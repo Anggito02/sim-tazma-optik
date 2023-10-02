@@ -9,8 +9,8 @@ class ItemDTO {
         public ?string $kode_item,
         public ?string $deskripsi,
         public int $stok,
-        public int $harga_beli,
-        public int $harga_jual,
+        public string $harga_beli,
+        public string $harga_jual,
 
         // Frame
         public ?string $frame_sku_vendor,
