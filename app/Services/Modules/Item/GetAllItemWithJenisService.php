@@ -28,12 +28,6 @@ class GetAllItemWithJenisService {
                 'limit' => 'required',
             ]);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Check request',
-                'data' => $request->all()
-            ], 200);
-
             $itemDTO = $this->itemRepository->getAllItem($request->jenis_item, $request->page, $request->limit);
 
             return $itemDTO;
