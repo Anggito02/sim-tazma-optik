@@ -20,12 +20,6 @@ class GetAllItemWithJenisRepository {
             // use pagination
             $items = Item::where('jenis_item', $jenis_item)->paginate($limit, ['*'], 'page', $page);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Check getting items',
-                'items' => $items
-            ], 200);
-
             $itemDTOs = [];
 
             foreach ($items as $item) {
