@@ -17,16 +17,14 @@ class GetAllItemWithJenisRepository {
      */
     public function getAllItem(string $jenis_item,  int $page, int $limit) {
         try {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Check request',
-                'jenis_item' => $jenis_item,
-                'page' => $page,
-                'limit' => $limit,
-            ], 200);
-
             // use pagination
             $items = Item::where('jenis_item', $jenis_item)->paginate($limit, ['*'], 'page', $page);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Check getting items',
+                'items' => $items
+            ], 200);
 
             $itemDTOs = [];
 
