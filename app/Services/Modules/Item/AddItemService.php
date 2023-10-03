@@ -28,37 +28,37 @@ class AddItemService {
 
                 // Kebutuhan penamaan otomatis
                 'nama_brand_item' => 'required',
-                'warna_item' => 'required_if:jenis_item,frame',
+                'warna_item' => 'required_if:jenis_item,frame|nullable',
 
-                'index_lensa' => 'required_if:jenis_item,lensa',
+                'index_lensa' => 'required_if:jenis_item,lensa|nullable',
 
                 // Frame
-                'frame_sku_vendor' => 'required_if:jenis_item,frame',
-                'frame_sub_kategori' => 'required_if:jenis_item,frame',
-                'frame_kode' => 'required_if:jenis_item,frame',
+                'frame_sku_vendor' => 'required_if:jenis_item,frame|nullable',
+                'frame_sub_kategori' => 'required_if:jenis_item,frame|nullable',
+                'frame_kode' => 'required_if:jenis_item,frame|nullable',
 
                 // Lens
-                'lensa_jenis_produk' => 'required_if:jenis_item,lensa',
-                'lensa_jenis_lensa' => 'required_if:jenis_item,lensa',
+                'lensa_jenis_produk' => 'required_if:jenis_item,lensa|nullable',
+                'lensa_jenis_lensa' => 'required_if:jenis_item,lensa|nullable',
 
                 // Accessory
-                'aksesoris_nama_item' => 'required_if:jenis_item,aksesoris',
-                'aksesoris_kategori' => 'required_if:jenis_item,aksesoris',
+                'aksesoris_nama_item' => 'required_if:jenis_item,aksesoris|nullable',
+                'aksesoris_kategori' => 'required_if:jenis_item,aksesoris|nullable',
 
                 // Foreign Keys
                 // FRAME //
-                'frame_frame_category_id' => 'required_if:jenis_item,frame|exists:frame_categories,id',
-                'frame_brand_id' => 'required_if:jenis_item,frame|exists:brands,id',
-                'frame_vendor_id' => 'required_if:jenis_item,frame|exists:vendors,id',
-                'frame_color_id' => 'required_if:jenis_item,frame|exists:colors,id',
+                'frame_frame_category_id' => 'required_if:jenis_item,frame|exists:frame_categories,id|nullable',
+                'frame_brand_id' => 'required_if:jenis_item,frame|exists:brands,id|nullable',
+                'frame_vendor_id' => 'required_if:jenis_item,frame|exists:vendors,id|nullable',
+                'frame_color_id' => 'required_if:jenis_item,frame|exists:colors,id|nullable',
 
                 // LENS //
-                'lensa_lens_category_id' => 'required_if:jenis_item,lensa|exists:lens_categories,id',
-                'lensa_brand_id' => 'required_if:jenis_item,lensa|exists:brands,id',
-                'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indices,id',
+                'lensa_lens_category_id' => 'required_if:jenis_item,lensa|exists:lens_categories,id|nullable',
+                'lensa_brand_id' => 'required_if:jenis_item,lensa|exists:brands,id|nullable',
+                'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indices,id|nullable',
 
                 // ACCESSORY //
-                'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id',
+                'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id|nullable',
             ]);
 
             // Auto naming kode_item
