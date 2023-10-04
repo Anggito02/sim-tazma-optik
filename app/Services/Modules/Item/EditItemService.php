@@ -60,6 +60,7 @@ class EditItemService {
                 // LENS //
                 'lensa_lens_category_id' => 'required_if:jenis_item,lensa|exists:lens_categories,id',
                 'lensa_brand_id' => 'required_if:jenis_item,lensa|exists:brands,id',
+                'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indices,id',
 
                 // ACCESSORY //
                 'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id',
