@@ -26,7 +26,7 @@ class AddVendorInvoiceService {
                 'nomor_invoice_vendor' => 'required',
                 'nomor_invoice_receive' => 'required',
                 'iterasi_pembayaran' => 'required|in:1,2,3,4',
-                'bukti_pembayaran_1' => 'required',
+                'bukti_pembayaran_1' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
                 'status_pembayaran_1' => 'required|boolean',
                 'bukti_pembayaran_2' => 'required_if:iterasi_pembayaran,2,3,4',
                 'status_pembayaran_2' => 'required_if:iterasi_pembayaran,2,3,4|boolean',
