@@ -27,6 +27,9 @@ class PurchaseOrderDetail extends Model
         // Purchase Order
         'purchase_order_id',
 
+        // Receive Order
+        'receive_order_id',
+
         // Item
         'item_id',
     ];

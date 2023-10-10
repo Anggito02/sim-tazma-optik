@@ -23,6 +23,7 @@ class AddPODetailRepository {
             $poDetail->diskon = $poDetailDto->getDiskon();
 
             $poDetail->purchase_order_id = $poDetailDto->getPurchaseOrderId();
+            $poDetail->receive_order_id = $poDetailDto->getReceiveOrderId();
 
             $poDetail->item_id = $poDetailDto->getItemId();
             $poDetail->save();

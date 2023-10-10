@@ -5,20 +5,23 @@ namespace App\DTO\Modules;
 class PurchaseOrderDetailDTO {
     public function __construct(
         public ?int $id,
-        public int $pre_order_qty,
+        public ?int $pre_order_qty,
         public ?int $received_qty,
         public ?int $not_good_qty,
-        public string $unit,
-        public int $harga_beli_satuan,
-        public int $harga_jual_satuan,
-        public float $diskon,
+        public ?string $unit,
+        public ?int $harga_beli_satuan,
+        public ?int $harga_jual_satuan,
+        public ?float $diskon,
 
         // Foreign Keys
         // Purchase Order
-        public int $purchase_order_id,
+        public ?int $purchase_order_id,
+
+        // Receive Order
+        public ?int $receive_order_id,
 
         // Item
-        public int $item_id,
+        public ?int $item_id,
     ) {}
 
     public function getPreOrderQty(): int {
@@ -83,6 +86,14 @@ class PurchaseOrderDetailDTO {
 
     public function setPurchaseOrderId(int $purchase_order_id): void {
         $this->purchase_order_id = $purchase_order_id;
+    }
+
+    public function getReceiveOrderId(): int {
+        return $this->receive_order_id;
+    }
+
+    public function setReceiveOrderId(int $receive_order_id): void {
+        $this->receive_order_id = $receive_order_id;
     }
 
     public function getItemId(): int {

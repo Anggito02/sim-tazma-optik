@@ -9,17 +9,26 @@ use App\DTO\Modules\PurchaseOrderDetailDTO;
 
 use App\Repositories\Modules\PurchaseOrderDetail\EditPODetailRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
+use App\Repositories\Modules\ReceiveOrder\GetReceiveOrderRepository;
 
 use App\Repositories\Modules\Item\PriceLogProcedureRepository;
 use App\Repositories\Modules\Item\StockLogProcedureRepository;
+use App\Repositories\Modules\Item\StockIn\CheckStockInRepository;
+use App\Repositories\Modules\Item\StockIn\AddStockInProcedureRepository;
+use App\Repositories\Modules\Item\StockIn\UpdateStockInProcedureRepository;
 
 class EditPODetailService {
     public function __construct(
         private EditPODetailRepository $poDetailRepository,
         private GetItemRepository $getItemRepository,
+        private GetReceiveOrderRepository $receiveOrderRepository,
 
         private PriceLogProcedureRepository $priceLogProcedureRepository,
-        private StockLogProcedureRepository $stockLogProcedureRepository
+        private StockLogProcedureRepository $stockLogProcedureRepository,
+        private CheckStockInRepository $checkStockInRepository,
+        private AddStockInProcedureRepository $addStockInProcedureRepository,
+        private UpdateStockInProcedureRepository $updateStockInProcedureRepository,
+
     ) {}
 
     /**
@@ -30,14 +39,17 @@ class EditPODetailService {
     public function editPurchaseOrderDetail(Request $request) {
         try {
             // Validate request
+            // NOTES : CAN ONLY EDIT RECEIVE QTY AND NOT GOOD QTY
             $request->validate([
                 'id' => 'required|exists:purchase_order_details,id',
                 'pre_order_qty' => 'gte:0',
-                'harga_beli_satuan' => 'required|gte:0',
-                'harga_jual_satuan' => 'required|gte:0',
-                'diskon' => 'gte:0',
-                'purchase_order_id' => 'exists:purchase_orders,id',
+                'received_qty' => 'lte:pre_order_qty',
+                'not_good_qty' => 'lte:pre_order_qty',
                 'item_id' => 'exists:items,id',
+
+                // Foreign Key
+                'purchase_order_id' => 'required|exists:purchase_orders,id',
+                'receive_order_id' => 'nullable|exists:receive_orders,id',
             ]);
 
             $poDetailDTO = new PurchaseOrderDetailDTO(
@@ -50,35 +62,15 @@ class EditPODetailService {
                 $request->harga_jual_satuan,
                 $request->diskon,
                 $request->purchase_order_id,
+                $request->receive_order_id,
                 $request->item_id
             );
 
+            // Get Item
             $itemDTO = $this->getItemRepository->getItem($request->item_id);
 
-            // update harga log
-            if ((int)$itemDTO->harga_beli != $request->harga_beli_satuan) {
-                $this->priceLogProcedureRepository->priceLogProcedure(
-                    'harga_beli',
-                    date('Y-m-d H:i:s'),
-                    (int)$itemDTO->harga_beli,
-                    $request->harga_beli_satuan,
-                    'purchase_order',
-                    $request->item_id,
-                    $request->purchase_order_id
-                );
-            }
-
-            if ((int)$itemDTO->harga_jual != $request->harga_jual_satuan) {
-                $this->priceLogProcedureRepository->priceLogProcedure(
-                    'harga_jual',
-                    date('Y-m-d H:i:s'),
-                    $itemDTO->harga_jual,
-                    $request->harga_jual_satuan,
-                    'purchase_order',
-                    $request->item_id,
-                    $request->purchase_order_id
-                );
-            }
+            // Get RO
+            $receiveOrderDTO = $this->receiveOrderRepository->getReceiveOrder($request->receive_order_id);
 
             // update stok log
             $this->stockLogProcedureRepository->stockLogProcedure(
@@ -89,6 +81,34 @@ class EditPODetailService {
                 $request->item_id,
                 $request->purchase_order_id
             );
+
+            if ($this->checkStockInRepository->checkStockInExistence($itemDTO->id, date('m'), date('Y'))) {
+                // update stok in
+                $this->updateStockInProcedureRepository->updateStockInProcedure(
+                    $itemDTO->kode_item,
+                    date('m'),
+                    date('Y'),
+                    $request->received_qty,
+                    $request->item_id,
+                    $request->purchase_order_id,
+                    $request->receive_order_id,
+                    $receiveOrderDTO->checked_by,
+                    $receiveOrderDTO->approved_by
+                );
+            } else {
+                // make new row in stok in
+                $this->addStockInProcedureRepository->addStockInProcedure(
+                    $itemDTO->kode_item,
+                    date('m'),
+                    date('Y'),
+                    $request->received_qty,
+                    $request->item_id,
+                    $request->purchase_order_id,
+                    $request->receive_order_id,
+                    $receiveOrderDTO->checked_by,
+                    $receiveOrderDTO->approved_by
+                );
+            }
 
             $poDetailDTO = $this->poDetailRepository->editPurchaseOrderDetail($poDetailDTO);
 
