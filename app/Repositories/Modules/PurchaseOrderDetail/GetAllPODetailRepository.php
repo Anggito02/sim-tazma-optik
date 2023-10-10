@@ -12,14 +12,16 @@ class GetAllPODetailRepository {
      * Get All Purchase Order Detail
      * @param int $page
      * @param int $limit
+     * @param int $poId
      * @return PurchaseOrderDetailDTO
      */
-    public function getAllPurchaseOrderDetail(int $page, int $limit) {
+    public function getAllPurchaseOrderDetail(int $page, int $limit, int $poId) {
         try {
             // use pagination
-            $poDetails = PurchaseOrderDetail::paginate($limit, ['*'], 'page', $page);
+            $poDetails = PurchaseOrderDetail::where('purchase_order_id', $poId)->paginate($limit, ['*'], 'page', $page);
 
             $poDetailDTOs = [];
+
             foreach ($poDetails as $poDetail) {
                 $poDetailDTO = new PurchaseOrderDetailDTO(
                     $poDetail->id,
@@ -31,7 +33,8 @@ class GetAllPODetailRepository {
                     $poDetail->harga_jual_satuan,
                     $poDetail->diskon,
                     $poDetail->purchase_order_id,
-                    $poDetail->item_id
+                    $poDetail->receive_order_id,
+                    $poDetail->item_id,
                 );
 
                 array_push($poDetailDTOs, $poDetailDTO);

@@ -27,6 +27,7 @@ class GetPODetailRepository {
                 $poDetail->harga_jual_satuan,
                 $poDetail->diskon,
                 $poDetail->purchase_order_id,
+                $poDetail->receive_order_id,
                 $poDetail->item_id,
             );
 
