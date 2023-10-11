@@ -32,7 +32,7 @@ class PurchaseOrderDetailDTO {
         $this->pre_order_qty = $pre_order_qty;
     }
 
-    public function getReceivedQty(): int {
+    public function getReceivedQty(): int|null {
         return $this->received_qty;
     }
 
@@ -40,7 +40,7 @@ class PurchaseOrderDetailDTO {
         $this->received_qty = $received_qty;
     }
 
-    public function getNotGoodQty(): int {
+    public function getNotGoodQty(): int|null {
         return $this->not_good_qty;
     }
 
@@ -80,7 +80,7 @@ class PurchaseOrderDetailDTO {
         $this->diskon = $diskon;
     }
 
-    public function getPurchaseOrderId(): int {
+    public function getPurchaseOrderId(): int|null {
         return $this->purchase_order_id;
     }
 
@@ -88,7 +88,7 @@ class PurchaseOrderDetailDTO {
         $this->purchase_order_id = $purchase_order_id;
     }
 
-    public function getReceiveOrderId(): int {
+    public function getReceiveOrderId(): int|null {
         return $this->receive_order_id;
     }
 
