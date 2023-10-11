@@ -71,4 +71,10 @@ class PurchaseOrder extends Model
     {
         return $this->hasMany(PurchaseOrderDetail::class, 'purchase_order_id');
     }
+
+    // Vendor Invoice
+    public function vendorInvoices()
+    {
+        return $this->hasMany(VendorInvoice::class, 'purchase_order_id');
+    }
 }

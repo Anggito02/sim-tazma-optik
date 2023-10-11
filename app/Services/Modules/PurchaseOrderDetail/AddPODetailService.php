@@ -10,7 +10,6 @@ use App\Repositories\Modules\PurchaseOrderDetail\AddPODetailRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
 
 use App\Repositories\Modules\Item\PriceLogProcedureRepository;
-use App\Repositories\Modules\Item\StockLogProcedureRepository;
 
 class AddPODetailService {
     public function __construct(
@@ -18,7 +17,6 @@ class AddPODetailService {
         private GetItemRepository $getItemRepository,
 
         private PriceLogProcedureRepository $priceLogProcedureRepository,
-        private StockLogProcedureRepository $stockLogProcedureRepository
     ) {}
 
     /**
@@ -35,8 +33,8 @@ class AddPODetailService {
                 'harga_beli_satuan' => 'required|gte:0',
                 'harga_jual_satuan' => 'required|gte:0',
                 'diskon' => 'required|gte:0',
-                'purchase_order_id' => 'required|exists:purchase_orders,id',
                 'item_id' => 'required|exists:items,id',
+                'purchase_order_id' => 'required|exists:purchase_orders,id',
             ]);
 
             $poDetailDTO = new PurchaseOrderDetailDTO(
@@ -49,13 +47,14 @@ class AddPODetailService {
                 $request->harga_jual_satuan,
                 $request->diskon,
                 $request->purchase_order_id,
+                null,
                 $request->item_id
             );
 
             $itemDTO = $this->getItemRepository->getItem($request->item_id);
 
             // update harga log
-            if ((int)$itemDTO->harga_beli != $request->harga_beli_satuan) {
+            if ($itemDTO->harga_beli != $request->harga_beli_satuan) {
                 $this->priceLogProcedureRepository->priceLogProcedure(
                     'harga_beli',
                     date('Y-m-d H:i:s'),
@@ -67,7 +66,7 @@ class AddPODetailService {
                 );
             }
 
-            if ((int)$itemDTO->harga_jual != $request->harga_jual_satuan) {
+            if ($itemDTO->harga_jual != $request->harga_jual_satuan) {
                 $this->priceLogProcedureRepository->priceLogProcedure(
                     'harga_jual',
                     date('Y-m-d H:i:s'),

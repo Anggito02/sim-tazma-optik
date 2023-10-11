@@ -49,4 +49,14 @@ class ReceiveOrder extends Model
     {
         return $this->belongsTo(User::class, 'approved_by');
     }
+
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    // Vendor Invoice
+    public function vendorInvoices()
+    {
+        return $this->hasMany(VendorInvoice::class, 'receive_order_id');
+    }
 }
