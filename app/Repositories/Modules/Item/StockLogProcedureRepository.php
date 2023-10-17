@@ -7,9 +7,14 @@ use Illuminate\Support\Facades\DB;
 
 class StockLogProcedureRepository {
     /**
-     * Get stock log procedure
+     * Call stock log procedure
+     * @param string $tanggal_berubah
+     * @param int $stok_lama
+     * @param int $stok_baru
+     * @param string $bentuk_perubahan
      * @param int $item_id
-     * @return array
+     * @param int $purchase_order_id | null
+     *
      */
     public function stockLogProcedure(
         string $tanggal_berubah,

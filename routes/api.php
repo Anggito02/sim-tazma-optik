@@ -19,6 +19,7 @@ use App\Http\Controllers\Modules\ItemController;
 use App\Http\Controllers\Modules\PurchaseOrderController;
 use App\Http\Controllers\Modules\ReceiveOrderController;
 use App\Http\Controllers\Modules\PurchaseOrderDetailController;
+use App\Http\Controllers\Modules\VendorInvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,7 +117,8 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
 
     /* Item Controllers */
     Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
-    Route::get('/item/allWithJenis', [ItemController::class, 'getAllItem'])->name('getAllItem');
+    Route::get('/item/all', [ItemController::class, 'getAllItem'])->name('getAllItem');
+    Route::get('/item/allWithJenis', [ItemController::class, 'getAllItemWithJenis'])->name('getAllItemWithJenis');
     Route::post('/item/add', [ItemController::class, 'addItem'])->name('addItem');
     Route::delete('/item/delete', [ItemController::class, 'deleteItem'])->name('deleteItem');
     Route::put('/item/edit', [ItemController::class, 'editItem'])->name('editItem');
@@ -144,6 +146,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/purchase-order-detail/add', [PurchaseOrderDetailController::class, 'addPODetail'])->name('addPODetail');
     Route::delete('/purchase-order-detail/delete', [PurchaseOrderDetailController::class, 'deletePODetail'])->name('deletePODetail');
     Route::put('/purchase-order-detail/edit', [PurchaseOrderDetailController::class, 'editPODetail'])->name('editPODetail');
+
+    /* Vendor Invoice Controllers */
+    Route::get('/vendor-invoice/one', [VendorInvoiceController::class, 'getVendorInvoice'])->name('getVendorInvoice');
+    Route::get('/vendor-invoice/all', [VendorInvoiceController::class, 'getAllVendorInvoice'])->name('getAllVendorInvoice');
+    Route::post('/vendor-invoice/add', [VendorInvoiceController::class, 'addVendorInvoice'])->name('addVendorInvoice');
+    Route::delete('/vendor-invoice/delete', [VendorInvoiceController::class, 'deleteVendorInvoice'])->name('deleteVendorInvoice');
+    Route::put('/vendor-invoice/edit', [VendorInvoiceController::class, 'editVendorInvoice'])->name('editVendorInvoice');
 
 });
 
