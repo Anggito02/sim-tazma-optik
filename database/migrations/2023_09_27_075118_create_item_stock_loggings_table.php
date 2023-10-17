@@ -22,8 +22,8 @@ return new class extends Migration
             // Item
             $table->foreignId('item_id')->constrained('items')->onDelete('cascade')->onUpdate('cascade');
 
-            // Purchase Order
-            $table->foreignId('purchase_order_id')->nullable()->constrained('purchase_orders')->onDelete('cascade')->onUpdate('cascade');
+            // Receive Order
+            $table->foreignId('receive_order_id')->nullable()->constrained('receive_orders')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
 

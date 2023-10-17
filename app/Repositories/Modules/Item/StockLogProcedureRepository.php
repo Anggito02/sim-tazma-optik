@@ -13,7 +13,7 @@ class StockLogProcedureRepository {
      * @param int $stok_baru
      * @param string $bentuk_perubahan
      * @param int $item_id
-     * @param int $purchase_order_id | null
+     * @param int $receive_order_id | null
      *
      */
     public function stockLogProcedure(
@@ -22,11 +22,11 @@ class StockLogProcedureRepository {
         int $stok_baru,
         string $bentuk_perubahan,
         int $item_id,
-        ?int $purchase_order_id
+        ?int $receive_order_id
         ) {
         try {
-            if ($purchase_order_id == null) {
-                $purchase_order_id = 'NULL';
+            if ($receive_order_id == null) {
+                $receive_order_id = 'NULL';
             }
 
             $sqlStatement = "CALL item_stock_logging_procedure(
@@ -35,7 +35,7 @@ class StockLogProcedureRepository {
                 $stok_baru,
                 '$bentuk_perubahan',
                 $item_id,
-                $purchase_order_id
+                $receive_order_id
             )";
             DB::statement($sqlStatement);
 
