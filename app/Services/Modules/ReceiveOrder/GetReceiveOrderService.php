@@ -26,7 +26,7 @@ class GetReceiveOrderService {
                 'po_id' => 'required',
             ]);
 
-            $id = $request->id;
+            $id = $request->po_id;
 
             $receiveOrderDTO = $this->receiveOrderRepository->getReceiveOrder($id);
 
