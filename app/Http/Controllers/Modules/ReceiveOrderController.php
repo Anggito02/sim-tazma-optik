@@ -12,6 +12,8 @@ use App\Services\Modules\ReceiveOrder\AddReceiveOrderService;
 use App\Services\Modules\ReceiveOrder\EditReceiveOrderService;
 use App\Services\Modules\ReceiveOrder\DeleteReceiveOrderService;
 
+use App\Services\Modules\ReceiveOrder\GetReceiveOrderWithInfoService;
+
 class ReceiveOrderController extends Controller
 {
     // Service Providers Constructs
@@ -20,7 +22,9 @@ class ReceiveOrderController extends Controller
         private GetReceiveOrderService $getReceiveOrderService,
         private AddReceiveOrderService $addReceiveOrderService,
         private EditReceiveOrderService $editReceiveOrderService,
-        private DeleteReceiveOrderService $deleteReceiveOrderService
+        private DeleteReceiveOrderService $deleteReceiveOrderService,
+
+        private GetReceiveOrderWithInfoService $getReceiveOrderWithInfoService
     ) {}
 
     /**
@@ -133,6 +137,29 @@ class ReceiveOrderController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Delete receive order failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Get receive order with info
+     * @param Request $request
+     * @return ReceiveOrderDTO
+     */
+    public function getReceiveOrderWithInfo(Request $request) {
+        try {
+            $receiveOrderDTO = $this->getReceiveOrderWithInfoService->getReceiveOrderWithInfo($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Get receive order with info success',
+                'data' => $receiveOrderDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get receive order with info failed',
                 'data' => $error->getMessage()
             ], 400);
         }
