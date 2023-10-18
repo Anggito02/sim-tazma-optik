@@ -132,6 +132,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
 
     /* === */
     Route::get('/purchase-orderWith/info/all', [PurchaseOrderController::class, 'getAllPOWithInfo'])->name('getAllPOWithInfo');
+    Route::get('/purchase-orderWith/info/one', [PurchaseOrderController::class, 'getPOWithInfo'])->name('getPOWithInfo');
 
     /* Receive Order Controllers */
     Route::get('/receive-order/one', [ReceiveOrderController::class, 'getReceiveOrder'])->name('getReceiveOrder');
