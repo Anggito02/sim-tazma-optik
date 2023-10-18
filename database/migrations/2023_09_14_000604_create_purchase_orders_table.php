@@ -20,10 +20,6 @@ return new class extends Migration
             $table->boolean('status_pembayaran');
 
             // Foreign Keys
-
-            // Receive Order
-            $table->foreignId('receive_order_id')->nullable()->constrained('receive_orders')->onDelete('cascade')->onUpdate('cascade');
-
             // Vendor
             $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade')->onUpdate('cascade');
 

@@ -20,8 +20,6 @@ class EditPORepository {
             $po->status_penerimaan = $PoDto->getStatusPenerimaan();
             $po->status_pembayaran = $PoDto->getStatusPembayaran();
 
-            $po->receive_order_id = $PoDto->getReceiveOrderId();
-
             $po->vendor_id = $PoDto->getVendorId();
 
             $po->made_by = $PoDto->getMadeBy();
