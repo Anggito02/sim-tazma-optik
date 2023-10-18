@@ -24,15 +24,12 @@ class EditPOService {
             // Validate request
             $request->validate([
                 'id' => 'required',
-                'status_po' => 'required',
-                'status_penerimaan' => 'required',
-                'status_pembayaran' => 'required',
 
                 // Foreign Keys
-                'vendor_id' => 'required|exists:vendors,id',
-                'made_by' => 'required|exists:users,id',
-                'checked_by' => 'required|exists:users,id',
-                'approved_by' => 'required|exists:users,id',
+                'vendor_id' => 'exists:vendors,id',
+                'made_by' => 'exists:users,id',
+                'checked_by' => 'exists:users,id',
+                'approved_by' => 'exists:users,id',
             ]);
 
             $poDTO = new PurchaseOrderDTO(
