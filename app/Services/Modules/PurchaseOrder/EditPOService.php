@@ -24,9 +24,6 @@ class EditPOService {
             // Validate request
             $request->validate([
                 'id' => 'required',
-                'status_po' => 'required',
-                'status_penerimaan' => 'required',
-                'status_pembayaran' => 'required',
 
                 // Foreign Keys
                 'vendor_id' => 'exists:vendors,id',
