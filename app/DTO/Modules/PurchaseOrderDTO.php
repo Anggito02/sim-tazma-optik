@@ -66,7 +66,7 @@ class PurchaseOrderDTO {
         $this->status_pembayaran = $status_pembayaran;
     }
 
-    public function getReceiveOrderId(): int {
+    public function getReceiveOrderId(): int | null {
         return $this->receive_order_id;
     }
 
