@@ -39,6 +39,7 @@ class EditPOService {
                 $request->status_po,
                 $request->status_penerimaan,
                 $request->status_pembayaran,
+                $request->receive_order_id,
                 $request->vendor_id,
                 $request->made_by,
                 $request->checked_by,

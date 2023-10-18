@@ -12,6 +12,10 @@ class PurchaseOrderDTO {
         public bool $status_pembayaran,
 
         // Foreign Keys
+
+        // Receive Order
+        public ?int $receive_order_id,
+
         // Vendor
         public int $vendor_id,
 
@@ -60,6 +64,14 @@ class PurchaseOrderDTO {
 
     public function setStatusPembayaran(bool $status_pembayaran): void {
         $this->status_pembayaran = $status_pembayaran;
+    }
+
+    public function getReceiveOrderId(): int {
+        return $this->receive_order_id;
+    }
+
+    public function setReceiveOrderId(int $receive_order_id): void {
+        $this->receive_order_id = $receive_order_id;
     }
 
     public function getVendorId(): int {
