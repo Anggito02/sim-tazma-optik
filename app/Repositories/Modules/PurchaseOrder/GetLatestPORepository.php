@@ -29,7 +29,6 @@ class GetLatestPORepository {
                 $po->status_penerimaan,
                 $po->status_pembayaran,
 
-                $po->receive_order_id,
                 $po->vendor_id,
                 $po->made_by,
                 $po->checked_by,

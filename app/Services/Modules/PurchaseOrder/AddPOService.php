@@ -32,7 +32,6 @@ class AddPOService {
                 'status_pembayaran' => 'required',
 
                 // Foreign Keys
-                'receive_order_id' => 'nullable|exists:receive_orders,id',
                 'vendor_id' => 'required|exists:vendors,id',
                 'made_by' => 'required|exists:users,id',
                 'checked_by' => 'required|exists:users,id',
