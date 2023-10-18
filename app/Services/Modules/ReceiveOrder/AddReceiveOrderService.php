@@ -41,7 +41,7 @@ class AddReceiveOrderService {
                     'id' => $request->purchase_order_id,
                     'status_penerimaan' => true
                 ])
-                );
+            );
 
             // Auto numbering RO
             $nomor_receive_order = $this->generateReceiveOrderNumberService->generateReceiveOrderNumber();

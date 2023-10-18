@@ -10,12 +10,12 @@ use App\Models\Modules\ReceiveOrder;
 class GetReceiveOrderRepository {
     /**
      * Get Receive Order
-     * @param int $id
+     * @param int $po_id
      * @return ReceiveOrderDTO
      */
-    public function getReceiveOrder(int $id) {
+    public function getReceiveOrder(int $po_id) {
         try {
-            $receiveOrder = ReceiveOrder::find($id);
+            $receiveOrder = ReceiveOrder::where('purchase_order_id', $po_id)->first();
 
             $receiveOrderDTO = new ReceiveOrderDTO(
                 $receiveOrder->id,

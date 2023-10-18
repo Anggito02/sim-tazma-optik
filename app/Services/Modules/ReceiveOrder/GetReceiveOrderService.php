@@ -23,7 +23,7 @@ class GetReceiveOrderService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'po_id' => 'required',
             ]);
 
             $id = $request->id;
