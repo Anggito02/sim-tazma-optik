@@ -23,12 +23,12 @@ class GetReceiveOrderWithInfoService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'po_id' => 'required',
             ]);
 
-            $id = $request->id;
+            $po_id = $request->po_id;
 
-            $receiveOrderDTO = $this->receiveOrderRepository->getReceiveOrderWithInfo($id);
+            $receiveOrderDTO = $this->receiveOrderRepository->getReceiveOrderWithInfo($po_id);
 
             return $receiveOrderDTO;
 
