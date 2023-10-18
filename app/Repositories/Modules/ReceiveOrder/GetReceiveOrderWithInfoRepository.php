@@ -11,7 +11,7 @@ class GetReceiveOrderWithInfoRepository {
     public function getReceiveOrderWithInfo($po_id) {
         try {
             $receive_order = DB::table('receive_orders')
-                ->join('purchase_orders', 'receive_orders.po_id', '=', 'purchase_orders.id')
+                ->join('purchase_orders', 'receive_orders.purchase_order_id', '=', 'purchase_orders.id')
                 ->join('users as received_by', 'receive_orders.received_by', '=', 'received_by.id')
                 ->join('users as checked_by', 'receive_orders.checked_by', '=', 'checked_by.id')
                 ->join('users as approved_by', 'receive_orders.approved_by', '=', 'approved_by.id')
