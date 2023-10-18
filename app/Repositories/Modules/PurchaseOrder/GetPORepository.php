@@ -33,6 +33,7 @@ class GetPORepository {
                 'status_po' => $po->status_po,
                 'status_penerimaan' => $po->status_penerimaan,
                 'status_pembayaran' => $po->status_pembayaran,
+                'receive_order_id' => $po->receive_order_id,
                 'vendor_id' => $po->vendor_id,
                 'nama_vendor' => $po->nama_vendor,
                 'made_by_id' => $po->made_by,

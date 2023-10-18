@@ -22,6 +22,9 @@ class PurchaseOrder extends Model
         'status_pembayaran',
 
         // Foreign Keys
+        // Receive Order
+        'receive_order_id',
+
         // Vendor
         'vendor_id',
 

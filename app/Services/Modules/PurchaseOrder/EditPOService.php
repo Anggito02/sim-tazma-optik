@@ -29,6 +29,7 @@ class EditPOService {
                 'status_pembayaran' => 'required',
 
                 // Foreign Keys
+                'receive_order_id' => 'nullable|exists:receive_orders,id',
                 'vendor_id' => 'required|exists:vendors,id',
                 'made_by' => 'required|exists:users,id',
                 'checked_by' => 'required|exists:users,id',
@@ -42,6 +43,7 @@ class EditPOService {
                 $request->status_po,
                 $request->status_penerimaan,
                 $request->status_pembayaran,
+                $request->receive_order_id,
                 $request->vendor_id,
                 $request->made_by,
                 $request->checked_by,

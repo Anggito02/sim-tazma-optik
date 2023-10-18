@@ -23,6 +23,8 @@ class AddPORepository {
             $newPo->status_penerimaan = $PoDto->getStatusPenerimaan();
             $newPo->status_pembayaran = $PoDto->getStatusPembayaran();
 
+            $newPo->receive_order_id = $PoDto->getReceiveOrderId();
+
             $newPo->vendor_id = $PoDto->getVendorId();
 
             $newPo->made_by = $PoDto->getMadeBy();
