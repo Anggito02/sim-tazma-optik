@@ -27,7 +27,6 @@ class AddReceiveOrderService {
         try {
             // Validate request
             $request->validate([
-                'tanggal_penerimaan' => 'required',
                 'purchase_order_id' => 'required',
                 'received_by' => 'required',
                 'checked_by' => 'required',
