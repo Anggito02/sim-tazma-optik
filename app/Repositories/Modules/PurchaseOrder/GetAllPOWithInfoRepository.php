@@ -3,7 +3,8 @@
 namespace App\Repositories\Modules\PurchaseOrder;
 
 use Exception;
-use Illuminate\Support\Facades\DB;
+
+use App\Models\Modules\PurchaseOrder;
 
 class GetAllPOWithInfoRepository {
     /**
@@ -14,13 +15,11 @@ class GetAllPOWithInfoRepository {
      */
     public function getAllPurchaseOrderWithInfo(int $page, int $limit) {
         try {
-            // inner join purchase order and vendor
-            $pos = DB::table('purchase_orders')
-                ->join('vendors', 'purchase_orders.vendor_id', '=', 'vendors.id')
+            $pos = PurchaseOrder::join('vendors', 'purchase_orders.vendor_id', '=', 'vendors.id')
                 ->join('users as made_by', 'purchase_orders.made_by', '=', 'made_by.id')
                 ->join('users as checked_by', 'purchase_orders.checked_by', '=', 'checked_by.id')
                 ->join('users as approved_by', 'purchase_orders.approved_by', '=', 'approved_by.id')
-                ->select('purchase_orders.*', 'vendors.nama_vendor', 'made_by.employee_name as made_by_name', 'checked_by.employee_name as checked_by_name', 'approved_by.employee_name as approved_by_name')
+                ->select('purchase_orders.*', 'vendors.nama_vendor as nama_vendor', 'made_by.employee_name as made_by_name', 'checked_by.employee_name as checked_by_name', 'approved_by.employee_name as approved_by_name')
                 ->paginate($limit, ['*'], 'page', $page);
 
             $poDTOs = [];

@@ -5,9 +5,9 @@ namespace App\Repositories\Modules\PurchaseOrder;
 use Exception;
 
 use App\DTO\Modules\PurchaseOrderDTO;
-use App\Models\Modules\PurchaseOrder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Modules\PurchaseOrder;
 class GetPORepository {
     /**
      * Get Purchase Order
@@ -17,8 +17,7 @@ class GetPORepository {
     public function getPurchaseOrder(int $id) {
         try {
             // get purchase order with user info and vendor info
-            $po = DB::table('purchase_orders')
-                ->join('vendors', 'purchase_orders.vendor_id', '=', 'vendors.id')
+            $po = PurchaseOrder::join('vendors', 'purchase_orders.vendor_id', '=', 'vendors.id')
                 ->join('users as made_by', 'purchase_orders.made_by', '=', 'made_by.id')
                 ->join('users as checked_by', 'purchase_orders.checked_by', '=', 'checked_by.id')
                 ->join('users as approved_by', 'purchase_orders.approved_by', '=', 'approved_by.id')

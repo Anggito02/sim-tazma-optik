@@ -13,7 +13,6 @@ use App\Services\Modules\PurchaseOrder\EditPOService;
 use App\Services\Modules\PurchaseOrder\DeletePOService;
 
 use App\Services\Modules\PurchaseOrder\GetAllPOWithInfoService;
-use App\Services\Modules\PurchaseOrder\GetPOWithInfoService;
 
 class PurchaseOrderController extends Controller
 {
@@ -25,8 +24,7 @@ class PurchaseOrderController extends Controller
         private EditPOService $editPOService,
         private DeletePOService $deletePOService,
 
-        private GetAllPOWithInfoService $getAllPOWithInfoService,
-        private GetPOWithInfoService $getPOWithInfoService
+        private GetAllPOWithInfoService $getAllPOWithInfoService
     ) {}
 
     /**
@@ -162,29 +160,6 @@ class PurchaseOrderController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Get all purchase order with info failed',
-                'data' => $error->getMessage()
-            ], 400);
-        }
-    }
-
-    /**
-     * Get purchase order with info
-     * @param Request $request
-     * @return PurchaseOrderDTO
-     */
-    public function getPOWithInfo(Request $request) {
-        try {
-            $poDTO = $this->getPOWithInfoService->getPurchaseOrderWithInfo($request);
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Get purchase order with info success',
-                'data' => $poDTO
-            ], 200);
-        } catch (Exception $error) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Get purchase order with info failed',
                 'data' => $error->getMessage()
             ], 400);
         }
