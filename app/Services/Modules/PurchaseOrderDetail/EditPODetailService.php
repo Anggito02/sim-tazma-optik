@@ -70,7 +70,7 @@ class EditPODetailService {
             $itemDTO = $this->getItemRepository->getItem($request->item_id);
 
             // Get RO
-            $receiveOrderDTO = $this->receiveOrderRepository->getReceiveOrder($request->receive_order_id);
+            $receiveOrderDTO = $this->receiveOrderRepository->getReceiveOrder($request->purchase_order_id);
 
             // update stok log
             $this->stockLogProcedureRepository->stockLogProcedure(
