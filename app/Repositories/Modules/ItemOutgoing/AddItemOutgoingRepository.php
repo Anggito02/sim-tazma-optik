@@ -29,7 +29,7 @@ class AddItemOutgoingRepository {
 
             return $itemOutgoing;
         } catch (Exception $e) {
-            throw $e;
+            throw new Exception($e->getMessage());
         }
     }
 }

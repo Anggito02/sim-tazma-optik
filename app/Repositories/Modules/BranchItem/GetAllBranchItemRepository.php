@@ -43,7 +43,7 @@ class GetAllBranchItemRepository {
 
             return $branchItemInfoDTOs;
         } catch (Exception $e) {
-            throw $e;
+            throw new Exception($e->getMessage());
         }
     }
 }

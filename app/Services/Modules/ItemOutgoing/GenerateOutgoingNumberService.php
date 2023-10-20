@@ -50,7 +50,7 @@ class GenerateOutgoingNumberService {
 
             return $outgoingNumber;
         } catch (Exception $e) {
-            throw $e;
+            throw new Exception($e->getMessage());
         }
     }
 }

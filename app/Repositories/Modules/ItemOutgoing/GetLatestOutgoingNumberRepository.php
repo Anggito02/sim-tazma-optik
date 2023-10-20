@@ -20,7 +20,7 @@ class GetLatestOutgoingNumberRepository {
 
             return $outgoingNumber->nomor_outgoing;
         } catch (Exception $e) {
-            throw $e;
+            throw new Exception($e->getMessage());
         }
     }
 }

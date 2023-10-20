@@ -22,7 +22,7 @@ class AddBranchItemRepository {
 
             return $branchItem;
         } catch (Exception $e) {
-            throw $e;
+            throw new Exception($e->getMessage());
         }
     }
 }
