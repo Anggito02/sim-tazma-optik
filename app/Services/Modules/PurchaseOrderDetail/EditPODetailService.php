@@ -9,6 +9,7 @@ use App\DTO\Modules\PurchaseOrderDetailDTO;
 
 use App\Repositories\Modules\PurchaseOrderDetail\EditPODetailRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
+use App\Repositories\Modules\Item\EditItemRepository;
 use App\Repositories\Modules\ReceiveOrder\GetReceiveOrderRepository;
 
 use App\Repositories\Modules\Item\PriceLogProcedureRepository;
@@ -21,6 +22,7 @@ class EditPODetailService {
     public function __construct(
         private EditPODetailRepository $poDetailRepository,
         private GetItemRepository $getItemRepository,
+        private EditItemRepository $editItemRepository,
         private GetReceiveOrderRepository $receiveOrderRepository,
 
         private PriceLogProcedureRepository $priceLogProcedureRepository,
@@ -68,6 +70,10 @@ class EditPODetailService {
 
             // Get Item
             $itemDTO = $this->getItemRepository->getItem($request->item_id);
+
+            // update item stock
+            $itemDTO->stok += $request->received_qty;
+            $itemDTO = $this->editItemRepository->editItem($itemDTO);
 
             // Get RO
             $receiveOrderDTO = $this->receiveOrderRepository->getReceiveOrder($request->purchase_order_id);
