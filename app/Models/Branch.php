@@ -31,4 +31,10 @@ class Branch extends Model
     {
         return $this->hasMany(BranchItem::class, 'branch_id');
     }
+
+    // Item Outgoing
+    public function itemOutgoings()
+    {
+        return $this->hasMany(ItemOutgoing::class, 'branch_id');
+    }
 }
