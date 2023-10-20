@@ -25,8 +25,6 @@ class AddStockInProcedureRepository {
         int $stok_in_total,
 
         int $item_id,
-        int $purchase_order_id,
-        int $receive_order_id,
         ) {
         try {
             $sqlStatement = "CALL add_stock_in_procedure(
@@ -36,8 +34,6 @@ class AddStockInProcedureRepository {
                 $stok_in_total,
 
                 $item_id,
-                $purchase_order_id,
-                $receive_order_id
             )";
             DB::statement($sqlStatement);
         } catch (Exception $error) {
