@@ -20,6 +20,7 @@ use App\Http\Controllers\Modules\PurchaseOrderController;
 use App\Http\Controllers\Modules\ReceiveOrderController;
 use App\Http\Controllers\Modules\PurchaseOrderDetailController;
 use App\Http\Controllers\Modules\VendorInvoiceController;
+use App\Http\Controllers\Modules\BranchItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,6 +158,10 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/vendor-invoice/delete', [VendorInvoiceController::class, 'deleteVendorInvoice'])->name('deleteVendorInvoice');
     Route::put('/vendor-invoice/edit', [VendorInvoiceController::class, 'editVendorInvoice'])->name('editVendorInvoice');
 
+    /* Branch Item Controllers */
+    Route::get('/branch-item/all', [BranchItemController::class, 'getAllBranchItem'])->name('getAllBranchItem');
+    Route::post('/branch-item/add', [BranchItemController::class, 'addBranchItem'])->name('addBranchItem');
+    Route::put('/branch-item/update-stok', [BranchItemController::class, 'updateBranchStok'])->name('updateBranchStok');
 });
 
 Route::middleware('guest')->group(function() {

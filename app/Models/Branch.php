@@ -20,8 +20,15 @@ class Branch extends Model
         'alamat',
     ];
 
+    // Employee
     public function employee()
     {
         return $this->belongsTo(User::class, 'employee_id_pic_branch');
+    }
+
+    // Branch Item
+    public function branchItems()
+    {
+        return $this->hasMany(BranchItem::class, 'branch_id');
     }
 }

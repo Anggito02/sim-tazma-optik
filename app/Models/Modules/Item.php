@@ -89,4 +89,9 @@ class Item extends Model
         return $this->hasMany(PurchaseOrderDetail::class, 'item_id');
     }
 
+    // Branch Item
+    public function branchItems()
+    {
+        return $this->hasMany(BranchItem::class, 'item_id');
+    }
 }
