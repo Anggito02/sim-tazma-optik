@@ -18,9 +18,10 @@ class GetAllItemOutgoingRepository {
         try {
             // use pagination
             $itemOutgoings = ItemOutgoing::join('branches', 'item_outgoings.branch_id', '=', 'branches.id')
-                ->join('users as packed_by', 'item_outgoings.packed_by', '=', 'packed_by.id')
+                ->join('users as known_by', 'item_outgoings.known_by', '=', 'known_by.id')
                 ->join('users as checked_by', 'item_outgoings.checked_by', '=', 'checked_by.id')
                 ->join('users as approved_by', 'item_outgoings.approved_by', '=', 'approved_by.id')
+                ->join('users as delivered_by', 'item_outgoings.delivered_by', '=', 'delivered_by.id')
                 ->select(
                     'item_outgoings.id as id',
                     'item_outgoings.nomor_outgoing as nomor_outgoing',
@@ -28,16 +29,20 @@ class GetAllItemOutgoingRepository {
                     'item_outgoings.tanggal_pengiriman as tanggal_pengiriman',
 
                     'item_outgoings.branch_id as branch_id',
-                    'branches.nama as branch_nama',
+                    'branches.nama_branch as nama_branch',
+                    'branches.kode_branch as kode_branch',
 
-                    'item_outgoings.packed_by as packed_by',
-                    'packed_by.nama as packed_by_nama',
+                    'item_outgoings.known_by as known_by',
+                    'known_by.employee_name as known_by_nama',
 
                     'item_outgoings.checked_by as checked_by',
-                    'checked_by.nama as checked_by_nama',
+                    'checked_by.employee_name as checked_by_nama',
 
                     'item_outgoings.approved_by as approved_by',
-                    'approved_by.nama as approved_by_nama',
+                    'approved_by.employee_name as approved_by_nama',
+
+                    'item_outgoings.delivered_by as delivered_by',
+                    'delivered_by.employee_name as delivered_by_nama',
                 )
                 ->paginate($limit, ['*'], 'page', $page);
 
@@ -51,16 +56,20 @@ class GetAllItemOutgoingRepository {
                     $itemOutgoing->tanggal_pengiriman,
 
                     $itemOutgoing->branch_id,
-                    $itemOutgoing->branch_nama,
+                    $itemOutgoing->nama_branch,
+                    $itemOutgoing->kode_branch,
 
-                    $itemOutgoing->packed_by,
-                    $itemOutgoing->packed_by_nama,
+                    $itemOutgoing->known_by,
+                    $itemOutgoing->known_by_nama,
 
                     $itemOutgoing->checked_by,
                     $itemOutgoing->checked_by_nama,
 
                     $itemOutgoing->approved_by,
                     $itemOutgoing->approved_by_nama,
+
+                    $itemOutgoing->delivered_by,
+                    $itemOutgoing->delivered_by_nama,
                 );
 
                 array_push($itemOutgoingInfoDTOs, $itemOutgoingInfoDTO);

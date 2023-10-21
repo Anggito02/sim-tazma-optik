@@ -23,12 +23,12 @@ class ItemOutgoingController extends Controller
 
     /**
      * Get item outgoing
-     * @param int $id
+     * @param Request $request
      * @return ItemOutgoingInfoDTO
      */
-    public function getItemOutgoing(int $id) {
+    public function getItemOutgoing(Request $request) {
         try {
-            $itemOutgoingDTO = $this->getItemOutgoingService->getItemOutgoing($id);
+            $itemOutgoingDTO = $this->getItemOutgoingService->getItemOutgoing($request->id);
 
             return response()->json([
                 'status' => 'success',

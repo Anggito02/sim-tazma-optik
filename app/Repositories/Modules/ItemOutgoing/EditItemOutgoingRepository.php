@@ -22,29 +22,11 @@ class EditItemOutgoingRepository {
 
                     'branch_id' => $editItemOutgoingDTO->getBranchId(),
 
-                    'packed_by' => $editItemOutgoingDTO->getPackedBy(),
+                    'known_by' => $editItemOutgoingDTO->getKnownBy(),
                     'checked_by' => $editItemOutgoingDTO->getCheckedBy(),
                     'approved_by' => $editItemOutgoingDTO->getApprovedBy(),
+                    'delivered_by' => $editItemOutgoingDTO->getDeliveredBy(),
                 ]);
-
-            $itemOutgoingDTO = new ItemOutgoingInfoDTO(
-                $itemOutgoing->id,
-                $itemOutgoing->nomor_outgoing,
-                $itemOutgoing->tanggal_outgoing,
-                $itemOutgoing->tanggal_pengiriman,
-
-                $itemOutgoing->branch_id,
-                $itemOutgoing->branch_nama,
-
-                $itemOutgoing->packed_by,
-                $itemOutgoing->packed_by_nama,
-
-                $itemOutgoing->checked_by,
-                $itemOutgoing->checked_by_nama,
-
-                $itemOutgoing->approved_by,
-                $itemOutgoing->approved_by_nama,
-            );
 
             return $itemOutgoing;
         } catch (Exception $e) {

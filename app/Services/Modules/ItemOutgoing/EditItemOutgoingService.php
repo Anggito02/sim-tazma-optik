@@ -28,9 +28,10 @@ class EditItemOutgoingService {
 
                 'branch_id' => 'required|exists:branches,id',
 
-                'packed_by' => 'required|exists:users,id',
+                'known_by' => 'required|exists:users,id',
                 'checked_by' => 'required|exists:users,id',
                 'approved_by' => 'required|exists:users,id',
+                'delivered_by' => 'required|exists:users,id',
             ]);
 
             $editItemOutgoingDTO = new EditItemOutgoingDTO(
@@ -39,9 +40,10 @@ class EditItemOutgoingService {
 
                 $request->branch_id,
 
-                $request->packed_by,
+                $request->known_by,
                 $request->checked_by,
                 $request->approved_by,
+                $request->delivered_by,
             );
 
             $itemOutgoingDTO = $this->itemOutgoingRepository->editItemOutgoing($editItemOutgoingDTO);

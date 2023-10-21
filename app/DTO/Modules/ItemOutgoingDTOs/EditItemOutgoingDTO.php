@@ -9,9 +9,10 @@ class EditItemOutgoingDTO {
 
         public int $branch_id,
 
-        public int $packed_by,
+        public int $known_by,
         public int $checked_by,
         public int $approved_by,
+        public int $delivered_by,
     )
     {}
 
@@ -27,8 +28,8 @@ class EditItemOutgoingDTO {
         return $this->branch_id;
     }
 
-    public function getPackedBy(): int {
-        return $this->packed_by;
+    public function getKnownBy(): int {
+        return $this->known_by;
     }
 
     public function getCheckedBy(): int {
@@ -37,6 +38,10 @@ class EditItemOutgoingDTO {
 
     public function getApprovedBy(): int {
         return $this->approved_by;
+    }
+
+    public function getDeliveredBy(): int {
+        return $this->delivered_by;
     }
 
     public function setId(int $id): void {
@@ -51,8 +56,8 @@ class EditItemOutgoingDTO {
         $this->branch_id = $branch_id;
     }
 
-    public function setPackedBy(int $packed_by): void {
-        $this->packed_by = $packed_by;
+    public function setKnownBy(int $known_by): void {
+        $this->known_by = $known_by;
     }
 
     public function setCheckedBy(int $checked_by): void {
@@ -61,6 +66,10 @@ class EditItemOutgoingDTO {
 
     public function setApprovedBy(int $approved_by): void {
         $this->approved_by = $approved_by;
+    }
+
+    public function setDeliveredBy(int $delivered_by): void {
+        $this->delivered_by = $delivered_by;
     }
 }
 

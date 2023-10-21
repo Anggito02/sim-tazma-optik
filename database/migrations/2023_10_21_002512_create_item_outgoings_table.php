@@ -22,9 +22,10 @@ return new class extends Migration
             $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade')->onUpdate('cascade');
 
             // Employee
-            $table->foreignId('packed_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('known_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('checked_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('approved_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('delivered_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -19,9 +19,10 @@ class ItemOutgoing extends Model
         'branch_id',
 
         // User
-        'packed_by',
+        'known_by',
         'checked_by',
         'approved_by',
+        'delivered_by',
     ];
 
     // Branch
@@ -33,7 +34,7 @@ class ItemOutgoing extends Model
     // User
     public function packedBy()
     {
-        return $this->belongsTo(User::class, 'packed_by');
+        return $this->belongsTo(User::class, 'known_by');
     }
 
     public function checkedBy()
@@ -44,5 +45,10 @@ class ItemOutgoing extends Model
     public function approvedBy()
     {
         return $this->belongsTo(User::class, 'approved_by');
+    }
+
+    public function deliveredBy()
+    {
+        return $this->belongsTo(User::class, 'delivered_by');
     }
 }
