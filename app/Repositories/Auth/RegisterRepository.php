@@ -18,9 +18,10 @@ class RegisterRepository {
             $user = new User();
             $user->email = $userDTO->email;
             $user->password = $userDTO->password;
-            $user->employee_name = $userDTO->employee_name;
+            $user->username = $userDTO->username;
             $user->nik = $userDTO->nik;
-            $user->photo = $userDTO->photo;
+            $user->employee_name = $userDTO->employee_name;
+            // $user->photo = $userDTO->photo;
             $user->gender = $userDTO->gender;
             $user->address = $userDTO->address;
             $user->phone = $userDTO->phone;
@@ -28,6 +29,8 @@ class RegisterRepository {
             $user->section = $userDTO->section;
             $user->position = $userDTO->position;
             $user->role = $userDTO->role;
+            $user->plant = $userDTO->plant;
+            $user->status = $userDTO->status;
             $user->group = $userDTO->group;
             $user->domicile = $userDTO->domicile;
             $user->save();

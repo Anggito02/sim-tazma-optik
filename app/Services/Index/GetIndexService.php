@@ -23,7 +23,7 @@ class GetIndexService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:indices,id',
             ]);
 
             $indexDTO = new IndexDTO(

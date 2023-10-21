@@ -23,7 +23,7 @@ class EditBranchService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:branches,id',
                 'kode_branch' => 'required',
                 'nama_branch' => 'required',
                 'alamat' => 'required',

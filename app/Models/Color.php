@@ -17,4 +17,9 @@ class Color extends Model
     protected $fillable = [
         'color_name',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'frame_color_id');
+    }
 }

@@ -13,6 +13,15 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensCategoryController;
 use App\Http\Controllers\FrameCategoryController;
+use App\Http\Controllers\CoaController;
+
+use App\Http\Controllers\Modules\ItemController;
+use App\Http\Controllers\Modules\PurchaseOrderController;
+use App\Http\Controllers\Modules\ReceiveOrderController;
+use App\Http\Controllers\Modules\PurchaseOrderDetailController;
+use App\Http\Controllers\Modules\VendorInvoiceController;
+use App\Http\Controllers\Modules\BranchItemController;
+use App\Http\Controllers\Modules\ItemOutgoingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +49,6 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Employee Routes */
     Route::get('/employee/one', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
     Route::get('/employee/all', [EmployeeController::class, 'getAllEmployees'])->name('getAllEmployee');
-    Route::post('/employee/add', [EmployeeController::class, 'addEmployee'])->name('addEmployee');
     Route::delete('/employee/delete', [EmployeeController::class, 'deleteEmployee'])->name('deleteEmployee');
     Route::put('/employee/edit', [EmployeeController::class, 'editEmployee'])->name('editEmployee');
     // === //
@@ -79,7 +87,6 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/branch/edit', [BranchController::class, 'editBranch'])->name('editBranch');
 
     // === //
-    Route::get('/branch/employee/one', [BranchController::class, 'getEmployeeByBranchId'])->name('getEmployeeByBranchId');
     Route::get('/branchWith/employee/all', [BranchController::class, 'getAllBranchWithEmployee'])->name('getAllBranchWithEmployee');
 
     /* Index Routes */
@@ -103,6 +110,62 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/frame-category/delete', [FrameCategoryController::class, 'deleteFrameCategory'])->name('deleteFrameCategory');
     Route::put('/frame-category/edit', [FrameCategoryController::class, 'editFrameCategory'])->name('editFrameCategory');
 
+    /* Coa Controllers */
+    Route::get('/coa/one', [CoaController::class, 'getCoa'])->name('getCoa');
+    Route::get('/coa/all', [CoaController::class, 'getAllCoa'])->name('getAllCoa');
+    Route::post('/coa/add', [CoaController::class, 'addCoa'])->name('addCoa');
+    Route::delete('/coa/delete', [CoaController::class, 'deleteCoa'])->name('deleteCoa');
+    Route::put('/coa/edit', [CoaController::class, 'editCoa'])->name('editCoa');
+
+    /* Item Controllers */
+    Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
+    Route::get('/item/all', [ItemController::class, 'getAllItem'])->name('getAllItem');
+    Route::get('/item/allWithJenis', [ItemController::class, 'getAllItemWithJenis'])->name('getAllItemWithJenis');
+    Route::post('/item/add', [ItemController::class, 'addItem'])->name('addItem');
+    Route::delete('/item/delete', [ItemController::class, 'deleteItem'])->name('deleteItem');
+    Route::put('/item/edit', [ItemController::class, 'editItem'])->name('editItem');
+
+    /* Purchase Order Controllers */
+    Route::get('/purchase-order/one', [PurchaseOrderController::class, 'getPO'])->name('getPO');
+    Route::get('/purchase-order/all', [PurchaseOrderController::class, 'getAllPO'])->name('getAllPO');
+    Route::post('/purchase-order/add', [PurchaseOrderController::class, 'addPO'])->name('addPO');
+    Route::delete('/purchase-order/delete', [PurchaseOrderController::class, 'deletePO'])->name('deletePO');
+    Route::put('/purchase-order/edit', [PurchaseOrderController::class, 'editPO'])->name('editPO');
+
+    /* === */
+    Route::get('/purchase-orderWith/info/all', [PurchaseOrderController::class, 'getAllPOWithInfo'])->name('getAllPOWithInfo');
+
+    /* Receive Order Controllers */
+    Route::get('/receive-order/one', [ReceiveOrderController::class, 'getReceiveOrder'])->name('getReceiveOrder');
+    Route::get('/receive-order/all', [ReceiveOrderController::class, 'getAllReceiveOrder'])->name('getAllReceiveOrder');
+    Route::post('/receive-order/add', [ReceiveOrderController::class, 'addReceiveOrder'])->name('addReceiveOrder');
+    Route::delete('/receive-order/delete', [ReceiveOrderController::class, 'deleteReceiveOrder'])->name('deleteReceiveOrder');
+    Route::put('/receive-order/edit', [ReceiveOrderController::class, 'editReceiveOrder'])->name('editReceiveOrder');
+
+    /* === */
+    Route::get('/receive-orderWith/info/one', [ReceiveOrderController::class, 'getReceiveOrderWithInfo'])->name('getReceiveOrderWithInfo');
+
+    /* Purchase Order Detail Controllers */
+    Route::get('/purchase-order-detail/one', [PurchaseOrderDetailController::class, 'getPODetail'])->name('getPODetail');
+    Route::get('/purchase-order-detail/all', [PurchaseOrderDetailController::class, 'getAllPODetail'])->name('getAllPODetail');
+    Route::post('/purchase-order-detail/add', [PurchaseOrderDetailController::class, 'addPODetail'])->name('addPODetail');
+    Route::delete('/purchase-order-detail/delete', [PurchaseOrderDetailController::class, 'deletePODetail'])->name('deletePODetail');
+    Route::put('/purchase-order-detail/edit', [PurchaseOrderDetailController::class, 'editPODetail'])->name('editPODetail');
+
+    /* Vendor Invoice Controllers */
+    Route::get('/vendor-invoice/one', [VendorInvoiceController::class, 'getVendorInvoice'])->name('getVendorInvoice');
+    Route::get('/vendor-invoice/all', [VendorInvoiceController::class, 'getAllVendorInvoice'])->name('getAllVendorInvoice');
+    Route::post('/vendor-invoice/add', [VendorInvoiceController::class, 'addVendorInvoice'])->name('addVendorInvoice');
+    Route::delete('/vendor-invoice/delete', [VendorInvoiceController::class, 'deleteVendorInvoice'])->name('deleteVendorInvoice');
+    Route::put('/vendor-invoice/edit', [VendorInvoiceController::class, 'editVendorInvoice'])->name('editVendorInvoice');
+
+    /* Branch Item Controllers */
+    Route::get('/branch-item/all', [BranchItemController::class, 'getAllBranchItem'])->name('getAllBranchItem');
+    Route::post('/branch-item/add', [BranchItemController::class, 'addBranchItem'])->name('addBranchItem');
+    Route::put('/branch-item/update-stok', [BranchItemController::class, 'updateBranchStok'])->name('updateBranchStok');
+
+    /* Item Outgoing Controllers */
+    Route::post('/item-outgoing/add', [ItemOutgoingController::class, 'addItemOutgoing'])->name('addItemOutgoing');
 });
 
 Route::middleware('guest')->group(function() {
@@ -127,6 +190,6 @@ Route::post('/token-test', function() {
 Route::any('{any}', function () {
     return response()->json([
         'status' => 'error',
-        'message' => 'Not found'
+        'message' => 'Endpoint not found'
     ])->setStatusCode(404);
 })->where('any', '.*');

@@ -22,8 +22,8 @@ class GetAllBrandService {
         try {
             // Validate request
             $request->validate([
-                'page' => 'required',
-                'limit' => 'required',
+                'page' => 'required|gt:0',
+                'limit' => 'required|gt:0',
             ]);
 
             $brandDTO = $this->brandRepository->getAllBrand($request->page, $request->limit);

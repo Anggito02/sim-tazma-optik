@@ -24,8 +24,8 @@ class GetAllFrameCategoryService {
         try {
             // Validate request
             $request->validate([
-                'page' => 'required',
-                'limit' => 'required',
+                'page' => 'required|gt:0',
+                'limit' => 'required|gt:0',
             ]);
 
             $frameCategoryDTO = $this->frameCategoryRepository->getAllFrameCategory($request->page, $request->limit);

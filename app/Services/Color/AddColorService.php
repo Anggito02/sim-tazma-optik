@@ -23,7 +23,7 @@ class AddColorService {
         try {
             // Validate request
             $request->validate([
-                'color_name' => 'required',
+                'color_name' => 'required|unique:colors,color_name',
             ]);
 
             $colorDTO = new ColorDTO(

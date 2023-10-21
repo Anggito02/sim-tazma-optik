@@ -3,11 +3,8 @@
 namespace App\Repositories\Branch;
 
 use Exception;
-use Illuminate\Support\Facades\DB;
 
-use App\DTO\BranchDTO;
 use App\Models\Branch;
-use App\Models\Employee;
 
 class GetAllBranchWithEmployeeRepository {
     /**
@@ -19,9 +16,8 @@ class GetAllBranchWithEmployeeRepository {
     public function getAllBranchWithEmployee(int $page, int $limit) {
         try {
             // inner join branch and employee
-            $branches = DB::table('branches')
-                ->join('employees', 'branches.employee_id_pic_branch', '=', 'employees.id')
-                ->select('branches.*', 'employees.employee_name')
+            $branches = Branch::join('users', 'branches.employee_id_pic_branch', '=', 'users.id')
+                ->select('branches.*', 'users.employee_name')
                 ->paginate($limit, ['*'], 'page', $page);
 
             $branchDTOs = [];

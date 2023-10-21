@@ -23,7 +23,7 @@ class GetBranchService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:branches,id',
             ]);
 
             $id = $request->id;

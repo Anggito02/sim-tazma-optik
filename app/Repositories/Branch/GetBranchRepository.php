@@ -19,12 +19,10 @@ class GetBranchRepository {
 
             $branchDTO = new BranchDTO(
                 $branch->id,
-                $branch->name,
-                $branch->address,
-                $branch->phone,
-                $branch->email,
-                $branch->created_at,
-                $branch->updated_at
+                $branch->kode_branch,
+                $branch->nama_branch,
+                $branch->alamat,
+                $branch->employee_id_pic_branch,
             );
 
             return $branchDTO;
