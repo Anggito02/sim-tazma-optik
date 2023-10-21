@@ -174,6 +174,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
 
     /* Outgoing Detail Controllers */
     Route::post('/outgoing-detail/add', [OutgoingDetailController::class, 'addOutgoingDetail'])->name('addOutgoingDetail');
+    Route::put('/outgoing-detail/verify', [OutgoingDetailController::class, 'verifyOutgoingDetail'])->name('verifyOutgoingDetail');
 });
 
 Route::middleware('guest')->group(function() {
