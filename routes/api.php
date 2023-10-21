@@ -169,6 +169,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::get('/item-outgoing/all', [ItemOutgoingController::class, 'getAllItemOutgoing'])->name('getAllItemOutgoing');
     Route::post('/item-outgoing/add', [ItemOutgoingController::class, 'addItemOutgoing'])->name('addItemOutgoing');
     Route::put('/item-outgoing/edit', [ItemOutgoingController::class, 'editItemOutgoing'])->name('editItemOutgoing');
+    Route::delete('/item-outgoing/delete', [ItemOutgoingController::class, 'deleteItemOutgoing'])->name('deleteItemOutgoing');
 });
 
 Route::middleware('guest')->group(function() {

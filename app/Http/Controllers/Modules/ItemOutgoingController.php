@@ -10,6 +10,7 @@ use App\Services\Modules\ItemOutgoing\GetAllItemOutgoingService;
 use App\Services\Modules\ItemOutgoing\GetItemOutgoingService;
 use App\Services\Modules\ItemOutgoing\AddItemOutgoingService;
 use App\Services\Modules\ItemOutgoing\EditItemOutgoingService;
+use App\Services\Modules\ItemOutgoing\DeleteItemOutgoingService;
 
 class ItemOutgoingController extends Controller
 {
@@ -18,13 +19,14 @@ class ItemOutgoingController extends Controller
         private GetItemOutgoingService $getItemOutgoingService,
         private GetAllItemOutgoingService $getAllItemOutgoingService,
         private AddItemOutgoingService $addBranchItemService,
-        private EditItemOutgoingService $editItemOutgoingService
+        private EditItemOutgoingService $editItemOutgoingService,
+        private DeleteItemOutgoingService $deleteItemOutgoingService
     ) {}
 
     /**
      * Get item outgoing
      * @param Request $request
-     * @return ItemOutgoingInfoDTO
+     * @return JsonResponse
      */
     public function getItemOutgoing(Request $request) {
         try {
@@ -47,7 +49,7 @@ class ItemOutgoingController extends Controller
     /**
      * Get all item outgoing
      * @param Request $request
-     * @return ItemOutgoingInfoDTO
+     * @return JsonResponse
      */
     public function getAllItemOutgoing(Request $request) {
         try {
@@ -70,7 +72,7 @@ class ItemOutgoingController extends Controller
     /**
      * Add new item outgoing
      * @param Request $request
-     * @return ItemOutgoingDTO
+     * @return JsonResponse
      */
     public function addItemOutgoing(Request $request) {
         try {
@@ -93,7 +95,7 @@ class ItemOutgoingController extends Controller
     /**
      * Edit item outgoing
      * @param Request $request
-     * @return ItemOutgoingDTO
+     * @return JsonResponse
      */
     public function editItemOutgoing(Request $request) {
         try {
@@ -108,6 +110,29 @@ class ItemOutgoingController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Edit item outgoing failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Delete item outgoing
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function deleteItemOutgoing(Request $request) {
+        try {
+            $itemOutgoing = $this->deleteItemOutgoingService->deleteItemOutgoing($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Delete item outgoing success',
+                'data' => $itemOutgoing
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Delete item outgoing failed',
                 'data' => $error->getMessage()
             ], 400);
         }

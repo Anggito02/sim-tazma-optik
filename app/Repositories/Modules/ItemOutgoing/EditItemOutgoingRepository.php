@@ -5,7 +5,7 @@ namespace App\Repositories\Modules\ItemOutgoing;
 use Exception;
 
 use App\DTO\Modules\ItemOutgoingDTOs\EditItemOutgoingDTO;
-use App\DTO\Modules\ItemOutgoingDTOs\ItemOutgoingInfoDTO;
+
 use App\Models\Modules\ItemOutgoing;
 
 class EditItemOutgoingRepository {
