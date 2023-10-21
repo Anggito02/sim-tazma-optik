@@ -2,10 +2,9 @@
 
 namespace App\DTO\Modules\ItemOutgoingDTOs;
 
-class NewItemOutgoingDTO {
+class EditItemOutgoingDTO {
     public function __construct(
-        public string $nomor_outgoing,
-        public string $tanggal_outgoing,
+        public int $id,
         public string $tanggal_pengiriman,
 
         public int $branch_id,
@@ -17,12 +16,8 @@ class NewItemOutgoingDTO {
     )
     {}
 
-    public function getNomorOutgoing(): string {
-        return $this->nomor_outgoing;
-    }
-
-    public function getTanggalOutgoing(): string {
-        return $this->tanggal_outgoing;
+    public function getId(): int {
+        return $this->id;
     }
 
     public function getTanggalPengiriman(): string {
@@ -37,7 +32,6 @@ class NewItemOutgoingDTO {
         return $this->known_by;
     }
 
-
     public function getCheckedBy(): int {
         return $this->checked_by;
     }
@@ -50,12 +44,8 @@ class NewItemOutgoingDTO {
         return $this->delivered_by;
     }
 
-    public function setNomorOutgoing(string $nomor_outgoing): void {
-        $this->nomor_outgoing = $nomor_outgoing;
-    }
-
-    public function setTanggalOutgoing(string $tanggal_outgoing): void {
-        $this->tanggal_outgoing = $tanggal_outgoing;
+    public function setId(int $id): void {
+        $this->id = $id;
     }
 
     public function setTanggalPengiriman(string $tanggal_pengiriman): void {

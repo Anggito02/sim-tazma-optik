@@ -5,51 +5,48 @@ namespace App\Services\Modules\ItemOutgoing;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\ItemOutgoingDTOs\NewItemOutgoingDTO;
+use App\DTO\Modules\ItemOutgoingDTOs\EditItemOutgoingDTO;
 
-use App\Repositories\Modules\ItemOutgoing\AddItemOutgoingRepository;
-use App\Services\Modules\ItemOutgoing\GenerateOutgoingNumberService;
+use App\Repositories\Modules\ItemOutgoing\EditItemOutgoingRepository;
 
-class AddItemOutgoingService {
+class EditItemOutgoingService {
     public function __construct(
-        private AddItemOutgoingRepository $itemOutgoingRepository,
-        private GenerateOutgoingNumberService $generateOutgoingNumberService
-    )
-    {}
+        private EditItemOutgoingRepository $itemOutgoingRepository
+    ) {}
 
     /**
-     * Add new item outgoing
+     * Edit item outgoing
      * @param Request $request
-     * @return ItemOutgoingInfoDTO
+     * @return EditItemOutgoingDTO
      */
-    public function addItemOutgoing(Request $request) {
+    public function editItemOutgoing(Request $request) {
         try {
             // Validate request
             $request->validate([
+                'id' => 'required|exists:item_outgoings,id',
                 'tanggal_pengiriman' => 'required|date|after_or_equal:today',
+
                 'branch_id' => 'required|exists:branches,id',
+
                 'known_by' => 'required|exists:users,id',
                 'checked_by' => 'required|exists:users,id',
                 'approved_by' => 'required|exists:users,id',
                 'delivered_by' => 'required|exists:users,id',
             ]);
 
-            $nomor_outgoing = $this->generateOutgoingNumberService->generateOutgoingNumber();
-
-            $tanggal_outgoing = date('Y-m-d H:i:s');
-
-            $newItemOutgoingDTO = new NewItemOutgoingDTO(
-                $nomor_outgoing,
-                $tanggal_outgoing,
+            $editItemOutgoingDTO = new EditItemOutgoingDTO(
+                $request->id,
                 $request->tanggal_pengiriman,
+
                 $request->branch_id,
+
                 $request->known_by,
                 $request->checked_by,
                 $request->approved_by,
                 $request->delivered_by,
             );
 
-            $itemOutgoingDTO = $this->itemOutgoingRepository->addItemOutgoing($newItemOutgoingDTO);
+            $itemOutgoingDTO = $this->itemOutgoingRepository->editItemOutgoing($editItemOutgoingDTO);
 
             return $itemOutgoingDTO;
         } catch (Exception $error) {
