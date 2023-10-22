@@ -16,7 +16,7 @@ class VerifyOutgoingDetailRepository {
         try {
             $outgoingDetail = OutgoingDetail::find($outgoingDetailId);
             $outgoingDetail->verified_at = date('Y-m-d H:i:s');
-            $outgoingDetail->status = true;
+            $outgoingDetail->verified_status = true;
             $outgoingDetail->save();
 
             return $outgoingDetail;

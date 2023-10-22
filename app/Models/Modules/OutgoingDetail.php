@@ -11,7 +11,7 @@ class OutgoingDetail extends Model
 
     protected $fillable = [
         'delivered_qty',
-        'status',
+        'verified_status',
 
         // Foreign Keys
         // Outgoing

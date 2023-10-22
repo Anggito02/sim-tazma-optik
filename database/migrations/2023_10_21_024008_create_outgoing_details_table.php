@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('delivered_qty');
             $table->dateTime('verified_at')->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('verified_status')->default(false);
 
             // Foreign Keys
             // Outgoing
