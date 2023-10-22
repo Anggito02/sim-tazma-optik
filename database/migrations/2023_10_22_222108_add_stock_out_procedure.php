@@ -13,11 +13,11 @@ return new class extends Migration
     public function up(): void
     {
         DB::unprepared('
-            CREATE PROCEDURE IF NOT EXISTS add_stock_in_procedure(
+            CREATE PROCEDURE IF NOT EXISTS add_stock_out_procedure(
                 IN kode_item VARCHAR(255),
                 IN bulan INT,
                 IN tahun INT,
-                IN stok_in_total INT,
+                IN stok_out_total INT,
                 IN item_id BIGINT,
             )
             BEGIN
@@ -26,7 +26,7 @@ return new class extends Migration
                     bulan,
                     tahun,
                     stok_total,
-                    stok_in_total,
+                    stok_out_total,
                     item_id
                 )
                 VALUES (
@@ -46,6 +46,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP PROCEDURE IF EXISTS `add_stock_in_procedure`');
+        DB::unprepared('DROP PROCEDURE IF EXISTS `add_stock_out_procedure`');
     }
 };
