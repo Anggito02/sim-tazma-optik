@@ -17,7 +17,7 @@ return new class extends Migration
                 IN kode_item VARCHAR(255),
                 IN bulan INT,
                 IN tahun INT,
-                IN stok_out_total INT,
+                IN last_stok_out_qty INT,
                 IN item_id BIGINT,
             )
             BEGIN
@@ -26,15 +26,15 @@ return new class extends Migration
                     bulan,
                     tahun,
                     stok_total,
-                    stok_out_total,
+                    last_stok_out_qty,
                     item_id
                 )
                 VALUES (
                     kode_item,
                     bulan,
                     tahun,
-                    stok_in_total,
-                    stok_in_total,
+                    last_stok_out_qty,
+                    last_stok_out_qty,
                     item_id
                 );
             END;

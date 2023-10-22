@@ -95,11 +95,7 @@ class EditPODetailService {
                     date('m'),
                     date('Y'),
                     $request->received_qty,
-                    $request->item_id,
-                    $request->purchase_order_id,
-                    $request->receive_order_id,
-                    $receiveOrderDTO->checked_by,
-                    $receiveOrderDTO->approved_by
+                    $request->item_id
                 );
             } else {
                 // make new row in stok in
@@ -108,11 +104,7 @@ class EditPODetailService {
                     date('m'),
                     date('Y'),
                     $request->received_qty,
-                    $request->item_id,
-                    $request->purchase_order_id,
-                    $request->receive_order_id,
-                    $receiveOrderDTO->checked_by,
-                    $receiveOrderDTO->approved_by
+                    $request->item_id
                 );
             }
 

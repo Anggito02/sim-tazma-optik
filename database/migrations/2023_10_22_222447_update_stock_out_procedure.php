@@ -17,14 +17,14 @@ return new class extends Migration
                IN kode_item VARCHAR(255),
                IN bulan INT,
                IN tahun INT,
-               IN stok_out INT,
+               IN last_stok_out_qty INT,
                IN item_id BIGINT
            )
            BEGIN
                UPDATE stock_out_logs
                SET
-                   stok_total = stok_total + stok_out,
-                   stok_out_total = stok_out
+                   stok_total = stok_total + last_stok_out_qty,
+                   last_stok_out_qty = last_stok_out_qty
                WHERE
                 kode_item = kode_item AND
                 bulan = bulan AND

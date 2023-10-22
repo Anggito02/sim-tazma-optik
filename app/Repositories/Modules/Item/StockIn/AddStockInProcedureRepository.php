@@ -11,18 +11,16 @@ class AddStockInProcedureRepository {
      * @param string $kode_item
      * @param int $bulan
      * @param int $tahun
-     * @param int $stok_in_total
+     * @param int $last_stok_in_qty
      *
      * @param int $item_id
-     * @param int $purchase_order_id
-     * @param int $receive_order_id
      *
      */
     public function addStockInProcedure(
         string $kode_item,
         int $bulan,
         int $tahun,
-        int $stok_in_total,
+        int $last_stok_in_qty,
 
         int $item_id,
         ) {
@@ -31,7 +29,7 @@ class AddStockInProcedureRepository {
                 '$kode_item',
                 $bulan,
                 $tahun,
-                $stok_in_total,
+                $last_stok_in_qty,
 
                 $item_id,
             )";
