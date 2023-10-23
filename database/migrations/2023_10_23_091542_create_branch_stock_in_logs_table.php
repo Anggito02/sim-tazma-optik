@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stock_out_logs', function (Blueprint $table) {
+        Schema::create('branch_stock_in_logs', function (Blueprint $table) {
             $table->id();
             $table->string('kode_item');
             $table->integer('bulan');
             $table->integer('tahun');
-            $table->integer('stok_total');
-            $table->integer('last_stok_out_qty');
+            $table->integer('stok_total_branch');
+            $table->integer('last_stok_in_qty_branch');
 
             // Foreign Key
             // Item
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stock_out_logs');
+        Schema::dropIfExists('branch_stock_in_logs');
     }
 };

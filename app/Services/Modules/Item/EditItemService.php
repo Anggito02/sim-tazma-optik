@@ -102,6 +102,7 @@ class EditItemService {
                     $request->stok,
                     $bentuk_perubahan,
                     $request->id,
+                    null,
                     null
                 );
             }

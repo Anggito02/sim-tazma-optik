@@ -32,7 +32,7 @@ class ItemOutgoing extends Model
     }
 
     // User
-    public function packedBy()
+    public function knownBy()
     {
         return $this->belongsTo(User::class, 'known_by');
     }
@@ -50,5 +50,15 @@ class ItemOutgoing extends Model
     public function deliveredBy()
     {
         return $this->belongsTo(User::class, 'delivered_by');
+    }
+
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    // Outgoing Details
+    public function outgoingDetails()
+    {
+        return $this->hasMany(OutgoingDetail::class, 'outgoing_id');
     }
 }

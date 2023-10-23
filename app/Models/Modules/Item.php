@@ -94,4 +94,10 @@ class Item extends Model
     {
         return $this->hasMany(BranchItem::class, 'item_id');
     }
+
+    // Outgoing Detail
+    public function outgoingDetails()
+    {
+        return $this->hasMany(OutgoingDetail::class, 'item_id');
+    }
 }

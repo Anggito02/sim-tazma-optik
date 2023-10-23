@@ -25,6 +25,9 @@ return new class extends Migration
             // Receive Order
             $table->foreignId('receive_order_id')->nullable()->constrained('receive_orders')->onDelete('cascade')->onUpdate('cascade');
 
+            // Outgoing
+            $table->foreignId('outgoing_id')->nullable()->constrained('item_outgoings')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
 
         });

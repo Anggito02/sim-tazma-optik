@@ -1,35 +1,35 @@
 <?php
 
-namespace App\Repositories\Modules\Item\StockIn;
+namespace App\Repositories\Modules\Item\StockOut;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class UpdateStockInProcedureRepository {
+class UpdateStockOutProcedureRepository {
     /**
      * Call update stock in procedure
      * @param string $kode_item
      * @param int $bulan
      * @param int $tahun
-     * @param int $last_stok_in_qty
+     * @param int $last_stok_out_qty
      *
      * @param int $item_id
      *
      */
-    public function updateStockInProcedure(
+    public function updateStockOutProcedure(
         string $kode_item,
         int $bulan,
         int $tahun,
-        int $last_stok_in_qty,
+        int $last_stok_out_qty,
 
         int $item_id,
         ) {
         try {
-            $sqlStatement = "CALL update_stock_in_procedure(
+            $sqlStatement = "CALL update_stock_out_procedure(
                 '$kode_item',
                 $bulan,
                 $tahun,
-                $last_stok_in_qty,
+                $last_stok_out_qty,
 
                 $item_id
             )";

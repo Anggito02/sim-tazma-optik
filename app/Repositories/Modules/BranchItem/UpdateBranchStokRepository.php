@@ -19,7 +19,7 @@ class UpdateBranchStokRepository {
                 ->where('branch_id', $updateStokBranchDTO->getBranchId());
 
             $branchItem->update([
-                'stok' => $branchItem->first()->stok + $updateStokBranchDTO->getStokBerubah()
+                'stok_branch' => $branchItem->first()->stok_branch + $updateStokBranchDTO->getStokBerubah()
             ]);
 
             return $branchItem;

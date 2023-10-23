@@ -13,28 +13,28 @@ return new class extends Migration
     public function up(): void
     {
         DB::unprepared('
-            CREATE PROCEDURE IF NOT EXISTS add_stock_in_procedure(
+            CREATE PROCEDURE IF NOT EXISTS add_stock_out_procedure(
                 IN kode_item VARCHAR(255),
                 IN bulan INT,
                 IN tahun INT,
-                IN last_stok_in_qty INT,
+                IN last_stok_out_qty INT,
                 IN item_id BIGINT
             )
             BEGIN
-                INSERT INTO stock_in_logs (
+                INSERT INTO stock_out_logs (
                     kode_item,
                     bulan,
                     tahun,
                     stok_total,
-                    last_stok_in_qty,
+                    last_stok_out_qty,
                     item_id
                 )
                 VALUES (
                     kode_item,
                     bulan,
                     tahun,
-                    last_stok_in_qty,
-                    last_stok_in_qty,
+                    last_stok_out_qty,
+                    last_stok_out_qty,
                     item_id
                 );
             END;
@@ -46,6 +46,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP PROCEDURE IF EXISTS `add_stock_in_procedure`');
+        DB::unprepared('DROP PROCEDURE IF EXISTS `add_stock_out_procedure`');
     }
 };
