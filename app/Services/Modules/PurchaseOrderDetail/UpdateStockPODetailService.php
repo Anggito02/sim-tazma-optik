@@ -42,7 +42,7 @@ class UpdateStockPODetailService {
             // NOTES : CAN ONLY EDIT RECEIVE QTY AND NOT GOOD QTY
             $request->validate([
                 'id' => 'required|exists:purchase_order_details,id',
-                'pre_order_qty' => 'requried|gte:0',
+                'pre_order_qty' => 'required|gte:0',
                 'received_qty' => 'required|lte:pre_order_qty',
                 'not_good_qty' => 'required|lte:pre_order_qty',
                 'item_id' => 'required|exists:items,id',

@@ -5,7 +5,7 @@ namespace App\DTO\Modules\PurchaseOrderDetail;
 class UpdateStockPODetailDTO {
     public function __construct(
         public int $id,
-        public int $receive_qty,
+        public int $received_qty,
         public int $not_good_qty,
 
         // Foreign Keys
@@ -25,7 +25,7 @@ class UpdateStockPODetailDTO {
     }
 
     public function getReceiveQty(): int {
-        return $this->receive_qty;
+        return $this->received_qty;
     }
 
     public function getNotGoodQty(): int {

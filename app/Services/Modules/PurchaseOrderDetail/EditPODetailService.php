@@ -24,7 +24,7 @@ class EditPODetailService {
             // Validate request
             $request->validate([
                 'id' => 'required',
-                'pre_order_qty' => 'requried|gte:0',
+                'pre_order_qty' => 'required|gte:0',
                 'unit' => 'required',
                 'harga_beli_satuan' => 'required|gte:0',
                 'harga_jual_satuan' => 'required|gte:0',
@@ -42,9 +42,9 @@ class EditPODetailService {
                 $request->harga_beli_satuan,
                 $request->harga_jual_satuan,
                 $request->diskon,
-                $request->item_id,
                 null,
-                null
+                null,
+                $request->item_id
             );
 
             $poDetailDTO = $this->poDetailRepository->editPurchaseOrderDetail($poDetailDTO);

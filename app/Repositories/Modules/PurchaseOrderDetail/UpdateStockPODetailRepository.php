@@ -17,7 +17,7 @@ class UpdateStockPODetailRepository {
         try {
             $poDetail = PurchaseOrderDetail::find($poDetailDto->getId());
 
-            $poDetail->receive_qty = $poDetailDto->getReceiveQty();
+            $poDetail->received_qty = $poDetailDto->getReceiveQty();
             $poDetail->not_good_qty = $poDetailDto->getNotGoodQty();
             $poDetail->save();
 
