@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Services\Modules\OutgoingDetail\GetAllOutgoingDetailService;
 use App\Services\Modules\OutgoingDetail\AddOutgoingDetailService;
+use App\Services\Modules\OutgoingDetail\EditOutgoingDetailService;
 use App\Services\Modules\OutgoingDetail\VerifyOutgoingDetailService;
 
 class OutgoingDetailController extends Controller
@@ -16,6 +17,7 @@ class OutgoingDetailController extends Controller
     public function __construct(
         private GetAllOutgoingDetailService $getAllOutgoingDetailService,
         private AddOutgoingDetailService $addOutgoingDetailService,
+        private EditOutgoingDetailService $editOutgoingDetailService,
         private VerifyOutgoingDetailService $verifyOutgoingDetailService
     ) {}
 
@@ -65,6 +67,34 @@ class OutgoingDetailController extends Controller
         }
     }
 
+    /**
+     * Edit outgoing detail
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function editOutgoingDetail(Request $request) {
+        try {
+            $outgoingDetailDTO = $this->editOutgoingDetailService->editOutgoingDetail($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Edit outgoing detail success',
+                'data' => $outgoingDetailDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Edit outgoing detail failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Verify outgoing detail
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function verifyOutgoingDetail(Request $request) {
         try {
             $outgoingDetailDTO = $this->verifyOutgoingDetailService->verifyOutgoingDetail($request);
