@@ -4,7 +4,7 @@ namespace App\Repositories\Modules\PurchaseOrderDetail;
 
 use Exception;
 
-use App\DTO\Modules\PurchaseOrderDetailDTO;
+use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
 use App\Models\Modules\PurchaseOrderDetail;
 
 class AddPODetailRepository {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO\Modules;
+namespace App\DTO\Modules\PurchaseOrderDetail;
 
 class PurchaseOrderDetailDTO {
     public function __construct(
