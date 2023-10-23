@@ -18,11 +18,15 @@ return new class extends Migration
             $table->integer('tahun');
             $table->integer('stok_total');
             $table->integer('last_stok_out_qty');
-            $table->timestamps();
 
             // Foreign Key
             // Item
             $table->foreignId('item_id')->constrained('items')->onDelete('cascade')->onUpdate('cascade');
+
+            // Outgoing
+            $table->foreignId('outgoing_id')->constrained('item_outgoings')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->timestamps();
         });
     }
 

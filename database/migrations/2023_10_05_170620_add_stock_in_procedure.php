@@ -18,7 +18,7 @@ return new class extends Migration
                 IN bulan INT,
                 IN tahun INT,
                 IN last_stok_in_qty INT,
-                IN item_id BIGINT,
+                IN item_id BIGINT
             )
             BEGIN
                 INSERT INTO stock_in_logs (
