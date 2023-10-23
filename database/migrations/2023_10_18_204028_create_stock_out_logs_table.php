@@ -23,9 +23,6 @@ return new class extends Migration
             // Item
             $table->foreignId('item_id')->constrained('items')->onDelete('cascade')->onUpdate('cascade');
 
-            // Outgoing
-            $table->foreignId('outgoing_id')->constrained('item_outgoings')->onDelete('cascade')->onUpdate('cascade');
-
             $table->timestamps();
         });
     }

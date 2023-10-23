@@ -85,7 +85,8 @@ class EditPODetailService {
                 $itemDTO->stok + $request->received_qty,
                 'penambahan',
                 $request->item_id,
-                $request->receive_order_id
+                $request->receive_order_id,
+                null
             );
 
             if ($this->checkStockInRepository->checkStockInExistence($itemDTO->id, date('m'), date('Y'))) {

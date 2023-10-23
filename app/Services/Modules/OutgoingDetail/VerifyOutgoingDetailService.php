@@ -72,7 +72,8 @@ class VerifyOutgoingDetailService {
                 $stok_sesudah,
                 'pengurangan',
                 $request->item_id,
-                null
+                null,
+                $request->outgoing_id
             );
 
             if ($this->checkStockOutRepository->checkStockOutExistence($request->item_id, date('m'), date('Y'))) {
