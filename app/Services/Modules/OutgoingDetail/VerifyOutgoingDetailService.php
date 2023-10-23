@@ -17,6 +17,10 @@ use App\Repositories\Modules\Item\StockOut\CheckStockOutRepository;
 use App\Repositories\Modules\Item\StockOut\AddStockOutProcedureRepository;
 use App\Repositories\Modules\Item\StockOut\UpdateStockOutProcedureRepository;
 
+use App\Repositories\Modules\BranchItem\BranchStockIn\CheckBranchStockInRepository;
+use App\Repositories\Modules\BranchItem\BranchStockIn\AddBranchStockInProcedureRepository;
+use App\Repositories\Modules\BranchItem\BranchStockIn\UpdateBranchStockInProcedureRepository;
+
 use App\Repositories\Modules\ItemOutgoing\GetItemOutgoingRepository;
 use App\Repositories\Modules\BranchItem\CheckBranchItemExistenceRepository;
 use App\Repositories\Modules\BranchItem\AddBranchItemRepository;
@@ -32,6 +36,10 @@ class VerifyOutgoingDetailService {
         private CheckStockOutRepository $checkStockOutRepository,
         private AddStockOutProcedureRepository $addStockOutProcedureRepository,
         private UpdateStockOutProcedureRepository $updateStockOutProcedureRepository,
+
+        private CheckBranchStockInRepository $checkBranchStockInRepository,
+        private AddBranchStockInProcedureRepository $addBranchStockInProcedureRepository,
+        private UpdateBranchStockInProcedureRepository $updateBranchStockInProcedureRepository,
 
         private GetItemOutgoingRepository $getItemOutgoingRepository,
         private CheckBranchItemExistenceRepository $checkBranchItemExistenceRepository,
@@ -76,6 +84,7 @@ class VerifyOutgoingDetailService {
                 $request->outgoing_id
             );
 
+            // Add Global Stock Out Log
             if ($this->checkStockOutRepository->checkStockOutExistence($request->item_id, date('m'), date('Y'))) {
                 // update stok out
                 $this->updateStockOutProcedureRepository->updateStockOutProcedure(
@@ -96,6 +105,28 @@ class VerifyOutgoingDetailService {
                 );
             }
 
+            // Add/Update Branch Stock In
+            if ($this->checkBranchStockInRepository->checkBranchStockIn($request->item_id, date('m'), date('Y'))) {
+                // update branch stok in
+                $this->updateBranchStockInProcedureRepository->updateBranchStockInProcedure(
+                    $itemDTO->kode_item,
+                    date('m'),
+                    date('Y'),
+                    $request->delivered_qty,
+                    $request->item_id
+                );
+            } else {
+                // make new branch stok in
+                $this->addBranchStockInProcedureRepository->addBranchStockInProcedure(
+                    $itemDTO->kode_item,
+                    date('m'),
+                    date('Y'),
+                    $request->delivered_qty,
+                    $request->item_id
+                );
+            }
+
+            // Add branch item
             // Get branch id from outgoing id
             $outgoingDTO = $this->getItemOutgoingRepository->getItemOutgoing($request->outgoing_id);
             $branch_id = $outgoingDTO->branch_id;
