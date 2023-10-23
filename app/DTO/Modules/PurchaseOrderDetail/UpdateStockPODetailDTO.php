@@ -56,17 +56,7 @@ class UpdateStockPODetailDTO {
         $this->not_good_qty = $not_good_qty;
     }
 
-    public function setItemId(int $item_id): void {
-        $this->item_id = $item_id;
-    }
 
-    public function setPurchaseOrderId(int $purchase_order_id): void {
-        $this->purchase_order_id = $purchase_order_id;
-    }
-
-    public function setReceiveOrderId(int $receive_order_id): void {
-        $this->receive_order_id = $receive_order_id;
-    }
 }
 
 ?>
