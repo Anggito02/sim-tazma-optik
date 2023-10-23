@@ -48,8 +48,8 @@ class UpdateStockPODetailDTO {
         $this->id = $id;
     }
 
-    public function setReceiveQty(int $receive_qty): void {
-        $this->receive_qty = $receive_qty;
+    public function setReceiveQty(int $received_qty): void {
+        $this->received_qty = $received_qty;
     }
 
     public function setNotGoodQty(int $not_good_qty): void {
