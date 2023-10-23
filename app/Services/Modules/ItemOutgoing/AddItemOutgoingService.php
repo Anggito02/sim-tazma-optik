@@ -32,6 +32,7 @@ class AddItemOutgoingService {
                 'checked_by' => 'required|exists:users,id',
                 'approved_by' => 'required|exists:users,id',
                 'delivered_by' => 'required|exists:users,id',
+                'received_by' => 'required|exists:users,id',
             ]);
 
             $nomor_outgoing = $this->generateOutgoingNumberService->generateOutgoingNumber();
@@ -47,6 +48,7 @@ class AddItemOutgoingService {
                 $request->checked_by,
                 $request->approved_by,
                 $request->delivered_by,
+                $request->received_by,
             );
 
             $itemOutgoingDTO = $this->itemOutgoingRepository->addItemOutgoing($newItemOutgoingDTO);

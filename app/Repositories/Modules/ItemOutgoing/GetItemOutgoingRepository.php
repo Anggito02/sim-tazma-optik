@@ -20,6 +20,7 @@ class GetItemOutgoingRepository {
             ->join('users as checked_by', 'item_outgoings.checked_by', '=', 'checked_by.id')
             ->join('users as approved_by', 'item_outgoings.approved_by', '=', 'approved_by.id')
             ->join('users as delivered_by', 'item_outgoings.delivered_by', '=', 'delivered_by.id')
+            ->join('users as received_by', 'item_outgoings.received_by', '=', 'received_by.id')
             ->select(
                 'item_outgoings.id as id',
                 'item_outgoings.nomor_outgoing as nomor_outgoing',
@@ -41,6 +42,9 @@ class GetItemOutgoingRepository {
 
                 'item_outgoings.delivered_by as delivered_by',
                 'delivered_by.employee_name as delivered_by_nama',
+
+                'item_outgoings.received_by as received_by',
+                'received_by.employee_name as received_by_nama',
                 )
                 ->where('item_outgoings.id', $id)
                 ->first();
@@ -66,6 +70,9 @@ class GetItemOutgoingRepository {
 
                 $itemOutgoing->delivered_by,
                 $itemOutgoing->delivered_by_nama,
+
+                $itemOutgoing->received_by,
+                $itemOutgoing->received_by_nama,
             );
 
             return $itemOutgoingInfoDTO;
