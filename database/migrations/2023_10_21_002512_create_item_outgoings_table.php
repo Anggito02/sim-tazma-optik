@@ -26,6 +26,8 @@ return new class extends Migration
             $table->foreignId('checked_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('approved_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('delivered_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('received_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
