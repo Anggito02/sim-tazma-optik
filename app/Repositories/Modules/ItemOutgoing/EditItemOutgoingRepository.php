@@ -26,6 +26,7 @@ class EditItemOutgoingRepository {
                     'checked_by' => $editItemOutgoingDTO->getCheckedBy(),
                     'approved_by' => $editItemOutgoingDTO->getApprovedBy(),
                     'delivered_by' => $editItemOutgoingDTO->getDeliveredBy(),
+                    'received_by' => $editItemOutgoingDTO->getReceivedBy(),
                 ]);
 
             return $itemOutgoing;

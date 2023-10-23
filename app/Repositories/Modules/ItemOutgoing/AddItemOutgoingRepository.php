@@ -26,6 +26,7 @@ class AddItemOutgoingRepository {
                 'checked_by' => $newItemOutgoingDTO->getCheckedBy(),
                 'approved_by' => $newItemOutgoingDTO->getApprovedBy(),
                 'delivered_by' => $newItemOutgoingDTO->getDeliveredBy(),
+                'received_by' => $newItemOutgoingDTO->getReceivedBy(),
             ]);
 
             return $itemOutgoing;

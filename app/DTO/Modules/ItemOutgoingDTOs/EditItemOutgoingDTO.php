@@ -13,6 +13,7 @@ class EditItemOutgoingDTO {
         public int $checked_by,
         public int $approved_by,
         public int $delivered_by,
+        public int $received_by,
     )
     {}
 
@@ -44,6 +45,10 @@ class EditItemOutgoingDTO {
         return $this->delivered_by;
     }
 
+    public function getReceivedBy(): int {
+        return $this->received_by;
+    }
+
     public function setId(int $id): void {
         $this->id = $id;
     }
@@ -70,6 +75,10 @@ class EditItemOutgoingDTO {
 
     public function setDeliveredBy(int $delivered_by): void {
         $this->delivered_by = $delivered_by;
+    }
+
+    public function setReceivedBy(int $received_by): void {
+        $this->received_by = $received_by;
     }
 }
 
