@@ -23,6 +23,7 @@ use App\Http\Controllers\Modules\VendorInvoiceController;
 use App\Http\Controllers\Modules\BranchItemController;
 use App\Http\Controllers\Modules\ItemOutgoingController;
 use App\Http\Controllers\Modules\OutgoingDetailController;
+use App\Http\Controllers\Modules\StockOpnameMasterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -179,6 +180,10 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/outgoing-detail/edit', [OutgoingDetailController::class, 'editOutgoingDetail'])->name('editOutgoingDetail');
     Route::delete('/outgoing-delete/delete', [OutgoingDetailController::class, 'deleteOutgoingDetail'])->name('deleteOutgoingDetail');
     Route::put('/outgoing-detail/verify', [OutgoingDetailController::class, 'verifyOutgoingDetail'])->name('verifyOutgoingDetail');
+
+    /* Stock Opname Master Controllers */
+    Route::get('/stock-opname-master/all', [StockOpnameMasterController::class, 'getAllStockOpname'])->name('getAllStockOpname');
+    Route::post('/stock-opname-master/add', [StockOpnameMasterController::class, 'addStockOpname'])->name('addStockOpname');
 });
 
 Route::middleware('guest')->group(function() {
