@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -24,6 +23,7 @@ use App\Http\Controllers\Modules\BranchItemController;
 use App\Http\Controllers\Modules\ItemOutgoingController;
 use App\Http\Controllers\Modules\OutgoingDetailController;
 use App\Http\Controllers\Modules\StockOpnameMasterController;
+use App\Http\Controllers\Modules\StockOpnameDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -184,6 +184,11 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Stock Opname Master Controllers */
     Route::get('/stock-opname-master/all', [StockOpnameMasterController::class, 'getAllStockOpname'])->name('getAllStockOpname');
     Route::post('/stock-opname-master/add', [StockOpnameMasterController::class, 'addStockOpname'])->name('addStockOpname');
+
+    /* Stock Opname Detail Controllers */
+    Route::post('/stock-opname-detail/add', [StockOpnameDetailController::class, 'addStockOpnameDetail'])->name('addStockOpnameDetail');
+    Route::put('/stock-opname-detail/edit', [StockOpnameDetailController::class, 'editStockOpnameDetail'])->name('editStockOpnameDetail');
+    Route::put('/stock-opname-detail/adjustment', [StockOpnameDetailController::class, 'adjustStockOpnameDetail'])->name('adjustStockOpnameDetail');
 });
 
 Route::middleware('guest')->group(function() {
