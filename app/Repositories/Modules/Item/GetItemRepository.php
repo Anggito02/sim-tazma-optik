@@ -25,6 +25,7 @@ class GetItemRepository {
                 $item->stok,
                 $item->harga_beli,
                 $item->harga_jual,
+                $item->diskon,
                 $item->frame_sku_vendor,
                 $item->frame_sub_kategori,
                 $item->frame_kode,

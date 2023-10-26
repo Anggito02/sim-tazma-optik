@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Services\Modules\StockOpnameDetail\AddStockOpnameDetailService;
 use App\Services\Modules\StockOpnameDetail\EditStockOpnameDetailService;
 use App\Services\Modules\StockOpnameDetail\AdjustStockOpnameDetailService;
+use App\Services\Modules\StockOpnameDetail\MakeAdjustmentSODetailService;
 
 class StockOpnameDetailController extends Controller
 {
@@ -17,6 +18,7 @@ class StockOpnameDetailController extends Controller
         private AddStockOpnameDetailService $addStockOpnameDetailService,
         private EditStockOpnameDetailService $editStockOpnameDetailService,
         private AdjustStockOpnameDetailService $adjustStockOpnameDetailService,
+        private MakeAdjustmentSODetailService $makeAdjustmentSODetailService,
     )
     {}
 
@@ -73,6 +75,26 @@ class StockOpnameDetailController extends Controller
             return response()->json([
                 'message' => 'Success',
                 'data' => $updateSODetailAdjustmentDTO,
+            ]);
+        } catch (Exception $error) {
+            return response()->json([
+                'message' => $error->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Make Adjustment Stock Opname Detail
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function makeAdjustmentSODetail(Request $request) {
+        try {
+            $makeAdjustmentSODetailDTO = $this->makeAdjustmentSODetailService->makeAdjustmentSODetail($request);
+
+            return response()->json([
+                'message' => 'Success',
+                'data' => $makeAdjustmentSODetailDTO,
             ]);
         } catch (Exception $error) {
             return response()->json([

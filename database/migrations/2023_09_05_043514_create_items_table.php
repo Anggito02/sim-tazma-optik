@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('stok');
             $table->bigInteger('harga_beli');
             $table->bigInteger('harga_jual');
+            $table->float('diskon');
 
             // Frame
             $table->string('frame_sku_vendor')->nullable();

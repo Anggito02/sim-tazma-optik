@@ -88,6 +88,7 @@ class AddItemService {
                 0,
                 0,
                 0,
+                0,
 
                 // Frame
                 $request->frame_sku_vendor,

@@ -36,6 +36,7 @@ class EditItemService {
                 'stok' => 'required',
                 'harga_beli' => 'required',
                 'harga_jual' => 'required',
+                'diskon' => 'required',
 
                 // Frame
                 'frame_sku_vendor' => 'required_if:jenis_item,frame|nullable',
@@ -115,6 +116,7 @@ class EditItemService {
                 $request->stok,
                 $request->harga_beli,
                 $request->harga_jual,
+                $request->diskon,
 
                 // Frame
                 $request->frame_sku_vendor,

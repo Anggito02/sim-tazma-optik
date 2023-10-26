@@ -11,6 +11,7 @@ class ItemDTO {
         public ?int $stok,
         public ?string $harga_beli,
         public ?string $harga_jual,
+        public ?string $diskon,
 
         // Frame
         public ?string $frame_sku_vendor,
@@ -88,6 +89,14 @@ class ItemDTO {
 
     public function setHargaJual(string $harga_jual): void {
         $this->harga_jual = $harga_jual;
+    }
+
+    public function getDiskon(): string {
+        return $this->diskon;
+    }
+
+    public function setDiskon(string $diskon): void {
+        $this->diskon = $diskon;
     }
 
     public function getFrameSkuVendor(): ?string {

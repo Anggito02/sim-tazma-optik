@@ -31,6 +31,7 @@ class GetAllItemWithJenisRepository {
                     $item->stok,
                     $item->harga_beli,
                     $item->harga_jual,
+                    $item->diskon,
 
                     // Frame
                     $item->frame_sku_vendor,
