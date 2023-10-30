@@ -100,6 +100,7 @@ class EditItemService {
                 $this->stockLogProcedureRepository->stockLogProcedure(
                     date('Y-m-d H:i:s'),
                     $itemDTO->stok,
+                    $itemDTO->stok + $request->stok,
                     $request->stok,
                     $bentuk_perubahan,
                     $request->id,

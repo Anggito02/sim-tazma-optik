@@ -86,6 +86,7 @@ class VerifyOutgoingDetailService {
                 date('Y-m-d H:i:s'),
                 $stok_sebelum,
                 $stok_sesudah,
+                $request->delivered_qty,
                 'pengurangan',
                 $request->item_id,
                 null,

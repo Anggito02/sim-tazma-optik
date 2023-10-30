@@ -11,6 +11,7 @@ class StockLogProcedureRepository {
      * @param string $tanggal_berubah
      * @param int $stok_lama
      * @param int $stok_baru
+     * @param int $jumlah_stok_berubah
      * @param string $bentuk_perubahan
      * @param int $item_id
      * @param int $receive_order_id | null
@@ -21,6 +22,7 @@ class StockLogProcedureRepository {
         string $tanggal_berubah,
         int $stok_lama,
         int $stok_baru,
+        int $jumlah_stok_berubah,
         string $bentuk_perubahan,
         int $item_id,
         ?int $receive_order_id,
@@ -39,6 +41,7 @@ class StockLogProcedureRepository {
                 '$tanggal_berubah',
                 $stok_lama,
                 $stok_baru,
+                $jumlah_stok_berubah,
                 '$bentuk_perubahan',
                 $item_id,
                 $receive_order_id,

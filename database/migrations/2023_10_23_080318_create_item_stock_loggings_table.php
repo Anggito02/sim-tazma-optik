@@ -16,6 +16,7 @@ return new class extends Migration
             $table->dateTime('tanggal_berubah');
             $table->integer('stok_lama');
             $table->integer('stok_baru');
+            $table->integer('jumlah_stok_berubah');
             $table->enum('bentuk_perubahan', ['penambahan', 'pengurangan']);
 
             // Foreign Keys
