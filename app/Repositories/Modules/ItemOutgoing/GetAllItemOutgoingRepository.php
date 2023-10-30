@@ -22,7 +22,7 @@ class GetAllItemOutgoingRepository {
                 ->join('users as checked_by', 'item_outgoings.checked_by', '=', 'checked_by.id')
                 ->join('users as approved_by', 'item_outgoings.approved_by', '=', 'approved_by.id')
                 ->join('users as delivered_by', 'item_outgoings.delivered_by', '=', 'delivered_by.id')
-                ->join('users as received_by', 'item_outgoings.received_by', '=', 'received_by.id')
+                ->leftJoin('users as received_by', 'item_outgoings.received_by', '=', 'received_by.id')
                 ->select(
                     'item_outgoings.id as id',
                     'item_outgoings.nomor_outgoing as nomor_outgoing',

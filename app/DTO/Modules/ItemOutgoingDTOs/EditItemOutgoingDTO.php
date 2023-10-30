@@ -13,7 +13,7 @@ class EditItemOutgoingDTO {
         public int $checked_by,
         public int $approved_by,
         public int $delivered_by,
-        public int $received_by,
+        public ?int $received_by,
     )
     {}
 
@@ -45,7 +45,7 @@ class EditItemOutgoingDTO {
         return $this->delivered_by;
     }
 
-    public function getReceivedBy(): int {
+    public function getReceivedBy(): ?int {
         return $this->received_by;
     }
 

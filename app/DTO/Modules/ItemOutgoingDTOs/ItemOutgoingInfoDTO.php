@@ -25,8 +25,8 @@ class ItemOutgoingInfoDTO {
         public int $delivered_by,
         public string $delivered_by_name,
 
-        public int $received_by,
-        public string $received_by_name,
+        public ?int $received_by,
+        public ?string $received_by_name,
     )
     {}
 
@@ -90,11 +90,11 @@ class ItemOutgoingInfoDTO {
         return $this->delivered_by_name;
     }
 
-    public function getReceivedBy(): int {
+    public function getReceivedBy(): ?int {
         return $this->received_by;
     }
 
-    public function getReceivedByName(): string {
+    public function getReceivedByName(): ?string {
         return $this->received_by_name;
     }
 }

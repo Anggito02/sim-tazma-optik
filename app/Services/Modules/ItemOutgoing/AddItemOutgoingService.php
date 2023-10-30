@@ -32,7 +32,7 @@ class AddItemOutgoingService {
                 'checked_by' => 'required|exists:users,id',
                 'approved_by' => 'required|exists:users,id',
                 'delivered_by' => 'required|exists:users,id',
-                'received_by' => 'required|exists:users,id',
+                'received_by' => 'nullable|exists:users,id',
             ]);
 
             $nomor_outgoing = $this->generateOutgoingNumberService->generateOutgoingNumber();

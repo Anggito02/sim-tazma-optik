@@ -32,7 +32,7 @@ class EditItemOutgoingService {
                 'checked_by' => 'required|exists:users,id',
                 'approved_by' => 'required|exists:users,id',
                 'delivered_by' => 'required|exists:users,id',
-                'received_by' => 'required|exists:users,id',
+                'received_by' => 'nullable|exists:users,id',
             ]);
 
             $editItemOutgoingDTO = new EditItemOutgoingDTO(
