@@ -6,7 +6,7 @@ class OutgoingDetailInfoDTO {
     public function __construct(
         public int $id,
         public int $delivered_qty,
-        public string $verified_at,
+        public ?string $verified_at,
         public string $verified_status,
 
         public int $outgoing_id,
@@ -27,7 +27,7 @@ class OutgoingDetailInfoDTO {
         return $this->delivered_qty;
     }
 
-    public function getVerifiedAt(): string {
+    public function getVerifiedAt(): ?string {
         return $this->verified_at;
     }
 
