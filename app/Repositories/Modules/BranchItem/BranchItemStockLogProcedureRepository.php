@@ -27,6 +27,8 @@ class BranchItemStockLogProcedureRepository {
         int $branch_item_id
         ) {
         try {
+            $is_Adjustment = $is_Adjustment ? 'true' : 'false';
+
             $sqlStatement = "CALL branch_item_stock_logging_procedure(
                 '$tanggal_berubah',
                 $stok_lama,

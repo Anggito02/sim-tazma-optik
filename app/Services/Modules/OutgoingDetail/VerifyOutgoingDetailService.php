@@ -170,9 +170,9 @@ class VerifyOutgoingDetailService {
             // Add branch item stock log
             $this->branchItemStockLogProcedure->branchItemStockLogProcedure(
                 date('Y-m-d H:i:s'),
+                $branchItemDTO->getStokBranch() - $request->delivered_qty,
                 $branchItemDTO->getStokBranch(),
-                $branchItemDTO->getStokBranch() + $request->delivery_gty,
-                $branchItemDTO->getStokBranch() + $request->delivery_gty - $branchItemDTO->getStokBranch(),
+                $request->delivered_qty,
                 'penambahan',
                 false,
                 $branchItemDTO->getId()
