@@ -15,7 +15,7 @@ class CheckStockOutRepository {
     public function checkStockOutExistence(int $item_id, int $bulan, int $tahun) {
         try {
             $sqlStatement = "
-                SELECT * FROM stock_in_logs
+                SELECT * FROM stock_out_logs
                 WHERE item_id = $item_id
                     AND bulan = $bulan
                     AND tahun = $tahun
