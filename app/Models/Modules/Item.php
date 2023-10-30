@@ -21,6 +21,7 @@ class Item extends Model
         'stok',
         'harga_beli',
         'harga_jual',
+        'diskon',
 
         // Frame
         'frame_sku_vendor',
