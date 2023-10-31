@@ -74,6 +74,7 @@ class UpdateStockPODetailService {
                 date('Y-m-d H:i:s'),
                 $itemDTO->stok,
                 $itemDTO->stok + $request->received_qty,
+                $request->received_qty,
                 'penambahan',
                 $request->item_id,
                 $request->receive_order_id,

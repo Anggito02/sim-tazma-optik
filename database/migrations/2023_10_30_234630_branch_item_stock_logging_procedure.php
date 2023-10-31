@@ -13,26 +13,24 @@ return new class extends Migration
     public function up(): void
     {
         DB::unprepared('
-            CREATE PROCEDURE IF NOT EXISTS item_stock_logging_procedure(
+            CREATE PROCEDURE IF NOT EXISTS branch_item_stock_logging_procedure(
                 IN tanggal_berubah DATETIME,
                 IN stok_lama INT,
                 IN stok_baru INT,
                 IN jumlah_stok_berubah INT,
                 IN bentuk_perubahan VARCHAR(255),
-                IN item_id BIGINT,
-                IN receive_order_id BIGINT,
-                IN outgoing_id BIGINT
+                IN is_Adjustment BOOLEAN,
+                IN branch_item_id BIGINT
             )
             BEGIN
-                INSERT INTO item_stock_loggings (
+                INSERT INTO branch_item_stock_loggings (
                     tanggal_berubah,
                     stok_lama,
                     stok_baru,
                     jumlah_stok_berubah,
                     bentuk_perubahan,
-                    item_id,
-                    receive_order_id,
-                    outgoing_id
+                    is_Adjustment,
+                    branch_item_id
                 )
                 VALUES (
                     tanggal_berubah,
@@ -40,9 +38,8 @@ return new class extends Migration
                     stok_baru,
                     jumlah_stok_berubah,
                     bentuk_perubahan,
-                    item_id,
-                    receive_order_id,
-                    outgoing_id
+                    is_Adjustment,
+                    branch_item_id
                 );
             END;
         ');
@@ -53,6 +50,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP PROCEDURE IF EXISTS `item_stock_logging_procedure`');
+        DB::unprepared('DROP PROCEDURE IF EXISTS `branch_item_stock_logging_procedure`');
     }
 };

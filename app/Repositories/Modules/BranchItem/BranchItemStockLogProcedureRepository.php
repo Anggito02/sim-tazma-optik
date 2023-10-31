@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories\Modules\Item;
+namespace App\Repositories\Modules\BranchItem;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class StockLogProcedureRepository {
+class BranchItemStockLogProcedureRepository {
     /**
      * Call stock log procedure
      * @param string $tanggal_berubah
@@ -13,39 +13,30 @@ class StockLogProcedureRepository {
      * @param int $stok_baru
      * @param int $jumlah_stok_berubah
      * @param string $bentuk_perubahan
-     * @param int $item_id
-     * @param int $receive_order_id | null
-     * @param int $outgoing_id | null
+     * @param bool $is_Adjustment
+     * @param int $branch_item_id
      *
      */
-    public function stockLogProcedure(
+    public function branchItemStockLogProcedure(
         string $tanggal_berubah,
         int $stok_lama,
         int $stok_baru,
         int $jumlah_stok_berubah,
         string $bentuk_perubahan,
-        int $item_id,
-        ?int $receive_order_id,
-        ?int $outgoing_id
+        bool $is_Adjustment,
+        int $branch_item_id
         ) {
         try {
-            if ($receive_order_id == null) {
-                $receive_order_id = 'NULL';
-            }
+            $is_Adjustment = $is_Adjustment ? 'true' : 'false';
 
-            if ($outgoing_id == null) {
-                $outgoing_id = 'NULL';
-            }
-
-            $sqlStatement = "CALL item_stock_logging_procedure(
+            $sqlStatement = "CALL branch_item_stock_logging_procedure(
                 '$tanggal_berubah',
                 $stok_lama,
                 $stok_baru,
                 $jumlah_stok_berubah,
                 '$bentuk_perubahan',
-                $item_id,
-                $receive_order_id,
-                $outgoing_id
+                $is_Adjustment,
+                $branch_item_id
             )";
             DB::statement($sqlStatement);
 

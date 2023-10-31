@@ -13,6 +13,7 @@ use App\Repositories\Modules\OutgoingDetail\VerifyOutgoingDetailRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
 use App\Repositories\Modules\Item\EditItemRepository;
 use App\Repositories\Modules\Item\StockLogProcedureRepository;
+
 use App\Repositories\Modules\Item\StockOut\CheckStockOutRepository;
 use App\Repositories\Modules\Item\StockOut\AddStockOutProcedureRepository;
 use App\Repositories\Modules\Item\StockOut\UpdateStockOutProcedureRepository;
@@ -22,9 +23,14 @@ use App\Repositories\Modules\BranchItem\BranchStockIn\AddBranchStockInProcedureR
 use App\Repositories\Modules\BranchItem\BranchStockIn\UpdateBranchStockInProcedureRepository;
 
 use App\Repositories\Modules\ItemOutgoing\GetItemOutgoingRepository;
+
 use App\Repositories\Modules\BranchItem\CheckBranchItemExistenceRepository;
+
+use App\Repositories\Modules\BranchItem\GetBranchItemRepository;
 use App\Repositories\Modules\BranchItem\AddBranchItemRepository;
 use App\Repositories\Modules\BranchItem\UpdateBranchStokRepository;
+
+use App\Repositories\Modules\BranchItem\BranchItemStockLogProcedureRepository;
 
 class VerifyOutgoingDetailService {
     public function __construct(
@@ -42,9 +48,11 @@ class VerifyOutgoingDetailService {
         private UpdateBranchStockInProcedureRepository $updateBranchStockInProcedureRepository,
 
         private GetItemOutgoingRepository $getItemOutgoingRepository,
+        private GetBranchItemRepository $getBranchItemRepository,
         private CheckBranchItemExistenceRepository $checkBranchItemExistenceRepository,
         private AddBranchItemRepository $addBranchItemRepository,
-        private UpdateBranchStokRepository $updateBranchStokRepository
+        private UpdateBranchStokRepository $updateBranchStokRepository,
+        private BranchItemStockLogProcedureRepository $branchItemStockLogProcedure,
     )
     {}
 
@@ -78,6 +86,7 @@ class VerifyOutgoingDetailService {
                 date('Y-m-d H:i:s'),
                 $stok_sebelum,
                 $stok_sesudah,
+                $request->delivered_qty,
                 'pengurangan',
                 $request->item_id,
                 null,
@@ -143,7 +152,7 @@ class VerifyOutgoingDetailService {
                 ));
             } else {
                 // Add branch item
-                $this->addBranchItemRepository->addBranchItem(new NewBranchItemDTO(
+                $branchItem = $this->addBranchItemRepository->addBranchItem(new NewBranchItemDTO(
                     $request->item_id,
                     $branch_id,
                 ));
@@ -155,6 +164,20 @@ class VerifyOutgoingDetailService {
                     $request->delivered_qty
                 ));
             }
+
+            // Get branch item
+            $branchItemDTO = $this->getBranchItemRepository->getBranchItem(date('m'), date('Y'));
+
+            // Add branch item stock log
+            $this->branchItemStockLogProcedure->branchItemStockLogProcedure(
+                date('Y-m-d H:i:s'),
+                $branchItemDTO->getStokBranch() - $request->delivered_qty,
+                $branchItemDTO->getStokBranch(),
+                $request->delivered_qty,
+                'penambahan',
+                false,
+                $branchItemDTO->getId()
+            );
 
             $outgoingDetailDTO = $this->outgoingDetailRepository->verifyOutgoingDetail($request->id);
 
