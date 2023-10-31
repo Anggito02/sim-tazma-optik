@@ -56,8 +56,8 @@ class GetItemOutgoingRepository {
                 $itemOutgoing->tanggal_pengiriman,
 
                 $itemOutgoing->branch_id,
-                $itemOutgoing->nama_branch,
                 $itemOutgoing->kode_branch,
+                $itemOutgoing->nama_branch,
 
                 $itemOutgoing->known_by,
                 $itemOutgoing->known_by_nama,
