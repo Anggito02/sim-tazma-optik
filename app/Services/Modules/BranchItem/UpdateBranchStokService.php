@@ -89,7 +89,7 @@ class UpdateBranchStokService {
 
             // Add branch item stock log
             // Get branch item
-            $branchItemDTO = $this->getBranchItemRepository->getBranchItem(date('m'), date('Y'));
+            $branchItemDTO = $this->getBranchItemRepository->getBranchItem($request->branch_id, $request->item_id);
 
             // Add branch item stock log
             $this->branchItemStockLogProcedure->branchItemStockLogProcedure(

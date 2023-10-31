@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Modules\BranchItem;
+use App\Models\Modules\ItemOutgoing;
+use App\Models\Modules\StockOpnameBranch;
+
 class Branch extends Model
 {
     use HasFactory;
@@ -36,5 +40,11 @@ class Branch extends Model
     public function itemOutgoings()
     {
         return $this->hasMany(ItemOutgoing::class, 'branch_id');
+    }
+
+    // Stock Opname Branch
+    public function stockOpnameBranches()
+    {
+        return $this->hasMany(StockOpnameBranch::class, 'branch_id');
     }
 }
