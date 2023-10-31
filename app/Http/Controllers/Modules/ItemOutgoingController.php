@@ -30,7 +30,7 @@ class ItemOutgoingController extends Controller
      */
     public function getItemOutgoing(Request $request) {
         try {
-            $itemOutgoingDTO = $this->getItemOutgoingService->getItemOutgoing($request->id);
+            $itemOutgoingDTO = $this->getItemOutgoingService->getItemOutgoing($request);
 
             return response()->json([
                 'status' => 'success',

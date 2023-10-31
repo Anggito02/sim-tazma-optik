@@ -16,10 +16,17 @@ class GetItemOutgoingService {
 
     /**
      * Get item outgoing
-     * @param int $id
+     * @param Request $request
      * @return ItemOutgoingInfoDTO
      */
-    public function getItemOutgoing(int $id) {
+    public function getItemOutgoing(Request $request) {
+        // Validate request
+        $request->validate([
+            'id' => 'required|exists:item_outgoings,id'
+        ]);
+
+        $id = $request->id;
+
         try {
             $itemOutgoingDTO = $this->itemOutgoingRepository->getItemOutgoing($id);
 
