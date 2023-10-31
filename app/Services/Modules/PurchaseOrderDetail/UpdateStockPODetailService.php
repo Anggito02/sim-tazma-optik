@@ -65,10 +65,6 @@ class UpdateStockPODetailService {
             // Get Item
             $itemDTO = $this->getItemRepository->getItem($request->item_id);
 
-            // update item stock
-            $itemDTO->stok += $request->received_qty;
-            $itemDTO = $this->editItemRepository->editItem($itemDTO);
-
             // update stok log
             $this->stockLogProcedureRepository->stockLogProcedure(
                 date('Y-m-d H:i:s'),
@@ -80,6 +76,10 @@ class UpdateStockPODetailService {
                 $request->receive_order_id,
                 null
             );
+
+            // update item stock
+            $itemDTO->stok += $request->received_qty;
+            $itemDTO = $this->editItemRepository->editItem($itemDTO);
 
             if ($this->checkStockInRepository->checkStockInExistence($itemDTO->id, date('m'), date('Y'))) {
                 // update stok in
