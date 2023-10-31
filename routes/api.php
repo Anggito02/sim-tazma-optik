@@ -24,6 +24,7 @@ use App\Http\Controllers\Modules\ItemOutgoingController;
 use App\Http\Controllers\Modules\OutgoingDetailController;
 use App\Http\Controllers\Modules\StockOpnameMasterController;
 use App\Http\Controllers\Modules\StockOpnameDetailController;
+use App\Http\Controllers\Modules\StockOpnameBranchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -190,6 +191,10 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/stock-opname-detail/edit', [StockOpnameDetailController::class, 'editStockOpnameDetail'])->name('editStockOpnameDetail');
     Route::put('/stock-opname-detail/init-adjustment', [StockOpnameDetailController::class, 'adjustStockOpnameDetail'])->name('adjustStockOpnameDetail');
     Route::post('/stock-opname-detail/make-adjustment', [StockOpnameDetailController::class, 'makeAdjustmentSODetail'])->name('makeAdjustmentSODetail');
+
+    /* Stock Opname Branch Controllers */
+    Route::get('/stock-opname-branch/all', [StockOpnameBranchController::class, 'getAllStockOpnameBranch'])->name('getAllStockOpnameBranch');
+    Route::post('/stock-opname-branch/add', [StockOpnameBranchController::class, 'addStockOpnameBranch'])->name('addStockOpnameBranch');
 });
 
 Route::middleware('guest')->group(function() {

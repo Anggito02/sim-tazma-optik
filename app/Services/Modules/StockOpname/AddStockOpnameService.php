@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 use App\DTO\Modules\StockOpnameDTOs\NewStockOpnameDTO;
 
-use App\Repositories\Modules\StockOpname\GetStockOpnameRepository;
+use App\Repositories\Modules\StockOpname\CheckExistenceStockOpnameRepository;
 use App\Repositories\Modules\StockOpname\AddStockOpnameRepository;
 
 class AddStockOpnameService {
     public function __construct(
-        private GetStockOpnameRepository $getStockOpnameRepository,
+        private CheckExistenceStockOpnameRepository $checkExistenceStockOpnameRepository,
         private AddStockOpnameRepository $addStockOpnameRepository,
     )
     {}
@@ -31,7 +31,7 @@ class AddStockOpnameService {
             );
 
             // if stock opname already exists
-            if ($this->getStockOpnameRepository->getStockOpname($newStockOpnameDTO)) {
+            if ($this->checkExistenceStockOpnameRepository->checkStockOpnameExistence($newStockOpnameDTO)) {
                 throw new Exception('Stock Opname already exists');
             }
 

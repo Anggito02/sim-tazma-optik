@@ -7,13 +7,13 @@ use Exception;
 use App\DTO\Modules\StockOpnameDTOs\NewStockOpnameDTO;
 use App\Models\Modules\StockOpnameMaster;
 
-class GetStockOpnameRepository {
+class CheckExistenceStockOpnameRepository {
     /**
      * Get Stock Opname
      * @param NewStockOpnameDTO $newStockOpnameDTO
      * @return StockOpnameMaster
      */
-    public function getStockOpname(NewStockOpnameDTO $newStockOpnameDTO) {
+    public function checkStockOpnameExistence(NewStockOpnameDTO $newStockOpnameDTO) {
         try {
             $stockOpname = StockOpnameMaster::where('bulan', $newStockOpnameDTO->getBulan())
                 ->where('tahun', $newStockOpnameDTO->getTahun())
