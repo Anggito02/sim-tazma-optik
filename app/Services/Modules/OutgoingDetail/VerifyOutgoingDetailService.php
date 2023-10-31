@@ -20,7 +20,6 @@ use App\Repositories\Modules\BranchItem\BranchStockIn\CheckBranchStockInReposito
 use App\Repositories\Modules\ItemOutgoing\GetItemOutgoingRepository;
 
 use App\Repositories\Modules\BranchItem\CheckBranchItemExistenceRepository;
-use App\Repositories\Modules\BranchItem\GetBranchItemRepository;
 
 use App\Services\Modules\BranchItem\AddBranchItemService;
 use App\Services\Modules\BranchItem\UpdateBranchStokService;
@@ -39,7 +38,6 @@ class VerifyOutgoingDetailService {
         private CheckBranchStockInRepository $checkBranchStockInRepository,
 
         private GetItemOutgoingRepository $getItemOutgoingRepository,
-        private GetBranchItemRepository $getBranchItemRepository,
         private CheckBranchItemExistenceRepository $checkBranchItemExistenceRepository,
 
         private AddBranchItemService $addBranchItemService,
