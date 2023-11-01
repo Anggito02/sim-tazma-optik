@@ -54,7 +54,6 @@ class UpdateStockPODetailService {
 
             $poDetailDTO = new UpdateStockPODetailDTO(
                 $request->id,
-                $request->pre_order_qty,
                 $request->received_qty,
                 $request->not_good_qty,
                 $request->item_id,
