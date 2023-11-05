@@ -13,6 +13,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensCategoryController;
 use App\Http\Controllers\FrameCategoryController;
 use App\Http\Controllers\CoaController;
+use App\Http\Controllers\CustomerController;
 
 use App\Http\Controllers\Modules\ItemController;
 use App\Http\Controllers\Modules\PurchaseOrderController;
@@ -120,6 +121,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/coa/add', [CoaController::class, 'addCoa'])->name('addCoa');
     Route::delete('/coa/delete', [CoaController::class, 'deleteCoa'])->name('deleteCoa');
     Route::put('/coa/edit', [CoaController::class, 'editCoa'])->name('editCoa');
+
+    /* Customer Controllers */
+    Route::get('/customer/one', [CustomerController::class, 'getCustomer'])->name('getCustomer');
+    Route::get('/customer/all', [CustomerController::class, 'getAllCustomer'])->name('getAllCustomer');
+    Route::post('/customer/add', [CustomerController::class, 'addCustomer'])->name('addCustomer');
+    Route::delete('/customer/delete', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
+    Route::put('/customer/edit', [CustomerController::class, 'editCustomer'])->name('editCustomer');
 
     /* Item Controllers */
     Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
