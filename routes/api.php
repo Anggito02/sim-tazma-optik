@@ -13,6 +13,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensCategoryController;
 use App\Http\Controllers\FrameCategoryController;
 use App\Http\Controllers\CoaController;
+use App\Http\Controllers\CustomerController;
 
 use App\Http\Controllers\Modules\ItemController;
 use App\Http\Controllers\Modules\PurchaseOrderController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\Modules\StockOpnameMasterController;
 use App\Http\Controllers\Modules\StockOpnameDetailController;
 use App\Http\Controllers\Modules\StockOpnameBranchController;
 use App\Http\Controllers\Modules\StockOpnameBranchDetailController;
+use App\Http\Controllers\Modules\CustomerDiagnoseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +123,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/coa/delete', [CoaController::class, 'deleteCoa'])->name('deleteCoa');
     Route::put('/coa/edit', [CoaController::class, 'editCoa'])->name('editCoa');
 
+    /* Customer Controllers */
+    Route::get('/customer/one', [CustomerController::class, 'getCustomer'])->name('getCustomer');
+    Route::get('/customer/all', [CustomerController::class, 'getAllCustomer'])->name('getAllCustomer');
+    Route::post('/customer/add', [CustomerController::class, 'addCustomer'])->name('addCustomer');
+    Route::delete('/customer/delete', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
+    Route::put('/customer/edit', [CustomerController::class, 'editCustomer'])->name('editCustomer');
+
     /* Item Controllers */
     Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
     Route::get('/item/all', [ItemController::class, 'getAllItem'])->name('getAllItem');
@@ -202,6 +211,9 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/stock-opname-branch-detail/edit', [StockOpnameBranchDetailController::class, 'editStockOpnameBranchDetail'])->name('editStockOpnameBranchDetail');
     Route::put('/stock-opname-branch-detail/init-adjustment', [StockOpnameBranchDetailController::class, 'adjustStockOpnameBranchDetail'])->name('adjustStockOpnameBranchDetail');
     Route::post('/stock-opname-branch-detail/make-adjustment', [StockOpnameBranchDetailController::class, 'makeAdjustmentSOBranchDetail'])->name('makeAdjustmentSOBranchDetail');
+
+    /* Customer Diagnose Controllers */
+    Route::post('/customer-diagnose/add', [CustomerDiagnoseController::class, 'addCustomerDiagnose'])->name('addCustomerDiagnose');
 });
 
 Route::middleware('guest')->group(function() {
