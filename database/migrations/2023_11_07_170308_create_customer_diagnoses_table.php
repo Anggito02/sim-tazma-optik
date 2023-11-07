@@ -39,6 +39,12 @@ return new class extends Migration
             // Customer
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
 
+            // Branch
+            $table->foreignId('branch_check_location_id')->constrained('branches')->onDelete('cascade')->onUpdate('cascade');
+
+            // Employee
+            $table->foreignId('diagnosed_by')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

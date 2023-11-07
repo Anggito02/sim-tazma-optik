@@ -27,6 +27,7 @@ use App\Http\Controllers\Modules\StockOpnameMasterController;
 use App\Http\Controllers\Modules\StockOpnameDetailController;
 use App\Http\Controllers\Modules\StockOpnameBranchController;
 use App\Http\Controllers\Modules\StockOpnameBranchDetailController;
+use App\Http\Controllers\Modules\CustomerDiagnoseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -210,6 +211,9 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/stock-opname-branch-detail/edit', [StockOpnameBranchDetailController::class, 'editStockOpnameBranchDetail'])->name('editStockOpnameBranchDetail');
     Route::put('/stock-opname-branch-detail/init-adjustment', [StockOpnameBranchDetailController::class, 'adjustStockOpnameBranchDetail'])->name('adjustStockOpnameBranchDetail');
     Route::post('/stock-opname-branch-detail/make-adjustment', [StockOpnameBranchDetailController::class, 'makeAdjustmentSOBranchDetail'])->name('makeAdjustmentSOBranchDetail');
+
+    /* Customer Diagnose Controllers */
+    Route::post('/customer-diagnose/add', [CustomerDiagnoseController::class, 'addCustomerDiagnose'])->name('addCustomerDiagnose');
 });
 
 Route::middleware('guest')->group(function() {

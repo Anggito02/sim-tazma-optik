@@ -31,6 +31,12 @@ class CustomerDiagnose extends Model
         // Foreign Key
         // Customer
         'customer_id',
+
+        // Branch
+        'branch_check_location_id',
+
+        // Employee
+        'diagnosed_by',
     ];
 
     // Customer

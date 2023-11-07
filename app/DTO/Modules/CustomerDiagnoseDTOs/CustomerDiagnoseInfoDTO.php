@@ -33,6 +33,15 @@ class CustomerDiagnoseInfoDTO {
         public string $customer_nama_depan,
         public string $customer_nama_belakang,
         public string $customer_nomor_telepon,
+
+        // Branch
+        public int $branch_check_location_id,
+        public string $branch_check_location_kode,
+        public string $branch_check_location_nama,
+
+        // Employee
+        public int $diagnosed_by,
+        public string $diagnosed_by_nama,
     )
     {}
 

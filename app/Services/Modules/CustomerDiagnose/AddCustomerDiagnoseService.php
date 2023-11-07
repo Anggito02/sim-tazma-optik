@@ -44,6 +44,12 @@ class AddCustomerDiagnoseService {
                 // Foreign Key
                 // Customer
                 'customer_id' => 'required|exists:customers,id',
+
+                // Branch
+                'branch_check_location_id' => 'required|exists:branches,id',
+
+                // Employee
+                'diagnosed_by' => 'required|exists:users,id',
             ]);
 
             $newCustomerDiagnoseDTO = new NewCustomerDiagnoseDTO(
@@ -65,6 +71,8 @@ class AddCustomerDiagnoseService {
                 $request->diagnosa,
                 $request->catatan,
                 $request->customer_id,
+                $request->branch_check_location_id,
+                $request->diagnosed_by,
             );
 
             $customerDiagnose = $this->customerDiagnoseRepository->addCustomerDiagnose($newCustomerDiagnoseDTO);

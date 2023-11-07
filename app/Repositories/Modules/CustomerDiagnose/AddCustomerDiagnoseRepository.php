@@ -40,6 +40,8 @@ class AddCustomerDiagnoseRepository {
                 'diagnosa' => $newCustomerDiagnoseDTO->getDiagnosa(),
                 'catatan' => $newCustomerDiagnoseDTO->getCatatan(),
                 'customer_id' => $newCustomerDiagnoseDTO->getCustomerId(),
+                'branch_check_location_id' => $newCustomerDiagnoseDTO->getBranchCheckLocationId(),
+                'diagnosed_by' => $newCustomerDiagnoseDTO->getDiagnosedBy(),
             ]);
 
             return $customerDiagnose;

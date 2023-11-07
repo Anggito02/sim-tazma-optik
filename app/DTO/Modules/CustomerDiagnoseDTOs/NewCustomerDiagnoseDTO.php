@@ -29,6 +29,12 @@ class NewCustomerDiagnoseDTO {
         // Foreign Key
         // Customer
         public int $customer_id,
+
+        // Branch
+        public int $branch_check_location_id,
+
+        // Employee
+        public int $diagnosed_by,
     )
     {}
 
@@ -104,6 +110,14 @@ class NewCustomerDiagnoseDTO {
         $this->customer_id = $customer_id;
     }
 
+    public function setBranchCheckLocationId(int $branch_check_location_id): void {
+        $this->branch_check_location_id = $branch_check_location_id;
+    }
+
+    public function setDiagnosedBy(int $diagnosed_by): void {
+        $this->diagnosed_by = $diagnosed_by;
+    }
+
     public function getTanggalDiagnosa(): string {
         return $this->tanggal_diagnosa;
     }
@@ -174,6 +188,14 @@ class NewCustomerDiagnoseDTO {
 
     public function getCustomerId(): int {
         return $this->customer_id;
+    }
+
+    public function getBranchCheckLocationId(): int {
+        return $this->branch_check_location_id;
+    }
+
+    public function getDiagnosedBy(): int {
+        return $this->diagnosed_by;
     }
 }
 
