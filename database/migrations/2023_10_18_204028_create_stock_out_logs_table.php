@@ -17,12 +17,13 @@ return new class extends Migration
             $table->integer('bulan');
             $table->integer('tahun');
             $table->integer('stok_total');
-            $table->integer('stok_out_total');
-            $table->timestamps();
+            $table->integer('last_stok_out_qty');
 
             // Foreign Key
             // Item
             $table->foreignId('item_id')->constrained('items')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->timestamps();
         });
     }
 

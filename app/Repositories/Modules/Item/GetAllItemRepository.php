@@ -18,8 +18,6 @@ class GetAllItemRepository {
 
             $itemDTOs = [];
 
-            $itemDTOs = [];
-
             foreach ($items as $item) {
                 $itemDTO = new ItemDTO(
                     $item->id,
@@ -29,6 +27,7 @@ class GetAllItemRepository {
                     $item->stok,
                     $item->harga_beli,
                     $item->harga_jual,
+                    $item->diskon,
 
                     // Frame
                     $item->frame_sku_vendor,

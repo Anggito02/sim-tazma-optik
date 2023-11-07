@@ -11,22 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('item_stock_loggings', function (Blueprint $table) {
+        Schema::create('branch_stock_in_logs', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('tanggal_berubah');
-            $table->integer('stok_lama');
-            $table->integer('stok_baru');
-            $table->enum('bentuk_perubahan', ['penambahan', 'pengurangan']);
+            $table->string('kode_item');
+            $table->integer('bulan');
+            $table->integer('tahun');
+            $table->integer('stok_total_branch');
+            $table->integer('last_stok_in_qty_branch');
 
-            // Foreign Keys
+            // Foreign Key
             // Item
             $table->foreignId('item_id')->constrained('items')->onDelete('cascade')->onUpdate('cascade');
 
-            // Receive Order
-            $table->foreignId('receive_order_id')->nullable()->constrained('receive_orders')->onDelete('cascade')->onUpdate('cascade');
-
             $table->timestamps();
-
         });
     }
 
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('item_stock_loggings');
+        Schema::dropIfExists('branch_stock_in_logs');
     }
 };

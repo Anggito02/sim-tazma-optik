@@ -21,6 +21,7 @@ class Item extends Model
         'stok',
         'harga_beli',
         'harga_jual',
+        'diskon',
 
         // Frame
         'frame_sku_vendor',
@@ -93,5 +94,11 @@ class Item extends Model
     public function branchItems()
     {
         return $this->hasMany(BranchItem::class, 'item_id');
+    }
+
+    // Outgoing Detail
+    public function outgoingDetails()
+    {
+        return $this->hasMany(OutgoingDetail::class, 'item_id');
     }
 }

@@ -10,6 +10,7 @@ use App\Services\Modules\PurchaseOrderDetail\GetAllPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\AddPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\GetPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\EditPODetailService;
+use App\Services\Modules\PurchaseOrderDetail\UpdateStockPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\DeletePODetailService;
 
 class PurchaseOrderDetailController extends Controller
@@ -20,6 +21,7 @@ class PurchaseOrderDetailController extends Controller
         private AddPODetailService $addPODetailService,
         private GetPODetailService $getPODetailService,
         private EditPODetailService $editPODetailService,
+        private UpdateStockPODetailService $updateStockPODetailService,
         private DeletePODetailService $deletePODetailService
     ) {}
 
@@ -100,6 +102,28 @@ class PurchaseOrderDetailController extends Controller
     public function editPODetail(Request $request) {
         try {
             $poDetailDTO = $this->editPODetailService->editPurchaseOrderDetail($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Edit purchase order detail success',
+                'data' => $poDetailDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Edit purchase order detail failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+    /**
+     * Update stock purchase order detail
+     * @param Request $request
+     * @return PurchaseOrderDetailDTO
+     */
+    public function updateStockPODetail(Request $request) {
+        try {
+            $poDetailDTO = $this->updateStockPODetailService->editPurchaseOrderDetail($request);
 
             return response()->json([
                 'status' => 'success',

@@ -17,10 +17,8 @@ return new class extends Migration
                 IN kode_item VARCHAR(255),
                 IN bulan INT,
                 IN tahun INT,
-                IN stok_in_total INT,
-                IN item_id BIGINT,
-                IN purchase_order_id BIGINT,
-                IN receive_order_id BIGINT
+                IN last_stok_in_qty INT,
+                IN item_id BIGINT
             )
             BEGIN
                 INSERT INTO stock_in_logs (
@@ -28,15 +26,15 @@ return new class extends Migration
                     bulan,
                     tahun,
                     stok_total,
-                    stok_in_total,
+                    last_stok_in_qty,
                     item_id
                 )
                 VALUES (
                     kode_item,
                     bulan,
                     tahun,
-                    stok_in_total,
-                    stok_in_total,
+                    last_stok_in_qty,
+                    last_stok_in_qty,
                     item_id
                 );
             END;

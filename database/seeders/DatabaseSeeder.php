@@ -21,8 +21,14 @@ class DatabaseSeeder extends Seeder
             FrameCategorySeeder::class,
         ]);
 
+        $this->call([
+            AdjustmentBranchSeeder::class,
+            AdjustmentVendorSeeder::class,
+        ]);
+
         Branch::factory(10)->create();
         Vendor::factory(40)->create();
+
 
         $this->call([
             ItemSeeder::class,

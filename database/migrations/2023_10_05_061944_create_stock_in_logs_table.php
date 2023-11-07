@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('bulan');
             $table->integer('tahun');
             $table->integer('stok_total');
-            $table->integer('stok_in_total');
+            $table->integer('last_stok_in_qty');
 
             // Foreign Key
             // Item
