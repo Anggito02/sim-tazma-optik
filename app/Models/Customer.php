@@ -30,4 +30,14 @@ class Customer extends Model
     {
         return $this->belongsTo(Branch::class, 'branch_id');
     }
+
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    // Customer Diagnose
+    public function customerDiagnoses()
+    {
+        return $this->hasMany(CustomerDiagnose::class, 'customer_id');
+    }
 }
