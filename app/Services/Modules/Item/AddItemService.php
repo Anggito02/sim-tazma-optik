@@ -68,7 +68,7 @@ class AddItemService {
 
                 $kode_warna = explode(" ", $request->warna_item);
                 foreach ($kode_warna as $warna) {
-                    $kode_item .= substr($warna, 0, 2);
+                    $kode_item .= substr($warna, 0, 3);
                 }
             }
 
