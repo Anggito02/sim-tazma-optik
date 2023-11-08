@@ -17,7 +17,7 @@ class GetAllBranchRepository {
     public function getAllBranch(int $page, int $limit) {
         try {
             // use pagination
-            $branches = Branch::paginate($limit, ['*'], 'page', $page);
+            $branches = Branch::skip(1)->paginate($limit, ['*'], 'page', $page);
 
             $branchDTOs = [];
             foreach ($branches as $branch) {

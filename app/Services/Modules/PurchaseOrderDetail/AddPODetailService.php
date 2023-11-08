@@ -83,6 +83,7 @@ class AddPODetailService {
             // update price in item module
             $itemDTO->harga_beli = $request->harga_beli_satuan;
             $itemDTO->harga_jual = $request->harga_jual_satuan;
+            $itemDTO->diskon = $request->diskon;
             $itemDTO = $this->editItemRepository->editItem($itemDTO);
 
 
