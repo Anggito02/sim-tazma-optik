@@ -57,8 +57,8 @@ class UpdateBranchStokService {
             }
 
             $updateStokBranchDTO = new UpdateStokBranchDTO(
-                $request->item_id,
                 $request->branch_id,
+                $request->item_id,
                 $jumlah_perubahan,
             );
 

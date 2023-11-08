@@ -16,10 +16,13 @@ class UpdateBranchStokRepository {
     public function updateBranchStok(UpdateStokBranchDTO $updateStokBranchDTO) {
         try {
             $branchItem = BranchItem::where('item_id', $updateStokBranchDTO->getItemId())
-                ->where('branch_id', $updateStokBranchDTO->getBranchId());
+                ->where('branch_id', $updateStokBranchDTO->getBranchId())
+                ->first();
+
+            $stok_baru = $branchItem->stok_branch + $updateStokBranchDTO->getStokBerubah();
 
             $branchItem->update([
-                'stok_branch' => $branchItem->first()->stok_branch + $updateStokBranchDTO->getStokBerubah()
+                'stok_branch' => $stok_baru
             ]);
 
             return $branchItem;
