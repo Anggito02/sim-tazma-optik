@@ -22,6 +22,7 @@ class AddItemRepository {
             $newItem->stok = $itemDTO->getStok();
             $newItem->harga_beli = $itemDTO->getHargaBeli();
             $newItem->harga_jual = $itemDTO->getHargaJual();
+            $newItem->diskon = $itemDTO->getDiskon();
 
             // Frame
             $newItem->frame_sku_vendor = $itemDTO->getFrameSkuVendor();

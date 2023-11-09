@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -14,11 +13,21 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LensCategoryController;
 use App\Http\Controllers\FrameCategoryController;
 use App\Http\Controllers\CoaController;
+use App\Http\Controllers\CustomerController;
 
 use App\Http\Controllers\Modules\ItemController;
 use App\Http\Controllers\Modules\PurchaseOrderController;
 use App\Http\Controllers\Modules\ReceiveOrderController;
 use App\Http\Controllers\Modules\PurchaseOrderDetailController;
+use App\Http\Controllers\Modules\VendorInvoiceController;
+use App\Http\Controllers\Modules\BranchItemController;
+use App\Http\Controllers\Modules\ItemOutgoingController;
+use App\Http\Controllers\Modules\OutgoingDetailController;
+use App\Http\Controllers\Modules\StockOpnameMasterController;
+use App\Http\Controllers\Modules\StockOpnameDetailController;
+use App\Http\Controllers\Modules\StockOpnameBranchController;
+use App\Http\Controllers\Modules\StockOpnameBranchDetailController;
+use App\Http\Controllers\Modules\CustomerDiagnoseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,9 +123,17 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/coa/delete', [CoaController::class, 'deleteCoa'])->name('deleteCoa');
     Route::put('/coa/edit', [CoaController::class, 'editCoa'])->name('editCoa');
 
+    /* Customer Controllers */
+    Route::get('/customer/one', [CustomerController::class, 'getCustomer'])->name('getCustomer');
+    Route::get('/customer/all', [CustomerController::class, 'getAllCustomer'])->name('getAllCustomer');
+    Route::post('/customer/add', [CustomerController::class, 'addCustomer'])->name('addCustomer');
+    Route::delete('/customer/delete', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
+    Route::put('/customer/edit', [CustomerController::class, 'editCustomer'])->name('editCustomer');
+
     /* Item Controllers */
     Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
-    Route::get('/item/allWithJenis', [ItemController::class, 'getAllItem'])->name('getAllItem');
+    Route::get('/item/all', [ItemController::class, 'getAllItem'])->name('getAllItem');
+    Route::get('/item/allWithJenis', [ItemController::class, 'getAllItemWithJenis'])->name('getAllItemWithJenis');
     Route::post('/item/add', [ItemController::class, 'addItem'])->name('addItem');
     Route::delete('/item/delete', [ItemController::class, 'deleteItem'])->name('deleteItem');
     Route::put('/item/edit', [ItemController::class, 'editItem'])->name('editItem');
@@ -138,13 +155,65 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/receive-order/delete', [ReceiveOrderController::class, 'deleteReceiveOrder'])->name('deleteReceiveOrder');
     Route::put('/receive-order/edit', [ReceiveOrderController::class, 'editReceiveOrder'])->name('editReceiveOrder');
 
+    /* === */
+    Route::get('/receive-orderWith/info/one', [ReceiveOrderController::class, 'getReceiveOrderWithInfo'])->name('getReceiveOrderWithInfo');
+
     /* Purchase Order Detail Controllers */
     Route::get('/purchase-order-detail/one', [PurchaseOrderDetailController::class, 'getPODetail'])->name('getPODetail');
     Route::get('/purchase-order-detail/all', [PurchaseOrderDetailController::class, 'getAllPODetail'])->name('getAllPODetail');
     Route::post('/purchase-order-detail/add', [PurchaseOrderDetailController::class, 'addPODetail'])->name('addPODetail');
     Route::delete('/purchase-order-detail/delete', [PurchaseOrderDetailController::class, 'deletePODetail'])->name('deletePODetail');
     Route::put('/purchase-order-detail/edit', [PurchaseOrderDetailController::class, 'editPODetail'])->name('editPODetail');
+    Route::put('/purchase-order-detail/update-stok', [PurchaseOrderDetailController::class, 'updateStockPODetail'])->name('updateStockPODetail');
 
+    /* Vendor Invoice Controllers */
+    Route::get('/vendor-invoice/one', [VendorInvoiceController::class, 'getVendorInvoice'])->name('getVendorInvoice');
+    Route::get('/vendor-invoice/all', [VendorInvoiceController::class, 'getAllVendorInvoice'])->name('getAllVendorInvoice');
+    Route::post('/vendor-invoice/add', [VendorInvoiceController::class, 'addVendorInvoice'])->name('addVendorInvoice');
+    Route::delete('/vendor-invoice/delete', [VendorInvoiceController::class, 'deleteVendorInvoice'])->name('deleteVendorInvoice');
+    Route::put('/vendor-invoice/edit', [VendorInvoiceController::class, 'editVendorInvoice'])->name('editVendorInvoice');
+
+    /* Branch Item Controllers */
+    Route::get('/branch-item/all', [BranchItemController::class, 'getAllBranchItem'])->name('getAllBranchItem');
+    Route::post('/branch-item/add', [BranchItemController::class, 'addBranchItem'])->name('addBranchItem');
+    Route::put('/branch-item/update-stok', [BranchItemController::class, 'updateBranchStok'])->name('updateBranchStok');
+
+    /* Item Outgoing Controllers */
+    Route::get('/item-outgoing/one', [ItemOutgoingController::class, 'getItemOutgoing'])->name('getItemOutgoing');
+    Route::get('/item-outgoing/all', [ItemOutgoingController::class, 'getAllItemOutgoing'])->name('getAllItemOutgoing');
+    Route::post('/item-outgoing/add', [ItemOutgoingController::class, 'addItemOutgoing'])->name('addItemOutgoing');
+    Route::put('/item-outgoing/edit', [ItemOutgoingController::class, 'editItemOutgoing'])->name('editItemOutgoing');
+    Route::delete('/item-outgoing/delete', [ItemOutgoingController::class, 'deleteItemOutgoing'])->name('deleteItemOutgoing');
+
+    /* Outgoing Detail Controllers */
+    Route::get('/outgoing-detail/all', [OutgoingDetailController::class, 'getAllOutgoingDetail'])->name('getAllOutgoingDetail');
+    Route::post('/outgoing-detail/add', [OutgoingDetailController::class, 'addOutgoingDetail'])->name('addOutgoingDetail');
+    Route::put('/outgoing-detail/edit', [OutgoingDetailController::class, 'editOutgoingDetail'])->name('editOutgoingDetail');
+    Route::delete('/outgoing-delete/delete', [OutgoingDetailController::class, 'deleteOutgoingDetail'])->name('deleteOutgoingDetail');
+    Route::put('/outgoing-detail/verify', [OutgoingDetailController::class, 'verifyOutgoingDetail'])->name('verifyOutgoingDetail');
+
+    /* Stock Opname Master Controllers */
+    Route::get('/stock-opname-master/all', [StockOpnameMasterController::class, 'getAllStockOpname'])->name('getAllStockOpname');
+    Route::post('/stock-opname-master/add', [StockOpnameMasterController::class, 'addStockOpname'])->name('addStockOpname');
+
+    /* Stock Opname Detail Controllers */
+    Route::post('/stock-opname-detail/add', [StockOpnameDetailController::class, 'addStockOpnameDetail'])->name('addStockOpnameDetail');
+    Route::put('/stock-opname-detail/edit', [StockOpnameDetailController::class, 'editStockOpnameDetail'])->name('editStockOpnameDetail');
+    Route::put('/stock-opname-detail/init-adjustment', [StockOpnameDetailController::class, 'adjustStockOpnameDetail'])->name('adjustStockOpnameDetail');
+    Route::post('/stock-opname-detail/make-adjustment', [StockOpnameDetailController::class, 'makeAdjustmentSODetail'])->name('makeAdjustmentSODetail');
+
+    /* Stock Opname Branch Controllers */
+    Route::get('/stock-opname-branch/all', [StockOpnameBranchController::class, 'getAllStockOpnameBranch'])->name('getAllStockOpnameBranch');
+    Route::post('/stock-opname-branch/add', [StockOpnameBranchController::class, 'addStockOpnameBranch'])->name('addStockOpnameBranch');
+
+    /* Stock Opname Branch Detail Controllers */
+    Route::post('/stock-opname-branch-detail/add', [StockOpnameBranchDetailController::class, 'addStockOpnameBranchDetail'])->name('addStockOpnameBranchDetail');
+    Route::put('/stock-opname-branch-detail/edit', [StockOpnameBranchDetailController::class, 'editStockOpnameBranchDetail'])->name('editStockOpnameBranchDetail');
+    Route::put('/stock-opname-branch-detail/init-adjustment', [StockOpnameBranchDetailController::class, 'adjustStockOpnameBranchDetail'])->name('adjustStockOpnameBranchDetail');
+    Route::post('/stock-opname-branch-detail/make-adjustment', [StockOpnameBranchDetailController::class, 'makeAdjustmentSOBranchDetail'])->name('makeAdjustmentSOBranchDetail');
+
+    /* Customer Diagnose Controllers */
+    Route::post('/customer-diagnose/add', [CustomerDiagnoseController::class, 'addCustomerDiagnose'])->name('addCustomerDiagnose');
 });
 
 Route::middleware('guest')->group(function() {

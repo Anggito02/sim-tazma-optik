@@ -5,7 +5,7 @@ namespace App\Services\Modules\PurchaseOrderDetail;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\PurchaseOrderDetailDTO;
+use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
 
 use App\Repositories\Modules\PurchaseOrderDetail\GetAllPODetailRepository;
 
@@ -23,11 +23,12 @@ class GetAllPODetailService {
         try {
             // Validate request
             $request->validate([
+                'purchase_order_id' => 'required|exists:purchase_orders,id',
                 'page' => 'required',
                 'limit' => 'required',
             ]);
 
-            $poDetailDTO = $this->poDetailRepository->getAllPurchaseOrderDetail($request->page, $request->limit);
+            $poDetailDTO = $this->poDetailRepository->getAllPurchaseOrderDetail($request->page, $request->limit, $request->purchase_order_id);
 
             return $poDetailDTO;
         } catch (Exception $error) {

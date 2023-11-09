@@ -1,24 +1,27 @@
 <?php
 
-namespace App\DTO\Modules;
+namespace App\DTO\Modules\PurchaseOrderDetail;
 
 class PurchaseOrderDetailDTO {
     public function __construct(
         public ?int $id,
-        public int $pre_order_qty,
+        public ?int $pre_order_qty,
         public ?int $received_qty,
         public ?int $not_good_qty,
-        public string $unit,
-        public int $harga_beli_satuan,
-        public int $harga_jual_satuan,
-        public float $diskon,
+        public ?string $unit,
+        public ?int $harga_beli_satuan,
+        public ?int $harga_jual_satuan,
+        public ?float $diskon,
 
         // Foreign Keys
         // Purchase Order
-        public int $purchase_order_id,
+        public ?int $purchase_order_id,
+
+        // Receive Order
+        public ?int $receive_order_id,
 
         // Item
-        public int $item_id,
+        public ?int $item_id,
     ) {}
 
     public function getPreOrderQty(): int {
@@ -29,7 +32,7 @@ class PurchaseOrderDetailDTO {
         $this->pre_order_qty = $pre_order_qty;
     }
 
-    public function getReceivedQty(): int {
+    public function getReceivedQty(): int|null {
         return $this->received_qty;
     }
 
@@ -37,7 +40,7 @@ class PurchaseOrderDetailDTO {
         $this->received_qty = $received_qty;
     }
 
-    public function getNotGoodQty(): int {
+    public function getNotGoodQty(): int|null {
         return $this->not_good_qty;
     }
 
@@ -77,12 +80,20 @@ class PurchaseOrderDetailDTO {
         $this->diskon = $diskon;
     }
 
-    public function getPurchaseOrderId(): int {
+    public function getPurchaseOrderId(): int|null {
         return $this->purchase_order_id;
     }
 
     public function setPurchaseOrderId(int $purchase_order_id): void {
         $this->purchase_order_id = $purchase_order_id;
+    }
+
+    public function getReceiveOrderId(): int|null {
+        return $this->receive_order_id;
+    }
+
+    public function setReceiveOrderId(int $receive_order_id): void {
+        $this->receive_order_id = $receive_order_id;
     }
 
     public function getItemId(): int {

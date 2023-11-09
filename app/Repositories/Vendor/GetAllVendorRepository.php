@@ -11,7 +11,7 @@ class GetAllVendorRepository {
     // use pagination
     public function getAllVendor(int $page, int $limit) {
         try {
-            $vendors = Vendor::paginate($limit, ['*'], 'page', $page);
+            $vendors = Vendor::skip(1)->paginate($limit, ['*'], 'page', $page);
 
             $vendorDTOs = [];
             foreach ($vendors as $vendor) {

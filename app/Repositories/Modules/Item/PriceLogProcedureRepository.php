@@ -7,9 +7,14 @@ use Illuminate\Support\Facades\DB;
 
 class PriceLogProcedureRepository {
     /**
-     * Get price log procedure
+     * Call price log procedure
+     * @param string $tipe_harga_berubah
+     * @param string $tanggal_berubah
+     * @param int $harga_lama
+     * @param int $harga_baru
+     * @param string $metode_perubahan
      * @param int $item_id
-     * @return array
+     * @param int $purchase_order_id | null
      */
     public function priceLogProcedure(
         string $tipe_harga_berubah,

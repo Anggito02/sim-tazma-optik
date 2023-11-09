@@ -4,7 +4,7 @@ namespace App\Repositories\Modules\PurchaseOrderDetail;
 
 use Exception;
 
-use App\DTO\Modules\PurchaseOrderDetailDTO;
+use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
 use App\Models\Modules\PurchaseOrderDetail;
 
 class GetPODetailRepository {
@@ -27,6 +27,7 @@ class GetPODetailRepository {
                 $poDetail->harga_jual_satuan,
                 $poDetail->diskon,
                 $poDetail->purchase_order_id,
+                $poDetail->receive_order_id,
                 $poDetail->item_id,
             );
 

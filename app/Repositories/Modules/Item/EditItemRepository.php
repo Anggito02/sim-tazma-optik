@@ -22,6 +22,7 @@ class EditItemRepository {
             $item->stok = $itemDTO->stok;
             $item->harga_beli = $itemDTO->harga_beli;
             $item->harga_jual = $itemDTO->harga_jual;
+            $item->diskon = $itemDTO->diskon;
 
             // Frame
             $item->frame_sku_vendor = $itemDTO->frame_sku_vendor;

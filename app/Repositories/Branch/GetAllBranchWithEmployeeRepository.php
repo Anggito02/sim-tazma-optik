@@ -3,7 +3,8 @@
 namespace App\Repositories\Branch;
 
 use Exception;
-use Illuminate\Support\Facades\DB;
+
+use App\Models\Branch;
 
 class GetAllBranchWithEmployeeRepository {
     /**
@@ -15,8 +16,7 @@ class GetAllBranchWithEmployeeRepository {
     public function getAllBranchWithEmployee(int $page, int $limit) {
         try {
             // inner join branch and employee
-            $branches = DB::table('branches')
-                ->join('users', 'branches.employee_id_pic_branch', '=', 'users.id')
+            $branches = Branch::join('users', 'branches.employee_id_pic_branch', '=', 'users.id')
                 ->select('branches.*', 'users.employee_name')
                 ->paginate($limit, ['*'], 'page', $page);
 

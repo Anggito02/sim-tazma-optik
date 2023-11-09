@@ -31,4 +31,14 @@ class Vendor extends Model
     {
         return $this->hasMany(Item::class, 'frame_vendor_id');
     }
+
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    // Vendor Invoice
+    public function vendorInvoices()
+    {
+        return $this->hasMany(VendorInvoice::class, 'vendor_id');
+    }
 }

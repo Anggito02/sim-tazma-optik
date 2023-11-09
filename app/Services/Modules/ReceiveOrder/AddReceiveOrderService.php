@@ -10,12 +10,14 @@ use App\DTO\Modules\ReceiveOrderDTO;
 use App\Repositories\Modules\ReceiveOrder\AddReceiveOrderRepository;
 
 use App\Services\Modules\ReceiveOrder\GenerateReceiveOrderNumberService;
+use App\Services\Modules\PurchaseOrder\EditPOStatusPenerimaanService;
 
 class AddReceiveOrderService {
     public function __construct(
         private AddReceiveOrderRepository $receiveOrderRepository,
 
-        private GenerateReceiveOrderNumberService $generateReceiveOrderNumberService
+        private GenerateReceiveOrderNumberService $generateReceiveOrderNumberService,
+        private EditPOStatusPenerimaanService $editPOService
     ) {}
 
     /**
@@ -27,12 +29,19 @@ class AddReceiveOrderService {
         try {
             // Validate request
             $request->validate([
-                'tanggal_penerimaan' => 'required',
                 'purchase_order_id' => 'required',
                 'received_by' => 'required',
                 'checked_by' => 'required',
                 'approved_by' => 'required'
             ]);
+
+            // Change purchase order status_penerimaan to TRUE
+            $editPOService = $this->editPOService->editPurchaseOrderStatusPenerimaan(
+                new Request([
+                    'id' => $request->purchase_order_id,
+                    'status_penerimaan' => true
+                ])
+            );
 
             // Auto numbering RO
             $nomor_receive_order = $this->generateReceiveOrderNumberService->generateReceiveOrderNumber();

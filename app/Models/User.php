@@ -57,8 +57,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
     public function branch()
     {
         return $this->hasMany(Branch::class, 'employee_id_pic_branch');
     }
+
+    public function vendorInvoices()
+    {
+        return $this->hasMany(VendorInvoice::class, 'employee_id');
+    }
+
 }
