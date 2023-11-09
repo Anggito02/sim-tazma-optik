@@ -29,7 +29,8 @@ use App\Http\Controllers\Modules\StockOpnameBranchController;
 use App\Http\Controllers\Modules\StockOpnameBranchDetailController;
 use App\Http\Controllers\Modules\CustomerDiagnoseController;
 
-use App\Http\Controllers\Modules\Monitoring\Stock\GetAllStockInController;
+use App\Http\Controllers\Modules\Monitoring\Stock\StockInController;
+use App\Http\Controllers\Modules\Monitoring\Stock\StockOutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -218,7 +219,8 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/customer-diagnose/add', [CustomerDiagnoseController::class, 'addCustomerDiagnose'])->name('addCustomerDiagnose');
 
     /* Monitoring Routes */
-    Route::get('/monitoring/stock-in/all', [GetAllStockInController::class, 'getAllStockIn'])->name('getAllStockIn');
+    Route::get('/monitoring/stock-in/all', [StockInController::class, 'getAllStockIn'])->name('getAllStockIn');
+    Route::get('/monitoring/stock-out/all', [StockOutController::class, 'getAllStockOut'])->name('getAllStockOut');
 });
 
 Route::middleware('guest')->group(function() {
