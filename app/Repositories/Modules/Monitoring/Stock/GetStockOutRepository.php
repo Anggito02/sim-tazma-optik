@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 use App\DTO\Modules\Monitoring\Stock\StockInfoDTO;
 
-class GetAllStockInRepository {
+class GetAllStockOutRepository {
     public function __construct()
     {}
 
     /**
-     * Get all stock in
+     * Get all stock out
      * @return StockInfoDTO[]
      */
-    public function getAllStockIn() {
+    public function getAllStockOut() {
         try {
             $stockDTOs = DB::select("
                 SELECT
@@ -27,7 +27,7 @@ class GetAllStockInRepository {
 
                     stock.item_id,
                     item.jenis_item
-                FROM stock_in_logs stock
+                FROM stock_out_logs stock
                 INNER JOIN item ON item.id = stock.item_id
                 ORDER BY TO_DATE(CONCAT(stock.bulan, '-', stock.tahun), 'MM-YYYY') ASC
             ");
