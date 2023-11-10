@@ -26,7 +26,7 @@ class RegisterService {
         try {
             // Validate user data
             $request->validate([
-                'email' => 'required|email:dns|unique:users, email',
+                'email' => 'required|email:dns|unique:users,email',
                 'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'min:8', 'max:20'],
                 'username' => 'required|unique:users',
                 'nik' => 'required|unique:users',
