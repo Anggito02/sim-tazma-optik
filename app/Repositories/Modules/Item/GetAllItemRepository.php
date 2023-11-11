@@ -4,7 +4,7 @@ namespace App\Repositories\Modules\Item;
 
 use Exception;
 
-use App\DTO\Modules\ItemDTO;
+use App\DTO\ItemDTOs\ItemDTO;
 use App\Models\Modules\Item;
 
 class GetAllItemRepository {
