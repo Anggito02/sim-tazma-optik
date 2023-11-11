@@ -136,6 +136,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Item Controllers */
     Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
     Route::get('/item/all', [ItemController::class, 'getAllItem'])->name('getAllItem');
+    Route::get('/item/filtered', [ItemController::class, 'getItemFiltered'])->name('getItemFiltered');
     Route::get('/item/allWithJenis', [ItemController::class, 'getAllItemWithJenis'])->name('getAllItemWithJenis');
     Route::post('/item/add', [ItemController::class, 'addItem'])->name('addItem');
     Route::delete('/item/delete', [ItemController::class, 'deleteItem'])->name('deleteItem');

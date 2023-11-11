@@ -5,7 +5,7 @@ namespace App\Services\Modules\Item;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\ItemDTO;
+use App\DTO\ItemDTOs\ItemDTO;
 
 use App\Repositories\Modules\Item\EditItemRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
