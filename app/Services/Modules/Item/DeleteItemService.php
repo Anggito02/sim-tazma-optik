@@ -5,8 +5,6 @@ namespace App\Services\Modules\Item;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\ItemDTO;
-
 use App\Repositories\Modules\Item\DeleteItemRepository;
 
 class DeleteItemService {
