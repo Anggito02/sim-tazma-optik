@@ -2,10 +2,13 @@
 
 namespace App\Repositories\Modules\Item;
 
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 use Exception;
 
 use App\DTO\ItemDTOs\ItemDTO;
 use App\Models\Modules\Item;
+use Illuminate\Support\Facades\Storage;
 
 class AddItemRepository {
     /**
@@ -48,6 +51,25 @@ class AddItemRepository {
             $newItem->lensa_index_id = $itemDTO->getLensaIndexId();
 
             $newItem->aksesoris_brand_id = $itemDTO->getAksesorisBrandId();
+
+            $newItem->save();
+
+            // Json qr/barcode data
+            $qrData = [
+                'id' => $newItem->id,
+                'kode_item' => $newItem->kode_item,
+                'harga_jual' => $newItem->harga_jual,
+                'diskon' => $newItem->diskon,
+            ];
+
+            $qr = QrCode::size(500)
+                ->format('png')
+                ->generate(json_encode($qrData));
+
+            $qr_path = 'qr/item/' . $newItem->id . '_' . str_replace(' ', '-', $newItem->kode_item) . '.png';
+            Storage::put($qr_path, $qr);
+
+            $newItem->qr_path = $qr_path;
 
             $newItem->save();
 
