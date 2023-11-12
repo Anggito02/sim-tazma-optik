@@ -61,7 +61,7 @@ class UserSeeder extends Seeder {
             'department' => 'IT',
             'section' => 'Software Engineer',
             'position' => 'Staff of Software Engineer',
-            'role' => 'Administrator',
+            'role' => 'administrator',
             'plant' => 'Jakarta',
             'status' => true,
             'group' => 'IT',

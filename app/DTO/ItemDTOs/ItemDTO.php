@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO\Modules;
+namespace App\DTO\ItemDTOs;
 
 class ItemDTO {
     public function __construct(

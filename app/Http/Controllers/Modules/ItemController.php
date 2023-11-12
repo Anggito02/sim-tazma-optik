@@ -12,6 +12,7 @@ use App\Services\Modules\Item\DeleteItemService;
 use App\Services\Modules\Item\GetAllItemService;
 use App\Services\Modules\Item\GetAllItemWithJenisService;
 use App\Services\Modules\Item\GetItemService;
+use App\Services\Modules\Item\GetItemFilteredService;
 
 
 class ItemController extends Controller
@@ -23,7 +24,8 @@ class ItemController extends Controller
         private DeleteItemService $deleteItemService,
         private GetAllItemService $getAllItemService,
         private GetAllItemWithJenisService $getAllItemWithJenisService,
-        private GetItemService $getItemService
+        private GetItemService $getItemService,
+        private GetItemFilteredService $getItemFilteredService
     ) {}
 
     /**
@@ -90,6 +92,29 @@ class ItemController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Get all item failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Get item filtered
+     * @param Request $request
+     * @return ItemDTO
+     */
+    public function getItemFiltered(Request $request) {
+        try {
+            $itemDTO = $this->getItemFilteredService->getItem($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Get item success',
+                'data' => $itemDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get item failed',
                 'data' => $error->getMessage()
             ], 400);
         }

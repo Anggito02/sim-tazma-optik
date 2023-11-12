@@ -30,7 +30,6 @@ class AddBranchItemService {
             $newBranchItemDTO = new NewBranchItemDTO(
                 $request->item_id,
                 $request->branch_id,
-                $request->stok_branch,
             );
 
             $branchItemDTO = $this->branchItemRepository->addBranchItem($newBranchItemDTO);

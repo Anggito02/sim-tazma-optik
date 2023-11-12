@@ -47,4 +47,14 @@ class Branch extends Model
     {
         return $this->hasMany(StockOpnameBranch::class, 'branch_id');
     }
+
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    // Customer
+    public function customers()
+    {
+        return $this->hasMany(Customer::class, 'branch_id');
+    }
 }

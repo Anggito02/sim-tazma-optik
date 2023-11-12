@@ -5,7 +5,7 @@ namespace App\Services\Modules\Item;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\ItemDTO;
+use App\DTO\ItemDTOs\ItemDTO;
 
 use App\Repositories\Modules\Item\AddItemRepository;
 
@@ -68,7 +68,7 @@ class AddItemService {
 
                 $kode_warna = explode(" ", $request->warna_item);
                 foreach ($kode_warna as $warna) {
-                    $kode_item .= substr($warna, 0, 2);
+                    $kode_item .= substr($warna, 0, 3);
                 }
             }
 

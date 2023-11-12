@@ -24,10 +24,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdjustmentBranchSeeder::class,
             AdjustmentVendorSeeder::class,
+            VendorSeeder::class,
         ]);
 
         Branch::factory(10)->create();
-        Vendor::factory(40)->create();
 
 
         $this->call([

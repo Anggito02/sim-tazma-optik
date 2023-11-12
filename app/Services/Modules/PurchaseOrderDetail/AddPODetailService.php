@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
 use App\Repositories\Modules\PurchaseOrderDetail\AddPODetailRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
+use App\Repositories\Modules\Item\EditItemRepository;
 
 use App\Repositories\Modules\Item\PriceLogProcedureRepository;
 
@@ -15,6 +16,7 @@ class AddPODetailService {
     public function __construct(
         private AddPODetailRepository $poDetailRepository,
         private GetItemRepository $getItemRepository,
+        private EditItemRepository $editItemRepository,
 
         private PriceLogProcedureRepository $priceLogProcedureRepository,
     ) {}
@@ -77,6 +79,13 @@ class AddPODetailService {
                     $request->purchase_order_id
                 );
             }
+
+            // update price in item module
+            $itemDTO->harga_beli = $request->harga_beli_satuan;
+            $itemDTO->harga_jual = $request->harga_jual_satuan;
+            $itemDTO->diskon = $request->diskon;
+            $itemDTO = $this->editItemRepository->editItem($itemDTO);
+
 
             $poDetailDTO = $this->poDetailRepository->addPurchaseOrderDetail($poDetailDTO);
 
