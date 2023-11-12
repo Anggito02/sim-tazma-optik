@@ -3,7 +3,6 @@
 namespace App\Repositories\Modules\Item;
 
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Picqer\Barcode\BarcodeGeneratorPNG;
 
 use Exception;
 
@@ -62,12 +61,6 @@ class AddItemRepository {
                 'harga_jual' => $newItem->harga_jual,
                 'diskon' => $newItem->diskon,
             ];
-
-            // $barcodeGenerator = new BarcodeGeneratorPNG();
-            // $barcode = $barcodeGenerator->getBarcode(json_encode($qrData), $barcodeGenerator::TYPE_CODE_128);
-
-            // $barcode_path = 'barcode/item/' . $newItem->id . '_' . str_replace(' ', '-', $newItem->kode_item) . '.png';
-            // Storage::put($barcode_path, $barcode);
 
             $qr = QrCode::size(500)
                 ->format('png')
