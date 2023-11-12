@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('harga_beli');
             $table->bigInteger('harga_jual');
             $table->float('diskon');
+            $table->string('qr_path')->nullable();
 
             // Frame
             $table->string('frame_sku_vendor')->nullable();

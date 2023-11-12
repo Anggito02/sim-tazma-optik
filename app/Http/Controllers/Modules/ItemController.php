@@ -13,6 +13,7 @@ use App\Services\Modules\Item\GetAllItemService;
 use App\Services\Modules\Item\GetAllItemWithJenisService;
 use App\Services\Modules\Item\GetItemService;
 use App\Services\Modules\Item\GetItemFilteredService;
+use App\Services\Modules\Item\GetQRItemService;
 
 
 class ItemController extends Controller
@@ -25,7 +26,8 @@ class ItemController extends Controller
         private GetAllItemService $getAllItemService,
         private GetAllItemWithJenisService $getAllItemWithJenisService,
         private GetItemService $getItemService,
-        private GetItemFilteredService $getItemFilteredService
+        private GetItemFilteredService $getItemFilteredService,
+        private GetQRItemService $getQRItemService
     ) {}
 
     /**
@@ -115,6 +117,25 @@ class ItemController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Get item failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Get QR item
+     * @param Request $request
+     * @return ItemDTO
+     */
+    public function getQRItem(Request $request) {
+        try {
+            $qr_image = $this->getQRItemService->getQRItem($request);
+
+            return response($qr_image)->header('Content-Type', 'image/png');
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get QR item failed',
                 'data' => $error->getMessage()
             ], 400);
         }

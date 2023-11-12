@@ -22,6 +22,7 @@ class Item extends Model
         'harga_beli',
         'harga_jual',
         'diskon',
+        'qr_path',
 
         // Frame
         'frame_sku_vendor',
