@@ -26,6 +26,7 @@ class GetItemFilteredService {
             $request->validate([
                 'page' => 'required|gte:0',
                 'limit' => 'required|gte:0',
+                'jenis_item' => 'nullable',
                 'kode_item' => 'nullable',
                 'harga_beli_from' => 'nullable|gte:0',
                 'harga_beli_until' => 'nullable|gte:0',
@@ -48,6 +49,7 @@ class GetItemFilteredService {
             $itemFilterDTO = new ItemFilterDTO(
                 $request->page,
                 $request->limit,
+                $request->jenis_item,
                 $request->kode_item,
                 $request->harga_beli_from ? $request->harga_beli_from : 0,
                 $request->harga_beli_until ? $request->harga_beli_until : 99999999999,
