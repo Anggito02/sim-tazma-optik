@@ -6,6 +6,7 @@ class ItemFilterDTO {
     public function __construct(
         public int $page,
         public int $limit,
+        public ?string $jenis_item,
         public ?string $kode_item,
         public int $harga_beli_from,
         public int $harga_beli_until,
@@ -22,6 +23,14 @@ class ItemFilterDTO {
         public ?string $aksesoris_kategori,
     )
     {}
+
+    public function getJenisItem(): ?string {
+        return $this->jenis_item;
+    }
+
+    public function setJenisItem(?string $jenis_item): void {
+        $this->jenis_item = $jenis_item;
+    }
 
     public function getKodeItem(): ?string {
         return $this->kode_item;
