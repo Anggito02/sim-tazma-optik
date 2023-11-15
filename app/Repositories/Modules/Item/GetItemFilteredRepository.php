@@ -20,6 +20,9 @@ class GetItemFilteredRepository {
             // Check if filter is active
             $activeFilter = [];
 
+            $jenis_item_sql = $itemFilterDTO->jenis_item ? "jenis_item LIKE '%$itemFilterDTO->jenis_item%'" : null;
+            array_push($activeFilter, $jenis_item_sql);
+
             $kode_item_sql = $itemFilterDTO->kode_item ? "kode_item LIKE '%$itemFilterDTO->kode_item%'" : null;
             array_push($activeFilter, $kode_item_sql);
 
