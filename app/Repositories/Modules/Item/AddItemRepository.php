@@ -2,15 +2,20 @@
 
 namespace App\Repositories\Modules\Item;
 
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
 use Exception;
 
 use App\DTO\ItemDTOs\ItemDTO;
+use App\DTO\ItemDTOs\ItemQRInfoDTO;
+
 use App\Models\Modules\Item;
-use Illuminate\Support\Facades\Storage;
+use App\Services\Modules\Item\MakeItemQRService;
 
 class AddItemRepository {
+    public function __construct(
+        private MakeItemQRService $makeItemQRService
+    )
+    {}
+
     /**
      * Add item
      * @param ItemDTO $itemDTO
@@ -54,22 +59,13 @@ class AddItemRepository {
 
             $newItem->save();
 
-            // Json qr/barcode data
-            $qrData = [
-                'id' => $newItem->id,
-                'kode_item' => $newItem->kode_item,
-                'harga_jual' => $newItem->harga_jual,
-                'diskon' => $newItem->diskon,
-            ];
-
-            $qr = QrCode::size(500)
-                ->format('png')
-                ->generate(json_encode($qrData));
-
-            $qr_path = 'qr/item/' . $newItem->id . '_' . str_replace(' ', '-', $newItem->kode_item) . '.png';
-            Storage::put($qr_path, $qr);
-
-            $newItem->qr_path = $qr_path;
+            // Generate QR
+            $newItem->qr_path = $this->makeItemQRService->makeItemQR(new ItemQRInfoDTO(
+                $newItem->id,
+                $newItem->kode_item,
+                $newItem->harga_jual,
+                $newItem->diskon,
+            ));
 
             $newItem->save();
 
