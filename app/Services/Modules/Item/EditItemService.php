@@ -2,6 +2,7 @@
 
 namespace App\Services\Modules\Item;
 
+use App\DTO\ItemDTOs\ItemQRInfoDTO;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -9,13 +10,16 @@ use App\DTO\ItemDTOs\UpdateItemDTO;
 
 use App\Repositories\Modules\Item\EditItemRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
+use App\Services\Modules\Item\MakeItemQRService;
 use App\Repositories\Modules\Item\PriceLogProcedureRepository;
 use App\Repositories\Modules\Item\StockLogProcedureRepository;
+use Illuminate\Support\Facades\Storage;
 
 class EditItemService {
     public function __construct(
         private EditItemRepository $editItemRepository,
         private GetItemRepository $getItemRepository,
+        private MakeItemQRService $makeItemQRService,
 
         private PriceLogProcedureRepository $priceLogProcedureRepository,
         private StockLogProcedureRepository $stockLogProcedureRepository
@@ -107,13 +111,47 @@ class EditItemService {
                 );
             }
 
+            // Auto naming kode_item
+            $kode_item = "";
+            if ($request->jenis_item == 'frame') {
+                $kode_item = $request->nama_brand_item.'-'.$request->frame_sku_vendor.'-';
+
+                $kode_warna = explode(" ", $request->warna_item);
+                foreach ($kode_warna as $warna) {
+                    $kode_item .= substr($warna, 0, 3);
+                }
+            }
+
+            if ($request->jenis_item == 'lensa') {
+                $kode_item = $request->nama_brand_item.'-'.$request->lensa_jenis_produk.'-'.$request->index_lensa.'-'.$request->lensa_jenis_lensa;
+            }
+
+            if ($request->jenis_item == 'aksesoris') {
+                $kode_item = $request->aksesoris_nama_item.'-'.$request->nama_brand_item.'-'.$request->aksesoris_kategori;
+            }
+
+            // delete qr code lama
+            if ($itemDTO->getQrPath() != null) {
+                Storage::delete($itemDTO->getQrPath());
+            }
+
+            // generate qr code baru
+            $newQrPath = $this->makeItemQRService->makeItemQR(new ItemQRInfoDTO(
+                $request->id,
+                $kode_item,
+                $request->harga_jual,
+                $request->diskon
+            ));
+
             $itemDto = new UpdateItemDTO(
                 $request->id,
+                $kode_item,
                 $request->deskripsi,
                 $request->stok,
                 $request->harga_beli,
                 $request->harga_jual,
                 $request->diskon,
+                $newQrPath,
 
                 // Frame
                 $request->frame_sku_vendor,

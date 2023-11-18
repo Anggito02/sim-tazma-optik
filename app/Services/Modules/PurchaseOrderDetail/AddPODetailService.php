@@ -86,11 +86,13 @@ class AddPODetailService {
             // update price in item module
             $itemDTO = new UpdateItemDTO(
                 $request->item_id,
+                $itemDTO->getKodeItem(),
                 $itemDTO->getDeskripsi(),
                 $itemDTO->getStok(),
                 $request->harga_beli_satuan,
                 $request->harga_jual_satuan,
                 $request->diskon,
+                $itemDTO->getQrPath(),
                 $itemDTO->getFrameSkuVendor(),
                 $itemDTO->getFrameSubKategori(),
                 $itemDTO->getFrameKode(),

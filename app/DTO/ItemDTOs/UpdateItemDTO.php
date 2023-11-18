@@ -5,11 +5,13 @@ namespace App\DTO\ItemDTOs;
 class UpdateItemDTO {
     public function __construct(
         private int $id,
+        private string $kode_item,
         private string $deskripsi,
         private int $stok,
         private int $harga_beli,
         private int $harga_jual,
         private float $diskon,
+        private ?string $qr_path,
 
         // Frame
         private ?string $frame_sku_vendor,
@@ -43,6 +45,10 @@ class UpdateItemDTO {
         return $this->id;
     }
 
+    public function getKodeItem(): string {
+        return $this->kode_item;
+    }
+
     public function getDeskripsi(): string {
         return $this->deskripsi;
     }
@@ -61,6 +67,10 @@ class UpdateItemDTO {
 
     public function getDiskon(): float {
         return $this->diskon;
+    }
+
+    public function getQrPath(): ?string {
+        return $this->qr_path;
     }
 
     // Frame

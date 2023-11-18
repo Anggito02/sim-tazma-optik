@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\DTO\ItemDTOs\NewItemDTO;
 
 use App\Repositories\Modules\Item\AddItemRepository;
-use Milon\Barcode\DNS1D;
 
 class AddItemService {
     public function __construct(

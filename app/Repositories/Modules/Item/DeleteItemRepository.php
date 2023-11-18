@@ -3,6 +3,8 @@
 namespace App\Repositories\Modules\Item;
 
 use Exception;
+use Illuminate\Support\Facades\Storage;
+
 
 use App\Models\Modules\Item;
 
@@ -19,6 +21,9 @@ class DeleteItemRepository {
             if ($item->deleteable == false) {
                 throw new Exception('Item cannot be deleted because it is used in purchase order');
             }
+
+            // delete qr code
+            Storage::delete($item->qr_path);
 
             $item->delete();
 

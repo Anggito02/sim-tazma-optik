@@ -17,11 +17,13 @@ class EditItemRepository {
         try {
             $item = Item::find($itemDTO->getId());
 
+            $item->kode_item = $itemDTO->getKodeItem();
             $item->deskripsi = $itemDTO->getDeskripsi();
             $item->stok = $itemDTO->getStok();
             $item->harga_beli = $itemDTO->getHargaBeli();
             $item->harga_jual = $itemDTO->getHargaJual();
             $item->diskon = $itemDTO->getDiskon();
+            $item->qr_path = $itemDTO->getQrPath();
 
             // Frame
             $item->frame_sku_vendor = $itemDTO->getFrameSkuVendor();

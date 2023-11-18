@@ -57,8 +57,8 @@ class AddItemRepository {
             $newItem->qr_path = $this->makeItemQRService->makeItemQR(new ItemQRInfoDTO(
                 $newItem->id,
                 $newItem->kode_item,
-                $newItem->harga_jual,
-                $newItem->diskon,
+                0,
+                0,
             ));
 
             $newItem->save();

@@ -80,11 +80,13 @@ class UpdateStockPODetailService {
             // update item stock
             $itemDTO = new UpdateItemDTO(
                 $request->item_id,
+                $itemDTO->getKodeItem(),
                 $itemDTO->getDeskripsi(),
                 $itemDTO->getStok() + $request->received_qty,
                 $itemDTO->getHargaBeli(),
                 $itemDTO->getHargaJual(),
                 $itemDTO->getDiskon(),
+                $itemDTO->getQrPath(),
                 $itemDTO->getFrameSkuVendor(),
                 $itemDTO->getFrameSubKategori(),
                 $itemDTO->getFrameKode(),
