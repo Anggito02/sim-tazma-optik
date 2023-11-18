@@ -1,5 +1,7 @@
 <?php
 
+// [MIGHT BE DEPRECATED] Use GetItemFilteredRepository instead
+
 namespace App\Repositories\Modules\Item;
 
 use Exception;

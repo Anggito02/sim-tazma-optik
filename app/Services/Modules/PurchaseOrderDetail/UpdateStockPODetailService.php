@@ -2,6 +2,7 @@
 
 namespace App\Services\Modules\PurchaseOrderDetail;
 
+use App\DTO\ItemDTOs\UpdateItemDTO;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -67,8 +68,8 @@ class UpdateStockPODetailService {
             // update stok log
             $this->stockLogProcedureRepository->stockLogProcedure(
                 date('Y-m-d H:i:s'),
-                $itemDTO->stok,
-                $itemDTO->stok + $request->received_qty,
+                $itemDTO->getStok(),
+                $itemDTO->getStok() + $request->received_qty,
                 $request->received_qty,
                 'penambahan',
                 $request->item_id,
@@ -77,7 +78,30 @@ class UpdateStockPODetailService {
             );
 
             // update item stock
-            $itemDTO->stok += $request->received_qty;
+            $itemDTO = new UpdateItemDTO(
+                $request->item_id,
+                $itemDTO->getKodeItem(),
+                $itemDTO->getDeskripsi(),
+                $itemDTO->getStok() + $request->received_qty,
+                $itemDTO->getHargaBeli(),
+                $itemDTO->getHargaJual(),
+                $itemDTO->getDiskon(),
+                $itemDTO->getQrPath(),
+                $itemDTO->getFrameSkuVendor(),
+                $itemDTO->getFrameSubKategori(),
+                $itemDTO->getFrameKode(),
+                $itemDTO->getLensaJenisProduk(),
+                $itemDTO->getLensaJenisLensa(),
+                $itemDTO->getAksesorisNamaItem(),
+                $itemDTO->getAksesorisKategori(),
+                $itemDTO->getBrandId(),
+                $itemDTO->getFrameFrameCategoryId(),
+                $itemDTO->getFrameVendorId(),
+                $itemDTO->getFrameColorId(),
+                $itemDTO->getLensaLensCategoryId(),
+                $itemDTO->getLensaIndexId(),
+            );
+
             $itemDTO = $this->editItemRepository->editItem($itemDTO);
 
             if ($this->checkStockInRepository->checkStockInExistence($itemDTO->id, date('m'), date('Y'))) {

@@ -22,7 +22,7 @@ class MakeItemQRService {
                 ->size(500)
                 ->generate(json_encode($itemQRInfoDTO->getQRData()));
 
-            $qr_path = 'qr/item'. $itemQRInfoDTO->getId() . '_' . str_replace(' ', '_', $itemQRInfoDTO->getKodeItem()) . '.png';
+            $qr_path = 'qr/item/'. $itemQRInfoDTO->getId() . '_' . str_replace(' ', '_', $itemQRInfoDTO->getKodeItem()) . '.png';
 
             Storage::put($qr_path, $qr);
 

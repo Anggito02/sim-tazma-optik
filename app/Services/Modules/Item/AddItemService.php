@@ -5,10 +5,9 @@ namespace App\Services\Modules\Item;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\ItemDTOs\ItemDTO;
+use App\DTO\ItemDTOs\NewItemDTO;
 
 use App\Repositories\Modules\Item\AddItemRepository;
-use Milon\Barcode\DNS1D;
 
 class AddItemService {
     public function __construct(
@@ -47,19 +46,17 @@ class AddItemService {
                 'aksesoris_kategori' => 'required_if:jenis_item,aksesoris|nullable',
 
                 // Foreign Keys
+                // BRAND //
+                'brand_id' => 'required|exists:brands,id',
+
                 // FRAME //
                 'frame_frame_category_id' => 'required_if:jenis_item,frame|exists:frame_categories,id|nullable',
-                'frame_brand_id' => 'required_if:jenis_item,frame|exists:brands,id|nullable',
                 'frame_vendor_id' => 'required_if:jenis_item,frame|exists:vendors,id|nullable',
                 'frame_color_id' => 'required_if:jenis_item,frame|exists:colors,id|nullable',
 
                 // LENS //
                 'lensa_lens_category_id' => 'required_if:jenis_item,lensa|exists:lens_categories,id|nullable',
-                'lensa_brand_id' => 'required_if:jenis_item,lensa|exists:brands,id|nullable',
                 'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indices,id|nullable',
-
-                // ACCESSORY //
-                'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id|nullable',
             ]);
 
             // Auto naming kode_item
@@ -81,15 +78,10 @@ class AddItemService {
                 $kode_item = $request->aksesoris_nama_item.'-'.$request->nama_brand_item.'-'.$request->aksesoris_kategori;
             }
 
-            $itemDTO = new ItemDTO(
-                null,
+            $itemDTO = new NewItemDTO(
                 $request->jenis_item,
                 $kode_item,
                 $request->deskripsi,
-                0,
-                0,
-                0,
-                0,
 
                 // Frame
                 $request->frame_sku_vendor,
@@ -105,19 +97,17 @@ class AddItemService {
                 $request->aksesoris_kategori,
 
                 // Foreign Keys
+                // BRAND //
+                $request->brand_id,
+
                 // FRAME //
                 $request->frame_frame_category_id,
-                $request->frame_brand_id,
                 $request->frame_vendor_id,
                 $request->frame_color_id,
 
                 // LENS //
                 $request->lensa_lens_category_id,
-                $request->lensa_brand_id,
                 $request->lensa_index_id,
-
-                // ACCESSORY //
-                $request->aksesoris_brand_id,
             );
 
             $newItem = $this->itemRepository->addItem($itemDTO);

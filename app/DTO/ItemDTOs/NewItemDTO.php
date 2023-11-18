@@ -2,41 +2,37 @@
 
 namespace App\DTO\ItemDTOs;
 
-class ItemDTO {
+class NewItemDTO {
     public function __construct(
-        public ?int $id,
-        public ?string $jenis_item,
-        public ?string $kode_item,
-        public ?string $deskripsi,
-        public ?int $stok,
-        public ?string $harga_beli,
-        public ?string $harga_jual,
-        public ?string $diskon,
-        public ?string $qr_path,
-        public ?bool $deleteable,
+        private string $jenis_item,
+        private string $kode_item,
+        private string $deskripsi,
 
         // Frame
-        public ?string $frame_sku_vendor,
-        public ?string $frame_sub_kategori,
-        public ?string $frame_kode,
+        private ?string $frame_sku_vendor,
+        private ?string $frame_sub_kategori,
+        private ?string $frame_kode,
 
         // Lens
-        public ?string $lensa_jenis_produk,
-        public ?string $lensa_jenis_lensa,
+        private ?string $lensa_jenis_produk,
+        private ?string $lensa_jenis_lensa,
 
         // Accessory
-        public ?string $aksesoris_nama_item,
-        public ?string $aksesoris_kategori,
+        private ?string $aksesoris_nama_item,
+        private ?string $aksesoris_kategori,
 
         // Foreign Keys
+        // BRAND //
+        private ?int $brand_id,
+
         // FRAME //
-        public ?int $frame_frame_category_id,
-        public ?int $frame_vendor_id,
-        public ?int $frame_color_id,
+        private ?int $frame_frame_category_id,
+        private ?int $frame_vendor_id,
+        private ?int $frame_color_id,
 
         // LENS //
-        public ?int $lensa_lens_category_id,
-        public ?int $lensa_index_id,
+        private ?int $lensa_lens_category_id,
+        private ?int $lensa_index_id,
     )
     {}
 
@@ -64,54 +60,8 @@ class ItemDTO {
         $this->deskripsi = $deskripsi;
     }
 
-    public function getStok(): string {
-        return $this->stok;
-    }
 
-    public function setStok(string $stok): void {
-        $this->stok = $stok;
-    }
-
-    public function getHargaBeli(): string {
-        return $this->harga_beli;
-    }
-
-    public function setHargaBeli(string $harga_beli): void {
-        $this->harga_beli = $harga_beli;
-    }
-
-    public function getHargaJual(): string {
-        return $this->harga_jual;
-    }
-
-    public function setHargaJual(string $harga_jual): void {
-        $this->harga_jual = $harga_jual;
-    }
-
-    public function getDiskon(): string {
-        return $this->diskon;
-    }
-
-    public function setDiskon(string $diskon): void {
-        $this->diskon = $diskon;
-    }
-
-    public function getQrPath(): ?string {
-        return $this->qr_path;
-    }
-
-    public function setQrPath(?string $qr_path): void {
-        $this->qr_path = $qr_path;
-    }
-
-    public function getDeleteable(): bool {
-        return $this->deleteable;
-    }
-
-    public function setDeleteable(bool $deleteable): void {
-        $this->deleteable = $deleteable;
-    }
-
+    // Frame
     public function getFrameSkuVendor(): ?string {
         return $this->frame_sku_vendor;
     }
@@ -136,6 +86,7 @@ class ItemDTO {
         $this->frame_kode = $frame_kode;
     }
 
+    // Lens
     public function getLensaJenisProduk(): ?string {
         return $this->lensa_jenis_produk;
     }
@@ -152,6 +103,7 @@ class ItemDTO {
         $this->lensa_jenis_lensa = $lensa_kategori_lensa;
     }
 
+    // Aksesoris
     public function getAksesorisNamaItem(): ?string {
         return $this->aksesoris_nama_item;
     }
@@ -168,6 +120,17 @@ class ItemDTO {
         $this->aksesoris_kategori = $aksesoris_kategori;
     }
 
+    // Foreign Keys
+    // BRAND //
+    public function getBrandId(): int {
+        return $this->brand_id;
+    }
+
+    public function setBrandId(int $brand_id): void {
+        $this->brand_id = $brand_id;
+    }
+
+    // FRAME //
     public function getFrameFrameCategoryId(): ?int {
         return $this->frame_frame_category_id;
     }
@@ -192,6 +155,7 @@ class ItemDTO {
         $this->frame_color_id = $frame_color_id;
     }
 
+    // LENS //
     public function getLensaLensCategoryId(): ?int {
         return $this->lensa_lens_category_id;
     }
