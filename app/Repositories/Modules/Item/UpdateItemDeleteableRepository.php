@@ -6,21 +6,20 @@ use Exception;
 
 use App\Models\Modules\Item;
 
-class DeleteItemRepository {
+class UpdateItemDeleteableRepository {
     /**
-     * Delete item
+     * Update item deleteable
      * @param int $id
-     * @return ItemDTO
+     * @param bool $deleteable
+     * @return Item
      */
-    public function deleteItem(int $id) {
+    public function updateItemDeleteable(int $id, bool $deleteable) {
         try {
             $item = Item::find($id);
 
-            if ($item->deleteable == false) {
-                throw new Exception('Item cannot be deleted because it is used in purchase order');
-            }
+            $item->deleteable = $deleteable;
 
-            $item->delete();
+            $item->save();
 
             return $item;
         } catch (Exception $error) {
@@ -28,6 +27,5 @@ class DeleteItemRepository {
         }
     }
 }
-
 
 ?>

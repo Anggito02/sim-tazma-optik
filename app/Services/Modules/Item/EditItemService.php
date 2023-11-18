@@ -5,7 +5,7 @@ namespace App\Services\Modules\Item;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\ItemDTOs\ItemDTO;
+use App\DTO\ItemDTOs\UpdateItemDTO;
 
 use App\Repositories\Modules\Item\EditItemRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
@@ -24,7 +24,7 @@ class EditItemService {
     /**
      * Edit item
      * @param Request $request
-     * @return ItemDTO
+     * @return Item
      */
     public function editItem(Request $request) {
         try {
@@ -52,29 +52,27 @@ class EditItemService {
                 'aksesoris_kategori' => 'required_if:jenis_item,aksesoris|nullable',
 
                 // Foreign Keys
+                // BRAND //
+                'brand_id' => 'required|exists:brands,id',
+
                 // FRAME //
                 'frame_frame_category_id' => 'required_if:jenis_item,frame|exists:frame_categories,id|nullable',
-                'frame_brand_id' => 'required_if:jenis_item,frame|exists:brands,id|nullable',
                 'frame_vendor_id' => 'required_if:jenis_item,frame|exists:vendors,id|nullable',
                 'frame_color_id' => 'required_if:jenis_item,frame|exists:colors,id|nullable',
 
                 // LENS //
                 'lensa_lens_category_id' => 'required_if:jenis_item,lensa|exists:lens_categories,id|nullable',
-                'lensa_brand_id' => 'required_if:jenis_item,lensa|exists:brands,id|nullable',
                 'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indices,id|nullable',
-
-                // ACCESSORY //
-                'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id|nullable',
             ]);
 
             $itemDTO = $this->getItemRepository->getItem($request->id);
 
             // cek jika harga_beli / harga_jual berubah
-            if ((int)$itemDTO->harga_beli != $request->harga_beli) {
+            if ((int)$itemDTO->getHargaBeli() != $request->harga_beli) {
                 $this->priceLogProcedureRepository->priceLogProcedure(
                     'harga_beli',
                     date('Y-m-d H:i:s'),
-                    $itemDTO->harga_beli,
+                    $itemDTO->getHargaBeli(),
                     $request->harga_beli,
                     'manual',
                     $request->id,
@@ -82,11 +80,11 @@ class EditItemService {
                 );
             }
 
-            if ((int)$itemDTO->harga_jual != $request->harga_jual) {
+            if ((int)$itemDTO->getHargaJual() != $request->harga_jual) {
                 $this->priceLogProcedureRepository->priceLogProcedure(
                     'harga_jual',
                     date('Y-m-d H:i:s'),
-                    $itemDTO->harga_jual,
+                    $itemDTO->getHargaJual(),
                     $request->harga_jual,
                     'manual',
                     $request->id,
@@ -95,12 +93,12 @@ class EditItemService {
             }
 
             // cek jika stok berubah
-            if ((int)$itemDTO->stok != $request->stok) {
-                $bentuk_perubahan = (int)$itemDTO->stok > $request->stok ? 'pengurangan' : 'penambahan';
+            if ((int)$itemDTO->getStok() != $request->stok) {
+                $bentuk_perubahan = (int)$itemDTO->getStok() > $request->stok ? 'pengurangan' : 'penambahan';
                 $this->stockLogProcedureRepository->stockLogProcedure(
                     date('Y-m-d H:i:s'),
-                    $itemDTO->stok,
-                    $itemDTO->stok + $request->stok,
+                    $itemDTO->getStok(),
+                    $itemDTO->getStok() + $request->stok,
                     $request->stok,
                     $bentuk_perubahan,
                     $request->id,
@@ -109,10 +107,8 @@ class EditItemService {
                 );
             }
 
-            $itemDto = new ItemDTO(
+            $itemDto = new UpdateItemDTO(
                 $request->id,
-                $request->jenis_item,
-                null,
                 $request->deskripsi,
                 $request->stok,
                 $request->harga_beli,
@@ -133,19 +129,16 @@ class EditItemService {
                 $request->aksesoris_kategori,
 
                 // Foreign Keys
+                // BRAND //
+                $request->brand_id,
                 // FRAME //
                 $request->frame_frame_category_id,
-                $request->frame_brand_id,
                 $request->frame_vendor_id,
                 $request->frame_color_id,
 
                 // LENS //
                 $request->lensa_lens_category_id,
-                $request->lensa_brand_id,
                 $request->lensa_index_id,
-
-                // ACCESSORY //
-                $request->aksesoris_brand_id,
             );
 
             return $this->editItemRepository->editItem($itemDto);
