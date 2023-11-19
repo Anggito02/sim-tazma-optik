@@ -29,6 +29,7 @@ class AddItemRepository {
             $newItem->deskripsi = $itemDTO->getDeskripsi();
 
             // Frame
+            $newItem->frame_sku_vendor = $itemDTO->getFrameSkuVendor();
             $newItem->frame_sub_kategori = $itemDTO->getFrameSubKategori();
             $newItem->frame_kode = $itemDTO->getFrameKode();
 
@@ -38,17 +39,16 @@ class AddItemRepository {
 
             // Accessory
             $newItem->aksesoris_nama_item = $itemDTO->getAksesorisNamaItem();
-            $newItem->aksesoris_kategori = $itemDTO->getAksesorisKategori();
 
             // Foreign Keys
             $newItem->brand_id = $itemDTO->getBrandId();
 
             $newItem->vendor_id = $itemDTO->getVendorId();
 
-            $newItem->frame_frame_category_id = $itemDTO->getFrameFrameCategoryId();
+            $newItem->category_id = $itemDTO->getCategoryId();
+
             $newItem->frame_color_id = $itemDTO->getFrameColorId();
 
-            $newItem->lensa_lens_category_id = $itemDTO->getLensaLensCategoryId();
             $newItem->lensa_index_id = $itemDTO->getLensaIndexId();
 
             $newItem->save();

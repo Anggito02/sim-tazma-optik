@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('deleteable')->default(true);
 
             // Frame
+            $table->string('frame_sku_vendor')->nullable();
             $table->string('frame_sub_kategori')->nullable();
             $table->string('frame_kode')->nullable();
 
@@ -33,7 +34,6 @@ return new class extends Migration
 
             // Accessory
             $table->string('aksesoris_nama_item')->nullable();
-            $table->string('aksesoris_kategori')->nullable();
 
             // Foreign Keys
             // BRAND //
@@ -42,19 +42,16 @@ return new class extends Migration
             // VENDOR //
             $table->foreignId('vendor_id')->nullable()->constrained('vendors')->onDelete('cascade')->onUpdate('cascade');
 
-            // FRAME //
-            // Frame Category
-            $table->foreignId('frame_frame_category_id')->nullable()->constrained('frame_categories')->onDelete('cascade')->onUpdate('cascade');
+            // CATEGORY //
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
 
+            // FRAME //
             // Frame Color
             $table->foreignId('frame_color_id')->nullable()->constrained('colors')->onDelete('cascade')->onUpdate('cascade');
 
             // ========== //
 
             // LENS //
-            // Lens Category
-            $table->foreignId('lensa_lens_category_id')->nullable()->constrained('lens_categories')->onDelete('cascade')->onUpdate('cascade');
-
             // Lens Index
             $table->foreignId('lensa_index_id')->nullable()->constrained('indices')->onDelete('cascade')->onUpdate('cascade');
 

@@ -2,23 +2,23 @@
 
 namespace Database\Seeders;
 
-use App\Models\FrameCategory;
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class FrameCategorySeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        FrameCategory::create([
+        Category::create([
             'nama_kategori' => 'low',
         ]);
 
-        FrameCategory::create([
+        Category::create([
             'nama_kategori' => 'mid',
         ]);
 
-        FrameCategory::create([
+        Category::create([
             'nama_kategori' => 'high',
         ]);
     }

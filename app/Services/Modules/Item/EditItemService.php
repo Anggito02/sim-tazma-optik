@@ -43,13 +43,14 @@ class EditItemService {
                 'diskon' => 'required',
 
                 // Kebutuhan penamaan otomatis
-                'sku_vendor' => 'required',
+                'nama_kategori' => 'required',
                 'nama_brand_item' => 'required|exists:brands,nama_brand',
                 'warna_item' => 'required_if:jenis_item,frame|nullable',
 
                 'index_lensa' => 'required_if:jenis_item,lensa|nullable',
 
                 // Frame
+                'frame_sku_vendor' => 'required_if:jenis_item,frame|nullable',
                 'frame_sub_kategori' => 'required_if:jenis_item,frame|nullable',
                 'frame_kode' => 'required_if:jenis_item,frame|nullable',
 
@@ -59,7 +60,6 @@ class EditItemService {
 
                 // Accessory
                 'aksesoris_nama_item' => 'required_if:jenis_item,aksesoris|nullable',
-                'aksesoris_kategori' => 'required_if:jenis_item,aksesoris|nullable',
 
                 // Foreign Keys
                 // BRAND //
@@ -122,7 +122,7 @@ class EditItemService {
             // Auto naming kode_item
             $kode_item = "";
             if ($request->jenis_item == 'frame') {
-                $kode_item = $request->nama_brand_item.'-'.$request->sku_vendor.'-';
+                $kode_item = $request->nama_brand_item.'-'.$request->frame_sku_vendor.'-';
 
                 $kode_warna = explode(" ", $request->warna_item);
                 foreach ($kode_warna as $warna) {
@@ -135,7 +135,7 @@ class EditItemService {
             }
 
             if ($request->jenis_item == 'aksesoris') {
-                $kode_item = $request->aksesoris_nama_item.'-'.$request->nama_brand_item.'-'.$request->aksesoris_kategori;
+                $kode_item = $request->aksesoris_nama_item.'-'.$request->nama_brand_item.'-'.$request->nama_kategori;
             }
 
             // delete qr code lama
@@ -162,6 +162,7 @@ class EditItemService {
                 $newQrPath,
 
                 // Frame
+                $request->frame_sku_vendor,
                 $request->frame_sub_kategori,
                 $request->frame_kode,
 
@@ -171,7 +172,6 @@ class EditItemService {
 
                 // Accessory
                 $request->aksesoris_nama_item,
-                $request->aksesoris_kategori,
 
                 // Foreign Keys
                 // BRAND //
@@ -180,12 +180,13 @@ class EditItemService {
                 // VENDOR //
                 $request->vendor_id,
 
+                // CATEGORY //
+                $request->category_id,
+
                 // FRAME //
-                $request->frame_frame_category_id,
                 $request->frame_color_id,
 
                 // LENS //
-                $request->lensa_lens_category_id,
                 $request->lensa_index_id,
             );
 

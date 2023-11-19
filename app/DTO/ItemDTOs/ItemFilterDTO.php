@@ -20,7 +20,6 @@ class ItemFilterDTO {
         public ?string $lensa_jenis_produk,
         public ?string $lensa_jenis_lensa,
         public ?string $aksesoris_nama_item,
-        public ?string $aksesoris_kategori,
     )
     {}
 
@@ -134,14 +133,6 @@ class ItemFilterDTO {
 
     public function setAksesorisNamaItem(?string $aksesoris_nama_item): void {
         $this->aksesoris_nama_item = $aksesoris_nama_item;
-    }
-
-    public function getAksesorisKategori(): ?string {
-        return $this->aksesoris_kategori;
-    }
-
-    public function setAksesorisKategori(?string $aksesoris_kategori): void {
-        $this->aksesoris_kategori = $aksesoris_kategori;
     }
 }
 
