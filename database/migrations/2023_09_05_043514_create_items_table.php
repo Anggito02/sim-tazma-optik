@@ -24,7 +24,6 @@ return new class extends Migration
             $table->boolean('deleteable')->default(true);
 
             // Frame
-            $table->string('frame_sku_vendor')->nullable();
             $table->string('frame_sub_kategori')->nullable();
             $table->string('frame_kode')->nullable();
 
@@ -40,12 +39,12 @@ return new class extends Migration
             // BRAND //
             $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade')->onUpdate('cascade');
 
+            // VENDOR //
+            $table->foreignId('vendor_id')->nullable()->constrained('vendors')->onDelete('cascade')->onUpdate('cascade');
+
             // FRAME //
             // Frame Category
             $table->foreignId('frame_frame_category_id')->nullable()->constrained('frame_categories')->onDelete('cascade')->onUpdate('cascade');
-
-            // Frame Vendor
-            $table->foreignId('frame_vendor_id')->nullable()->constrained('vendors')->onDelete('cascade')->onUpdate('cascade');
 
             // Frame Color
             $table->foreignId('frame_color_id')->nullable()->constrained('colors')->onDelete('cascade')->onUpdate('cascade');

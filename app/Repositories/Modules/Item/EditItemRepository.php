@@ -26,7 +26,6 @@ class EditItemRepository {
             $item->qr_path = $itemDTO->getQrPath();
 
             // Frame
-            $item->frame_sku_vendor = $itemDTO->getFrameSkuVendor();
             $item->frame_sub_kategori = $itemDTO->getFrameSubKategori();
             $item->frame_kode = $itemDTO->getFrameKode();
 
@@ -42,9 +41,11 @@ class EditItemRepository {
             // BRAND //
             $item->brand_id = $itemDTO->getBrandId();
 
+            // VENDOR //
+            $item->vendor_id = $itemDTO->getVendorId();
+
             // FRAME //
             $item->frame_frame_category_id = $itemDTO->getFrameFrameCategoryId();
-            $item->frame_vendor_id = $itemDTO->getFrameVendorId();
             $item->frame_color_id = $itemDTO->getFrameColorId();
 
             // LENS //

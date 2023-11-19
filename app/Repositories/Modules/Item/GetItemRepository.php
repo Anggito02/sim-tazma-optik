@@ -18,35 +18,43 @@ class GetItemRepository {
             $item = Item::find($id);
 
             if ($item->jenis_item == 'frame') {
-                $item = $item->join('brands', 'items.brand_id', '=', 'brands.id')
+                $item = $item
+                    ->join('brands', 'items.brand_id', '=', 'brands.id')
+                    ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
                     ->join('frame_categories', 'items.frame_frame_category_id', '=', 'frame_categories.id')
-                    ->join('vendors', 'items.frame_vendor_id', '=', 'vendors.id')
                     ->join('colors', 'items.frame_color_id', '=', 'colors.id')
                     ->select(
                         'items.*',
                         'brands.nama_brand',
-                        'frame_categories.nama_kategori',
                         'vendors.nama_vendor',
+                        'frame_categories.nama_kategori',
                         'colors.color_name',
                     )
                     ->first();
 
             } else if ($item->jenis_item == 'lensa') {
-                $item = $item->join('brands', 'items.brand_id', '=', 'brands.id')
+                $item = $item
+                    ->join('brands', 'items.brand_id', '=', 'brands.id')
+                    ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
                     ->join('lens_categories', 'items.lensa_lens_category_id', '=', 'lens_categories.id')
                     ->join('indices', 'items.lensa_index_id', '=', 'indices.id')
                     ->select(
                         'items.*',
                         'brands.nama_brand',
+                        'vendors.nama_vendor',
                         'lens_categories.nama_kategori',
                         'indices.value',
                     )
                     ->first();
+
             } else if ($item->jenis_item == 'aksesoris') {
-                $item = $item->join('brands', 'items.brand_id', '=', 'brands.id')
+                $item = $item
+                    ->join('brands', 'items.brand_id', '=', 'brands.id')
+                    ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
                     ->select(
                         'items.*',
                         'brands.nama_brand',
+                        'vendors.nama_vendor',
                     )
                     ->first();
             }
@@ -64,7 +72,6 @@ class GetItemRepository {
                 $item->deleteable,
 
                 // Frame
-                $item->frame_sku_vendor,
                 $item->frame_sub_kategori,
                 $item->frame_kode,
 
@@ -81,11 +88,13 @@ class GetItemRepository {
                 $item->brand_id,
                 $item->nama_brand,
 
+                // VENDOR //
+                $item->vendor_id,
+                $item->nama_vendor,
+
                 // FRAME //
                 $item->frame_frame_category_id,
                 $item->nama_kategori,
-                $item->frame_vendor_id,
-                $item->nama_vendor,
                 $item->frame_color_id,
                 $item->color_name,
 

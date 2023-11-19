@@ -16,7 +16,6 @@ class ItemInfoDTO {
         private bool $deleteable,
 
         // Frame
-        private ?string $frame_sku_vendor,
         private ?string $frame_sub_kategori,
         private ?string $frame_kode,
 
@@ -33,11 +32,13 @@ class ItemInfoDTO {
         private int $brand_id,
         private string $nama_brand,
 
+        // VENDOR //
+        private int $vendor_id,
+        private string $nama_vendor,
+
         // FRAME //
         private ?int $frame_frame_category_id,
         private ?string $frame_nama_kategori,
-        private ?int $frame_vendor_id,
-        private ?string $frame_nama_vendor,
         private ?int $frame_color_id,
         private ?string $frame_nama_warna,
 
@@ -63,7 +64,6 @@ class ItemInfoDTO {
             'deleteable' => $this->deleteable,
 
             // Frame
-            'frame_sku_vendor' => $this->frame_sku_vendor,
             'frame_sub_kategori' => $this->frame_sub_kategori,
             'frame_kode' => $this->frame_kode,
 
@@ -80,11 +80,13 @@ class ItemInfoDTO {
             'brand_id' => $this->brand_id,
             'nama_brand' => $this->nama_brand,
 
+            // VENDOR //
+            'vendor_id' => $this->vendor_id,
+            'nama_vendor' => $this->nama_vendor,
+
             // FRAME //
             'frame_frame_category_id' => $this->frame_frame_category_id,
             'frame_nama_kategori' => $this->frame_nama_kategori,
-            'frame_vendor_id' => $this->frame_vendor_id,
-            'frame_nama_vendor' => $this->frame_nama_vendor,
             'frame_color_id' => $this->frame_color_id,
             'frame_nama_warna' => $this->frame_nama_warna,
 
@@ -137,10 +139,6 @@ class ItemInfoDTO {
     }
 
     // Frame
-    public function getFrameSkuVendor(): ?string {
-        return $this->frame_sku_vendor;
-    }
-
     public function getFrameSubKategori(): ?string {
         return $this->frame_sub_kategori;
     }
@@ -177,6 +175,15 @@ class ItemInfoDTO {
         return $this->nama_brand;
     }
 
+    // VENDOR //
+    public function getVendorId(): int {
+        return $this->vendor_id;
+    }
+
+    public function getNamaVendor(): string {
+        return $this->nama_vendor;
+    }
+
     // FRAME //
     public function getFrameFrameCategoryId(): ?int {
         return $this->frame_frame_category_id;
@@ -184,14 +191,6 @@ class ItemInfoDTO {
 
     public function getFrameNamaKategori(): ?string {
         return $this->frame_nama_kategori;
-    }
-
-    public function getFrameVendorId(): ?int {
-        return $this->frame_vendor_id;
-    }
-
-    public function getFrameNamaVendor(): ?string {
-        return $this->frame_nama_vendor;
     }
 
     public function getFrameColorId(): ?int {

@@ -14,7 +14,6 @@ class UpdateItemDTO {
         private ?string $qr_path,
 
         // Frame
-        private ?string $frame_sku_vendor,
         private ?string $frame_sub_kategori,
         private ?string $frame_kode,
 
@@ -28,11 +27,13 @@ class UpdateItemDTO {
 
         // Foreign Keys
         // BRAND //
-        private ?int $brand_id,
+        private int $brand_id,
+
+        // VENDOR //
+        private int $vendor_id,
 
         // FRAME //
         private ?int $frame_frame_category_id,
-        private ?int $frame_vendor_id,
         private ?int $frame_color_id,
 
         // LENS //
@@ -74,10 +75,6 @@ class UpdateItemDTO {
     }
 
     // Frame
-    public function getFrameSkuVendor(): ?string {
-        return $this->frame_sku_vendor;
-    }
-
     public function getFrameSubKategori(): ?string {
         return $this->frame_sub_kategori;
     }
@@ -110,13 +107,14 @@ class UpdateItemDTO {
         return $this->brand_id;
     }
 
+    // VENDOR //
+    public function getVendorId(): ?int {
+        return $this->vendor_id;
+    }
+
     // FRAME //
     public function getFrameFrameCategoryId(): ?int {
         return $this->frame_frame_category_id;
-    }
-
-    public function getFrameVendorId(): ?int {
-        return $this->frame_vendor_id;
     }
 
     public function getFrameColorId(): ?int {

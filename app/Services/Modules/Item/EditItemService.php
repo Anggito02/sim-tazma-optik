@@ -42,8 +42,14 @@ class EditItemService {
                 'harga_jual' => 'required',
                 'diskon' => 'required',
 
+                // Kebutuhan penamaan otomatis
+                'sku_vendor' => 'required',
+                'nama_brand_item' => 'required|exists:brands,nama_brand',
+                'warna_item' => 'required_if:jenis_item,frame|nullable',
+
+                'index_lensa' => 'required_if:jenis_item,lensa|nullable',
+
                 // Frame
-                'frame_sku_vendor' => 'required_if:jenis_item,frame|nullable',
                 'frame_sub_kategori' => 'required_if:jenis_item,frame|nullable',
                 'frame_kode' => 'required_if:jenis_item,frame|nullable',
 
@@ -59,9 +65,11 @@ class EditItemService {
                 // BRAND //
                 'brand_id' => 'required|exists:brands,id',
 
+                // VENDOR //
+                'vendor_id' => 'required|exists:vendors,id',
+
                 // FRAME //
                 'frame_frame_category_id' => 'required_if:jenis_item,frame|exists:frame_categories,id|nullable',
-                'frame_vendor_id' => 'required_if:jenis_item,frame|exists:vendors,id|nullable',
                 'frame_color_id' => 'required_if:jenis_item,frame|exists:colors,id|nullable',
 
                 // LENS //
@@ -114,7 +122,7 @@ class EditItemService {
             // Auto naming kode_item
             $kode_item = "";
             if ($request->jenis_item == 'frame') {
-                $kode_item = $request->nama_brand_item.'-'.$request->frame_sku_vendor.'-';
+                $kode_item = $request->nama_brand_item.'-'.$request->sku_vendor.'-';
 
                 $kode_warna = explode(" ", $request->warna_item);
                 foreach ($kode_warna as $warna) {
@@ -154,7 +162,6 @@ class EditItemService {
                 $newQrPath,
 
                 // Frame
-                $request->frame_sku_vendor,
                 $request->frame_sub_kategori,
                 $request->frame_kode,
 
@@ -169,9 +176,12 @@ class EditItemService {
                 // Foreign Keys
                 // BRAND //
                 $request->brand_id,
+
+                // VENDOR //
+                $request->vendor_id,
+
                 // FRAME //
                 $request->frame_frame_category_id,
-                $request->frame_vendor_id,
                 $request->frame_color_id,
 
                 // LENS //

@@ -9,7 +9,6 @@ class NewItemDTO {
         private string $deskripsi,
 
         // Frame
-        private ?string $frame_sku_vendor,
         private ?string $frame_sub_kategori,
         private ?string $frame_kode,
 
@@ -23,11 +22,13 @@ class NewItemDTO {
 
         // Foreign Keys
         // BRAND //
-        private ?int $brand_id,
+        private int $brand_id,
+
+        // VENDOR //
+        private int $vendor_id,
 
         // FRAME //
         private ?int $frame_frame_category_id,
-        private ?int $frame_vendor_id,
         private ?int $frame_color_id,
 
         // LENS //
@@ -62,14 +63,6 @@ class NewItemDTO {
 
 
     // Frame
-    public function getFrameSkuVendor(): ?string {
-        return $this->frame_sku_vendor;
-    }
-
-    public function setFrameSkuVendor(?string $frame_sku_vendor): void {
-        $this->frame_sku_vendor = $frame_sku_vendor;
-    }
-
     public function getFrameSubKategori(): ?string {
         return $this->frame_sub_kategori;
     }
@@ -130,6 +123,15 @@ class NewItemDTO {
         $this->brand_id = $brand_id;
     }
 
+    // VENDOR //
+    public function getVendorId(): int {
+        return $this->vendor_id;
+    }
+
+    public function setVendorId(int $vendor_id): void {
+        $this->vendor_id = $vendor_id;
+    }
+
     // FRAME //
     public function getFrameFrameCategoryId(): ?int {
         return $this->frame_frame_category_id;
@@ -137,14 +139,6 @@ class NewItemDTO {
 
     public function setFrameFrameCategoryId(?int $frame_frame_category_id): void {
         $this->frame_frame_category_id = $frame_frame_category_id;
-    }
-
-    public function getFrameVendorId(): ?int {
-        return $this->frame_vendor_id;
-    }
-
-    public function setFrameVendorId(?int $frame_vendor_id): void {
-        $this->frame_vendor_id = $frame_vendor_id;
     }
 
     public function getFrameColorId(): ?int {

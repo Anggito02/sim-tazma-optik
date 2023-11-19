@@ -1,5 +1,7 @@
 <?php
 
+// [MIGHT BE DEPRECATED] Use another item DTO instead
+
 namespace App\DTO\ItemDTOs;
 
 class ItemDTO {
