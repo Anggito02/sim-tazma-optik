@@ -53,9 +53,6 @@ class GetItemFilteredRepository {
             $aksesoris_nama_item_sql = $itemFilterDTO->aksesoris_nama_item ? "aksesoris_nama_item LIKE '%$itemFilterDTO->aksesoris_nama_item%'" : null;
             array_push($activeFilter, $aksesoris_nama_item_sql);
 
-            $aksesoris_kategori_sql = $itemFilterDTO->aksesoris_kategori ? "aksesoris_kategori LIKE '%$itemFilterDTO->aksesoris_kategori%'" : null;
-            array_push($activeFilter, $aksesoris_kategori_sql);
-
             $activeFilter = array_filter($activeFilter, function ($filter) {
                 return $filter !== null;
             });
@@ -64,55 +61,26 @@ class GetItemFilteredRepository {
 
             // Get item filtered
             $items = Item::whereRaw($activeFilter)
+                ->join('brands', 'items.brand_id', '=', 'brands.id')
+                ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
+                ->join('categories', 'items.category_id', '=', 'categories.id')
+                ->leftJoin('colors', 'items.frame_color_id', '=', 'colors.id')
+                ->leftJoin('indices', 'items.lensa_index_id', '=', 'indices.id')
+                ->select(
+                    'items.*',
+                    'brands.nama_brand',
+                    'vendors.nama_vendor',
+                    'categories.nama_kategori',
+                    'colors.color_name',
+                    'indices.value',
+                )
+                ->orderBy('items.id', 'asc')
                 ->paginate($itemFilterDTO->limit, ['*'], 'page', $itemFilterDTO->page);
 
             // use pagination
             $itemDTOs = [];
 
             foreach ($items as $item) {
-                if ($item->jenis_item == 'frame') {
-                    $item = $item
-                        ->join('brands', 'items.brand_id', '=', 'brands.id')
-                        ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
-                        ->join('categories', 'items.categories_id', '=', 'categories.id')
-                        ->join('colors', 'items.frame_color_id', '=', 'colors.id')
-                        ->select(
-                            'items.*',
-                            'brands.nama_brand',
-                            'vendors.nama_vendor',
-                            'categories.nama_kategori',
-                            'colors.color_name',
-                        )
-                        ->first();
-
-                } else if ($item->jenis_item == 'lensa') {
-                    $item = $item
-                        ->join('brands', 'items.brand_id', '=', 'brands.id')
-                        ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
-                        ->join('categories', 'items.categories_id', '=', 'categories.id')
-                        ->join('indices', 'items.lensa_index_id', '=', 'indices.id')
-                        ->select(
-                            'items.*',
-                            'brands.nama_brand',
-                            'vendors.nama_vendor',
-                            'categories.nama_kategori',
-                            'indices.value',
-                        )
-                        ->first();
-                } else if ($item->jenis_item == 'aksesoris') {
-                    $item = $item
-                        ->join('brands', 'items.brand_id', '=', 'brands.id')
-                        ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
-                        ->join('categories', 'items.categories_id', '=', 'categories.id')
-                        ->select(
-                            'items.*',
-                            'brands.nama_brand',
-                            'vendors.nama_vendor',
-                            'categories.nama_kategori',
-                        )
-                        ->first();
-                }
-
                 $itemDTO = new ItemInfoDTO(
                     $item->id,
                     $item->jenis_item,

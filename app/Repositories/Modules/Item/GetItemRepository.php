@@ -15,96 +15,67 @@ class GetItemRepository {
      */
     public function getItem(int $id) {
         try {
-            $item = Item::find($id);
+            $item = Item::find($id)
+                ->join('brands', 'items.brand_id', '=', 'brands.id')
+                ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
+                ->join('categories', 'items.category_id', '=', 'categories.id')
+                ->leftJoin('colors', 'items.frame_color_id', '=', 'colors.id')
+                ->leftJoin('indices', 'items.lensa_index_id', '=', 'indices.id')
+                ->select(
+                    'items.*',
+                    'brands.nama_brand',
+                    'vendors.nama_vendor',
+                    'categories.nama_kategori',
+                    'colors.color_name',
+                    'indices.value',
+                )
+                ->first();
 
-            if ($item->jenis_item == 'frame') {
-                $item = $item
-                    ->join('brands', 'items.brand_id', '=', 'brands.id')
-                    ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
-                    ->join('categories', 'items.categories_id', '=', 'categories.id')
-                    ->join('colors', 'items.frame_color_id', '=', 'colors.id')
-                    ->select(
-                        'items.*',
-                        'brands.nama_brand',
-                        'vendors.nama_vendor',
-                        'categories.nama_kategori',
-                        'colors.color_name',
-                    )
-                    ->first();
+                $itemDTO = new ItemInfoDTO(
+                    $item->id,
+                    $item->jenis_item,
+                    $item->kode_item,
+                    $item->deskripsi,
+                    $item->stok,
+                    $item->harga_beli,
+                    $item->harga_jual,
+                    $item->diskon,
+                    $item->qr_path,
+                    $item->deleteable,
 
-            } else if ($item->jenis_item == 'lensa') {
-                $item = $item
-                    ->join('brands', 'items.brand_id', '=', 'brands.id')
-                    ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
-                    ->join('categories', 'items.categories_id', '=', 'categories.id')
-                    ->join('indices', 'items.lensa_index_id', '=', 'indices.id')
-                    ->select(
-                        'items.*',
-                        'brands.nama_brand',
-                        'vendors.nama_vendor',
-                        'categories.nama_kategori',
-                        'indices.value',
-                    )
-                    ->first();
-            } else if ($item->jenis_item == 'aksesoris') {
-                $item = $item
-                    ->join('brands', 'items.brand_id', '=', 'brands.id')
-                    ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
-                    ->join('categories', 'items.categories_id', '=', 'categories.id')
-                    ->select(
-                        'items.*',
-                        'brands.nama_brand',
-                        'vendors.nama_vendor',
-                        'categories.nama_kategori',
-                    )
-                    ->first();
-            }
+                    // Frame
+                    $item->frame_sku_vendor,
+                    $item->frame_sub_kategori,
+                    $item->frame_kode,
 
-            $itemDTO = new ItemInfoDTO(
-                $item->id,
-                $item->jenis_item,
-                $item->kode_item,
-                $item->deskripsi,
-                $item->stok,
-                $item->harga_beli,
-                $item->harga_jual,
-                $item->diskon,
-                $item->qr_path,
-                $item->deleteable,
+                    // Lens
+                    $item->lensa_jenis_produk,
+                    $item->lensa_jenis_lensa,
 
-                // Frame
-                $item->frame_sku_vendor,
-                $item->frame_sub_kategori,
-                $item->frame_kode,
+                    // Accessory
+                    $item->aksesoris_nama_item,
 
-                // Lens
-                $item->lensa_jenis_produk,
-                $item->lensa_jenis_lensa,
+                    // Foreign Keys
+                    // BRAND //
+                    $item->brand_id,
+                    $item->nama_brand,
 
-                // Accessory
-                $item->aksesoris_nama_item,
+                    // VENDOR //
+                    $item->vendor_id,
+                    $item->nama_vendor,
 
-                // Foreign Keys
-                // BRAND //
-                $item->brand_id,
-                $item->nama_brand,
+                    // CATEGORY //
+                    $item->category_id,
+                    $item->nama_kategori,
 
-                // VENDOR //
-                $item->vendor_id,
-                $item->nama_vendor,
+                    // FRAME //
+                    $item->frame_color_id,
+                    $item->color_name,
 
-                // CATEGORY //
-                $item->category_id,
-                $item->nama_kategori,
-
-                // FRAME //
-                $item->frame_color_id,
-                $item->color_name,
-
-                // LENS //
-                $item->lensa_index_id,
-                $item->value,
-            );
+                    // LENS //
+                    $item->lensa_index_id,
+                    $item->value,
+                );
 
             $itemDTO = $itemDTO->toArray();
 

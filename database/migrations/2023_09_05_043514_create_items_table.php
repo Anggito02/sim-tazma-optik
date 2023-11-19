@@ -49,8 +49,6 @@ return new class extends Migration
             // Frame Color
             $table->foreignId('frame_color_id')->nullable()->constrained('colors')->onDelete('cascade')->onUpdate('cascade');
 
-            // ========== //
-
             // LENS //
             // Lens Index
             $table->foreignId('lensa_index_id')->nullable()->constrained('indices')->onDelete('cascade')->onUpdate('cascade');
