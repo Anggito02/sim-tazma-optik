@@ -9,6 +9,7 @@ class UserDTO {
         public ?string $password = null,
         public ?string $username = null,
         public ?string $nik = null,
+        public ?string $nip = null,
         public ?string $employee_name = null,
         public ?string $photo = null,
         public ?string $gender = null,
@@ -72,6 +73,14 @@ class UserDTO {
 
     public function setNik(string $nik): void {
         $this->nik = $nik;
+    }
+
+    public function getNip(): string {
+        return $this->nip;
+    }
+
+    public function setNip(string $nip): void {
+        $this->nip = $nip;
     }
 
     public function getPhoto(): string {
