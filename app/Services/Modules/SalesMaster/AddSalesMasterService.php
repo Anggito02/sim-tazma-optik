@@ -18,7 +18,7 @@ class AddSalesMasterService {
     /**
      * Add Sales Master
      * @param Request $request
-     * @return int
+     * @return SalesMaster
      */
     public function addSalesMaster(Request $request) {
         try {
@@ -53,9 +53,9 @@ class AddSalesMasterService {
                 $request->customer_id,
             );
 
-            $salesMasterId = $this->addSalesMasterRepository->addSalesMaster($newSalesMasterDTO);
+            $salesMasterDTO = $this->addSalesMasterRepository->addSalesMaster($newSalesMasterDTO);
 
-            return $salesMasterId;
+            return $salesMasterDTO;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

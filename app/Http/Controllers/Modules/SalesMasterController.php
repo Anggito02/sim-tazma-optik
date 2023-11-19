@@ -45,11 +45,11 @@ class SalesMasterController extends Controller
      */
     public function addSalesMaster(Request $request) {
         try {
-            $salesMasterId = $this->addSalesMasterService->addSalesMaster($request);
+            $salesMasterDTO = $this->addSalesMasterService->addSalesMaster($request);
 
             return response()->json([
                 'status' => 'success',
-                'data' => $salesMasterId,
+                'data' => $salesMasterDTO,
             ]);
         } catch (Exception $e) {
             return response()->json([

@@ -34,7 +34,7 @@ class AddSalesMasterRepository {
 
             $salesMaster->save();
 
-            return $salesMaster->id;
+            return $salesMaster;
         } catch (Exception $e) {
             throw $e;
         }

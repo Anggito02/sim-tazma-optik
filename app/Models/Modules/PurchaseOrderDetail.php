@@ -45,4 +45,20 @@ class PurchaseOrderDetail extends Model
     {
         return $this->belongsTo(Item::class, 'item_id');
     }
+
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    // Receive Order
+    public function receiveOrder()
+    {
+        return $this->belongsTo(ReceiveOrder::class, 'receive_order_id');
+    }
+
+    // Sales Detail
+    public function salesDetails()
+    {
+        return $this->hasMany(SalesDetail::class);
+    }
 }

@@ -38,4 +38,14 @@ class SalesMaster extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    public function salesDetails()
+    {
+        return $this->hasMany(SalesDetail::class);
+    }
+
 }
