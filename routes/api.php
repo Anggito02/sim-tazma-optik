@@ -28,6 +28,7 @@ use App\Http\Controllers\Modules\StockOpnameDetailController;
 use App\Http\Controllers\Modules\StockOpnameBranchController;
 use App\Http\Controllers\Modules\StockOpnameBranchDetailController;
 use App\Http\Controllers\Modules\CustomerDiagnoseController;
+use App\Http\Controllers\Modules\SalesMasterController;
 
 use App\Http\Controllers\Modules\Monitoring\Stock\StockInController;
 use App\Http\Controllers\Modules\Monitoring\Stock\StockOutController;
@@ -220,6 +221,9 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
 
     /* Customer Diagnose Controllers */
     Route::post('/customer-diagnose/add', [CustomerDiagnoseController::class, 'addCustomerDiagnose'])->name('addCustomerDiagnose');
+
+    /* Sales Master Controllers */
+    Route::get('/sales-master/all', [SalesMasterController::class, 'getAllSalesMaster'])->name('getAllSalesMaster');
 
     /* Monitoring Routes */
     Route::get('/monitoring/stock-in/all', [StockInController::class, 'getAllStockIn'])->name('getAllStockIn');
