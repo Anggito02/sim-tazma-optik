@@ -74,13 +74,13 @@ class GetItemFilteredRepository {
                     $item = $item
                         ->join('brands', 'items.brand_id', '=', 'brands.id')
                         ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
-                        ->join('frame_categories', 'items.frame_frame_category_id', '=', 'frame_categories.id')
+                        ->join('categories', 'items.categories_id', '=', 'categories.id')
                         ->join('colors', 'items.frame_color_id', '=', 'colors.id')
                         ->select(
                             'items.*',
                             'brands.nama_brand',
                             'vendors.nama_vendor',
-                            'frame_categories.nama_kategori',
+                            'categories.nama_kategori',
                             'colors.color_name',
                         )
                         ->first();
@@ -89,13 +89,13 @@ class GetItemFilteredRepository {
                     $item = $item
                         ->join('brands', 'items.brand_id', '=', 'brands.id')
                         ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
-                        ->join('lens_categories', 'items.lensa_lens_category_id', '=', 'lens_categories.id')
+                        ->join('categories', 'items.categories_id', '=', 'categories.id')
                         ->join('indices', 'items.lensa_index_id', '=', 'indices.id')
                         ->select(
                             'items.*',
                             'brands.nama_brand',
                             'vendors.nama_vendor',
-                            'lens_categories.nama_kategori',
+                            'categories.nama_kategori',
                             'indices.value',
                         )
                         ->first();
@@ -103,10 +103,12 @@ class GetItemFilteredRepository {
                     $item = $item
                         ->join('brands', 'items.brand_id', '=', 'brands.id')
                         ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
+                        ->join('categories', 'items.categories_id', '=', 'categories.id')
                         ->select(
                             'items.*',
                             'brands.nama_brand',
                             'vendors.nama_vendor',
+                            'categories.nama_kategori',
                         )
                         ->first();
                 }
@@ -124,6 +126,7 @@ class GetItemFilteredRepository {
                     $item->deleteable,
 
                     // Frame
+                    $item->frame_sku_vendor,
                     $item->frame_sub_kategori,
                     $item->frame_kode,
 
@@ -133,7 +136,6 @@ class GetItemFilteredRepository {
 
                     // Accessory
                     $item->aksesoris_nama_item,
-                    $item->aksesoris_kategori,
 
                     // Foreign Keys
                     // BRAND //
@@ -144,15 +146,15 @@ class GetItemFilteredRepository {
                     $item->vendor_id,
                     $item->nama_vendor,
 
-                    // FRAME //
-                    $item->frame_frame_category_id,
+                    // CATEGORY //
+                    $item->category_id,
                     $item->nama_kategori,
+
+                    // FRAME //
                     $item->frame_color_id,
                     $item->color_name,
 
                     // LENS //
-                    $item->lensa_lens_category_id,
-                    $item->nama_kategori,
                     $item->lensa_index_id,
                     $item->value,
                 );

@@ -27,13 +27,14 @@ class AddItemService {
                 'deskripsi' => 'required',
 
                 // Kebutuhan penamaan otomatis
-                'sku_vendor' => 'required',
+                'nama_kategori' => 'required',
                 'nama_brand_item' => 'required|exists:brands,nama_brand',
                 'warna_item' => 'required_if:jenis_item,frame|nullable',
 
                 'index_lensa' => 'required_if:jenis_item,lensa|nullable',
 
                 // Frame
+                'frame_sku_vendor' => 'required_if:jenis_item,frame|nullable',
                 'frame_sub_kategori' => 'required_if:jenis_item,frame|nullable',
                 'frame_kode' => 'required_if:jenis_item,frame|nullable',
 
@@ -43,27 +44,23 @@ class AddItemService {
 
                 // Accessory
                 'aksesoris_nama_item' => 'required_if:jenis_item,aksesoris|nullable',
-                'aksesoris_kategori' => 'required_if:jenis_item,aksesoris|nullable',
 
                 // Foreign Keys
-                // BRAND //
                 'brand_id' => 'required|exists:brands,id',
-
                 'vendor_id' => 'required|exists:vendors,id',
+                'category_id' => 'required|exists:categories,id',
 
                 // FRAME //
-                'frame_frame_category_id' => 'required_if:jenis_item,frame|exists:frame_categories,id|nullable',
                 'frame_color_id' => 'required_if:jenis_item,frame|exists:colors,id|nullable',
 
                 // LENS //
-                'lensa_lens_category_id' => 'required_if:jenis_item,lensa|exists:lens_categories,id|nullable',
                 'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indices,id|nullable',
             ]);
 
             // Auto naming kode_item
             $kode_item = "";
             if ($request->jenis_item == 'frame') {
-                $kode_item = $request->nama_brand_item.'-'.$request->sku_vendor.'-';
+                $kode_item = $request->nama_brand_item.'-'.$request->frame_sku_vendor.'-';
 
                 $kode_warna = explode(" ", $request->warna_item);
                 foreach ($kode_warna as $warna) {
@@ -76,7 +73,7 @@ class AddItemService {
             }
 
             if ($request->jenis_item == 'aksesoris') {
-                $kode_item = $request->aksesoris_nama_item.'-'.$request->nama_brand_item.'-'.$request->aksesoris_kategori;
+                $kode_item = $request->aksesoris_nama_item.'-'.$request->nama_brand_item.'-'.$request->nama_kategori;
             }
 
             $itemDTO = new NewItemDTO(
@@ -85,6 +82,7 @@ class AddItemService {
                 $request->deskripsi,
 
                 // Frame
+                $request->frame_sku_vendor,
                 $request->frame_sub_kategori,
                 $request->frame_kode,
 
@@ -94,7 +92,6 @@ class AddItemService {
 
                 // Accessory
                 $request->aksesoris_nama_item,
-                $request->aksesoris_kategori,
 
                 // Foreign Keys
                 // BRAND //
@@ -103,12 +100,13 @@ class AddItemService {
                 // VENDOR //
                 $request->vendor_id,
 
+                // CATEGORY //
+                $request->category_id,
+
                 // FRAME //
-                $request->frame_frame_category_id,
                 $request->frame_color_id,
 
                 // LENS //
-                $request->lensa_lens_category_id,
                 $request->lensa_index_id,
             );
 

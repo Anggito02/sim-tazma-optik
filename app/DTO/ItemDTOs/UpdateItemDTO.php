@@ -14,6 +14,7 @@ class UpdateItemDTO {
         private ?string $qr_path,
 
         // Frame
+        private ?string $frame_sku_vendor,
         private ?string $frame_sub_kategori,
         private ?string $frame_kode,
 
@@ -23,7 +24,6 @@ class UpdateItemDTO {
 
         // Accessory
         private ?string $aksesoris_nama_item,
-        private ?string $aksesoris_kategori,
 
         // Foreign Keys
         // BRAND //
@@ -32,12 +32,13 @@ class UpdateItemDTO {
         // VENDOR //
         private int $vendor_id,
 
+        // CATEGORY //
+        private int $category_id,
+
         // FRAME //
-        private ?int $frame_frame_category_id,
         private ?int $frame_color_id,
 
         // LENS //
-        private ?int $lensa_lens_category_id,
         private ?int $lensa_index_id,
     )
     {}
@@ -75,6 +76,10 @@ class UpdateItemDTO {
     }
 
     // Frame
+    public function getFrameSkuVendor(): ?string {
+        return $this->frame_sku_vendor;
+    }
+
     public function getFrameSubKategori(): ?string {
         return $this->frame_sub_kategori;
     }
@@ -97,10 +102,6 @@ class UpdateItemDTO {
         return $this->aksesoris_nama_item;
     }
 
-    public function getAksesorisKategori(): ?string {
-        return $this->aksesoris_kategori;
-    }
-
     // Foreign Keys
     // BRAND //
     public function getBrandId(): ?int {
@@ -112,20 +113,17 @@ class UpdateItemDTO {
         return $this->vendor_id;
     }
 
-    // FRAME //
-    public function getFrameFrameCategoryId(): ?int {
-        return $this->frame_frame_category_id;
+    // CATEGORY //
+    public function getCategoryId(): ?int {
+        return $this->category_id;
     }
 
+    // FRAME //
     public function getFrameColorId(): ?int {
         return $this->frame_color_id;
     }
 
     // LENS //
-    public function getLensaLensCategoryId(): ?int {
-        return $this->lensa_lens_category_id;
-    }
-
     public function getLensaIndexId(): ?int {
         return $this->lensa_index_id;
     }

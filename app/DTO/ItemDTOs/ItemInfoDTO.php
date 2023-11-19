@@ -16,6 +16,7 @@ class ItemInfoDTO {
         private bool $deleteable,
 
         // Frame
+        private ?string $frame_sku_vendor,
         private ?string $frame_sub_kategori,
         private ?string $frame_kode,
 
@@ -25,7 +26,6 @@ class ItemInfoDTO {
 
         // Accessory
         private ?string $aksesoris_nama_item,
-        private ?string $aksesoris_kategori,
 
         // Foreign Keys
         // BRAND //
@@ -36,15 +36,15 @@ class ItemInfoDTO {
         private int $vendor_id,
         private string $nama_vendor,
 
+        // CATEGORY //
+        private int $category_id,
+        private string $nama_kategori,
+
         // FRAME //
-        private ?int $frame_frame_category_id,
-        private ?string $frame_nama_kategori,
         private ?int $frame_color_id,
         private ?string $frame_nama_warna,
 
         // LENS //
-        private ?int $lensa_lens_category_id,
-        private ?string $lensa_nama_kategori,
         private ?int $lensa_index_id,
         private ?string $lensa_nama_index,
     )
@@ -64,6 +64,7 @@ class ItemInfoDTO {
             'deleteable' => $this->deleteable,
 
             // Frame
+            'frame_sku_vendor' => $this->frame_sku_vendor,
             'frame_sub_kategori' => $this->frame_sub_kategori,
             'frame_kode' => $this->frame_kode,
 
@@ -73,7 +74,6 @@ class ItemInfoDTO {
 
             // Accessory
             'aksesoris_nama_item' => $this->aksesoris_nama_item,
-            'aksesoris_kategori' => $this->aksesoris_kategori,
 
             // Foreign Keys
             // BRAND //
@@ -84,15 +84,15 @@ class ItemInfoDTO {
             'vendor_id' => $this->vendor_id,
             'nama_vendor' => $this->nama_vendor,
 
+            // CATEGORY //
+            'category_id' => $this->category_id,
+            'nama_kategori' => $this->nama_kategori,
+
             // FRAME //
-            'frame_frame_category_id' => $this->frame_frame_category_id,
-            'frame_nama_kategori' => $this->frame_nama_kategori,
             'frame_color_id' => $this->frame_color_id,
             'frame_nama_warna' => $this->frame_nama_warna,
 
             // LENS //
-            'lensa_lens_category_id' => $this->lensa_lens_category_id,
-            'lensa_nama_kategori' => $this->lensa_nama_kategori,
             'lensa_index_id' => $this->lensa_index_id,
             'lensa_nama_index' => $this->lensa_nama_index,
         ];
@@ -139,6 +139,9 @@ class ItemInfoDTO {
     }
 
     // Frame
+    public function getFrameSkuVendor(): ?string {
+        return $this->frame_sku_vendor;
+    }
     public function getFrameSubKategori(): ?string {
         return $this->frame_sub_kategori;
     }
@@ -161,10 +164,6 @@ class ItemInfoDTO {
         return $this->aksesoris_nama_item;
     }
 
-    public function getAksesorisKategori(): ?string {
-        return $this->aksesoris_kategori;
-    }
-
     // Foreign Keys
     // BRAND //
     public function getBrandId(): int {
@@ -184,15 +183,16 @@ class ItemInfoDTO {
         return $this->nama_vendor;
     }
 
+    // CATEGORY //
+    public function getCategoryId(): int {
+        return $this->category_id;
+    }
+
+    public function getNamaKategori(): string {
+        return $this->nama_kategori;
+    }
+
     // FRAME //
-    public function getFrameFrameCategoryId(): ?int {
-        return $this->frame_frame_category_id;
-    }
-
-    public function getFrameNamaKategori(): ?string {
-        return $this->frame_nama_kategori;
-    }
-
     public function getFrameColorId(): ?int {
         return $this->frame_color_id;
     }
@@ -202,14 +202,6 @@ class ItemInfoDTO {
     }
 
     // LENS //
-    public function getLensaLensCategoryId(): ?int {
-        return $this->lensa_lens_category_id;
-    }
-
-    public function getLensaNamaKategori(): ?string {
-        return $this->lensa_nama_kategori;
-    }
-
     public function getLensaIndexId(): ?int {
         return $this->lensa_index_id;
     }

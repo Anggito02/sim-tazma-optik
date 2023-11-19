@@ -9,6 +9,7 @@ class NewItemDTO {
         private string $deskripsi,
 
         // Frame
+        private ?string $frame_sku_vendor,
         private ?string $frame_sub_kategori,
         private ?string $frame_kode,
 
@@ -18,7 +19,6 @@ class NewItemDTO {
 
         // Accessory
         private ?string $aksesoris_nama_item,
-        private ?string $aksesoris_kategori,
 
         // Foreign Keys
         // BRAND //
@@ -27,12 +27,13 @@ class NewItemDTO {
         // VENDOR //
         private int $vendor_id,
 
+        // CATEGORY //
+        private int $category_id,
+
         // FRAME //
-        private ?int $frame_frame_category_id,
         private ?int $frame_color_id,
 
         // LENS //
-        private ?int $lensa_lens_category_id,
         private ?int $lensa_index_id,
     )
     {}
@@ -63,6 +64,10 @@ class NewItemDTO {
 
 
     // Frame
+    public function getFrameSkuVendor(): ?string {
+        return $this->frame_sku_vendor;
+    }
+
     public function getFrameSubKategori(): ?string {
         return $this->frame_sub_kategori;
     }
@@ -105,14 +110,6 @@ class NewItemDTO {
         $this->aksesoris_nama_item = $aksesoris_nama_item;
     }
 
-    public function getAksesorisKategori(): ?string {
-        return $this->aksesoris_kategori;
-    }
-
-    public function setAksesorisKategori(?string $aksesoris_kategori): void {
-        $this->aksesoris_kategori = $aksesoris_kategori;
-    }
-
     // Foreign Keys
     // BRAND //
     public function getBrandId(): int {
@@ -132,15 +129,16 @@ class NewItemDTO {
         $this->vendor_id = $vendor_id;
     }
 
+    // CATEGORY //
+    public function getCategoryId(): int {
+        return $this->category_id;
+    }
+
+    public function setCategoryId(int $category_id): void {
+        $this->category_id = $category_id;
+    }
+
     // FRAME //
-    public function getFrameFrameCategoryId(): ?int {
-        return $this->frame_frame_category_id;
-    }
-
-    public function setFrameFrameCategoryId(?int $frame_frame_category_id): void {
-        $this->frame_frame_category_id = $frame_frame_category_id;
-    }
-
     public function getFrameColorId(): ?int {
         return $this->frame_color_id;
     }
@@ -150,14 +148,6 @@ class NewItemDTO {
     }
 
     // LENS //
-    public function getLensaLensCategoryId(): ?int {
-        return $this->lensa_lens_category_id;
-    }
-
-    public function setLensaLensCategoryId(?int $lensa_lens_category_id): void {
-        $this->lensa_lens_category_id = $lensa_lens_category_id;
-    }
-
     public function getLensaIndexId(): ?int {
         return $this->lensa_index_id;
     }

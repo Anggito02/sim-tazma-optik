@@ -17,8 +17,7 @@ class DatabaseSeeder extends Seeder
             ColorSeeder::class,
             BrandSeeder::class,
             IndexSeeder::class,
-            LensCategorySeeder::class,
-            FrameCategorySeeder::class,
+            CategorySeeder::class,
         ]);
 
         $this->call([
