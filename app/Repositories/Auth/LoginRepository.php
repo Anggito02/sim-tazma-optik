@@ -33,6 +33,7 @@ class LoginRepository {
                 null,
                 $user->username,
                 $user->nik,
+                $user->nip,
                 $user->employee_name,
                 null,
                 $user->gender,
