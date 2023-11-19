@@ -4,53 +4,53 @@ namespace App\Repositories\Modules\Item;
 
 use Exception;
 
-use App\DTO\ItemDTOs\ItemDTO;
+use App\DTO\ItemDTOs\UpdateItemDTO;
 use App\Models\Modules\Item;
 
 class EditItemRepository {
     /**
      * Edit item
-     * @param ItemDTO $itemDTO
+     * @param UpdateItemDTO $itemDTO
      * @return ItemDTO
      */
-    public function editItem(ItemDTO $itemDTO) {
+    public function editItem(UpdateItemDTO $itemDTO) {
         try {
-            $item = Item::find($itemDTO->id);
+            $item = Item::find($itemDTO->getId());
 
-            $item->jenis_item = $itemDTO->jenis_item;
-            $item->deskripsi = $itemDTO->deskripsi;
-            $item->stok = $itemDTO->stok;
-            $item->harga_beli = $itemDTO->harga_beli;
-            $item->harga_jual = $itemDTO->harga_jual;
-            $item->diskon = $itemDTO->diskon;
+            $item->kode_item = $itemDTO->getKodeItem();
+            $item->deskripsi = $itemDTO->getDeskripsi();
+            $item->stok = $itemDTO->getStok();
+            $item->harga_beli = $itemDTO->getHargaBeli();
+            $item->harga_jual = $itemDTO->getHargaJual();
+            $item->diskon = $itemDTO->getDiskon();
+            $item->qr_path = $itemDTO->getQrPath();
 
             // Frame
-            $item->frame_sku_vendor = $itemDTO->frame_sku_vendor;
-            $item->frame_sub_kategori = $itemDTO->frame_sub_kategori;
-            $item->frame_kode = $itemDTO->frame_kode;
+            $item->frame_sub_kategori = $itemDTO->getFrameSubKategori();
+            $item->frame_kode = $itemDTO->getFrameKode();
 
             // Lens
-            $item->lensa_jenis_produk = $itemDTO->lensa_jenis_produk;
-            $item->lensa_jenis_lensa = $itemDTO->lensa_jenis_lensa;
+            $item->lensa_jenis_produk = $itemDTO->getLensaJenisProduk();
+            $item->lensa_jenis_lensa = $itemDTO->getLensaJenisLensa();
 
             // Accessory
-            $item->aksesoris_nama_item = $itemDTO->aksesoris_nama_item;
-            $item->aksesoris_kategori = $itemDTO->aksesoris_kategori;
+            $item->aksesoris_nama_item = $itemDTO->getAksesorisNamaItem();
+            $item->aksesoris_kategori = $itemDTO->getAksesorisKategori();
 
             // Foreign Keys
+            // BRAND //
+            $item->brand_id = $itemDTO->getBrandId();
+
+            // VENDOR //
+            $item->vendor_id = $itemDTO->getVendorId();
+
             // FRAME //
-            $item->frame_frame_category_id = $itemDTO->frame_frame_category_id;
-            $item->frame_brand_id = $itemDTO->frame_brand_id;
-            $item->frame_vendor_id = $itemDTO->frame_vendor_id;
-            $item->frame_color_id = $itemDTO->frame_color_id;
+            $item->frame_frame_category_id = $itemDTO->getFrameFrameCategoryId();
+            $item->frame_color_id = $itemDTO->getFrameColorId();
 
             // LENS //
-            $item->lensa_lens_category_id = $itemDTO->lensa_lens_category_id;
-            $item->lensa_brand_id = $itemDTO->lensa_brand_id;
-            $item->lensa_index_id = $itemDTO->lensa_index_id;
-
-            // ACCESSORY //
-            $item->aksesoris_brand_id = $itemDTO->aksesoris_brand_id;
+            $item->lensa_lens_category_id = $itemDTO->getLensaLensCategoryId();
+            $item->lensa_index_id = $itemDTO->getLensaIndexId();
 
             $item->save();
 

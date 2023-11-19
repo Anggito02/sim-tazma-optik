@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
         Branch::factory(10)->create();
 
 
-        $this->call([
-            ItemSeeder::class,
-        ]);
+        // $this->call([
+        //     ItemSeeder::class,
+        // ]);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Services\Modules\Item;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\ItemDTOs\ItemDTO;
+use App\DTO\ItemDTOs\ItemInfoDTO;
 
 use App\Repositories\Modules\Item\GetItemRepository;
 
@@ -17,7 +17,7 @@ class GetItemService {
     /**
      * Get item
      * @param Request $request
-     * @return ItemDTO
+     * @return ItemInfoDTO
      */
     public function getItem(Request $request) {
         try {

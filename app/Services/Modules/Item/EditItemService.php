@@ -2,20 +2,24 @@
 
 namespace App\Services\Modules\Item;
 
+use App\DTO\ItemDTOs\ItemQRInfoDTO;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\ItemDTOs\ItemDTO;
+use App\DTO\ItemDTOs\UpdateItemDTO;
 
 use App\Repositories\Modules\Item\EditItemRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
+use App\Services\Modules\Item\MakeItemQRService;
 use App\Repositories\Modules\Item\PriceLogProcedureRepository;
 use App\Repositories\Modules\Item\StockLogProcedureRepository;
+use Illuminate\Support\Facades\Storage;
 
 class EditItemService {
     public function __construct(
         private EditItemRepository $editItemRepository,
         private GetItemRepository $getItemRepository,
+        private MakeItemQRService $makeItemQRService,
 
         private PriceLogProcedureRepository $priceLogProcedureRepository,
         private StockLogProcedureRepository $stockLogProcedureRepository
@@ -24,7 +28,7 @@ class EditItemService {
     /**
      * Edit item
      * @param Request $request
-     * @return ItemDTO
+     * @return Item
      */
     public function editItem(Request $request) {
         try {
@@ -38,8 +42,14 @@ class EditItemService {
                 'harga_jual' => 'required',
                 'diskon' => 'required',
 
+                // Kebutuhan penamaan otomatis
+                'sku_vendor' => 'required',
+                'nama_brand_item' => 'required|exists:brands,nama_brand',
+                'warna_item' => 'required_if:jenis_item,frame|nullable',
+
+                'index_lensa' => 'required_if:jenis_item,lensa|nullable',
+
                 // Frame
-                'frame_sku_vendor' => 'required_if:jenis_item,frame|nullable',
                 'frame_sub_kategori' => 'required_if:jenis_item,frame|nullable',
                 'frame_kode' => 'required_if:jenis_item,frame|nullable',
 
@@ -52,29 +62,29 @@ class EditItemService {
                 'aksesoris_kategori' => 'required_if:jenis_item,aksesoris|nullable',
 
                 // Foreign Keys
+                // BRAND //
+                'brand_id' => 'required|exists:brands,id',
+
+                // VENDOR //
+                'vendor_id' => 'required|exists:vendors,id',
+
                 // FRAME //
                 'frame_frame_category_id' => 'required_if:jenis_item,frame|exists:frame_categories,id|nullable',
-                'frame_brand_id' => 'required_if:jenis_item,frame|exists:brands,id|nullable',
-                'frame_vendor_id' => 'required_if:jenis_item,frame|exists:vendors,id|nullable',
                 'frame_color_id' => 'required_if:jenis_item,frame|exists:colors,id|nullable',
 
                 // LENS //
                 'lensa_lens_category_id' => 'required_if:jenis_item,lensa|exists:lens_categories,id|nullable',
-                'lensa_brand_id' => 'required_if:jenis_item,lensa|exists:brands,id|nullable',
                 'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indices,id|nullable',
-
-                // ACCESSORY //
-                'aksesoris_brand_id' => 'required_if:jenis_item,aksesoris|exists:brands,id|nullable',
             ]);
 
             $itemDTO = $this->getItemRepository->getItem($request->id);
 
             // cek jika harga_beli / harga_jual berubah
-            if ((int)$itemDTO->harga_beli != $request->harga_beli) {
+            if ((int)$itemDTO->getHargaBeli() != $request->harga_beli) {
                 $this->priceLogProcedureRepository->priceLogProcedure(
                     'harga_beli',
                     date('Y-m-d H:i:s'),
-                    $itemDTO->harga_beli,
+                    $itemDTO->getHargaBeli(),
                     $request->harga_beli,
                     'manual',
                     $request->id,
@@ -82,11 +92,11 @@ class EditItemService {
                 );
             }
 
-            if ((int)$itemDTO->harga_jual != $request->harga_jual) {
+            if ((int)$itemDTO->getHargaJual() != $request->harga_jual) {
                 $this->priceLogProcedureRepository->priceLogProcedure(
                     'harga_jual',
                     date('Y-m-d H:i:s'),
-                    $itemDTO->harga_jual,
+                    $itemDTO->getHargaJual(),
                     $request->harga_jual,
                     'manual',
                     $request->id,
@@ -95,12 +105,12 @@ class EditItemService {
             }
 
             // cek jika stok berubah
-            if ((int)$itemDTO->stok != $request->stok) {
-                $bentuk_perubahan = (int)$itemDTO->stok > $request->stok ? 'pengurangan' : 'penambahan';
+            if ((int)$itemDTO->getStok() != $request->stok) {
+                $bentuk_perubahan = (int)$itemDTO->getStok() > $request->stok ? 'pengurangan' : 'penambahan';
                 $this->stockLogProcedureRepository->stockLogProcedure(
                     date('Y-m-d H:i:s'),
-                    $itemDTO->stok,
-                    $itemDTO->stok + $request->stok,
+                    $itemDTO->getStok(),
+                    $itemDTO->getStok() + $request->stok,
                     $request->stok,
                     $bentuk_perubahan,
                     $request->id,
@@ -109,18 +119,49 @@ class EditItemService {
                 );
             }
 
-            $itemDto = new ItemDTO(
+            // Auto naming kode_item
+            $kode_item = "";
+            if ($request->jenis_item == 'frame') {
+                $kode_item = $request->nama_brand_item.'-'.$request->sku_vendor.'-';
+
+                $kode_warna = explode(" ", $request->warna_item);
+                foreach ($kode_warna as $warna) {
+                    $kode_item .= substr($warna, 0, 3);
+                }
+            }
+
+            if ($request->jenis_item == 'lensa') {
+                $kode_item = $request->nama_brand_item.'-'.$request->lensa_jenis_produk.'-'.$request->index_lensa.'-'.$request->lensa_jenis_lensa;
+            }
+
+            if ($request->jenis_item == 'aksesoris') {
+                $kode_item = $request->aksesoris_nama_item.'-'.$request->nama_brand_item.'-'.$request->aksesoris_kategori;
+            }
+
+            // delete qr code lama
+            if ($itemDTO->getQrPath() != null) {
+                Storage::delete($itemDTO->getQrPath());
+            }
+
+            // generate qr code baru
+            $newQrPath = $this->makeItemQRService->makeItemQR(new ItemQRInfoDTO(
                 $request->id,
-                $request->jenis_item,
-                null,
+                $kode_item,
+                $request->harga_jual,
+                $request->diskon
+            ));
+
+            $itemDto = new UpdateItemDTO(
+                $request->id,
+                $kode_item,
                 $request->deskripsi,
                 $request->stok,
                 $request->harga_beli,
                 $request->harga_jual,
                 $request->diskon,
+                $newQrPath,
 
                 // Frame
-                $request->frame_sku_vendor,
                 $request->frame_sub_kategori,
                 $request->frame_kode,
 
@@ -133,19 +174,19 @@ class EditItemService {
                 $request->aksesoris_kategori,
 
                 // Foreign Keys
+                // BRAND //
+                $request->brand_id,
+
+                // VENDOR //
+                $request->vendor_id,
+
                 // FRAME //
                 $request->frame_frame_category_id,
-                $request->frame_brand_id,
-                $request->frame_vendor_id,
                 $request->frame_color_id,
 
                 // LENS //
                 $request->lensa_lens_category_id,
-                $request->lensa_brand_id,
                 $request->lensa_index_id,
-
-                // ACCESSORY //
-                $request->aksesoris_brand_id,
             );
 
             return $this->editItemRepository->editItem($itemDto);

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'password',
         'username',
         'nik',
+        'nip',
         'employee_name',
         'photo',
         'gender',

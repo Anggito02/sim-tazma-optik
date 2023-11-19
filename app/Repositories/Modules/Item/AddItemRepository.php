@@ -2,33 +2,33 @@
 
 namespace App\Repositories\Modules\Item;
 
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
 use Exception;
 
-use App\DTO\ItemDTOs\ItemDTO;
+use App\DTO\ItemDTOs\NewItemDTO;
+use App\DTO\ItemDTOs\ItemQRInfoDTO;
+
 use App\Models\Modules\Item;
-use Illuminate\Support\Facades\Storage;
+use App\Services\Modules\Item\MakeItemQRService;
 
 class AddItemRepository {
+    public function __construct(
+        private MakeItemQRService $makeItemQRService
+    )
+    {}
+
     /**
      * Add item
-     * @param ItemDTO $itemDTO
-     * @return ItemDTO
+     * @param NewItemDTO $itemDTO
+     * @return Item
      */
-    public function addItem(ItemDTO $itemDTO) {
+    public function addItem(NewItemDTO $itemDTO) {
         try {
             $newItem = new Item();
-            $newItem->kode_item = $itemDTO->getKodeItem();
             $newItem->jenis_item = $itemDTO->getJenisItem();
+            $newItem->kode_item = $itemDTO->getKodeItem();
             $newItem->deskripsi = $itemDTO->getDeskripsi();
-            $newItem->stok = $itemDTO->getStok();
-            $newItem->harga_beli = $itemDTO->getHargaBeli();
-            $newItem->harga_jual = $itemDTO->getHargaJual();
-            $newItem->diskon = $itemDTO->getDiskon();
 
             // Frame
-            $newItem->frame_sku_vendor = $itemDTO->getFrameSkuVendor();
             $newItem->frame_sub_kategori = $itemDTO->getFrameSubKategori();
             $newItem->frame_kode = $itemDTO->getFrameKode();
 
@@ -41,35 +41,25 @@ class AddItemRepository {
             $newItem->aksesoris_kategori = $itemDTO->getAksesorisKategori();
 
             // Foreign Keys
+            $newItem->brand_id = $itemDTO->getBrandId();
+
+            $newItem->vendor_id = $itemDTO->getVendorId();
+
             $newItem->frame_frame_category_id = $itemDTO->getFrameFrameCategoryId();
-            $newItem->frame_brand_id = $itemDTO->getFrameBrandId();
-            $newItem->frame_vendor_id = $itemDTO->getFrameVendorId();
             $newItem->frame_color_id = $itemDTO->getFrameColorId();
 
             $newItem->lensa_lens_category_id = $itemDTO->getLensaLensCategoryId();
-            $newItem->lensa_brand_id = $itemDTO->getLensaBrandId();
             $newItem->lensa_index_id = $itemDTO->getLensaIndexId();
-
-            $newItem->aksesoris_brand_id = $itemDTO->getAksesorisBrandId();
 
             $newItem->save();
 
-            // Json qr/barcode data
-            $qrData = [
-                'id' => $newItem->id,
-                'kode_item' => $newItem->kode_item,
-                'harga_jual' => $newItem->harga_jual,
-                'diskon' => $newItem->diskon,
-            ];
-
-            $qr = QrCode::size(500)
-                ->format('png')
-                ->generate(json_encode($qrData));
-
-            $qr_path = 'qr/item/' . $newItem->id . '_' . str_replace(' ', '-', $newItem->kode_item) . '.png';
-            Storage::put($qr_path, $qr);
-
-            $newItem->qr_path = $qr_path;
+            // Generate QR
+            $newItem->qr_path = $this->makeItemQRService->makeItemQR(new ItemQRInfoDTO(
+                $newItem->id,
+                $newItem->kode_item,
+                0,
+                0,
+            ));
 
             $newItem->save();
 

@@ -1,5 +1,7 @@
 <?php
 
+// [MIGHT BE DEPRECATED] Use GetItemFilteredService instead
+
 namespace App\Services\Modules\Item;
 
 use Exception;

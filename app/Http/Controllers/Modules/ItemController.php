@@ -33,7 +33,7 @@ class ItemController extends Controller
     /**
      * Get item by id
      * @param Request $request
-     * @return ItemDTO
+     * @return ItemInfoDTO
      */
     public function getItem(Request $request) {
         try {
@@ -54,9 +54,10 @@ class ItemController extends Controller
     }
 
     /**
+     * [MIGHT BE DEPRECATED] Use GetItemFilteredService instead
      * Get all item
      * @param Request $request
-     * @return ItemDTO
+     * @return ItemInfoDTO
      */
     public function getAllItem(Request $request) {
         try {
@@ -77,9 +78,10 @@ class ItemController extends Controller
     }
 
     /**
+     * [MIGHT BE DEPRECATED] Use GetItemFilteredService instead
      * Get all item with jenis
      * @param Request $request
-     * @return ItemDTO
+     * @return ItemInfoDTO
      */
     public function getAllItemWithJenis(Request $request) {
         try {
