@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 
 use App\DTO\Modules\PurchaseOrderDetail\UpdateStockPODetailDTO;
+use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailQRInfoDTO;
 
 use App\Repositories\Modules\PurchaseOrderDetail\UpdateStockPODetailRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
@@ -17,6 +18,8 @@ use App\Repositories\Modules\Item\StockLogProcedureRepository;
 use App\Repositories\Modules\Item\StockIn\CheckStockInRepository;
 use App\Repositories\Modules\Item\StockIn\AddStockInProcedureRepository;
 use App\Repositories\Modules\Item\StockIn\UpdateStockInProcedureRepository;
+
+use App\Services\Modules\PurchaseOrderDetail\MakePODetailQRService;
 
 class UpdateStockPODetailService {
     public function __construct(
@@ -30,17 +33,17 @@ class UpdateStockPODetailService {
         private AddStockInProcedureRepository $addStockInProcedureRepository,
         private UpdateStockInProcedureRepository $updateStockInProcedureRepository,
 
+        private MakePODetailQRService $makePODetailQRService,
     ) {}
 
     /**
      * Edit Purchase Order Detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
     public function editPurchaseOrderDetail(Request $request) {
         try {
             // Validate request
-            // NOTES : CAN ONLY EDIT RECEIVE QTY AND NOT GOOD QTY
             $request->validate([
                 'id' => 'required|exists:purchase_order_details,id',
                 'pre_order_qty' => 'required|gte:0',
@@ -52,15 +55,6 @@ class UpdateStockPODetailService {
                 'purchase_order_id' => 'required|exists:purchase_orders,id',
                 'receive_order_id' => 'nullable|exists:receive_orders,id',
             ]);
-
-            $poDetailDTO = new UpdateStockPODetailDTO(
-                $request->id,
-                $request->received_qty,
-                $request->not_good_qty,
-                $request->item_id,
-                $request->purchase_order_id,
-                $request->receive_order_id,
-            );
 
             // Get Item
             $itemDTO = $this->getItemRepository->getItem($request->item_id);
@@ -78,7 +72,7 @@ class UpdateStockPODetailService {
             );
 
             // update item stock
-            $itemDTO = new UpdateItemDTO(
+            $updatedItemDTO = new UpdateItemDTO(
                 $request->item_id,
                 $itemDTO->getKodeItem(),
                 $itemDTO->getDeskripsi(),
@@ -100,12 +94,12 @@ class UpdateStockPODetailService {
                 $itemDTO->getLensaIndexId(),
             );
 
-            $itemDTO = $this->editItemRepository->editItem($itemDTO);
+            $updatedItemDTO = $this->editItemRepository->editItem($updatedItemDTO);
 
-            if ($this->checkStockInRepository->checkStockInExistence($itemDTO->id, date('m'), date('Y'))) {
+            if ($this->checkStockInRepository->checkStockInExistence($updatedItemDTO->id, date('m'), date('Y'))) {
                 // update stok in
                 $this->updateStockInProcedureRepository->updateStockInProcedure(
-                    $itemDTO->kode_item,
+                    $updatedItemDTO->kode_item,
                     date('m'),
                     date('Y'),
                     $request->received_qty,
@@ -114,13 +108,31 @@ class UpdateStockPODetailService {
             } else {
                 // make new row in stok in
                 $this->addStockInProcedureRepository->addStockInProcedure(
-                    $itemDTO->kode_item,
+                    $updatedItemDTO->kode_item,
                     date('m'),
                     date('Y'),
                     $request->received_qty,
                     $request->item_id
                 );
             }
+
+            // Make PO Detail QR for item
+            $po_detail_qr_item_path = $this->makePODetailQRService->makePODetailQR(new PurchaseOrderDetailQRInfoDTO(
+                $request->purchase_order_id,
+                $itemDTO->getId(),
+                $itemDTO->getKodeItem(),
+                $itemDTO->getHargaJual()
+            ));
+
+            $poDetailDTO = new UpdateStockPODetailDTO(
+                $request->id,
+                $request->received_qty,
+                $request->not_good_qty,
+                $po_detail_qr_item_path,
+                $request->item_id,
+                $request->purchase_order_id,
+                $request->receive_order_id,
+            );
 
             $poDetailDTO = $this->poDetailRepository->editPurchaseOrderDetail($poDetailDTO);
 

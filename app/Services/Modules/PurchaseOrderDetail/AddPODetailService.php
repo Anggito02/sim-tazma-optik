@@ -6,7 +6,7 @@ use App\DTO\ItemDTOs\UpdateItemDTO;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
+use App\DTO\Modules\PurchaseOrderDetail\NewPurchaseOrderDetailDTO;
 use App\Repositories\Modules\PurchaseOrderDetail\AddPODetailRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
 use App\Repositories\Modules\Item\EditItemRepository;
@@ -27,7 +27,7 @@ class AddPODetailService {
     /**
      * Add Purchase Order Detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
     public function addPurchaseOrderDetail(Request $request) {
         try {
@@ -42,18 +42,14 @@ class AddPODetailService {
                 'purchase_order_id' => 'required|exists:purchase_orders,id',
             ]);
 
-            $poDetailDTO = new PurchaseOrderDetailDTO(
-                null,
+            $poDetailDTO = new NewPurchaseOrderDetailDTO(
                 $request->pre_order_qty,
-                null,
-                null,
                 $request->unit,
                 $request->harga_beli_satuan,
                 $request->harga_jual_satuan,
                 $request->diskon,
+                $request->item_id,
                 $request->purchase_order_id,
-                null,
-                $request->item_id
             );
 
             $itemDTO = $this->getItemRepository->getItem($request->item_id);

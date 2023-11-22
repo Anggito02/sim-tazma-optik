@@ -11,7 +11,7 @@ class EditItemRepository {
     /**
      * Edit item
      * @param UpdateItemDTO $itemDTO
-     * @return ItemDTO
+     * @return Item
      */
     public function editItem(UpdateItemDTO $itemDTO) {
         try {

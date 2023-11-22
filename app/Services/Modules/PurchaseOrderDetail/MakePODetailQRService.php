@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Services\Modules\Item;
+namespace App\Services\Modules\PurchaseOrderDetail;
 
 use Exception;
 
-use App\DTO\ItemDTOs\ItemQRInfoDTO;
+use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailQRInfoDTO;
 use Illuminate\Support\Facades\Storage;
 
 // [OUTER DEPENDENCIES] QR Code Generator
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-class MakeItemQRService {
+class MakePODetailQRService {
     /**
      * Make item QR
-     * @param ItemQRInfoDTO $itemQRInfoDTO
+     * @param PurchaseOrderDetailQRInfoDTO $poDetailQRInfoDTO
      * @return string $qr_path
      */
-    public function makeItemQR(ItemQRInfoDTO $itemQRInfoDTO) {
+    public function makePODetailQR(PurchaseOrderDetailQRInfoDTO $poDetailQRInfoDTO) {
         try {
 
             // Make QR
             $qr = QrCode::format('png')
                 ->size(500)
-                ->generate(json_encode($itemQRInfoDTO->getQRData()));
+                ->generate(json_encode($poDetailQRInfoDTO->getQRData()));
 
-            $qr_path = 'qr/item/'. $itemQRInfoDTO->getId() . '_' . str_replace(' ', '_', $itemQRInfoDTO->getKodeItem()) . '.png';
+            $qr_path = 'qr/po_detail/'. 'PO-' . $poDetailQRInfoDTO->getPoId() . '_' . 'Item-' . $poDetailQRInfoDTO->getItemId() . '.png';
 
             Storage::put($qr_path, $qr);
 

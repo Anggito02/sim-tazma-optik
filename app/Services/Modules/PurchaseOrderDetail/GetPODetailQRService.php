@@ -4,35 +4,36 @@ namespace App\Services\Modules\PurchaseOrderDetail;
 
 use Exception;
 use Illuminate\Http\Request;
-
-use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailInfoDTO;
+use Illuminate\Support\Facades\Storage;
 
 use App\Repositories\Modules\PurchaseOrderDetail\GetPODetailRepository;
 
-class GetPODetailService {
+class GetPODetailQRService {
     public function __construct(
         private GetPODetailRepository $poDetailRepository
     ) {}
 
     /**
-     * Get Purchase Order Detail
+     * Get Purchase Order Detail QR
      * @param Request $request
-     * @return PurchaseOrderDetailInfoDTO
+     * @return Image
      */
-    public function getPurchaseOrderDetail(Request $request) {
+    public function getPurchaseOrderDetailQR(Request $request) {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:purchase_order_details,id',
             ]);
 
             $id = $request->id;
 
             $poDetailDTO = $this->poDetailRepository->getPurchaseOrderDetail($id);
 
-            $poDetailDTO = $poDetailDTO->toArray();
+            $poDetailQRPath = $poDetailDTO->getQrItemPath();
 
-            return $poDetailDTO;
+            $poDetailQRImage = Storage::get($poDetailQRPath);
+
+            return $poDetailQRImage;
 
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
