@@ -70,7 +70,7 @@ class UpdateBranchStokService {
             if ($this->checkBranchStockInRepository->checkBranchStockIn($request->item_id, date('m'), date('Y'))) {
                 // update branch stok in
                 $this->updateBranchStockInProcedureRepository->updateBranchStockInProcedure(
-                    $itemDTO->kode_item,
+                    $itemDTO->getKodeItem(),
                     date('m'),
                     date('Y'),
                     $jumlah_perubahan,
@@ -79,7 +79,7 @@ class UpdateBranchStokService {
             } else {
                 // make new branch stok in
                 $this->addBranchStockInProcedureRepository->addBranchStockInProcedure(
-                    $itemDTO->kode_item,
+                    $itemDTO->getKodeItem(),
                     date('m'),
                     date('Y'),
                     $jumlah_perubahan,

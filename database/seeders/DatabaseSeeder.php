@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Branch::factory(10)->create();
-        Item::factory(2000)->create();
+        // Item::factory(2000)->create();
 
 
         // $this->call([

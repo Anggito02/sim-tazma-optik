@@ -2,6 +2,7 @@
 
 namespace App\Services\Modules\OutgoingDetail;
 
+use App\DTO\ItemDTOs\UpdateItemDTO;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -63,12 +64,31 @@ class VerifyOutgoingDetailService {
             // Get Item
             $itemDTO = $this->getItemRepository->getItem($request->item_id);
 
-            $stok_sebelum = $itemDTO->stok;
-            $stok_sesudah = $itemDTO->stok - $request->delivered_qty;
+            $stok_sebelum = $itemDTO->getStok();
+            $stok_sesudah = $itemDTO->getStok() - $request->delivered_qty;
 
             // Update item stock
-            $itemDTO->stok = $stok_sesudah;
-            $itemDTO = $this->editItemRepository->editItem($itemDTO);
+            $itemDTO = $this->editItemRepository->editItem(new UpdateItemDTO(
+                $itemDTO->getId(),
+                $itemDTO->getKodeItem(),
+                $itemDTO->getDeskripsi(),
+                $stok_sesudah,
+                $itemDTO->getHargaBeli(),
+                $itemDTO->getHargaJual(),
+                $itemDTO->getDiskon(),
+                $itemDTO->getQrPath(),
+                $itemDTO->getFrameSkuVendor(),
+                $itemDTO->getFrameSubKategori(),
+                $itemDTO->getFrameKode(),
+                $itemDTO->getLensaJenisProduk(),
+                $itemDTO->getLensaJenisLensa(),
+                $itemDTO->getAksesorisNamaItem(),
+                $itemDTO->getBrandId(),
+                $itemDTO->getVendorId(),
+                $itemDTO->getCategoryId(),
+                $itemDTO->getFrameColorId(),
+                $itemDTO->getLensaIndexId(),
+            ));
 
             // Add Global Stock Log
             $this->stockLogProcedureRepository->stockLogProcedure(
