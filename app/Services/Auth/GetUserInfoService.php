@@ -42,6 +42,7 @@ class GetUserInfoService {
                 null,
                 $user_username,
                 null,
+                null,
                 $user_employee_name,
                 null,
                 null,

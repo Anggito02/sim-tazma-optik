@@ -40,4 +40,10 @@ class Customer extends Model
     {
         return $this->hasMany(CustomerDiagnose::class, 'customer_id');
     }
+
+    // Sales Master
+    public function salesMasters()
+    {
+        return $this->hasMany(SalesMaster::class, 'customer_id');
+    }
 }

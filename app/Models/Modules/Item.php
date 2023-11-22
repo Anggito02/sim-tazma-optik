@@ -93,4 +93,10 @@ class Item extends Model
     {
         return $this->hasMany(OutgoingDetail::class, 'item_id');
     }
+
+    // Sales Detail
+    public function salesDetails()
+    {
+        return $this->hasMany(SalesDetail::class, 'item_id');
+    }
 }
