@@ -17,7 +17,7 @@ class GetAllPODetailService {
     /**
      * Get all Purchase Order Detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetailInfoDTO[]
      */
     public function getAllPurchaseOrderDetail(Request $request) {
         try {
@@ -28,9 +28,15 @@ class GetAllPODetailService {
                 'limit' => 'required',
             ]);
 
-            $poDetailDTO = $this->poDetailRepository->getAllPurchaseOrderDetail($request->page, $request->limit, $request->purchase_order_id);
+            $poDetailDTOs = $this->poDetailRepository->getAllPurchaseOrderDetail($request->page, $request->limit, $request->purchase_order_id);
 
-            return $poDetailDTO;
+            $poDetailArrays = [];
+
+            foreach ($poDetailDTOs as $poDetailDTO) {
+                array_push($poDetailArrays, $poDetailDTO->toArray());
+            }
+
+            return $poDetailArrays;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

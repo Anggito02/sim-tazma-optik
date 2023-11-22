@@ -4,18 +4,18 @@ namespace App\Repositories\Modules\PurchaseOrderDetail;
 
 use Exception;
 
-use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
+use App\DTO\Modules\PurchaseOrderDetail\EditPurchaseOrderDetailDTO;
 use App\Models\Modules\PurchaseOrderDetail;
 
 class EditPODetailRepository {
     /**
      * Edit Purchase Order Detail
-     * @param PurchaseOrderDetailDTO $purchaseOrderDetailDTO
-     * @return PurchaseOrderDetailDTO
+     * @param NewPurchaseOrderDetailDTO $purchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
-    public function editPurchaseOrderDetail(PurchaseOrderDetailDTO $poDetailDto) {
+    public function editPurchaseOrderDetail(EditPurchaseOrderDetailDTO $poDetailDto) {
         try {
-            $poDetail = PurchaseOrderDetail::find($poDetailDto->id);
+            $poDetail = PurchaseOrderDetail::find($poDetailDto->getId());
 
             $poDetail->pre_order_qty = $poDetailDto->getPreOrderQty();
             $poDetail->unit = $poDetailDto->getUnit();

@@ -4,19 +4,19 @@ namespace App\DTO\Modules\PurchaseOrderDetail;
 
 class UpdateStockPODetailDTO {
     public function __construct(
-        public int $id,
-        public int $received_qty,
-        public int $not_good_qty,
+        private int $id,
+        private int $received_qty,
+        private int $not_good_qty,
 
         // Foreign Keys
         // Item
-        public int $item_id,
+        private int $item_id,
 
         // Purchase Order
-        public int $purchase_order_id,
+        private int $purchase_order_id,
 
         // Receive Order
-        public int $receive_order_id
+        private int $receive_order_id
     )
     {}
 

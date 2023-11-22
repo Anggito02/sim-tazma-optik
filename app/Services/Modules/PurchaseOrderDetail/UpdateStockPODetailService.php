@@ -35,7 +35,7 @@ class UpdateStockPODetailService {
     /**
      * Edit Purchase Order Detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
     public function editPurchaseOrderDetail(Request $request) {
         try {

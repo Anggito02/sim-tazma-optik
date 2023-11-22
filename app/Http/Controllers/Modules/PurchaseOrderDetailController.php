@@ -28,7 +28,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Get purchase order detail by id
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetailInfoDTO
      */
     public function getPODetail(Request $request) {
         try {
@@ -51,7 +51,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Get all purchase order detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetailInfoDTO[]
      */
     public function getAllPODetail(Request $request) {
         try {
@@ -74,7 +74,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Add purchase order detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetai
      */
     public function addPODetail(Request $request) {
         try {
@@ -97,7 +97,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Edit purchase order detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
     public function editPODetail(Request $request) {
         try {
@@ -119,7 +119,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Update stock purchase order detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
     public function updateStockPODetail(Request $request) {
         try {
@@ -142,7 +142,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Delete purchase order detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
     public function deletePODetail(Request $request) {
         try {
