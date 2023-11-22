@@ -6,9 +6,10 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Services\Modules\PurchaseOrderDetail\GetAllPODetailService;
-use App\Services\Modules\PurchaseOrderDetail\AddPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\GetPODetailService;
+use App\Services\Modules\PurchaseOrderDetail\GetAllPODetailService;
+use App\Services\Modules\PurchaseOrderDetail\GetPODetailQRService;
+use App\Services\Modules\PurchaseOrderDetail\AddPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\EditPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\UpdateStockPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\DeletePODetailService;
@@ -17,9 +18,10 @@ class PurchaseOrderDetailController extends Controller
 {
     // Service Providers Constructs
     public function __construct(
-        private GetAllPODetailService $getAllPODetailService,
-        private AddPODetailService $addPODetailService,
         private GetPODetailService $getPODetailService,
+        private GetAllPODetailService $getAllPODetailService,
+        private GetPODetailQRService $getPODetailQRService,
+        private AddPODetailService $addPODetailService,
         private EditPODetailService $editPODetailService,
         private UpdateStockPODetailService $updateStockPODetailService,
         private DeletePODetailService $deletePODetailService
@@ -66,6 +68,25 @@ class PurchaseOrderDetailController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Get all purchase order detail failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Get purchase order detail QR
+     * @param Request $request
+     * @return Image
+     */
+    public function getPODetailQR(Request $request) {
+        try {
+            $poDetailQRImage = $this->getPODetailQRService->getPurchaseOrderDetailQR($request);
+
+            return response($poDetailQRImage)->header('Content-Type', 'image/png');
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get purchase order detail QR failed',
                 'data' => $error->getMessage()
             ], 400);
         }
