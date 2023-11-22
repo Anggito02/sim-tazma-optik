@@ -7,6 +7,7 @@ class UpdateStockPODetailDTO {
         private int $id,
         private int $received_qty,
         private int $not_good_qty,
+        private ?string $qr_item_path,
 
         // Foreign Keys
         // Item
@@ -30,6 +31,10 @@ class UpdateStockPODetailDTO {
 
     public function getNotGoodQty(): int {
         return $this->not_good_qty;
+    }
+
+    public function getQrItemPath(): ?string {
+        return $this->qr_item_path;
     }
 
     public function getItemId(): int {

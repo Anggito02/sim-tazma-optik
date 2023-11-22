@@ -5,8 +5,6 @@ namespace App\Services\Modules\PurchaseOrderDetail;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
-
 use App\Repositories\Modules\PurchaseOrderDetail\GetAllPODetailRepository;
 
 class GetAllPODetailService {
