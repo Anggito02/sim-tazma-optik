@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('qty');
 
             $table->foreignId('sales_master_id')->constrained('sales_masters')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('item_id')->constrained('items')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('branch_item_id')->constrained('branch_items')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('po_detail_id')->constrained('purchase_order_details')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('coa_id')->constrained('coas')->onDelete('cascade')->onUpdate('cascade');
 

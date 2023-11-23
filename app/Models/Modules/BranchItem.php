@@ -31,4 +31,10 @@ class BranchItem extends Model
     {
         return $this->belongsTo(Branch::class, 'branch_id');
     }
+
+    // Sales Detail
+    public function salesDetails()
+    {
+        return $this->hasMany(SalesDetail::class);
+    }
 }

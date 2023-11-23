@@ -15,7 +15,7 @@ class SalesDetail extends Model
         'harga',
         'qty',
         'sales_master_id',
-        'item_id',
+        'branch_item_id',
         'po_detail_id',
         'coa_id',
     ];
@@ -25,9 +25,9 @@ class SalesDetail extends Model
         return $this->belongsTo(SalesMaster::class);
     }
 
-    public function item()
+    public function branchItem()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(BranchItem::class);
     }
 
     public function purchaseOrderDetail()

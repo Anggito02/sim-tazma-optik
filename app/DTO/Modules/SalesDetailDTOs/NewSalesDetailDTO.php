@@ -8,7 +8,7 @@ class NewSalesDetailDTO {
         private float $harga,
         private int $qty,
         private int $sales_master_id,
-        private int $item_id,
+        private int $branch_item_id,
         private int $po_detail_id,
         private int $coa_id,
     )
@@ -34,9 +34,9 @@ class NewSalesDetailDTO {
         return $this->sales_master_id;
     }
 
-    public function getItemId(): int
+    public function getBranchItemId(): int
     {
-        return $this->item_id;
+        return $this->branch_item_id;
     }
 
     public function getPoDetailId(): int

@@ -23,7 +23,7 @@ class AddSalesDetailRepository {
             $salesDetail->qty = $newSalesDetailDTO->getQty();
 
             $salesDetail->sales_master_id = $newSalesDetailDTO->getSalesMasterId();
-            $salesDetail->item_id = $newSalesDetailDTO->getItemId();
+            $salesDetail->branch_item_id = $newSalesDetailDTO->getBranchItemId();
             $salesDetail->po_detail_id = $newSalesDetailDTO->getPoDetailId();
             $salesDetail->coa_id = $newSalesDetailDTO->getCoaId();
 
