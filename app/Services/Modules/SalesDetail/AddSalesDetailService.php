@@ -9,6 +9,7 @@ use App\Repositories\Modules\SalesDetail\AddSalesDetailRepository;
 
 use App\Services\Modules\BranchItem\UpdateBranchStokService;
 use App\Repositories\Modules\BranchItem\GetBranchItemRepository;
+use App\Services\Coa\AddCoaService;
 
 use App\DTO\Modules\SalesDetailDTOs\NewSalesDetailDTO;
 
@@ -17,6 +18,7 @@ class AddSalesDetailService {
         private AddSalesDetailRepository $addSalesDetailRepository,
 
         private UpdateBranchStokService $branchItemRepository,
+        private AddCoaService $addCoaService,
         private GetBranchItemRepository $getBranchItemRepository,
     )
     {}
@@ -37,28 +39,24 @@ class AddSalesDetailService {
                 'item_id' => 'required|exists:branch_items,id',
                 'branch_id' => 'required|exists:branches,id',
                 'po_detail_id' => 'required|exists:purchase_order_details,id',
-                'coa_id' => 'required|exists:coas,id',
             ]);
 
-            // Update item stock in branch
-            $this->branchItemRepository->updateBranchStok(new Request([
+            // Update item stock branch
+            $branchItem =  $this->branchItemRepository->updateBranchStok(new Request([
                 'item_id' => $request->item_id,
                 'branch_id' => $request->branch_id,
                 'jumlah_perubahan' => $request->qty,
                 'jenis_perubahan' => 'pengurangan',
             ]));
 
-            // Get branch item
-            $branchItem = $this->getBranchItemRepository->getBranchItem($request->item_id, $request->branch_id);
-
             $newSalesDetailDTO = new NewSalesDetailDTO(
                 $request->kode_item,
                 $request->harga,
                 $request->qty,
                 $request->sales_master_id,
-                $branchItem->getId(),
+                $branchItem->id,
                 $request->po_detail_id,
-                $request->coa_id,
+                1,
             );
 
             $salesDetailDTO = $this->addSalesDetailRepository->addSalesDetail($newSalesDetailDTO);

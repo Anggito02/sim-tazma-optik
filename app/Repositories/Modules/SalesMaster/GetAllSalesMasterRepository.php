@@ -18,7 +18,7 @@ class GetAllSalesMasterRepository {
      */
     public function getAllSalesMaster(int $page, int $limit, int $branch_id) {
         try {
-            $branch_filter = $branch_id == 0 ? "" : "branch_id = $branch_id";
+            $branch_filter = $branch_id == 0 || $branch_id == 1 ? "" : "branch_id = $branch_id";
 
             $salesMasters = SalesMaster::whereRaw($branch_filter)
                 ->join('branches', 'sales_masters.branch_id', '=', 'branches.id')

@@ -224,6 +224,8 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
 
     /* Sales Master Controllers */
     Route::get('/sales-master/all', [SalesMasterController::class, 'getAllSalesMaster'])->name('getAllSalesMaster');
+    Route::post('/sales-master/add', [SalesMasterController::class, 'addSalesMaster'])->name('addSalesMaster');
+    Route::put('/sales-master/edit', [SalesMasterController::class, 'updateSalesMaster'])->name('updateSalesMaster');
 
     /* Sales Detail Controllers */
     Route::post('/sales-detail/add', [SalesDetailController::class, 'addSalesDetail'])->name('addSalesDetail');

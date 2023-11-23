@@ -18,7 +18,7 @@ class GetAllSalesMasterService {
     /**
      * Get All Sales Master
      * @param Request $request
-     * @return SalesMasterInfoDTO[]
+     * @return array
      */
     public function getAllSalesMaster(Request $request) {
         try {
@@ -26,7 +26,7 @@ class GetAllSalesMasterService {
             $request->validate([
                 'page' => 'required|integer',
                 'limit' => 'required|integer',
-                'branch_id' => 'required|exists:branches,id',
+                'branch_id' => 'required|integer',
             ]);
 
             $page = $request->page;
@@ -35,7 +35,13 @@ class GetAllSalesMasterService {
 
             $salesMasterInfoDTOs = $this->getAllSalesMasterRepository->getAllSalesMaster($page, $limit, $branch_id);
 
-            return $salesMasterInfoDTOs;
+            $salesMasterInfoArrays = [];
+
+            foreach ($salesMasterInfoDTOs as $salesMasterInfoDTO) {
+                array_push($salesMasterInfoArrays, $salesMasterInfoDTO->toArray());
+            }
+
+            return $salesMasterInfoArrays;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

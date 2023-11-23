@@ -10,6 +10,10 @@ use App\DTO\CoaDTO;
 use App\Repositories\Coa\AddCoaRepository;
 
 class AddCoaService {
+    public function __construct(
+        private AddCoaRepository $addCoaRepository,
+    )
+    {}
     /**
      * Add coa
      * @param Request $request
@@ -31,8 +35,7 @@ class AddCoaService {
                 $request->kategori,
             );
 
-            $addCoaRepository = new AddCoaRepository();
-            $coa = $addCoaRepository->addCoa($coaDTO);
+            $coa = $this->addCoaRepository->addCoa($coaDTO);
 
             return $coa;
         } catch (Exception $error) {

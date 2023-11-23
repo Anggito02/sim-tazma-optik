@@ -15,6 +15,10 @@ use App\Repositories\Modules\BranchItem\GetBranchItemRepository;
 use App\Repositories\Modules\BranchItem\BranchStockIn\CheckBranchStockInRepository;
 use App\Repositories\Modules\BranchItem\BranchStockIn\AddBranchStockInProcedureRepository;
 use App\Repositories\Modules\BranchItem\BranchStockIn\UpdateBranchStockInProcedureRepository;
+use App\Repositories\Modules\BranchItem\BranchStockOut\CheckBranchStockOutRepository;
+use App\Repositories\Modules\BranchItem\BranchStockOut\AddBranchStockOutProcedureRepository;
+use App\Repositories\Modules\BranchItem\BranchStockOut\UpdateBranchStockOutProcedureRepository;
+
 
 use App\Repositories\Modules\BranchItem\BranchItemStockLogProcedureRepository;
 
@@ -28,6 +32,9 @@ class UpdateBranchStokService {
         private CheckBranchStockInRepository $checkBranchStockInRepository,
         private AddBranchStockInProcedureRepository $addBranchStockInProcedureRepository,
         private UpdateBranchStockInProcedureRepository $updateBranchStockInProcedureRepository,
+        private CheckBranchStockOutRepository $checkBranchStockOutRepository,
+        private AddBranchStockOutProcedureRepository $addBranchStockOutProcedureRepository,
+        private UpdateBranchStockOutProcedureRepository $updateBranchStockOutProcedureRepository,
 
         private BranchItemStockLogProcedureRepository $branchItemStockLogProcedure,
 
@@ -48,13 +55,7 @@ class UpdateBranchStokService {
                 'jenis_perubahan' => 'required|in:penambahan,pengurangan'
             ]);
 
-            $jumlah_perubahan = $request->jumlah_perubahan;
-
-            if ($request->jenis_perubahan == 'penambahan') {
-                $jumlah_perubahan = abs($jumlah_perubahan);
-            } else {
-                $jumlah_perubahan = -abs($jumlah_perubahan);
-            }
+            $jumlah_perubahan = abs($request->jumlah_perubahan);
 
             $updateStokBranchDTO = new UpdateStokBranchDTO(
                 $request->branch_id,
@@ -67,42 +68,83 @@ class UpdateBranchStokService {
             $itemDTO = $this->getItemRepository->getItem($request->item_id);
 
             // if branch stock in exist
-            if ($this->checkBranchStockInRepository->checkBranchStockIn($request->item_id, date('m'), date('Y'))) {
-                // update branch stok in
-                $this->updateBranchStockInProcedureRepository->updateBranchStockInProcedure(
-                    $itemDTO->getKodeItem(),
-                    date('m'),
-                    date('Y'),
-                    $jumlah_perubahan,
-                    $request->item_id
-                );
-            } else {
-                // make new branch stok in
-                $this->addBranchStockInProcedureRepository->addBranchStockInProcedure(
-                    $itemDTO->getKodeItem(),
-                    date('m'),
-                    date('Y'),
-                    $jumlah_perubahan,
-                    $request->item_id
-                );
+            if ($request->jenis_perubahan == 'penambahan') {
+                if ($this->checkBranchStockInRepository->checkBranchStockIn($request->item_id, date('m'), date('Y'))) {
+                    // update branch stok in
+                    $this->updateBranchStockInProcedureRepository->updateBranchStockInProcedure(
+                        $itemDTO->getKodeItem(),
+                        date('m'),
+                        date('Y'),
+                        $jumlah_perubahan,
+                        $request->item_id
+                    );
+                } else {
+                    // make new branch stok in
+                    $this->addBranchStockInProcedureRepository->addBranchStockInProcedure(
+                        $itemDTO->getKodeItem(),
+                        date('m'),
+                        date('Y'),
+                        $jumlah_perubahan,
+                        $request->item_id
+                    );
+                }
+            }
+            else if ($request->jenis_perubahan == 'pengurangan') {
+                if ($this->checkBranchStockOutRepository->checkBranchStockOut($request->item_id, date('m'), date('Y'))) {
+                    // update branch stok out
+                    $this->updateBranchStockOutProcedureRepository->updateBranchStockOutProcedure(
+                        $itemDTO->getKodeItem(),
+                        date('m'),
+                        date('Y'),
+                        $jumlah_perubahan,
+                        $request->item_id
+                    );
+                } else {
+                    // make new branch stok out
+                    $this->addBranchStockOutProcedureRepository->addBranchStockOutProcedure(
+                        $itemDTO->getKodeItem(),
+                        date('m'),
+                        date('Y'),
+                        $jumlah_perubahan,
+                        $request->item_id
+                    );
+                }
             }
 
             // Add branch item stock log
             // Get branch item
             $branchItemDTO = $this->getBranchItemRepository->getBranchItem($request->branch_id, $request->item_id);
 
-            // Add branch item stock log
-            $this->branchItemStockLogProcedure->branchItemStockLogProcedure(
-                date('Y-m-d H:i:s'),
-                $branchItemDTO->getStokBranch(),
-                $branchItemDTO->getStokBranch() + $jumlah_perubahan,
-                $jumlah_perubahan,
-                'penambahan',
-                false,
-                $branchItemDTO->getId()
-            );
+            if ($request->jenis_perubahan == 'penambahan') {
+                // Add branch item stock log
+                $this->branchItemStockLogProcedure->branchItemStockLogProcedure(
+                    date('Y-m-d H:i:s'),
+                    $branchItemDTO->getStokBranch(),
+                    $branchItemDTO->getStokBranch() + $jumlah_perubahan,
+                    $jumlah_perubahan,
+                    'penambahan',
+                    false,
+                    $branchItemDTO->getId()
+                );
+            } else if ($request->jenis_perubahan == 'pengurangan') {
+                // Add branch item stock log
+                $this->branchItemStockLogProcedure->branchItemStockLogProcedure(
+                    date('Y-m-d H:i:s'),
+                    $branchItemDTO->getStokBranch(),
+                    $branchItemDTO->getStokBranch() - $jumlah_perubahan,
+                    $jumlah_perubahan,
+                    'pengurangan',
+                    false,
+                    $branchItemDTO->getId()
+                );
+            }
 
             // Update Branch Item
+            if ($request->jenis_perubahan == 'penambahan')
+                $updateStokBranchDTO->setStokBerubah($jumlah_perubahan);
+            else if ($request->jenis_perubahan == 'pengurangan')
+                $updateStokBranchDTO->setStokBerubah(-$jumlah_perubahan);
+
             $branchItemDTO = $this->branchItemRepository->updateBranchStok($updateStokBranchDTO);
 
             return $branchItemDTO;

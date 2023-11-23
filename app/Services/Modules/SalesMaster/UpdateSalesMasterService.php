@@ -5,53 +5,53 @@ namespace App\Services\Modules\SalesMaster;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\Repositories\Modules\SalesMaster\AddSalesMasterRepository;
+use App\DTO\Modules\SalesMasterDTOs\UpdateSalesMasterDTO;
 
-use App\Services\Modules\SalesMaster\GenerateNoTransaksiService;
+use App\Repositories\Modules\SalesMaster\UpdateSalesMasterRepository;
 
-use App\DTO\Modules\SalesMasterDTOs\NewSalesMasterDTO;
-
-class AddSalesMasterService {
+class UpdateSalesMasterService {
     public function __construct(
-        private AddSalesMasterRepository $addSalesMasterRepository,
-
-        private GenerateNoTransaksiService $generateNoTransaksiService,
+        private UpdateSalesMasterRepository $updateSalesMasterRepository,
     )
     {}
 
     /**
-     * Add Sales Master
+     * Update Sales Master
      * @param Request $request
      * @return SalesMaster
      */
-    public function addSalesMaster(Request $request) {
+    public function updateSalesMaster(Request $request) {
         try {
             // Validate request
             $request->validate([
-                'ref_sales_id' => 'required',
+                'id' => 'required|integer',
+                'ref_sales_id' => 'required|integer',
+                'sistem_pembayaran' => 'required|string',
                 'nomor_kartu' => 'nullable|string',
                 'nomor_referensi' => 'nullable|string',
+                'dp' => 'required',
+                'total_tagihan' => 'required|integer',
+                'status' => 'required|string|in:DP,Lunas',
                 'branch_id' => 'required|exists:branches,id',
                 'employee_id' => 'required|exists:users,id',
                 'customer_id' => 'nullable|exists:customers,id',
             ]);
 
-            $nomor_transaksi = $this->generateNoTransaksiService->generateNoTransaksi($request->branch_id);
-
-            $tanggal_transaksi = date('Y-m-d H:i:s');
-
-            $newSalesMasterDTO = new NewSalesMasterDTO(
+            $updateSalesMasterDTO = new UpdateSalesMasterDTO(
+                $request->id,
                 $request->ref_sales_id,
-                $nomor_transaksi,
-                $tanggal_transaksi,
+                $request->sistem_pembayaran,
                 $request->nomor_kartu,
                 $request->nomor_referensi,
+                $request->dp,
+                $request->total_tagihan,
+                $request->status,
                 $request->branch_id,
                 $request->employee_id,
                 $request->customer_id,
             );
 
-            $salesMasterDTO = $this->addSalesMasterRepository->addSalesMaster($newSalesMasterDTO);
+            $salesMasterDTO = $this->updateSalesMasterRepository->updateSalesMaster($updateSalesMasterDTO);
 
             return $salesMasterDTO;
         } catch (Exception $e) {
