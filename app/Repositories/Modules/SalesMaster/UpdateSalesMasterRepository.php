@@ -23,7 +23,6 @@ class UpdateSalesMasterRepository {
             $salesMaster->nomor_kartu = $updateSalesMasterDTO->getNomorKartu();
             $salesMaster->nomor_referensi = $updateSalesMasterDTO->getNomorReferensi();
             $salesMaster->dp = $updateSalesMasterDTO->getDp();
-            $salesMaster->total_tagihan = $updateSalesMasterDTO->getTotalTagihan();
             $salesMaster->status = $updateSalesMasterDTO->getStatus();
 
             $salesMaster->branch_id = $updateSalesMasterDTO->getBranchId();

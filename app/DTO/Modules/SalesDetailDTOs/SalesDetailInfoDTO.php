@@ -6,7 +6,7 @@ class SalesDetailInfoDTO {
     public function __construct(
         private int $id,
         private string $kode_item,
-        private float $harga,
+        private int $harga,
         private int $qty,
         private int $sales_master_id,
         private int $branch_item_id,
@@ -14,6 +14,19 @@ class SalesDetailInfoDTO {
         private int $coa_id,
     )
     {}
+
+    public function toArray(): array {
+        return [
+            'id' => $this->id,
+            'kode_item' => $this->kode_item,
+            'harga' => $this->harga,
+            'qty' => $this->qty,
+            'sales_master_id' => $this->sales_master_id,
+            'branch_item_id' => $this->branch_item_id,
+            'po_detail_id' => $this->po_detail_id,
+            'coa_id' => $this->coa_id,
+        ];
+    }
 
     public function getId(): int
     {
@@ -25,7 +38,7 @@ class SalesDetailInfoDTO {
         return $this->kode_item;
     }
 
-    public function getHarga(): float
+    public function getHarga(): int
     {
         return $this->harga;
     }

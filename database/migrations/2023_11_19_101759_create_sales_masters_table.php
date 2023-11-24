@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nomor_kartu', 50)->nullable();
             $table->string('nomor_referensi', 50)->nullable();
             $table->double('dp')->nullable();
-            $table->integer('total_tagihan')->nullable();
+            $table->integer('total_tagihan')->default(0);
             $table->enum('status', ['DP', 'Lunas'])->nullable();
             $table->boolean('verified')->default(false);
 

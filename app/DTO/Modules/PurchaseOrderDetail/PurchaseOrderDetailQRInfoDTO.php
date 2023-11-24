@@ -7,7 +7,6 @@ class PurchaseOrderDetailQRInfoDTO {
         private int $po_id,
         private int $item_id,
         private string $kode_item,
-        private int $harga
     )
     {}
 
@@ -16,7 +15,6 @@ class PurchaseOrderDetailQRInfoDTO {
             'po_id' => $this->getPoId(),
             'item_id' => $this->getItemId(),
             'kode_item' => $this->getKodeItem(),
-            'harga' => $this->getHarga(),
         ];
     }
 
@@ -30,10 +28,6 @@ class PurchaseOrderDetailQRInfoDTO {
 
     public function getKodeItem(): string {
         return $this->kode_item;
-    }
-
-    public function getHarga(): int {
-        return $this->harga;
     }
 }
 

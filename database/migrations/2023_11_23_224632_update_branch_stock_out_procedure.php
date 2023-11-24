@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        DB::unprepared('DROP PROCEDURE IF EXISTS `update_branch_stock_out_procedure`');
     }
 };
