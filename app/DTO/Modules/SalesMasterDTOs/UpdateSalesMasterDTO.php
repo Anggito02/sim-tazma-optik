@@ -10,7 +10,6 @@ class UpdateSalesMasterDTO {
         private ?string $nomor_kartu,
         private ?string $nomor_referensi,
         private float $dp,
-        private int $total_tagihan,
         private string $status,
 
         private int $branch_id,
@@ -47,11 +46,6 @@ class UpdateSalesMasterDTO {
     public function getDp(): float
     {
         return $this->dp;
-    }
-
-    public function getTotalTagihan(): int
-    {
-        return $this->total_tagihan;
     }
 
     public function getStatus(): string

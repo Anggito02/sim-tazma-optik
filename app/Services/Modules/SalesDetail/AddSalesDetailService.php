@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 use App\Repositories\Modules\SalesDetail\AddSalesDetailRepository;
 
 use App\Services\Modules\BranchItem\UpdateBranchStokService;
-use App\Repositories\Modules\BranchItem\GetBranchItemRepository;
 use App\Services\Coa\AddCoaService;
+use App\Repositories\Modules\BranchItem\GetBranchItemRepository;
+use App\Repositories\Modules\Item\GetItemRepository;
 
 use App\DTO\Modules\SalesDetailDTOs\NewSalesDetailDTO;
 
@@ -20,6 +21,7 @@ class AddSalesDetailService {
         private UpdateBranchStokService $branchItemRepository,
         private AddCoaService $addCoaService,
         private GetBranchItemRepository $getBranchItemRepository,
+        private GetItemRepository $getItemRepository,
     )
     {}
 
@@ -33,28 +35,25 @@ class AddSalesDetailService {
             // Validate request
             $request->validate([
                 'kode_item' => 'required|string',
-                'harga' => 'required',
-                'qty' => 'required|integer',
                 'sales_master_id' => 'required|exists:sales_masters,id',
                 'item_id' => 'required|exists:branch_items,id',
                 'branch_id' => 'required|exists:branches,id',
                 'po_detail_id' => 'required|exists:purchase_order_details,id',
             ]);
 
-            // Update item stock branch
-            $branchItem =  $this->branchItemRepository->updateBranchStok(new Request([
-                'item_id' => $request->item_id,
-                'branch_id' => $request->branch_id,
-                'jumlah_perubahan' => $request->qty,
-                'jenis_perubahan' => 'pengurangan',
-            ]));
+            // Get branch item
+            $branchItem = $this->getBranchItemRepository->getBranchItem($request->branch_id, $request->item_id);
+
+            // Get item harga
+            $item = $this->getItemRepository->getItem($request->item_id);
+
+            $harga_item = $item->getHargaJual();
 
             $newSalesDetailDTO = new NewSalesDetailDTO(
                 $request->kode_item,
-                $request->harga,
-                $request->qty,
+                $harga_item,
                 $request->sales_master_id,
-                $branchItem->id,
+                $branchItem->getId(),
                 $request->po_detail_id,
                 1,
             );
