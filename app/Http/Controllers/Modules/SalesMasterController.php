@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Services\Modules\SalesMaster\GetAllSalesMasterService;
 use App\Services\Modules\SalesMaster\AddSalesMasterService;
 use App\Services\Modules\SalesMaster\UpdateSalesMasterService;
+use App\Services\Modules\SalesMaster\VerifySalesMasterService;
 
 class SalesMasterController extends Controller
 {
@@ -16,6 +17,7 @@ class SalesMasterController extends Controller
         private GetAllSalesMasterService $getAllSalesMasterService,
         private AddSalesMasterService $addSalesMasterService,
         private UpdateSalesMasterService $updateSalesMasterService,
+        private VerifySalesMasterService $verifySalesMasterService,
     )
     {}
 
@@ -73,6 +75,27 @@ class SalesMasterController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesMasterDTO,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * Verify Sales Master
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function verifySalesMaster(Request $request) {
+        try {
+            $salesMaster = $this->verifySalesMasterService->verifySalesMaster($request);
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $salesMaster,
             ]);
         } catch (Exception $e) {
             return response()->json([

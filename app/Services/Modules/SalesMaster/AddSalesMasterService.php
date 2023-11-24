@@ -29,8 +29,6 @@ class AddSalesMasterService {
             // Validate request
             $request->validate([
                 'ref_sales_id' => 'required',
-                'nomor_kartu' => 'nullable|string',
-                'nomor_referensi' => 'nullable|string',
                 'branch_id' => 'required|exists:branches,id',
                 'employee_id' => 'required|exists:users,id',
                 'customer_id' => 'nullable|exists:customers,id',

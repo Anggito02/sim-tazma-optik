@@ -14,6 +14,7 @@ class SalesMasterInfoDTO {
         private ?float $dp,
         private ?int $total_tagihan,
         private ?string $status,
+        private bool $verified,
 
         private int $branch_id,
         private string $nama_branch,
@@ -96,6 +97,11 @@ class SalesMasterInfoDTO {
     public function getStatus(): ?string
     {
         return $this->status;
+    }
+
+    public function getVerified(): bool
+    {
+        return $this->verified;
     }
 
     public function getBranchId(): int

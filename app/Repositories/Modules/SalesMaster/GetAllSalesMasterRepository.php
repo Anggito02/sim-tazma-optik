@@ -35,6 +35,7 @@ class GetAllSalesMasterRepository {
                     'sales_masters.dp',
                     'sales_masters.total_tagihan',
                     'sales_masters.status',
+                    'sales_masters.verified',
 
                     'sales_masters.branch_id',
                     'branches.nama_branch',
@@ -58,6 +59,7 @@ class GetAllSalesMasterRepository {
                     $salesMaster->dp,
                     $salesMaster->total_tagihan,
                     $salesMaster->status,
+                    $salesMaster->verified,
 
                     $salesMaster->branch_id,
                     $salesMaster->branch->nama_branch,

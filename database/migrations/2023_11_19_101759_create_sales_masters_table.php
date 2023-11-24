@@ -22,6 +22,7 @@ return new class extends Migration
             $table->double('dp')->nullable();
             $table->integer('total_tagihan')->nullable();
             $table->enum('status', ['DP', 'Lunas'])->nullable();
+            $table->boolean('verified')->default(false);
 
             $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('employee_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
