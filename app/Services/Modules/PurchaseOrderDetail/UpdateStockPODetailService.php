@@ -120,8 +120,7 @@ class UpdateStockPODetailService {
             $po_detail_qr_item_path = $this->makePODetailQRService->makePODetailQR(new PurchaseOrderDetailQRInfoDTO(
                 $request->purchase_order_id,
                 $itemDTO->getId(),
-                $itemDTO->getKodeItem(),
-                $itemDTO->getHargaJual()
+                $itemDTO->getKodeItem()
             ));
 
             $poDetailDTO = new UpdateStockPODetailDTO(
