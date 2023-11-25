@@ -14,6 +14,8 @@ class AddBranchStockOutProcedureRepository {
      * @param int $last_stok_out_qty_branch
 
      * @param int $item_id
+     * @param int $branch_id
+     * @param int $branch_item_id
      */
 
     public function addBranchStockOutProcedure(
@@ -23,6 +25,8 @@ class AddBranchStockOutProcedureRepository {
         int $last_stok_out_qty_branch,
 
         int $item_id,
+        int $branch_id,
+        int $branch_item_id
     ) {
         try {
             $sqlStatement = "CALL add_branch_stock_out_procedure(
@@ -31,7 +35,9 @@ class AddBranchStockOutProcedureRepository {
                 $tahun,
                 $last_stok_out_qty_branch,
 
-                $item_id
+                $item_id,
+                $branch_id,
+                $branch_item_id
             )";
             DB::statement($sqlStatement);
         } catch (Exception $error) {

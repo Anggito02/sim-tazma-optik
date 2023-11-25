@@ -18,12 +18,12 @@ class GetAllSalesMasterRepository {
      */
     public function getAllSalesMaster(int $page, int $limit, int $branch_id) {
         try {
-            $branch_filter = $branch_id == 0 || $branch_id == 1 ? "" : "branch_id = $branch_id";
+            $branch_filter = $branch_id == 0 || $branch_id == 1 ? "" : "sales_masters.branch_id = $branch_id";
 
             $salesMasters = SalesMaster::whereRaw($branch_filter)
                 ->join('branches', 'sales_masters.branch_id', '=', 'branches.id')
                 ->join('users', 'sales_masters.employee_id', '=', 'users.id')
-                ->join('customers', 'sales_masters.customer_id', '=', 'customers.id')
+                ->leftJoin('customers', 'sales_masters.customer_id', '=', 'customers.id')
                 ->select(
                     'sales_masters.id',
                     'sales_masters.ref_sales_id',
@@ -44,7 +44,8 @@ class GetAllSalesMasterRepository {
                     'sales_masters.customer_id',
                     'customers.nama_depan',
                     'customers.nama_belakang',
-                );
+                )
+                ->paginate($limit, ['*'], 'page', $page);
 
             $salesMasterInfoDTOs = [];
             foreach ($salesMasters as $salesMaster) {
@@ -62,12 +63,12 @@ class GetAllSalesMasterRepository {
                     $salesMaster->verified,
 
                     $salesMaster->branch_id,
-                    $salesMaster->branch->nama_branch,
+                    $salesMaster->nama_branch,
                     $salesMaster->employee_id,
-                    $salesMaster->employee->employee_name,
+                    $salesMaster->employee_name,
                     $salesMaster->customer_id,
-                    $salesMaster->customer->nama_depan,
-                    $salesMaster->customer->nama_belakang,
+                    $salesMaster->nama_depan,
+                    $salesMaster->nama_belakang,
                 );
 
                 array_push($salesMasterInfoDTOs, $salesMasterInfoDTO);

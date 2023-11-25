@@ -18,7 +18,9 @@ return new class extends Migration
                IN bulan INT,
                IN tahun INT,
                IN last_stok_out_qty_branch INT,
-               IN item_id BIGINT
+               IN item_id BIGINT,
+                IN branch_id BIGINT,
+                IN branch_item_id BIGINT
            )
            BEGIN
                UPDATE branch_stock_out_logs
@@ -29,7 +31,9 @@ return new class extends Migration
                     kode_item = kode_item AND
                     bulan = bulan AND
                     tahun = tahun AND
-                    item_id = item_id;
+                    item_id = item_id AND
+                    branch_id = branch_id AND
+                    branch_item_id = branch_item_id
            END;
          ');
     }

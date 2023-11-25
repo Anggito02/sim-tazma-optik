@@ -16,8 +16,6 @@ use App\Repositories\Modules\Item\StockOut\CheckStockOutRepository;
 use App\Repositories\Modules\Item\StockOut\AddStockOutProcedureRepository;
 use App\Repositories\Modules\Item\StockOut\UpdateStockOutProcedureRepository;
 
-use App\Repositories\Modules\BranchItem\BranchStockIn\CheckBranchStockInRepository;
-
 use App\Repositories\Modules\ItemOutgoing\GetItemOutgoingRepository;
 
 use App\Repositories\Modules\BranchItem\CheckBranchItemExistenceRepository;
@@ -35,8 +33,6 @@ class VerifyOutgoingDetailService {
         private CheckStockOutRepository $checkStockOutRepository,
         private AddStockOutProcedureRepository $addStockOutProcedureRepository,
         private UpdateStockOutProcedureRepository $updateStockOutProcedureRepository,
-
-        private CheckBranchStockInRepository $checkBranchStockInRepository,
 
         private GetItemOutgoingRepository $getItemOutgoingRepository,
         private CheckBranchItemExistenceRepository $checkBranchItemExistenceRepository,

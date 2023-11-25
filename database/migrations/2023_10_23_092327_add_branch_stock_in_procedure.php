@@ -18,7 +18,9 @@ return new class extends Migration
                 IN bulan INT,
                 IN tahun INT,
                 IN last_stok_in_qty_branch INT,
-                IN item_id BIGINT
+                IN item_id BIGINT,
+                IN branch_id BIGINT,
+                IN branch_item_id BIGINT
             )
             BEGIN
                 INSERT INTO branch_stock_in_logs (
@@ -27,7 +29,9 @@ return new class extends Migration
                     tahun,
                     stok_total_branch,
                     last_stok_in_qty_branch,
-                    item_id
+                    item_id,
+                    branch_id,
+                    branch_item_id
                 )
                 VALUES (
                     kode_item,
@@ -35,7 +39,9 @@ return new class extends Migration
                     tahun,
                     last_stok_in_qty_branch,
                     last_stok_in_qty_branch,
-                    item_id
+                    item_id,
+                    branch_id,
+                    branch_item_id
                 );
             END;
         ');
