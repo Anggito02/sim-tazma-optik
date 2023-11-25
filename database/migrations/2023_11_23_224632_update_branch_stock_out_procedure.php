@@ -33,7 +33,7 @@ return new class extends Migration
                     tahun = tahun AND
                     item_id = item_id AND
                     branch_id = branch_id AND
-                    branch_item_id = branch_item_id
+                    branch_item_id = branch_item_id;
            END;
          ');
     }
