@@ -77,8 +77,6 @@ class GetItemRepository {
                     $item->value,
                 );
 
-            $itemDTO = $itemDTO->toArray();
-
             return $itemDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());

@@ -4,16 +4,16 @@ namespace App\Repositories\Modules\PurchaseOrderDetail;
 
 use Exception;
 
-use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
+use App\DTO\Modules\PurchaseOrderDetail\NewPurchaseOrderDetailDTO;
 use App\Models\Modules\PurchaseOrderDetail;
 
 class AddPODetailRepository {
     /**
      * Add Purchase Order Detail
-     * @param PurchaseOrderDetailDTO $purchaseOrderDetailDTO
+     * @param NewPurchaseOrderDetailDTO $purchaseOrderDetailDTO
      * @return PurchaseOrderDetailDTO
      */
-    public function addPurchaseOrderDetail(PurchaseOrderDetailDTO $poDetailDto) {
+    public function addPurchaseOrderDetail(NewPurchaseOrderDetailDTO $poDetailDto) {
         try {
             $poDetail = new PurchaseOrderDetail();
             $poDetail->pre_order_qty = $poDetailDto->getPreOrderQty();
@@ -23,7 +23,6 @@ class AddPODetailRepository {
             $poDetail->diskon = $poDetailDto->getDiskon();
 
             $poDetail->purchase_order_id = $poDetailDto->getPurchaseOrderId();
-            $poDetail->receive_order_id = $poDetailDto->getReceiveOrderId();
 
             $poDetail->item_id = $poDetailDto->getItemId();
             $poDetail->save();

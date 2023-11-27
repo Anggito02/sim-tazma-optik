@@ -64,9 +64,15 @@ class GetItemFilteredService {
                 $request->aksesoris_nama_item,
             );
 
-            $itemDTO = $this->itemRepository->getItemFiltered($itemFilterDTO);
+            $itemDTOs = $this->itemRepository->getItemFiltered($itemFilterDTO);
 
-            return $itemDTO;
+            $itemArrays = [];
+
+            foreach ($itemDTOs as $itemDTO) {
+                array_push($itemArrays, $itemDTO->toArray());
+            }
+
+            return $itemArrays;
 
         } catch (Exception $error) {
             throw new Exception($error->getMessage());

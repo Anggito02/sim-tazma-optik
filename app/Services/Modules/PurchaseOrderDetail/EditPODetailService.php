@@ -5,8 +5,7 @@ namespace App\Services\Modules\PurchaseOrderDetail;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
-
+use App\DTO\Modules\PurchaseOrderDetail\EditPurchaseOrderDetailDTO;
 use App\Repositories\Modules\PurchaseOrderDetail\EditPODetailRepository;
 use App\Repositories\Modules\Item\UpdateItemDeleteableRepository;
 
@@ -19,7 +18,7 @@ class EditPODetailService {
     /**
      * Edit Purchase Order Detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
     public function editPurchaseOrderDetail(Request $request) {
         try {
@@ -35,18 +34,14 @@ class EditPODetailService {
                 'item_id' => 'required|exists:items,id',
             ]);
 
-            $poDetailDTO = new PurchaseOrderDetailDTO(
+            $poDetailDTO = new EditPurchaseOrderDetailDTO(
                 $request->id,
                 $request->pre_order_qty,
-                null,
-                null,
                 $request->unit,
                 $request->harga_beli_satuan,
                 $request->harga_jual_satuan,
                 $request->diskon,
-                null,
-                null,
-                $request->item_id
+                $request->item_id,
             );
 
             // update item deleteable

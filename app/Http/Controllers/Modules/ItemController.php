@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 use App\Services\Modules\Item\AddItemService;
 use App\Services\Modules\Item\EditItemService;
 use App\Services\Modules\Item\DeleteItemService;
-use App\Services\Modules\Item\GetAllItemService;
-use App\Services\Modules\Item\GetAllItemWithJenisService;
 use App\Services\Modules\Item\GetItemService;
 use App\Services\Modules\Item\GetItemFilteredService;
 use App\Services\Modules\Item\GetQRItemService;
@@ -23,8 +21,6 @@ class ItemController extends Controller
         private AddItemService $addItemService,
         private EditItemService $editItemService,
         private DeleteItemService $deleteItemService,
-        private GetAllItemService $getAllItemService,
-        private GetAllItemWithJenisService $getAllItemWithJenisService,
         private GetItemService $getItemService,
         private GetItemFilteredService $getItemFilteredService,
         private GetQRItemService $getQRItemService
@@ -48,54 +44,6 @@ class ItemController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Get item failed',
-                'data' => $error->getMessage()
-            ], 400);
-        }
-    }
-
-    /**
-     * [MIGHT BE DEPRECATED] Use GetItemFilteredService instead
-     * Get all item
-     * @param Request $request
-     * @return ItemInfoDTO
-     */
-    public function getAllItem(Request $request) {
-        try {
-            $itemDTO = $this->getAllItemService->getAllItem($request);
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Get all item success',
-                'data' => $itemDTO
-            ], 200);
-        } catch (Exception $error) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Get all item failed',
-                'data' => $error->getMessage()
-            ], 400);
-        }
-    }
-
-    /**
-     * [MIGHT BE DEPRECATED] Use GetItemFilteredService instead
-     * Get all item with jenis
-     * @param Request $request
-     * @return ItemInfoDTO
-     */
-    public function getAllItemWithJenis(Request $request) {
-        try {
-            $itemDTO = $this->getAllItemWithJenisService->getAllItem($request);
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Get all item success',
-                'data' => $itemDTO
-            ], 200);
-        } catch (Exception $error) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Get all item failed',
                 'data' => $error->getMessage()
             ], 400);
         }

@@ -17,7 +17,10 @@ class GetBranchItemRepository {
     public function getBranchItem(int $branch_id, int $item_id): BranchItemInfoDTO {
         try {
             $branchItem = BranchItem::join('items', 'branch_items.item_id', '=', 'items.id')
-            ->join('branches', 'branch_items.branch_id', '=', 'branches.id')->where('branch_items.branch_id', $branch_id)->where('branch_items.item_id', $item_id)->select(
+            ->join('branches', 'branch_items.branch_id', '=', 'branches.id')
+            ->where('branch_items.branch_id', $branch_id)
+            ->where('branch_items.item_id', $item_id)
+            ->select(
                 'branch_items.id as id',
 
                 'branch_items.item_id as item_id',
@@ -30,8 +33,7 @@ class GetBranchItemRepository {
                 'branches.nama_branch as nama_branch',
 
                 'branch_items.stok_branch as stok_branch',
-            )->first()
-            ;
+            )->first();
 
             $branchItemInfoDTO = new BranchItemInfoDTO(
                 $branchItem->id,

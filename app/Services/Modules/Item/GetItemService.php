@@ -30,7 +30,9 @@ class GetItemService {
 
             $itemDTO = $this->itemRepository->getItem($id);
 
-            return $itemDTO;
+            $itemArray = $itemDTO->toArray();
+
+            return $itemArray;
 
         } catch (Exception $error) {
             throw new Exception($error->getMessage());

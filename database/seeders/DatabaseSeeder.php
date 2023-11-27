@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             IndexSeeder::class,
             CategorySeeder::class,
+            CoaSeeder::class,
         ]);
 
         $this->call([
@@ -28,7 +29,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Branch::factory(10)->create();
-        Item::factory(2000)->create();
+        // Item::factory(2000)->create();
 
 
         // $this->call([

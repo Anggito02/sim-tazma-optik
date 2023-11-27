@@ -5,7 +5,7 @@ namespace App\Services\Modules\PurchaseOrderDetail;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
+use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailInfoDTO;
 
 use App\Repositories\Modules\PurchaseOrderDetail\GetPODetailRepository;
 
@@ -17,7 +17,7 @@ class GetPODetailService {
     /**
      * Get Purchase Order Detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetailInfoDTO
      */
     public function getPurchaseOrderDetail(Request $request) {
         try {
@@ -29,6 +29,8 @@ class GetPODetailService {
             $id = $request->id;
 
             $poDetailDTO = $this->poDetailRepository->getPurchaseOrderDetail($id);
+
+            $poDetailDTO = $poDetailDTO->toArray();
 
             return $poDetailDTO;
 

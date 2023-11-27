@@ -6,9 +6,10 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Services\Modules\PurchaseOrderDetail\GetAllPODetailService;
-use App\Services\Modules\PurchaseOrderDetail\AddPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\GetPODetailService;
+use App\Services\Modules\PurchaseOrderDetail\GetAllPODetailService;
+use App\Services\Modules\PurchaseOrderDetail\GetPODetailQRService;
+use App\Services\Modules\PurchaseOrderDetail\AddPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\EditPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\UpdateStockPODetailService;
 use App\Services\Modules\PurchaseOrderDetail\DeletePODetailService;
@@ -17,9 +18,10 @@ class PurchaseOrderDetailController extends Controller
 {
     // Service Providers Constructs
     public function __construct(
-        private GetAllPODetailService $getAllPODetailService,
-        private AddPODetailService $addPODetailService,
         private GetPODetailService $getPODetailService,
+        private GetAllPODetailService $getAllPODetailService,
+        private GetPODetailQRService $getPODetailQRService,
+        private AddPODetailService $addPODetailService,
         private EditPODetailService $editPODetailService,
         private UpdateStockPODetailService $updateStockPODetailService,
         private DeletePODetailService $deletePODetailService
@@ -28,7 +30,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Get purchase order detail by id
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetailInfoDTO
      */
     public function getPODetail(Request $request) {
         try {
@@ -51,7 +53,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Get all purchase order detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetailInfoDTO[]
      */
     public function getAllPODetail(Request $request) {
         try {
@@ -72,9 +74,28 @@ class PurchaseOrderDetailController extends Controller
     }
 
     /**
+     * Get purchase order detail QR
+     * @param Request $request
+     * @return Image
+     */
+    public function getPODetailQR(Request $request) {
+        try {
+            $poDetailQRImage = $this->getPODetailQRService->getPurchaseOrderDetailQR($request);
+
+            return response($poDetailQRImage)->header('Content-Type', 'image/png');
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get purchase order detail QR failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
      * Add purchase order detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetai
      */
     public function addPODetail(Request $request) {
         try {
@@ -97,7 +118,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Edit purchase order detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
     public function editPODetail(Request $request) {
         try {
@@ -119,7 +140,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Update stock purchase order detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
     public function updateStockPODetail(Request $request) {
         try {
@@ -142,7 +163,7 @@ class PurchaseOrderDetailController extends Controller
     /**
      * Delete purchase order detail
      * @param Request $request
-     * @return PurchaseOrderDetailDTO
+     * @return PurchaseOrderDetail
      */
     public function deletePODetail(Request $request) {
         try {

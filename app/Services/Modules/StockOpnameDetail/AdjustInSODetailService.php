@@ -64,9 +64,9 @@ class AdjustInSODetailService {
             $poDetailDTO = $this->addPODetailService->addPurchaseOrderDetail(new Request([
                 'pre_order_qty' => $in_out_qty,
                 'unit' => 'buah',
-                'harga_beli_satuan' => $itemDTO->harga_beli,
-                'harga_jual_satuan' => $itemDTO->harga_jual,
-                'diskon' => $itemDTO->diskon,
+                'harga_beli_satuan' => $itemDTO->getHargaBeli(),
+                'harga_jual_satuan' => $itemDTO->getHargaJual(),
+                'diskon' => $itemDTO->getDiskon(),
                 'item_id' => $item_id,
                 'purchase_order_id' => $poDTO->id,
             ]));

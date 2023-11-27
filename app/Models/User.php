@@ -72,4 +72,8 @@ class User extends Authenticatable
         return $this->hasMany(VendorInvoice::class, 'employee_id');
     }
 
+    public function salesMasters()
+    {
+        return $this->hasMany(SalesMaster::class, 'employee_id');
+    }
 }

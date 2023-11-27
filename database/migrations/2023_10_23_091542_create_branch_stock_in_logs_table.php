@@ -23,6 +23,12 @@ return new class extends Migration
             // Item
             $table->foreignId('item_id')->constrained('items')->onDelete('cascade')->onUpdate('cascade');
 
+            // Branch
+            $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade')->onUpdate('cascade');
+
+            // Branch Item
+            $table->foreignId('branch_item_id')->constrained('branch_items')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

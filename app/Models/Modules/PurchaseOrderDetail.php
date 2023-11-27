@@ -22,6 +22,7 @@ class PurchaseOrderDetail extends Model
         'harga_beli_satuan',
         'harga_jual_satuan',
         'diskon',
+        'qr_item_path',
 
         // Foreign Keys
         // Purchase Order
@@ -44,5 +45,21 @@ class PurchaseOrderDetail extends Model
     public function item()
     {
         return $this->belongsTo(Item::class, 'item_id');
+    }
+
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    // Receive Order
+    public function receiveOrder()
+    {
+        return $this->belongsTo(ReceiveOrder::class, 'receive_order_id');
+    }
+
+    // Sales Detail
+    public function salesDetails()
+    {
+        return $this->hasMany(SalesDetail::class);
     }
 }
