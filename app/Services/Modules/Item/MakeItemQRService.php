@@ -6,7 +6,9 @@ use Exception;
 
 use App\DTO\ItemDTOs\ItemQRInfoDTO;
 use Illuminate\Support\Facades\Storage;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;;
+
+// [OUTER DEPENDENCIES] QR Code Generator
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MakeItemQRService {
     /**

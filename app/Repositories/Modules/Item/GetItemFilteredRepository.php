@@ -13,7 +13,7 @@ class GetItemFilteredRepository {
     /**
      * Get item filtered
      * @param string ItemFilterDTO $itemFilterDTO
-     * @return array ItemDTO
+     * @return ItemInfoDTO[]
      */
     public function getItemFiltered(ItemFilterDTO $itemFilterDTO) {
         try {

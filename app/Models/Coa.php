@@ -19,4 +19,9 @@ class Coa extends Model
         'deskripsi',
         'kategori',
     ];
+
+    public function salesDetails()
+    {
+        return $this->hasMany(SalesDetail::class);
+    }
 }

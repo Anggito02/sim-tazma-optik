@@ -28,6 +28,8 @@ use App\Http\Controllers\Modules\StockOpnameDetailController;
 use App\Http\Controllers\Modules\StockOpnameBranchController;
 use App\Http\Controllers\Modules\StockOpnameBranchDetailController;
 use App\Http\Controllers\Modules\CustomerDiagnoseController;
+use App\Http\Controllers\Modules\SalesMasterController;
+use App\Http\Controllers\Modules\SalesDetailController;
 
 use App\Http\Controllers\Modules\Monitoring\Stock\StockInController;
 use App\Http\Controllers\Modules\Monitoring\Stock\StockOutController;
@@ -135,9 +137,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
 
     /* Item Controllers */
     Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
-    Route::get('/item/all', [ItemController::class, 'getAllItem'])->name('getAllItem');
     Route::get('/item/filtered', [ItemController::class, 'getItemFiltered'])->name('getItemFiltered');
-    Route::get('/item/allWithJenis', [ItemController::class, 'getAllItemWithJenis'])->name('getAllItemWithJenis');
     Route::get('/item/qr', [ItemController::class, 'getQRItem'])->name('getQRItem');
     Route::post('/item/add', [ItemController::class, 'addItem'])->name('addItem');
     Route::delete('/item/delete', [ItemController::class, 'deleteItem'])->name('deleteItem');
@@ -166,6 +166,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Purchase Order Detail Controllers */
     Route::get('/purchase-order-detail/one', [PurchaseOrderDetailController::class, 'getPODetail'])->name('getPODetail');
     Route::get('/purchase-order-detail/all', [PurchaseOrderDetailController::class, 'getAllPODetail'])->name('getAllPODetail');
+    Route::get('purchase-order-detail/qr', [PurchaseOrderDetailController::class, 'getPODetailQR'])->name('getPODetailQR');
     Route::post('/purchase-order-detail/add', [PurchaseOrderDetailController::class, 'addPODetail'])->name('addPODetail');
     Route::delete('/purchase-order-detail/delete', [PurchaseOrderDetailController::class, 'deletePODetail'])->name('deletePODetail');
     Route::put('/purchase-order-detail/edit', [PurchaseOrderDetailController::class, 'editPODetail'])->name('editPODetail');
@@ -220,6 +221,18 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
 
     /* Customer Diagnose Controllers */
     Route::post('/customer-diagnose/add', [CustomerDiagnoseController::class, 'addCustomerDiagnose'])->name('addCustomerDiagnose');
+
+    /* Sales Master Controllers */
+    Route::get('/sales-master/all', [SalesMasterController::class, 'getAllSalesMaster'])->name('getAllSalesMaster');
+    Route::post('/sales-master/add', [SalesMasterController::class, 'addSalesMaster'])->name('addSalesMaster');
+    Route::put('/sales-master/edit', [SalesMasterController::class, 'updateSalesMaster'])->name('updateSalesMaster');
+    Route::put('/sales-master/verify', [SalesMasterController::class, 'verifySalesMaster'])->name('verifySalesMaster');
+
+    /* Sales Detail Controllers */
+    Route::get('/sales-detail/all', [SalesDetailController::class, 'getAllSalesDetail'])->name('getAllSalesDetail');
+    Route::post('/sales-detail/add', [SalesDetailController::class, 'addSalesDetail'])->name('addSalesDetail');
+    Route::put('/sales-detail/edit', [SalesDetailController::class, 'editSalesDetail'])->name('editSalesDetail');
+    Route::delete('/sales-detail/delete', [SalesDetailController::class, 'deleteSalesDetail'])->name('deleteSalesDetail');
 
     /* Monitoring Routes */
     Route::get('/monitoring/stock-in/all', [StockInController::class, 'getAllStockIn'])->name('getAllStockIn');

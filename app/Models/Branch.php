@@ -57,4 +57,10 @@ class Branch extends Model
     {
         return $this->hasMany(Customer::class, 'branch_id');
     }
+
+    // Sales Master
+    public function salesMasters()
+    {
+        return $this->hasMany(SalesMaster::class, 'branch_id');
+    }
 }

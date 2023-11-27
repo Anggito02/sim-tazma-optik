@@ -14,6 +14,8 @@ class UpdateBranchStockInProcedureRepository {
      * @param int $last_stok_in_qty_branch
 
      * @param int $item_id
+     * @param int $branch_id
+     * @param int $branch_item_id
      */
     public function updateBranchStockInProcedure(
         string $kode_item,
@@ -22,6 +24,8 @@ class UpdateBranchStockInProcedureRepository {
         int $last_stok_in_qty_branch,
 
         int $item_id,
+        int $branch_id,
+        int $branch_item_id
     ) {
         try {
             $sqlStatement = "CALL update_branch_stock_in_procedure(
@@ -30,7 +34,9 @@ class UpdateBranchStockInProcedureRepository {
                 $tahun,
                 $last_stok_in_qty_branch,
 
-                $item_id
+                $item_id,
+                $branch_id,
+                $branch_item_id
             )";
             DB::statement($sqlStatement);
         } catch (Exception $error) {
