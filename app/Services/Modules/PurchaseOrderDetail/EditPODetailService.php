@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 use App\DTO\Modules\PurchaseOrderDetail\PurchaseOrderDetailDTO;
 
 use App\Repositories\Modules\PurchaseOrderDetail\EditPODetailRepository;
+use App\Repositories\Modules\Item\UpdateItemDeleteableRepository;
 
 class EditPODetailService {
     public function __construct(
-        private EditPODetailRepository $poDetailRepository
+        private EditPODetailRepository $poDetailRepository,
+        private UpdateItemDeleteableRepository $updateItemDeleteableRepository,
     ) {}
 
     /**
@@ -46,6 +48,9 @@ class EditPODetailService {
                 null,
                 $request->item_id
             );
+
+            // update item deleteable
+            $this->updateItemDeleteableRepository->updateItemDeleteable($request->item_id, FALSE);
 
             $poDetailDTO = $this->poDetailRepository->editPurchaseOrderDetail($poDetailDTO);
 

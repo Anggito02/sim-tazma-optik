@@ -6,34 +6,35 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Services\LensCategory\GetLensCategoryService;
-use App\Services\LensCategory\GetAllLensCategoryService;
-use App\Services\LensCategory\AddLensCategoryService;
-use App\Services\LensCategory\DeleteLensCategoryService;
-use App\Services\LensCategory\EditLensCategoryService;
-class LensCategoryController extends Controller
+use App\Services\Category\GetCategoryService;
+use App\Services\Category\GetAllCategoryService;
+use App\Services\Category\AddCategoryService;
+use App\Services\Category\DeleteCategoryService;
+use App\Services\Category\EditCategoryService;
+
+class CategoryController extends Controller
 {
     // Service Providers Constructs
     public function __construct(
-        private GetLensCategoryService $getLensCategoryService,
-        private GetAllLensCategoryService $getAllLensCategoryService,
-        private AddLensCategoryService $addLensCategoryService,
-        private DeleteLensCategoryService $deleteLensCategoryService,
-        private EditLensCategoryService $editLensCategoryService
+        private GetCategoryService $getCategoryService,
+        private GetAllCategoryService $getAllCategoryService,
+        private AddCategoryService $addCategoryService,
+        private DeleteCategoryService $deleteCategoryService,
+        private EditCategoryService $editCategoryService,
     ) {}
 
     /**
-     * Get lens category by id
+     * Get category by id
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getLensCategory(Request $request) {
+    public function getCategory(Request $request) {
         try {
-            $resultData = $this->getLensCategoryService->getLensCategory($request);
+            $resultData = $this->getCategoryService->getCategory($request);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Lens category retrieved successfully',
+                'message' => ' category retrieved successfully',
                 'data' => $resultData
             ])->setStatusCode(200);
         } catch (Exception $error) {
@@ -45,17 +46,17 @@ class LensCategoryController extends Controller
     }
 
     /**
-     * Get all lens category
+     * Get all category
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAllLensCategory(Request $request) {
+    public function getAllCategory(Request $request) {
         try {
-            $resultData = $this->getAllLensCategoryService->getAllLensCategory($request);
+            $resultData = $this->getAllCategoryService->getAllCategory($request);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Lens category retrieved successfully',
+                'message' => ' category retrieved successfully',
                 'data' => $resultData
             ])->setStatusCode(200);
         } catch (Exception $error) {
@@ -67,17 +68,17 @@ class LensCategoryController extends Controller
     }
 
     /**
-     * Add lens category
+     * Add category
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function addLensCategory(Request $request) {
+    public function addCategory(Request $request) {
         try {
-            $resultData = $this->addLensCategoryService->addLensCategory($request);
+            $resultData = $this->addCategoryService->addCategory($request);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Lens category added successfully',
+                'message' => ' category added successfully',
                 'data' => $resultData
             ])->setStatusCode(201);
         } catch (Exception $error) {
@@ -89,17 +90,17 @@ class LensCategoryController extends Controller
     }
 
     /**
-     * Delete lens category
+     * Delete category
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function deleteLensCategory(Request $request) {
+    public function deleteCategory(Request $request) {
         try {
-            $resultData = $this->deleteLensCategoryService->deleteLensCategory($request);
+            $resultData = $this->deleteCategoryService->deleteCategory($request);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Lens category deleted successfully',
+                'message' => ' category deleted successfully',
                 'data' => $resultData
             ])->setStatusCode(200);
         } catch (Exception $error) {
@@ -111,17 +112,17 @@ class LensCategoryController extends Controller
     }
 
     /**
-     * Edit lens category
+     * Edit category
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function editLensCategory(Request $request) {
+    public function editCategory(Request $request) {
         try {
-            $resultData = $this->editLensCategoryService->editLensCategory($request);
+            $resultData = $this->editCategoryService->editCategory($request);
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Lens category edited successfully',
+                'message' => ' category edited successfully',
                 'data' => $resultData
             ])->setStatusCode(200);
         } catch (Exception $error) {

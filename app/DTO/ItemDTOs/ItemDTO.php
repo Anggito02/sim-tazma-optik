@@ -1,5 +1,7 @@
 <?php
 
+// [MIGHT BE DEPRECATED] Use another item DTO instead
+
 namespace App\DTO\ItemDTOs;
 
 class ItemDTO {
@@ -12,6 +14,8 @@ class ItemDTO {
         public ?string $harga_beli,
         public ?string $harga_jual,
         public ?string $diskon,
+        public ?string $qr_path,
+        public ?bool $deleteable,
 
         // Frame
         public ?string $frame_sku_vendor,
@@ -29,17 +33,12 @@ class ItemDTO {
         // Foreign Keys
         // FRAME //
         public ?int $frame_frame_category_id,
-        public ?int $frame_brand_id,
         public ?int $frame_vendor_id,
         public ?int $frame_color_id,
 
         // LENS //
         public ?int $lensa_lens_category_id,
-        public ?int $lensa_brand_id,
         public ?int $lensa_index_id,
-
-        // ACCESSORY //
-        public ?int $aksesoris_brand_id,
     )
     {}
 
@@ -97,6 +96,22 @@ class ItemDTO {
 
     public function setDiskon(string $diskon): void {
         $this->diskon = $diskon;
+    }
+
+    public function getQrPath(): ?string {
+        return $this->qr_path;
+    }
+
+    public function setQrPath(?string $qr_path): void {
+        $this->qr_path = $qr_path;
+    }
+
+    public function getDeleteable(): bool {
+        return $this->deleteable;
+    }
+
+    public function setDeleteable(bool $deleteable): void {
+        $this->deleteable = $deleteable;
     }
 
     public function getFrameSkuVendor(): ?string {
@@ -163,14 +178,6 @@ class ItemDTO {
         $this->frame_frame_category_id = $frame_frame_category_id;
     }
 
-    public function getFrameBrandId(): ?int {
-        return $this->frame_brand_id;
-    }
-
-    public function setFrameBrandId(?int $frame_brand_id): void {
-        $this->frame_brand_id = $frame_brand_id;
-    }
-
     public function getFrameVendorId(): ?int {
         return $this->frame_vendor_id;
     }
@@ -195,28 +202,12 @@ class ItemDTO {
         $this->lensa_lens_category_id = $lensa_lens_category_id;
     }
 
-    public function getLensaBrandId(): ?int {
-        return $this->lensa_brand_id;
-    }
-
-    public function setLensaBrandId(?int $lensa_brand_id): void {
-        $this->lensa_brand_id = $lensa_brand_id;
-    }
-
     public function getLensaIndexId(): ?int {
         return $this->lensa_index_id;
     }
 
     public function setLensaIndexId(?int $lensa_index_id): void {
         $this->lensa_index_id = $lensa_index_id;
-    }
-
-    public function getAksesorisBrandId(): ?int {
-        return $this->aksesoris_brand_id;
-    }
-
-    public function setAksesorisBrandId(?int $aksesoris_brand_id): void {
-        $this->aksesoris_brand_id = $aksesoris_brand_id;
     }
 }
 

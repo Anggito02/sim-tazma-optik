@@ -34,4 +34,26 @@ class StockOpnameDetail extends Model
         // Stock Opname
         'stock_opname_id',
     ];
+
+    // Item
+    public function item()
+    {
+        return $this->belongsTo(Item::class, 'item_id');
+    }
+
+    // Employee
+    public function openBy()
+    {
+        return $this->belongsTo(User::class, 'open_by');
+    }
+
+    public function closeBy()
+    {
+        return $this->belongsTo(User::class, 'close_by');
+    }
+
+    public function adjustmentBy()
+    {
+        return $this->belongsTo(User::class, 'adjustment_by');
+    }
 }

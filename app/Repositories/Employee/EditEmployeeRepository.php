@@ -21,6 +21,7 @@ class EditEmployeeRepository {
             // $employee->password = $userDTO->password;
             $employee->username = $userDTO->username;
             $employee->nik = $userDTO->nik;
+            $employee->nip = $userDTO->nip;
             $employee->employee_name = $userDTO->employee_name;
             // $employee->photo = $userDTO->photo;
             // $employee->gender = $userDTO->gender;

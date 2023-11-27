@@ -23,6 +23,7 @@ class Item extends Model
         'harga_jual',
         'diskon',
         'qr_path',
+        'deleteable',
 
         // Frame
         'frame_sku_vendor',
@@ -38,15 +39,16 @@ class Item extends Model
         'aksesoris_kategori',
     ];
 
+    // Brand
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
     // Frame
     public function frameCategory()
     {
         return $this->belongsTo(FrameCategory::class, 'frame_frame_category_id');
-    }
-
-    public function frameBrand()
-    {
-        return $this->belongsTo(Brand::class, 'frame_brand_id');
     }
 
     public function frameVendor()
@@ -65,20 +67,9 @@ class Item extends Model
         return $this->belongsTo(LensCategory::class, 'lensa_lens_category_id');
     }
 
-    public function lensBrand()
-    {
-        return $this->belongsTo(Brand::class, 'lensa_brand_id');
-    }
-
     public function lensIndex()
     {
         return $this->belongsTo(Index::class, 'lensa_index_id');
-    }
-
-    // Accessory
-    public function accessoryBrand()
-    {
-        return $this->belongsTo(Brand::class, 'aksesoris_brand_id');
     }
 
     /* ========== */

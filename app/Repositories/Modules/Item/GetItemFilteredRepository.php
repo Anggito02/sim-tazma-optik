@@ -4,7 +4,7 @@ namespace App\Repositories\Modules\Item;
 
 use Exception;
 
-use App\DTO\ItemDTOs\ItemDTO;
+use App\DTO\ItemDTOs\ItemInfoDTO;
 use App\DTO\ItemDTOs\ItemFilterDTO;
 
 use App\Models\Modules\Item;
@@ -53,9 +53,6 @@ class GetItemFilteredRepository {
             $aksesoris_nama_item_sql = $itemFilterDTO->aksesoris_nama_item ? "aksesoris_nama_item LIKE '%$itemFilterDTO->aksesoris_nama_item%'" : null;
             array_push($activeFilter, $aksesoris_nama_item_sql);
 
-            $aksesoris_kategori_sql = $itemFilterDTO->aksesoris_kategori ? "aksesoris_kategori LIKE '%$itemFilterDTO->aksesoris_kategori%'" : null;
-            array_push($activeFilter, $aksesoris_kategori_sql);
-
             $activeFilter = array_filter($activeFilter, function ($filter) {
                 return $filter !== null;
             });
@@ -63,13 +60,28 @@ class GetItemFilteredRepository {
             $activeFilter = implode(' AND ', $activeFilter);
 
             // Get item filtered
-            $items = Item::whereRaw($activeFilter)->paginate($itemFilterDTO->limit, ['*'], 'page', $itemFilterDTO->page);
+            $items = Item::whereRaw($activeFilter)
+                ->join('brands', 'items.brand_id', '=', 'brands.id')
+                ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
+                ->join('categories', 'items.category_id', '=', 'categories.id')
+                ->leftJoin('colors', 'items.frame_color_id', '=', 'colors.id')
+                ->leftJoin('indices', 'items.lensa_index_id', '=', 'indices.id')
+                ->select(
+                    'items.*',
+                    'brands.nama_brand',
+                    'vendors.nama_vendor',
+                    'categories.nama_kategori',
+                    'colors.color_name',
+                    'indices.value',
+                )
+                ->orderBy('items.id', 'asc')
+                ->paginate($itemFilterDTO->limit, ['*'], 'page', $itemFilterDTO->page);
 
             // use pagination
             $itemDTOs = [];
 
             foreach ($items as $item) {
-                $itemDTO = new ItemDTO(
+                $itemDTO = new ItemInfoDTO(
                     $item->id,
                     $item->jenis_item,
                     $item->kode_item,
@@ -78,6 +90,8 @@ class GetItemFilteredRepository {
                     $item->harga_beli,
                     $item->harga_jual,
                     $item->diskon,
+                    $item->qr_path,
+                    $item->deleteable,
 
                     // Frame
                     $item->frame_sku_vendor,
@@ -90,23 +104,30 @@ class GetItemFilteredRepository {
 
                     // Accessory
                     $item->aksesoris_nama_item,
-                    $item->aksesoris_kategori,
 
                     // Foreign Keys
+                    // BRAND //
+                    $item->brand_id,
+                    $item->nama_brand,
+
+                    // VENDOR //
+                    $item->vendor_id,
+                    $item->nama_vendor,
+
+                    // CATEGORY //
+                    $item->category_id,
+                    $item->nama_kategori,
+
                     // FRAME //
-                    $item->frame_frame_category_id,
-                    $item->frame_brand_id,
-                    $item->frame_vendor_id,
                     $item->frame_color_id,
+                    $item->color_name,
 
                     // LENS //
-                    $item->lensa_lens_category_id,
-                    $item->lensa_brand_id,
                     $item->lensa_index_id,
-
-                    // ACCESSORY //
-                    $item->aksesoris_brand_id
+                    $item->value,
                 );
+
+                $itemDTO = $itemDTO->toArray();
 
                 array_push($itemDTOs, $itemDTO);
             }

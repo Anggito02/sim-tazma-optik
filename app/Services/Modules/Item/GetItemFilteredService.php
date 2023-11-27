@@ -43,7 +43,6 @@ class GetItemFilteredService {
                 'lensa_jenis_lensa' => 'nullable',
 
                 'aksesoris_nama_item' => 'nullable',
-                'aksesoris_kategori' => 'nullable',
             ]);
 
             $itemFilterDTO = new ItemFilterDTO(
@@ -57,13 +56,12 @@ class GetItemFilteredService {
                 $request->harga_jual_until ? $request->harga_jual_until : 99999999999,
                 $request->diskon_from ? $request->diskon_from : 0,
                 $request->diskon_until ? $request->diskon_until : 100,
-                $request->frame_sku_vendor ,
+                $request->frame_sku_vendor,
                 $request->frame_sub_kategori,
                 $request->frame_kode,
                 $request->lensa_jenis_produk,
                 $request->lensa_jenis_lensa,
                 $request->aksesoris_nama_item,
-                $request->aksesoris_kategori
             );
 
             $itemDTO = $this->itemRepository->getItemFiltered($itemFilterDTO);

@@ -26,6 +26,7 @@ class GetAllEmployeeRepository {
                     null,
                     $employee->username,
                     $employee->nik,
+                    $employee->nip,
                     $employee->employee_name,
                     $employee->photo,
                     $employee->gender,

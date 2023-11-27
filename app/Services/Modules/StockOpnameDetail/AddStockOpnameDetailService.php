@@ -28,10 +28,10 @@ class AddStockOpnameDetailService {
         try {
             // validate request
             $request->validate([
+                'item_id' => 'required|exists:items,id',
                 'so_start' => 'required|date_format:Y-m-d H:i:s',
                 'so_end' => 'required|date_format:Y-m-d H:i:s',
                 'actual_qty' => 'required|numeric|min:0',
-                'item_id' => 'required|exists:items,id',
                 'open_by' => 'required|exists:users,id',
                 'close_by' => 'required|exists:users,id',
                 'stock_opname_id' => 'required|exists:stock_opname_masters,id',
