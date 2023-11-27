@@ -14,14 +14,27 @@ class CoaSeeder extends Seeder
     public function run(): void
     {
         Coa::create([
-            'kode_coa' => '1000',
-            'deskripsi' => 'Penjualan',
-            'kategori' => 'pendapatan',
+            'kode_coa' => '1001',
+            'deskripsi' => 'Penjualan Barang',
+            'kategori' => 'pendapatan kas',
+        ]);
+
+
+        Coa::create([
+            'kode_coa' => '1002',
+            'deskripsi' => 'Modal Awal',
+            'kategori' => 'pendapatan kas',
         ]);
 
         Coa::create([
-            'kode_coa' => '2000',
-            'deskripsi' => 'Pembelian',
+            'kode_coa' => '2001',
+            'deskripsi' => 'Tarik modal',
+            'kategori' => 'pengeluaran kas',
+        ]);
+
+        Coa::create([
+            'kode_coa' => '2002',
+            'deskripsi' => 'Pengeluaran lainnya',
             'kategori' => 'pengeluaran',
         ]);
     }
