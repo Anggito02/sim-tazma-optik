@@ -241,6 +241,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/kas/add', [KasController::class, 'addNewDailyKas'])->name('addNewDailyKas');
 
     /* Pengeluaran Controllers */
+    Route::get('/pengeluaran/all', [PengeluaranController::class, 'getAllPengeluaran'])->name('getAllPengeluaran');
     Route::post('/pengeluaran/add', [PengeluaranController::class, 'addPengeluaran'])->name('addPengeluaran');
 
     /* Monitoring Routes */
