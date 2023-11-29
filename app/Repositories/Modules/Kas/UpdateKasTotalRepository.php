@@ -3,21 +3,22 @@
 namespace App\Repositories\Modules\Kas;
 
 use Exception;
-
 use Illuminate\Support\Facades\DB;
 
-class CheckKasOpenedRepository {
+class UpdateKasTotalRepository {
     /**
-     * Check Kas Opened
+     * Update Kas Total
      * @param int $branch_id
      * @param string $tanggal_buka_kas
-     * @return bool
+     * @param int $total_perubahan
+     * @return Kas
      */
-    public function checkKasOpened(int $branch_id, string $tanggal_buka_kas) {
+    public function updateKasTotal(int $branch_id, string $tanggal_buka_kas, int $total_perubahan) {
         try {
-            $kasOpened = DB::select('
-                SELECT *
-                FROM kas
+            $updateKasTotal = DB::statement('
+                UPDATE kas
+                SET
+                    kas_akhir_harian = kas_akhir_harian + ' . $total_perubahan . '
                 WHERE
                     branch_id =' . $branch_id . '
                     AND CAST(tanggal_buka_kas AS DATE) = CAST("' . $tanggal_buka_kas . '" AS DATE)
@@ -25,7 +26,7 @@ class CheckKasOpenedRepository {
                 LIMIT 1
             ');
 
-            if (!$kasOpened) return false;
+            if (!$updateKasTotal) return false;
 
             return true;
         } catch (Exception $error) {
