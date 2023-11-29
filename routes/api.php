@@ -30,6 +30,7 @@ use App\Http\Controllers\Modules\StockOpnameBranchDetailController;
 use App\Http\Controllers\Modules\CustomerDiagnoseController;
 use App\Http\Controllers\Modules\SalesMasterController;
 use App\Http\Controllers\Modules\SalesDetailController;
+use App\Http\Controllers\Modules\KasController;
 
 use App\Http\Controllers\Modules\Monitoring\Stock\StockInController;
 use App\Http\Controllers\Modules\Monitoring\Stock\StockOutController;
@@ -233,6 +234,9 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/sales-detail/add', [SalesDetailController::class, 'addSalesDetail'])->name('addSalesDetail');
     Route::put('/sales-detail/edit', [SalesDetailController::class, 'editSalesDetail'])->name('editSalesDetail');
     Route::delete('/sales-detail/delete', [SalesDetailController::class, 'deleteSalesDetail'])->name('deleteSalesDetail');
+
+    /* Kas Controllers */
+    Route::post('/kas/add', [KasController::class, 'addNewDailyKas'])->name('addNewDailyKas');
 
     /* Monitoring Routes */
     Route::get('/monitoring/stock-in/all', [StockInController::class, 'getAllStockIn'])->name('getAllStockIn');
