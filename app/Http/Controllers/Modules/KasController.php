@@ -6,14 +6,39 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Services\Modules\Kas\GetAllKasService;
 use App\Services\Modules\Kas\AddNewDailyKasService;
 
 class KasController extends Controller
 {
     // Service Providers Constructs
     public function __construct(
+        private GetAllKasService $getAllKasService,
         private AddNewDailyKasService $addNewDailyKasService
     ) {}
+
+    /**
+     * Get all kas
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getAllKas(Request $request) {
+        try {
+            $kas = $this->getAllKasService->getAllKas($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Get all kas success',
+                'data' => $kas
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get all kas failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
 
     /**
      * Add new daily kas

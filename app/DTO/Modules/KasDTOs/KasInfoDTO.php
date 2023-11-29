@@ -6,7 +6,7 @@ class KasInfoDTO {
     public function __construct(
         private int $id,
         private string $tanggal_buka_kas,
-        private string $tanggal_tutup_kas,
+        private ?string $tanggal_tutup_kas,
         private string $modal_tambahan_harian,
         private string $kas_awal_harian,
         private string $kas_akhir_harian,
@@ -17,12 +17,28 @@ class KasInfoDTO {
         private string $employee_name,
     ) {}
 
+    public function toArray(): array {
+        return [
+            'id' => $this->id,
+            'tanggal_buka_kas' => $this->tanggal_buka_kas,
+            'tanggal_tutup_kas' => $this->tanggal_tutup_kas,
+            'modal_tambahan_harian' => $this->modal_tambahan_harian,
+            'kas_awal_harian' => $this->kas_awal_harian,
+            'kas_akhir_harian' => $this->kas_akhir_harian,
+            'branch_id' => $this->branch_id,
+            'kode_branch' => $this->kode_branch,
+            'nama_branch' => $this->nama_branch,
+            'employee_id' => $this->employee_id,
+            'employee_name' => $this->employee_name,
+        ];
+    }
+
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTanggalBukaKas(): string
+    public function getTanggalBukaKas(): ?string
     {
         return $this->tanggal_buka_kas;
     }

@@ -236,6 +236,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/sales-detail/delete', [SalesDetailController::class, 'deleteSalesDetail'])->name('deleteSalesDetail');
 
     /* Kas Controllers */
+    Route::get('/kas/all', [KasController::class, 'getAllKas'])->name('getAllKas');
     Route::post('/kas/add', [KasController::class, 'addNewDailyKas'])->name('addNewDailyKas');
 
     /* Monitoring Routes */
