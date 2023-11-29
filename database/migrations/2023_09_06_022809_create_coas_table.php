@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_coa');
             $table->string('deskripsi');
-            $table->enum('kategori', ['pendapatan', 'pengeluaran']);
+            $table->string('kategori');
             $table->timestamps();
         });
     }
