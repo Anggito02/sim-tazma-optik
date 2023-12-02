@@ -10,8 +10,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\LensCategoryController;
-use App\Http\Controllers\FrameCategoryController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CoaController;
 use App\Http\Controllers\CustomerController;
 
@@ -109,19 +108,12 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/index/delete', [IndexController::class, 'deleteIndex'])->name('deleteIndex');
     Route::put('/index/edit', [IndexController::class, 'editIndex'])->name('editIndex');
 
-    /* Lens Category Controllers */
-    Route::get('/lens-category/one', [LensCategoryController::class, 'getLensCategory'])->name('getLensCategory');
-    Route::get('/lens-category/all', [LensCategoryController::class, 'getAllLensCategory'])->name('getAllLensCategory');
-    Route::post('/lens-category/add', [LensCategoryController::class, 'addLensCategory'])->name('addLensCategory');
-    Route::delete('/lens-category/delete', [LensCategoryController::class, 'deleteLensCategory'])->name('deleteLensCategory');
-    Route::put('/lens-category/edit', [LensCategoryController::class, 'editLensCategory'])->name('editLensCategory');
-
-    /* Frame Category Controllers */
-    Route::get('/frame-category/one', [FrameCategoryController::class, 'getFrameCategory'])->name('getFrameCategory');
-    Route::get('/frame-category/all', [FrameCategoryController::class, 'getAllFrameCategory'])->name('getAllFrameCategory');
-    Route::post('/frame-category/add', [FrameCategoryController::class, 'addFrameCategory'])->name('addFrameCategory');
-    Route::delete('/frame-category/delete', [FrameCategoryController::class, 'deleteFrameCategory'])->name('deleteFrameCategory');
-    Route::put('/frame-category/edit', [FrameCategoryController::class, 'editFrameCategory'])->name('editFrameCategory');
+    /* Category Controllers */
+    Route::get('/category/one', [CategoryController::class, 'getCategory'])->name('getCategory');
+    Route::get('/category/all', [CategoryController::class, 'getAllCategory'])->name('getAllCategory');
+    Route::post('/category/add', [CategoryController::class, 'addCategory'])->name('addCategory');
+    Route::delete('/category/delete', [CategoryController::class, 'deleteCategory'])->name('deleteCategory');
+    Route::put('/category/edit', [CategoryController::class, 'editCategory'])->name('editCategory');
 
     /* Coa Controllers */
     Route::get('/coa/one', [CoaController::class, 'getCoa'])->name('getCoa');
