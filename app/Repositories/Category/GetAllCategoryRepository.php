@@ -14,10 +14,9 @@ class GetAllCategoryRepository {
      * @param int $limit
      * @return CategoryDTO
      */
-    public function getAllCategory(int $page, int $limit) {
+    public function getAllCategory() {
         try {
-            $Categories = Category::paginate($limit, ['*'], 'page', $page);
-
+            $Categories = Category::paginate();
             $CategoryDTOs = [];
 
             foreach ($Categories as $Category) {
