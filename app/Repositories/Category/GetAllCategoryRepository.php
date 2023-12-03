@@ -10,13 +10,11 @@ use App\Models\Category;
 class GetAllCategoryRepository {
     /**
      * Get all  category
-     * @param int $page
-     * @param int $limit
      * @return CategoryDTO
      */
     public function getAllCategory() {
         try {
-            $Categories = Category::paginate();
+            $Categories = Category::all();
             $CategoryDTOs = [];
 
             foreach ($Categories as $Category) {

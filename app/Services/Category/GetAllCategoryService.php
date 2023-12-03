@@ -22,12 +22,6 @@ class GetAllCategoryService {
      */
     public function getAllCategory(Request $request) {
         try {
-            // Validate request
-            // $request->validate([
-            //     'page' => 'required|gt:0',
-            //     'limit' => 'required|gt:0',
-            // ]);
-
             $CategoryDTO = $this->CategoryRepository->getAllCategory($request->page, $request->limit);
 
             return $CategoryDTO;
