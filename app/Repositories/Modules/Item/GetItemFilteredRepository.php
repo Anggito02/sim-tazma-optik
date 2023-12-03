@@ -26,10 +26,22 @@ class GetItemFilteredRepository {
             $kode_item_sql = $itemFilterDTO->kode_item ? "kode_item LIKE '%$itemFilterDTO->kode_item%'" : null;
             array_push($activeFilter, $kode_item_sql);
 
-            $harga_beli_sql = $itemFilterDTO->harga_beli_from || $itemFilterDTO->harga_beli_until ? "harga_beli BETWEEN $itemFilterDTO->harga_beli_from AND $itemFilterDTO->harga_beli_until" : null;
+            $harga_beli_sql = null;
+            if (!$itemFilterDTO->harga_beli_until) {
+                $harga_beli_sql = "harga_beli >= $itemFilterDTO->harga_beli_from";
+                array_push($activeFilter, $harga_beli_sql);
+            } elseif ($itemFilterDTO->harga_beli_until) {
+                $harga_beli_sql = "harga_beli BETWEEN $itemFilterDTO->harga_beli_from AND $itemFilterDTO->harga_beli_until";
+            }
             array_push($activeFilter, $harga_beli_sql);
 
-            $harga_jual_sql = $itemFilterDTO->harga_jual_from || $itemFilterDTO->harga_jual_until ? "harga_jual BETWEEN $itemFilterDTO->harga_jual_from AND $itemFilterDTO->harga_jual_until" : null;
+            $harga_jual_sql = null;
+            if ($itemFilterDTO->harga_jual_from && !$itemFilterDTO->harga_jual_until) {
+                $harga_jual_sql = "harga_jual >= $itemFilterDTO->harga_jual_from";
+                array_push($activeFilter, $harga_jual_sql);
+            } elseif ($itemFilterDTO->harga_jual_until) {
+                $harga_jual_sql = "harga_jual BETWEEN $itemFilterDTO->harga_jual_from AND $itemFilterDTO->harga_jual_until";
+            }
             array_push($activeFilter, $harga_jual_sql);
 
             $diskon_sql = $itemFilterDTO->diskon_from || $itemFilterDTO->diskon_until ? "diskon BETWEEN $itemFilterDTO->diskon_from AND $itemFilterDTO->diskon_until" : null;
