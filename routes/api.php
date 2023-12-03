@@ -10,8 +10,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\LensCategoryController;
-use App\Http\Controllers\FrameCategoryController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CoaController;
 use App\Http\Controllers\CustomerController;
 
@@ -30,6 +29,8 @@ use App\Http\Controllers\Modules\StockOpnameBranchDetailController;
 use App\Http\Controllers\Modules\CustomerDiagnoseController;
 use App\Http\Controllers\Modules\SalesMasterController;
 use App\Http\Controllers\Modules\SalesDetailController;
+use App\Http\Controllers\Modules\KasController;
+use App\Http\Controllers\Modules\PengeluaranController;
 
 use App\Http\Controllers\Modules\Monitoring\Stock\StockInController;
 use App\Http\Controllers\Modules\Monitoring\Stock\StockOutController;
@@ -107,19 +108,12 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/index/delete', [IndexController::class, 'deleteIndex'])->name('deleteIndex');
     Route::put('/index/edit', [IndexController::class, 'editIndex'])->name('editIndex');
 
-    /* Lens Category Controllers */
-    Route::get('/lens-category/one', [LensCategoryController::class, 'getLensCategory'])->name('getLensCategory');
-    Route::get('/lens-category/all', [LensCategoryController::class, 'getAllLensCategory'])->name('getAllLensCategory');
-    Route::post('/lens-category/add', [LensCategoryController::class, 'addLensCategory'])->name('addLensCategory');
-    Route::delete('/lens-category/delete', [LensCategoryController::class, 'deleteLensCategory'])->name('deleteLensCategory');
-    Route::put('/lens-category/edit', [LensCategoryController::class, 'editLensCategory'])->name('editLensCategory');
-
-    /* Frame Category Controllers */
-    Route::get('/frame-category/one', [FrameCategoryController::class, 'getFrameCategory'])->name('getFrameCategory');
-    Route::get('/frame-category/all', [FrameCategoryController::class, 'getAllFrameCategory'])->name('getAllFrameCategory');
-    Route::post('/frame-category/add', [FrameCategoryController::class, 'addFrameCategory'])->name('addFrameCategory');
-    Route::delete('/frame-category/delete', [FrameCategoryController::class, 'deleteFrameCategory'])->name('deleteFrameCategory');
-    Route::put('/frame-category/edit', [FrameCategoryController::class, 'editFrameCategory'])->name('editFrameCategory');
+    /* Category Controllers */
+    Route::get('/category/one', [CategoryController::class, 'getCategory'])->name('getCategory');
+    Route::get('/category/all', [CategoryController::class, 'getAllCategory'])->name('getAllCategory');
+    Route::post('/category/add', [CategoryController::class, 'addCategory'])->name('addCategory');
+    Route::delete('/category/delete', [CategoryController::class, 'deleteCategory'])->name('deleteCategory');
+    Route::put('/category/edit', [CategoryController::class, 'editCategory'])->name('editCategory');
 
     /* Coa Controllers */
     Route::get('/coa/one', [CoaController::class, 'getCoa'])->name('getCoa');
@@ -233,6 +227,14 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/sales-detail/add', [SalesDetailController::class, 'addSalesDetail'])->name('addSalesDetail');
     Route::put('/sales-detail/edit', [SalesDetailController::class, 'editSalesDetail'])->name('editSalesDetail');
     Route::delete('/sales-detail/delete', [SalesDetailController::class, 'deleteSalesDetail'])->name('deleteSalesDetail');
+
+    /* Kas Controllers */
+    Route::get('/kas/all', [KasController::class, 'getAllKas'])->name('getAllKas');
+    Route::post('/kas/add', [KasController::class, 'addNewDailyKas'])->name('addNewDailyKas');
+
+    /* Pengeluaran Controllers */
+    Route::get('/pengeluaran/all', [PengeluaranController::class, 'getAllPengeluaran'])->name('getAllPengeluaran');
+    Route::post('/pengeluaran/add', [PengeluaranController::class, 'addPengeluaran'])->name('addPengeluaran');
 
     /* Monitoring Routes */
     Route::get('/monitoring/stock-in/all', [StockInController::class, 'getAllStockIn'])->name('getAllStockIn');

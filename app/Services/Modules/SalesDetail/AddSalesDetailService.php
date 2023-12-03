@@ -11,6 +11,7 @@ use App\Services\Modules\BranchItem\UpdateBranchStokService;
 use App\Services\Coa\AddCoaService;
 use App\Repositories\Modules\BranchItem\GetBranchItemRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
+use App\Repositories\Modules\SalesMaster\UpdateTotalHargaProcedureRepository;
 
 use App\DTO\Modules\SalesDetailDTOs\NewSalesDetailDTO;
 
@@ -18,10 +19,11 @@ class AddSalesDetailService {
     public function __construct(
         private AddSalesDetailRepository $addSalesDetailRepository,
 
-        private UpdateBranchStokService $branchItemRepository,
         private AddCoaService $addCoaService,
+        private UpdateBranchStokService $branchItemService,
         private GetBranchItemRepository $getBranchItemRepository,
         private GetItemRepository $getItemRepository,
+        private UpdateTotalHargaProcedureRepository $updateTotalHargaProcedureRepository,
     )
     {}
 
@@ -48,6 +50,9 @@ class AddSalesDetailService {
             $item = $this->getItemRepository->getItem($request->item_id);
 
             $harga_item = $item->getHargaJual();
+
+            // Update total harga
+            $this->updateTotalHargaProcedureRepository->updateTotalHargaProcedure($request->sales_master_id, $harga_item, 'penambahan');
 
             $newSalesDetailDTO = new NewSalesDetailDTO(
                 $request->kode_item,
