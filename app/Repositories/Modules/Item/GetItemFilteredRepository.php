@@ -127,8 +127,6 @@ class GetItemFilteredRepository {
                     $item->value,
                 );
 
-                $itemDTO = $itemDTO->toArray();
-
                 array_push($itemDTOs, $itemDTO);
             }
 
