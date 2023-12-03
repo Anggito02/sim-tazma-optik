@@ -9,9 +9,9 @@ class ItemFilterDTO {
         public ?string $jenis_item,
         public ?string $kode_item,
         public int $harga_beli_from,
-        public int $harga_beli_until,
+        public ?int $harga_beli_until,
         public int $harga_jual_from,
-        public int $harga_jual_until,
+        public ?int $harga_jual_until,
         public int $diskon_from,
         public int $diskon_until,
         public ?string $frame_sku_vendor,
@@ -39,11 +39,11 @@ class ItemFilterDTO {
         $this->kode_item = $kode_item;
     }
 
-    public function getHargaBeliFrom(): ?int {
+    public function getHargaBeliFrom(): int {
         return $this->harga_beli_from;
     }
 
-    public function setHargaBeliFrom(?int $harga_beli_from): void {
+    public function setHargaBeliFrom(int $harga_beli_from): void {
         $this->harga_beli_from = $harga_beli_from;
     }
 
@@ -55,11 +55,11 @@ class ItemFilterDTO {
         $this->harga_beli_until = $harga_beli_until;
     }
 
-    public function getHargaJualFrom(): ?int {
+    public function getHargaJualFrom(): int {
         return $this->harga_jual_from;
     }
 
-    public function setHargaJualFrom(?int $harga_jual_from): void {
+    public function setHargaJualFrom(int $harga_jual_from): void {
         $this->harga_jual_from = $harga_jual_from;
     }
 
@@ -71,19 +71,19 @@ class ItemFilterDTO {
         $this->harga_jual_until = $harga_jual_until;
     }
 
-    public function getDiskonFrom(): ?int {
+    public function getDiskonFrom(): int {
         return $this->diskon_from;
     }
 
-    public function setDiskonFrom(?int $diskon_from): void {
+    public function setDiskonFrom(int $diskon_from): void {
         $this->diskon_from = $diskon_from;
     }
 
-    public function getDiskonUntil(): ?int {
+    public function getDiskonUntil(): int {
         return $this->diskon_until;
     }
 
-    public function setDiskonUntil(?int $diskon_until): void {
+    public function setDiskonUntil(int $diskon_until): void {
         $this->diskon_until = $diskon_until;
     }
 
