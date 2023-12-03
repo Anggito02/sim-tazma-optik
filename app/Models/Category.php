@@ -18,8 +18,8 @@ class Category extends Model
         'nama_kategori',
     ];
 
-    public function categories()
+    public function items()
     {
-        return $this->hasMany(categories::class, 'category_id');
+        return $this->hasMany(Item::class);
     }
 }
