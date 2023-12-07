@@ -15,8 +15,7 @@ class GetItemRepository {
      */
     public function getItem(int $id) {
         try {
-            $item = Item::find($id)
-                ->join('brands', 'items.brand_id', '=', 'brands.id')
+            $item = Item::join('brands', 'items.brand_id', '=', 'brands.id')
                 ->join('vendors', 'items.vendor_id', '=', 'vendors.id')
                 ->join('categories', 'items.category_id', '=', 'categories.id')
                 ->leftJoin('colors', 'items.frame_color_id', '=', 'colors.id')
@@ -29,7 +28,12 @@ class GetItemRepository {
                     'colors.color_name',
                     'indices.value',
                 )
+                ->where('items.id', $id)
                 ->first();
+
+                if ($item == null) {
+                    throw new Exception('Item not found');
+                }
 
                 $itemDTO = new ItemInfoDTO(
                     $item->id,
