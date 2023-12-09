@@ -43,6 +43,10 @@ class GetItemFilteredService {
                 'lensa_jenis_lensa' => 'nullable',
 
                 'aksesoris_nama_item' => 'nullable',
+
+                'vendor_id' => 'nullable|exists:vendors,id',
+                'brand_id' => 'nullable|exists:brands,id',
+                'category_id' => 'nullable|exists:categories,id'
             ]);
 
             $itemFilterDTO = new ItemFilterDTO(
@@ -62,6 +66,9 @@ class GetItemFilteredService {
                 $request->lensa_jenis_produk,
                 $request->lensa_jenis_lensa,
                 $request->aksesoris_nama_item,
+                $request->vendor_id,
+                $request->brand_id,
+                $request->category_id
             );
 
             $itemDTOs = $this->itemRepository->getItemFiltered($itemFilterDTO);
