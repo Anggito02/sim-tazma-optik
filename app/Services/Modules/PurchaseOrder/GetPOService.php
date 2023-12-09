@@ -5,7 +5,7 @@ namespace App\Services\Modules\PurchaseOrder;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\PurchaseOrderDTO;
+use App\DTO\Modules\PurchaseOrderDTOs\POInfoDTO;
 
 use App\Repositories\Modules\PurchaseOrder\GetPORepository;
 
@@ -17,7 +17,7 @@ class GetPOService {
     /**
      * Get Purchase Order
      * @param Request $request
-     * @return PurchaseOrderDTO
+     * @return POInfoDTO
      */
     public function getPurchaseOrder(Request $request) {
         try {
@@ -30,7 +30,9 @@ class GetPOService {
 
             $poDTO = $this->poRepository->getPurchaseOrder($id);
 
-            return $poDTO;
+            $poArray = $poDTO->toArray();
+
+            return $poArray;
 
         } catch (Exception $error) {
             throw new Exception($error->getMessage());

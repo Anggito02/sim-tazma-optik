@@ -4,18 +4,18 @@ namespace App\Repositories\Modules\PurchaseOrder;
 
 use Exception;
 
-use App\DTO\Modules\PurchaseOrderDTO;
+use App\DTO\Modules\PurchaseOrderDTOs\EditPODTO;
 use App\Models\Modules\PurchaseOrder;
 
 class EditPORepository {
     /**
      * Edit Purchase Order
-     * @param PurchaseOrderDTO $purchaseOrderDTO
-     * @return PurchaseOrderDTO
+     * @param EditPODTO $purchaseOrderDTO
+     * @return PurchaseOrder
      */
-    public function editPurchaseOrder(PurchaseOrderDTO $PoDto) {
+    public function editPurchaseOrder(EditPODTO $PoDto) {
         try {
-            $po = PurchaseOrder::find($PoDto->id);
+            $po = PurchaseOrder::find($PoDto->getId());
             $po->status_po = $PoDto->getStatusPo();
             $po->status_penerimaan = $PoDto->getStatusPenerimaan();
             $po->status_pembayaran = $PoDto->getStatusPembayaran();

@@ -4,14 +4,13 @@ namespace App\Repositories\Modules\PurchaseOrder;
 
 use Exception;
 
-use App\DTO\Modules\PurchaseOrderDTO;
 use App\Models\Modules\PurchaseOrder;
 
 class DeletePORepository {
     /**
      * Delete Purchase Order
      * @param int $id
-     * @return PurchaseOrderDTO
+     * @return PurchaseOrder
      */
     public function deletePurchaseOrder(int $id) {
         try {

@@ -144,9 +144,6 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/purchase-order/delete', [PurchaseOrderController::class, 'deletePO'])->name('deletePO');
     Route::put('/purchase-order/edit', [PurchaseOrderController::class, 'editPO'])->name('editPO');
 
-    /* === */
-    Route::get('/purchase-orderWith/info/all', [PurchaseOrderController::class, 'getAllPOWithInfo'])->name('getAllPOWithInfo');
-
     /* Receive Order Controllers */
     Route::get('/receive-order/one', [ReceiveOrderController::class, 'getReceiveOrder'])->name('getReceiveOrder');
     Route::get('/receive-order/all', [ReceiveOrderController::class, 'getAllReceiveOrder'])->name('getAllReceiveOrder');

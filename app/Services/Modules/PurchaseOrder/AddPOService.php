@@ -5,7 +5,7 @@ namespace App\Services\Modules\PurchaseOrder;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\PurchaseOrderDTO;
+use App\DTO\Modules\PurchaseOrderDTOs\NewPODTO;
 
 use App\Repositories\Modules\PurchaseOrder\AddPORepository;
 
@@ -44,8 +44,7 @@ class AddPOService {
             // Get current datetime
             $tanggal_dibuat = date('Y-m-d H:i:s');
 
-            $poDTO = new PurchaseOrderDTO(
-                null,
+            $poDTO = new NewPODTO(
                 $nomor_po,
                 $tanggal_dibuat,
                 $request->status_po,
