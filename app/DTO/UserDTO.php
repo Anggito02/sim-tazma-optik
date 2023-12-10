@@ -23,6 +23,7 @@ class UserDTO {
         public ?string $status = null,
         public ?string $group = null,
         public ?string $domicile = null,
+        public ?int $branch_id = null,
         public ?string $token = null
     )
     {}
@@ -174,6 +175,9 @@ class UserDTO {
 
     public function getDomicile(): string {
         return $this->domicile;
+    }
+    public function getBranch_id(): int {
+        return $this->branch_id;
     }
 
     public function setDomicile(string $domicile): void {
