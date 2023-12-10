@@ -65,15 +65,6 @@ class GetItemFilteredRepository {
             $aksesoris_nama_item_sql = $itemFilterDTO->aksesoris_nama_item ? "aksesoris_nama_item LIKE '%$itemFilterDTO->aksesoris_nama_item%'" : null;
             array_push($activeFilter, $aksesoris_nama_item_sql);
 
-            $vendor_id = $itemFilterDTO->vendor_id ? "vendor_id = $itemFilterDTO->vendor_id" : null;
-            array_push($activeFilter, $vendor_id);
-
-            $brand_id = $itemFilterDTO->brand_id ? "brand_id = $itemFilterDTO->brand_id" : null;
-            array_push($activeFilter, $brand_id);
-
-            $category_id = $itemFilterDTO->category_id ? "category_id = $itemFilterDTO->category_id" : null;
-            array_push($activeFilter, $category_id);
-
             $activeFilter = array_filter($activeFilter, function ($filter) {
                 return $filter !== null;
             });

@@ -68,13 +68,12 @@ class EditItemService {
                 // VENDOR //
                 'vendor_id' => 'required|exists:vendors,id',
 
-                // CATEGORY //
-                'category_id' => 'required|exists:categories,id',
-
                 // FRAME //
+                'frame_frame_category_id' => 'required_if:jenis_item,frame|exists:frame_categories,id|nullable',
                 'frame_color_id' => 'required_if:jenis_item,frame|exists:colors,id|nullable',
 
                 // LENS //
+                'lensa_lens_category_id' => 'required_if:jenis_item,lensa|exists:lens_categories,id|nullable',
                 'lensa_index_id' => 'required_if:jenis_item,lensa|exists:indices,id|nullable',
             ]);
 

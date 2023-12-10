@@ -20,9 +20,6 @@ class ItemFilterDTO {
         public ?string $lensa_jenis_produk,
         public ?string $lensa_jenis_lensa,
         public ?string $aksesoris_nama_item,
-        public ?int $vendor_id,
-        public ?int $brand_id,
-        public ?int $category_id
     )
     {}
 
@@ -136,30 +133,6 @@ class ItemFilterDTO {
 
     public function setAksesorisNamaItem(?string $aksesoris_nama_item): void {
         $this->aksesoris_nama_item = $aksesoris_nama_item;
-    }
-
-    public function getVendorId(): ?int {
-        return $this->vendor_id;
-    }
-
-    public function setVendorId(?int $vendor_id): void {
-        $this->vendor_id = $vendor_id;
-    }
-
-    public function getBrandId(): ?int {
-        return $this->brand_id;
-    }
-
-    public function setBrandId(?int $brand_id): void {
-        $this->brand_id = $brand_id;
-    }
-
-    public function getCategoryId(): ?int {
-        return $this->category_id;
-    }
-
-    public function setCategoryId(?int $category_id): void {
-        $this->category_id = $category_id;
     }
 }
 

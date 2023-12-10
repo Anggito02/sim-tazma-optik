@@ -37,24 +37,31 @@ class Item extends Model
         // Accessory
         'aksesoris_nama_item',
         'aksesoris_kategori',
+        'brand_id',
+        'vendor_id',
+        'category_id',
+        'frame_color_id',
+        'lensa_index_id',
     ];
 
     // Brand
     public function brand()
     {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsTo(Brand::class,'brand_id');
     }
 
-    // Frame
-    public function frameCategory()
+    //Vendor
+    public function vendor()
     {
-        return $this->belongsTo(FrameCategory::class, 'frame_frame_category_id');
+        return $this->belongsTo(Vendor::class, 'vendor_id');
     }
 
-    public function frameVendor()
+    // Category
+    public function category()
     {
-        return $this->belongsTo(Vendor::class, 'frame_vendor_id');
+        return $this->belongsTo(category::class, 'category_id');
     }
+
 
     public function frameColor()
     {
@@ -62,10 +69,10 @@ class Item extends Model
     }
 
     // Lens
-    public function lensCategory()
-    {
-        return $this->belongsTo(LensCategory::class, 'lensa_lens_category_id');
-    }
+    // public function lensCategory()
+    // {
+    //     return $this->belongsTo(LensCategory::class, 'lensa_lens_category_id');
+    // }
 
     public function lensIndex()
     {

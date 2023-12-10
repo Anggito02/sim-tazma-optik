@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Services\Employee\GetEmployeeService;
@@ -32,12 +33,19 @@ class EmployeeController extends Controller
      */
     public function getEmployee(Request $request) {
         try {
-            $resultData = $this->getEmployeeService->getEmployee($request);
-
+            // $resultData = $this->getEmployeeService->getEmployee($request);
+            // print_r($request);
+            $query = User::query();
+            if ($request->has('id')) {
+                $query->where('users.id',$request->input('id'));
+            }
+            $user = $query ->join('branches', 'branches.id', '=', 'users.branch_id')
+                            ->select("*")
+                            ->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Employee retrieved successfully',
-                'data' => $resultData
+                'data' => $user
             ])->setStatusCode(200);
         } catch (Exception $error) {
             return response()->json([
@@ -54,12 +62,15 @@ class EmployeeController extends Controller
      */
     public function getAllEmployees(Request $request) {
         try {
-            $resultData = $this->getAllEmployeeService->getAllEmployees($request);
-
+            // $resultData = $this->getAllEmployeeService->getAllEmployees($request);
+            $query = User::query();
+            $user = $query ->join('branches', 'branches.id', '=', 'users.branch_id')
+                            ->select("*")
+                            ->get();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Employee retrieved successfully',
-                'data' => $resultData
+                'data' => $user
             ])->setStatusCode(200);
         } catch (Exception $error) {
             return response()->json([

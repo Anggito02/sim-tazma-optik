@@ -36,7 +36,8 @@ class GetEmployeeRepository {
                 $employee->plant,
                 $employee->status,
                 $employee->group,
-                $employee->domicile
+                $employee->domicile,
+                $employee->branch_id
             );
 
             return $userDTO;
