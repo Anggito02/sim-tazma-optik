@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Services\Modules\Kas\GetAllKasService;
 use App\Services\Modules\Kas\AddNewDailyKasService;
+use App\Models\Modules\Kas;
 
 class KasController extends Controller
 {
@@ -24,7 +25,7 @@ class KasController extends Controller
      */
     public function getAllKas(Request $request) {
         try {
-            $kas = $this->getAllKasService->getAllKas($request);
+            $kas = $this->getAllKasService->getAllKas($request); 
 
             return response()->json([
                 'status' => 'success',
@@ -39,7 +40,10 @@ class KasController extends Controller
             ], 400);
         }
     }
-
+    public function getEksistKas(Request $request)
+    {
+        print_r($request->input());
+    }
     /**
      * Add new daily kas
      * @param Request $request

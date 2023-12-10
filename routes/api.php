@@ -230,6 +230,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
 
     /* Kas Controllers */
     Route::get('/kas/all', [KasController::class, 'getAllKas'])->name('getAllKas');
+    Route::post('/kas/getEksistKas', [KasController::class, 'getEksistKas'])->name('getEksistKas');
     Route::post('/kas/add', [KasController::class, 'addNewDailyKas'])->name('addNewDailyKas');
 
     /* Pengeluaran Controllers */

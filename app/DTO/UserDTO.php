@@ -23,7 +23,7 @@ class UserDTO {
         public ?string $status = null,
         public ?string $group = null,
         public ?string $domicile = null,
-        public ?int $branch_id = null,
+        public ?string $branch_id = null,
         public ?string $token = null
     )
     {}
