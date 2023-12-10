@@ -4,7 +4,6 @@ namespace App\Repositories\Employee;
 
 use Exception;
 
-use App\DTO\UserDTO;
 use App\DTO\BranchDTO;
 
 use App\Models\Branch;
