@@ -18,8 +18,8 @@ class LoginRepository {
     public function login(LoginDTO $userDTO) {
         try {
             $user = User::where('email', $userDTO->getEmail())
-            ->join('branches', 'users.branch_id', '=', 'branches.id')
-            ->select('users.*', 'branches.branch_name')
+            ->leftJoin('branches', 'users.branch_id', '=', 'branches.id')
+            ->select('users.*', 'branches.nama_branch')
             ->first();
 
             if (!$user) {

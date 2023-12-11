@@ -35,7 +35,7 @@ class RegisterService {
                 // 'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'gender' => 'required|in:laki-laki,perempuan',
                 'address' => 'required',
-                'phone' => 'required|unique:users, phone',
+                'phone' => 'required|unique:users,phone',
                 'department' => 'required',
                 'section' => 'required',
                 'position' => 'required',
