@@ -14,6 +14,11 @@ class CheckKasIfExistService
     )
     {}
 
+    /**
+     * Check kas if exist
+     * @param Request $request
+     * @return string
+     */
     public function checkKasIfExist(Request $request)
     {
         try {

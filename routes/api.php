@@ -217,6 +217,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/customer-diagnose/add', [CustomerDiagnoseController::class, 'addCustomerDiagnose'])->name('addCustomerDiagnose');
 
     /* Sales Master Controllers */
+    Route::get('/sales-master/one', [SalesMasterController::class, 'getSalesMaster'])->name('getSalesMaster');
     Route::get('/sales-master/all', [SalesMasterController::class, 'getAllSalesMaster'])->name('getAllSalesMaster');
     Route::post('/sales-master/add', [SalesMasterController::class, 'addSalesMaster'])->name('addSalesMaster');
     Route::put('/sales-master/edit', [SalesMasterController::class, 'updateSalesMaster'])->name('updateSalesMaster');
