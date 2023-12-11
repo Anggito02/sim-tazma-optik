@@ -16,7 +16,7 @@ class GetAllEmployeeRepository {
      */
     public function getAllEmployees(int $page, int $limit) {
         try {
-            $employees = User::join('branches', 'users.branch_id', '=', 'branches.id')
+            $employees = User::leftJoin('branches', 'users.branch_id', '=', 'branches.id')
             ->select(
                 'users.id',
                 'users.email',
@@ -36,7 +36,7 @@ class GetAllEmployeeRepository {
                 'users.group',
                 'users.domicile',
                 'users.branch_id',
-                'branches.name as nama_branch'
+                'branches.nama_branch'
             )->paginate($limit, ['*'], 'page', $page);
 
             $userDTOs = [];

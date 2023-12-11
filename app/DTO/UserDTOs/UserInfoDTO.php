@@ -21,8 +21,8 @@ class UserInfoDTO {
         private string $status,
         private string $group,
         private string $domicile,
-        private int $branch_id,
-        private string $nama_branch
+        private ?int $branch_id,
+        private ?string $nama_branch
     )
     {}
 
@@ -136,12 +136,12 @@ class UserInfoDTO {
         return $this->domicile;
     }
 
-    public function getBranchId(): int
+    public function getBranchId(): ?int
     {
         return $this->branch_id;
     }
 
-    public function getNamaBranch(): string
+    public function getNamaBranch(): ?string
     {
         return $this->nama_branch;
     }

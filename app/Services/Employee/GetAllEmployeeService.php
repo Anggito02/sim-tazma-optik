@@ -34,7 +34,7 @@ class GetAllEmployeeService {
 
             // TODO: getting all user photo
 
-            return $userDTOs;
+            return $userArrays;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

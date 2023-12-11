@@ -15,7 +15,7 @@ class GetEmployeeRepository {
      */
     public function getEmployee(int $id) {
         try {
-            $employee = User::join('branches', 'users.branch_id', '=', 'branches.id')
+            $employee = User::leftJoin('branches', 'users.branch_id', '=', 'branches.id')
                 ->where('users.id', $id)
                 ->select(
                     'users.id',
@@ -36,7 +36,7 @@ class GetEmployeeRepository {
                     'users.group',
                     'users.domicile',
                     'users.branch_id',
-                    'branches.name as nama_branch'
+                    'branches.nama_branch'
                 )
                 ->first();
 
