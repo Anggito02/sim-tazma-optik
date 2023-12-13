@@ -4,7 +4,6 @@ namespace App\Repositories\Modules\PurchaseOrder;
 
 use Exception;
 
-use App\DTO\Modules\PurchaseOrderDTO;
 use App\Models\Modules\PurchaseOrder;
 
 class EditPOStatusPenerimaanRepository {
@@ -12,7 +11,7 @@ class EditPOStatusPenerimaanRepository {
      * Edit Purchase Order Status Penerimaan
      * @param int $id
      * @param bool $status_penerimaan
-     * @return PurchaseOrderDTO
+     * @return PurchaseOrder
      */
     public function editPurchaseOrderStatusPenerimaan(int $id, bool $status_penerimaan) {
         try {

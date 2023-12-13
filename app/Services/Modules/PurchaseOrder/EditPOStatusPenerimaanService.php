@@ -5,8 +5,6 @@ namespace App\Services\Modules\PurchaseOrder;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\PurchaseOrderDTO;
-
 use App\Repositories\Modules\PurchaseOrder\EditPOStatusPenerimaanRepository;
 
 class EditPOStatusPenerimaanService {
@@ -17,7 +15,7 @@ class EditPOStatusPenerimaanService {
     /**
      * Edit Purchase Order Status Penerimaan
      * @param Request $request
-     * @return PurchaseOrderDTO
+     * @return PurchaseOrder
      */
     public function editPurchaseOrderStatusPenerimaan(Request $request) {
         try {

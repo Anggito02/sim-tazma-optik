@@ -12,7 +12,6 @@ use App\Services\Modules\PurchaseOrder\AddPOService;
 use App\Services\Modules\PurchaseOrder\EditPOService;
 use App\Services\Modules\PurchaseOrder\DeletePOService;
 
-use App\Services\Modules\PurchaseOrder\GetAllPOWithInfoService;
 
 class PurchaseOrderController extends Controller
 {
@@ -23,14 +22,12 @@ class PurchaseOrderController extends Controller
         private AddPOService $addPOService,
         private EditPOService $editPOService,
         private DeletePOService $deletePOService,
-
-        private GetAllPOWithInfoService $getAllPOWithInfoService
     ) {}
 
     /**
      * Get purchase order by id
      * @param Request $request
-     * @return PurchaseOrderDTO
+     * @return POInfoDTO
      */
     public function getPO(Request $request) {
         try {
@@ -53,7 +50,7 @@ class PurchaseOrderController extends Controller
     /**
      * Get all purchase order
      * @param Request $request
-     * @return PurchaseOrderDTO
+     * @return POInfoDTO
      */
     public function getAllPO(Request $request) {
         try {
@@ -76,7 +73,7 @@ class PurchaseOrderController extends Controller
     /**
      * Add purchase order
      * @param Request $request
-     * @return PurchaseOrderDTO
+     * @return PurchaseOrder
      */
     public function addPO(Request $request) {
         try {
@@ -99,7 +96,7 @@ class PurchaseOrderController extends Controller
     /**
      * Edit purchase order
      * @param Request $request
-     * @return PurchaseOrderDTO
+     * @return PurchaseOrder
      */
     public function editPO(Request $request) {
         try {
@@ -122,7 +119,7 @@ class PurchaseOrderController extends Controller
     /**
      * Delete purchase order
      * @param Request $request
-     * @return PurchaseOrderDTO
+     * @return PurchaseOrder
      */
     public function deletePO(Request $request) {
         try {
@@ -137,29 +134,6 @@ class PurchaseOrderController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Delete purchase order failed',
-                'data' => $error->getMessage()
-            ], 400);
-        }
-    }
-
-    /**
-     * Get all purchase order with info
-     * @param Request $request
-     * @return PurchaseOrderDTO
-     */
-    public function getAllPOWithInfo(Request $request) {
-        try {
-            $poDTO = $this->getAllPOWithInfoService->getAllPurchaseOrderWithInfo($request);
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Get all purchase order with info success',
-                'data' => $poDTO
-            ], 200);
-        } catch (Exception $error) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Get all purchase order with info failed',
                 'data' => $error->getMessage()
             ], 400);
         }
