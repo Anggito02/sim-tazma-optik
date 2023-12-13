@@ -22,7 +22,7 @@ class GetAllPODetailRepository {
             $poDetails = PurchaseOrderDetail::where('purchase_order_details.purchase_order_id', '=', $poId)
                 ->join('items', 'purchase_order_details.item_id', '=', 'items.id')
                 ->join('purchase_orders', 'purchase_order_details.purchase_order_id', '=', 'purchase_orders.id')
-                ->join('receive_orders', 'purchase_order_details.receive_order_id', '=', 'receive_orders.id')
+                ->leftJoin('receive_orders', 'purchase_order_details.receive_order_id', '=', 'receive_orders.id')
                 ->select(
                     'purchase_order_details.*', 'items.kode_item as kode_item',
                     'items.kode_item as kode_item',
