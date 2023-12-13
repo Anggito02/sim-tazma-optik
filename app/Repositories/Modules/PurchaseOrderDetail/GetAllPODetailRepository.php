@@ -19,7 +19,7 @@ class GetAllPODetailRepository {
         try {
             // use pagination
             // join with item
-            $poDetails = PurchaseOrderDetail::where('purchase_order_id', '=', $poId)
+            $poDetails = PurchaseOrderDetail::where('purchase_order_details.purchase_order_id', '=', $poId)
                 ->join('items', 'purchase_order_details.item_id', '=', 'items.id')
                 ->join('purchase_orders', 'purchase_order_details.purchase_order_id', '=', 'purchase_orders.id')
                 ->join('receive_orders', 'purchase_order_details.receive_order_id', '=', 'receive_orders.id')
