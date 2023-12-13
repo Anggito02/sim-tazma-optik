@@ -40,7 +40,7 @@ class VerifySalesMasterService {
                 'nomor_kartu' => 'required_unless:sistem_pembayaran,TUNAI',
                 'nomor_referensi' => 'required_unless:sistem_pembayaran,TUNAI',
 
-                'total_tagihan' => 'required|integer',
+                'total_tagihan' => 'required|integer|gt:0',
             ]);
 
             // Update kas if sistem_pembayaran is 'TUNAI'

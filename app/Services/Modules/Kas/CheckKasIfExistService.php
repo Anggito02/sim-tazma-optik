@@ -27,7 +27,7 @@ class CheckKasIfExistService
                 'branch_id' => 'required|exists:branches,id'
             ]);
 
-            $tanggal_buka_kas = date('Y--m-d');
+            $tanggal_buka_kas = date('Y-m-d');
 
             $checkKasOpened = $this->checkKasOpenedRepository->checkKasOpened($request->branch_id, $tanggal_buka_kas);
 
