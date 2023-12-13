@@ -4,17 +4,24 @@ namespace App\Repositories\Modules\SalesMaster;
 
 use Exception;
 
+use App\DTO\Modules\SalesMasterDTOs\VerifySalesMasterDTO;
+
 use App\Models\Modules\SalesMaster;
 
 class VerifySalesMasterRepository {
     /**
      * Verify Sales Master
-     * @param int $id
+     * @param VerifySalesMasterDTO $salesMasterDTO
+     *
      * @return SalesMaster
      */
-    public function verifySalesMaster(int $id) {
+    public function verifySalesMaster(VerifySalesMasterDTO $salesMasterDTO) {
         try {
-            $salesMaster = SalesMaster::find($id);
+            $salesMaster = SalesMaster::find($salesMasterDTO->getId());
+
+            $salesMaster->sistem_pembayaran = $salesMasterDTO->getSistemPembayaran();
+            $salesMaster->nomor_kartu = $salesMasterDTO->getNomorKartu();
+            $salesMaster->nomor_referensi = $salesMasterDTO->getNomorReferensi();
 
             $salesMaster->verified = true;
 
