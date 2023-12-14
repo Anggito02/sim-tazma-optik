@@ -24,7 +24,7 @@ class GetAllSalesMasterService {
             $request->validate([
                 'page' => 'required|integer',
                 'limit' => 'required|integer',
-                'branch_id' => 'required|integer',
+                'branch_id' => 'nullable|integer',
             ]);
 
             $page = $request->page;
