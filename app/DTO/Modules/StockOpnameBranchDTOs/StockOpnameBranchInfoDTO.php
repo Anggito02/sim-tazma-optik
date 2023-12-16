@@ -10,6 +10,7 @@ class StockOpnameBranchInfoDTO {
         private string $tahun,
 
         private int $branch_id,
+        private string $nama_branch
     )
     {}
 
@@ -20,6 +21,7 @@ class StockOpnameBranchInfoDTO {
             'bulan' => $this->bulan,
             'tahun' => $this->tahun,
             'branch_id' => $this->branch_id,
+            'nama_branch' => $this->nama_branch
         ];
     }
 
@@ -41,6 +43,10 @@ class StockOpnameBranchInfoDTO {
 
     public function getBranchId(): int {
         return $this->branch_id;
+    }
+
+    public function getNamaBranch(): string {
+        return $this->nama_branch;
     }
 }
 

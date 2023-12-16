@@ -34,6 +34,11 @@ class GetAllStockOpnameBranchRepository {
             $activeFilter = implode(' AND ', $activeFilter);
 
             $stockOpnameBranches = StockOpnameBranch::whereRaw($activeFilter ? $activeFilter : 1)
+                ->join('branches', 'branches.id', '=', 'stock_opname_branches.branch_id')
+                ->select(
+                    'stock_opname_branches.*',
+                    'branches.nama_branch as nama_branch'
+                )
                 ->orderBy('tabggal_dibuat', 'DESC')
                 ->paginate($stockOpnameDTO->getLimit(), ['*'], 'page', $stockOpnameDTO->getPage());
 
@@ -45,7 +50,8 @@ class GetAllStockOpnameBranchRepository {
                     $stockOpnameBranch->tanggal_dibuat,
                     $stockOpnameBranch->bulan,
                     $stockOpnameBranch->tahun,
-                    $stockOpnameBranch->branch_id
+                    $stockOpnameBranch->branch_id,
+                    $stockOpnameBranch->nama_branch
                 );
 
                 array_push($stockOpnameBranchInfoDTOs, $stockOpnameBranchInfoDTO);
