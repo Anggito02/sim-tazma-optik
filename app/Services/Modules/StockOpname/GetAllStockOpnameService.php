@@ -45,7 +45,7 @@ class GetAllStockOpnameService {
                 array_push($stockOpnameArrays, $stockOpname->toArray());
             }
 
-            return $stockOpnameInfoDTO;
+            return $stockOpnameArrays;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

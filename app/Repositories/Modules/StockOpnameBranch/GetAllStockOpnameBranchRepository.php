@@ -5,21 +5,37 @@ namespace App\Repositories\Modules\StockOpnameBranch;
 use Exception;
 
 use App\DTO\Modules\StockOpnameBranchDTOs\StockOpnameBranchInfoDTO;
+use App\DTO\Modules\StockOpnameBranchDTOs\StockOpnameBranchFilterDTO;
 use App\Models\Modules\StockOpnameBranch;
 
 class GetAllStockOpnameBranchRepository {
     /**
      * Get all Stock Opname Branch
-     * @param int $page
-     * @param int $limit
+     * @param StockOpnameBranchFilterDTO $stockOpnameDTO
      * @return StockOpnameInfoBranchDTO
      */
-    public function getAllStockOpnameBranch(int $page, int $limit) {
+    public function getAllStockOpnameBranch(StockOpnameBranchFilterDTO $stockOpnameDTO) {
         try {
-            $stockOpnameBranches = StockOpnameBranch::orderBy('tanggal_dibuat', 'desc')
-                ->offset(($page - 1) * $limit)
-                ->limit($limit)
-                ->get();
+            $activeFilter = [];
+
+            $bulanFilter = $stockOpnameDTO->getBulan() ? 'bulan=' . $stockOpnameDTO->getBulan() : null;
+            array_push($activeFilter, $bulanFilter);
+
+            $tahunFilter = $stockOpnameDTO->getTahun() ? 'tahun=' . $stockOpnameDTO->getTahun() : null;
+            array_push($activeFilter, $tahunFilter);
+
+            $branchFilter = $stockOpnameDTO->getBranchId() ? 'branch_id=' . $stockOpnameDTO->getBranchId() : null;
+            array_push($activeFilter, $branchFilter);
+
+            $activeFilter = array_filter($activeFilter, function ($filter) {
+                return $filter != null;
+            });
+
+            $activeFilter = implode(' AND ', $activeFilter);
+
+            $stockOpnameBranches = StockOpnameBranch::whereRaw($activeFilter ? $activeFilter : 1)
+                ->orderBy('tabggal_dibuat', 'DESC')
+                ->paginate($stockOpnameDTO->getLimit(), ['*'], 'page', $stockOpnameDTO->getPage());
 
             $stockOpnameBranchInfoDTOs = [];
 
