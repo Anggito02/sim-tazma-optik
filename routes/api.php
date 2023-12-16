@@ -48,7 +48,7 @@ use App\Http\Controllers\Modules\Monitoring\Stock\StockOutController;
 
 Route::middleware(['auth:sanctum'])->group(function() {
     /* User Info Routes */
-    // Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('auth:sanctum')->name('getUserInfo');
+    Route::post('/user/info', [AuthController::class, 'getUserInfo'])->middleware('auth:sanctum')->name('getUserInfo');
 
     /* Auth Routes */
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
