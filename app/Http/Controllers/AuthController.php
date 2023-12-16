@@ -66,9 +66,7 @@ class AuthController extends Controller {
      */
     public function login(Request $request) {
         try {
-            return response()->json([
-                'data' => $request
-            ]);
+            dd($request->all());
             $resultData = $this->loginService->login($request);
 
             return response()->json([
