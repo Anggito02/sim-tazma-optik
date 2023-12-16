@@ -22,6 +22,8 @@ class LoginRepository {
             ->select('users.*', 'branches.nama_branch')
             ->first();
 
+            dd($user);
+
             if (!$user) {
                 throw new Exception('Invalid credentials');
             }
