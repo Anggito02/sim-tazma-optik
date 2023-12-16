@@ -40,8 +40,6 @@ class LoginService {
 
             $userInfo = $validUserDTO->toArray();
 
-            dd($userInfo);
-
             return $userInfo;
 
         } catch (Exception $error) {
