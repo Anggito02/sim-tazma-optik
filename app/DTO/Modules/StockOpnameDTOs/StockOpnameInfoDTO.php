@@ -4,12 +4,21 @@ namespace App\DTO\Modules\StockOpnameDTOs;
 
 class StockOpnameInfoDTO {
     public function __construct(
-        public int $id,
-        public string $tanggal_dibuat,
-        public string $bulan,
-        public string $tahun,
+        private int $id,
+        private string $tanggal_dibuat,
+        private string $bulan,
+        private string $tahun,
     )
     {}
+
+    public function toArray(): array {
+        return [
+            'id' => $this->getId(),
+            'tanggal_dibuat' => $this->getTanggalDibuat(),
+            'bulan' => $this->getBulan(),
+            'tahun' => $this->getTahun(),
+        ];
+    }
 
     public function getId(): int {
         return $this->id;
