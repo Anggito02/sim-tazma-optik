@@ -30,7 +30,7 @@ class LoginService {
                 'password' => 'required',
             ]);
 
-            dd($request);
+            dd($request->all());
 
             $userDTO = new LoginDTO(
                 $request->email,
