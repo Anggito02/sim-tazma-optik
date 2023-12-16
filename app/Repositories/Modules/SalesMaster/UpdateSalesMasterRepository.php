@@ -18,6 +18,10 @@ class UpdateSalesMasterRepository {
         try {
             $salesMaster = SalesMaster::find($updateSalesMasterDTO->getId());
 
+            if ($salesMaster->verified) {
+                throw new Exception('Sales Master sudah diverifikasi');
+            }
+
             $salesMaster->ref_sales_id = $updateSalesMasterDTO->getRefSalesId();
             $salesMaster->sistem_pembayaran = $updateSalesMasterDTO->getSistemPembayaran();
             $salesMaster->nomor_kartu = $updateSalesMasterDTO->getNomorKartu();
