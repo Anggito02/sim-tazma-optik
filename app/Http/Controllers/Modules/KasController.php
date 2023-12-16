@@ -8,14 +8,19 @@ use Illuminate\Http\Request;
 
 use App\Services\Modules\Kas\GetAllKasService;
 use App\Services\Modules\Kas\AddNewDailyKasService;
+<<<<<<< HEAD
 use App\Models\Modules\Kas;
+=======
+use App\Services\Modules\Kas\CheckKasIfExistService;
+>>>>>>> 29e2c5a3fdc74d2fae264c9670aeef780aa12f62
 
 class KasController extends Controller
 {
     // Service Providers Constructs
     public function __construct(
         private GetAllKasService $getAllKasService,
-        private AddNewDailyKasService $addNewDailyKasService
+        private AddNewDailyKasService $addNewDailyKasService,
+        private CheckKasIfExistService $checkKasIfExistService
     ) {}
 
     /**
@@ -62,6 +67,29 @@ class KasController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Add new daily kas failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Check if kas exist
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function checkKasIfExist(Request $request) {
+        try {
+            $kas = $this->checkKasIfExistService->checkKasIfExist($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Check kas if exist success',
+                'data' => $kas
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Check kas if exist failed',
                 'data' => $error->getMessage()
             ], 400);
         }

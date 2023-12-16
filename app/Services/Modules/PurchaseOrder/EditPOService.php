@@ -5,7 +5,7 @@ namespace App\Services\Modules\PurchaseOrder;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\PurchaseOrderDTO;
+use App\DTO\Modules\PurchaseOrderDTOs\EditPODTO;
 
 use App\Repositories\Modules\PurchaseOrder\EditPORepository;
 
@@ -17,7 +17,7 @@ class EditPOService {
     /**
      * Edit Purchase Order
      * @param Request $request
-     * @return PurchaseOrderDTO
+     * @return PurchaseOrder
      */
     public function editPurchaseOrder(Request $request) {
         try {
@@ -35,10 +35,8 @@ class EditPOService {
                 'approved_by' => 'required|exists:users,id',
             ]);
 
-            $poDTO = new PurchaseOrderDTO(
+            $poDTO = new EditPODTO(
                 $request->id,
-                null,
-                null,
                 $request->status_po,
                 $request->status_penerimaan,
                 $request->status_pembayaran,

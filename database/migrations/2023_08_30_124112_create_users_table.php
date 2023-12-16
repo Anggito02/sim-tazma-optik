@@ -27,10 +27,10 @@ return new class extends Migration
             $table->string('section');
             $table->string('position');
             $table->string('role')->default('user');
-            $table->string('plant');
             $table->string('status');
             $table->string('group');
             $table->string('domicile');
+
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

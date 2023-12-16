@@ -2,8 +2,11 @@
 
 namespace App\Services\Modules\SalesMaster;
 
+use App\DTO\Modules\SalesMasterDTOs\SalesMasterInfoDTO;
 use Exception;
 use Illuminate\Http\Request;
+
+use App\DTO\Modules\SalesMasterDTOs\VerifySalesMasterDTO;
 
 use App\Repositories\Modules\SalesMaster\VerifySalesMasterRepository;
 
@@ -33,7 +36,11 @@ class VerifySalesMasterService {
                 'id' => 'required|exists:sales_masters,id',
                 'branch_id' => 'required|exists:branches,id',
                 'sistem_pembayaran' => 'required|string',
-                'total_tagihan' => 'required|integer',
+
+                'nomor_kartu' => 'required_unless:sistem_pembayaran,TUNAI',
+                'nomor_referensi' => 'required_unless:sistem_pembayaran,TUNAI',
+
+                'total_tagihan' => 'required|integer|gt:0',
             ]);
 
             // Update kas if sistem_pembayaran is 'TUNAI'
@@ -58,7 +65,15 @@ class VerifySalesMasterService {
                 ]));
             }
 
-            $salesMaster = $this->verifySalesMasterRepository->verifySalesMaster($request->id);
+            // Get updated sales master
+            $salesMasterVerifyInfo = new VerifySalesMasterDTO(
+                $request->id,
+                $request->sistem_pembayaran,
+                $request->nomor_kartu,
+                $request->nomor_referensi
+            );
+
+            $salesMaster = $this->verifySalesMasterRepository->verifySalesMaster($salesMasterVerifyInfo);
 
             return $salesMaster;
         } catch (Exception $e) {

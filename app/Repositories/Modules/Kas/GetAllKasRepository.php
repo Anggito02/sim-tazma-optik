@@ -18,7 +18,7 @@ class GetAllKasRepository {
      */
     public function getAllKas(int $branch_id, int $page, int $limit) {
         try {
-            $allKas = Kas::where('branch_id', $branch_id)
+            $allKas = Kas::where('kas.branch_id', $branch_id)
                 ->join('branches', 'branches.id', '=', 'kas.branch_id')
                 ->join('users', 'users.id', '=', 'kas.employee_id')
                 ->select(
@@ -28,12 +28,12 @@ class GetAllKasRepository {
                     'kas.modal_tambahan_harian',
                     'kas.kas_awal_harian',
                     'kas.kas_akhir_harian',
+                    'kas.branch_id',
+                    'kas.employee_id',
 
-                    'branches.id as branch_id',
                     'branches.kode_branch',
                     'branches.nama_branch',
 
-                    'users.id as employee_id',
                     'users.employee_name as employee_name',
                 )
             ->orderBy('tanggal_buka_kas', 'desc')

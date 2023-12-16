@@ -4,23 +4,49 @@ namespace App\Repositories\Employee;
 
 use Exception;
 
-use App\DTO\UserDTO;
+use App\DTO\UserDTOs\UserInfoDTO;
 use App\Models\User;
 
 class GetEmployeeRepository {
     /**
      * Get employee by id
      * @param int $id
-     * @return UserDTO
+     * @return UserInfoDTO
      */
     public function getEmployee(int $id) {
         try {
-            $employee = User::find($id);
+            $employee = User::leftJoin('branches', 'users.branch_id', '=', 'branches.id')
+                ->where('users.id', $id)
+                ->select(
+                    'users.id',
+                    'users.email',
+                    'users.username',
+                    'users.nik',
+                    'users.nip',
+                    'users.employee_name',
+                    'users.photo',
+                    'users.gender',
+                    'users.address',
+                    'users.phone',
+                    'users.department',
+                    'users.section',
+                    'users.position',
+                    'users.role',
+                    'users.status',
+                    'users.group',
+                    'users.domicile',
+                    'users.branch_id',
+                    'branches.nama_branch'
+                )
+                ->first();
 
-            $userDTO = new UserDTO(
+            if (!$employee) {
+                throw new Exception('Employee not found');
+            }
+
+            $userDTO = new UserInfoDTO(
                 $employee->id,
                 $employee->email,
-                null,
                 $employee->username,
                 $employee->nik,
                 $employee->nip,
@@ -33,11 +59,15 @@ class GetEmployeeRepository {
                 $employee->section,
                 $employee->position,
                 $employee->role,
-                $employee->plant,
                 $employee->status,
                 $employee->group,
                 $employee->domicile,
+<<<<<<< HEAD
                 $employee->branch_id
+=======
+                $employee->branch_id,
+                $employee->nama_branch
+>>>>>>> 29e2c5a3fdc74d2fae264c9670aeef780aa12f62
             );
 
             return $userDTO;

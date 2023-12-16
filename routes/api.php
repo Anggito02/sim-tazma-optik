@@ -144,9 +144,6 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::delete('/purchase-order/delete', [PurchaseOrderController::class, 'deletePO'])->name('deletePO');
     Route::put('/purchase-order/edit', [PurchaseOrderController::class, 'editPO'])->name('editPO');
 
-    /* === */
-    Route::get('/purchase-orderWith/info/all', [PurchaseOrderController::class, 'getAllPOWithInfo'])->name('getAllPOWithInfo');
-
     /* Receive Order Controllers */
     Route::get('/receive-order/one', [ReceiveOrderController::class, 'getReceiveOrder'])->name('getReceiveOrder');
     Route::get('/receive-order/all', [ReceiveOrderController::class, 'getAllReceiveOrder'])->name('getAllReceiveOrder');
@@ -217,6 +214,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/customer-diagnose/add', [CustomerDiagnoseController::class, 'addCustomerDiagnose'])->name('addCustomerDiagnose');
 
     /* Sales Master Controllers */
+    Route::get('/sales-master/one', [SalesMasterController::class, 'getSalesMaster'])->name('getSalesMaster');
     Route::get('/sales-master/all', [SalesMasterController::class, 'getAllSalesMaster'])->name('getAllSalesMaster');
     Route::post('/sales-master/add', [SalesMasterController::class, 'addSalesMaster'])->name('addSalesMaster');
     Route::put('/sales-master/edit', [SalesMasterController::class, 'updateSalesMaster'])->name('updateSalesMaster');
@@ -232,6 +230,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::get('/kas/all', [KasController::class, 'getAllKas'])->name('getAllKas');
     Route::post('/kas/getEksistKas', [KasController::class, 'getEksistKas'])->name('getEksistKas');
     Route::post('/kas/add', [KasController::class, 'addNewDailyKas'])->name('addNewDailyKas');
+    Route::post('kas/exist', [KasController::class, 'checkKasIfExist'])->name('checkKasIfExist');
 
     /* Pengeluaran Controllers */
     Route::get('/pengeluaran/all', [PengeluaranController::class, 'getAllPengeluaran'])->name('getAllPengeluaran');

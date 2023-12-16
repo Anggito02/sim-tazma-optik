@@ -5,7 +5,7 @@ namespace App\Services\Employee;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\UserDTO;
+use App\DTO\UserDTOs\EditUserDTO;
 
 use App\Repositories\Employee\EditEmployeeRepository;
 use Illuminate\Support\Facades\Hash;
@@ -18,76 +18,59 @@ class EditEmployeeService {
     /**
      * Edit employee
      * @param Request $request
-     * @return UserDTO
+     * @return User
      */
     public function editEmployee(Request $request) {
         try {
             // Validate request
             $request->validate([
                 'id' => 'required|exists:users,id',
-                // 'email' => 'required|email',
-                // 'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'min:8', 'max:20'],
+                'email' => 'required|email',
+                'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'min:8', 'max:20'],
                 'username' => 'required',
                 'nik' => 'required',
                 'nip' => 'required',
                 'employee_name' => 'required',
                 // 'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-                // 'gender' => 'required|in:laki-laki,perempuan',
-                // 'address' => 'required',
-                // 'phone' => 'required',
+                'gender' => 'required|in:laki-laki,perempuan',
+                'address' => 'required',
+                'phone' => 'required',
                 'department' => 'required',
                 'section' => 'required',
                 'position' => 'required',
                 'role' => 'required',
-                'plant' => 'required',
-                // 'status' => 'required',
-                // 'group' => 'required',
-                // 'domicile' => 'required',
+                'status' => 'required',
+                'group' => 'required',
+                'domicile' => 'required',
+                'branch_id' => 'required|exists:branches,id',
             ]);
 
-            // Upload photo
-            // $imagePath = "";
-            // if ($request->hasFile('photo')) {
-            //     $photo = $request->file('photo');
-            //     $photoNameLowercased = strtolower($photo->getClientOriginalName());
-            //     $photoNameUnderscored = str_replace(' ', '_', $photoNameLowercased);
-            //     $photoName = time() . '_' . $photoNameUnderscored.'.'.$photo->getClientOriginalExtension();
-
-            //     $photo->move(public_path('images'), $photoName);
-
-            //     // Get image path
-            //     $imagePath = 'images/' . $photoName;
-            // }
+            // TODO: Upload photo
+            $photo = 'photo.png';
 
             // Hash password
             $hashedPassword = Hash::make($request->password);
 
-            $userDTO = new UserDTO(
+            $userDTO = new EditUserDTO(
                 $request->id,
-                null,
-                null,
-                // $request->email,
-                // $hashedPassword,
+                $request->email,
+                $hashedPassword,
                 $request->username,
                 $request->nik,
                 $request->nip,
                 $request->employee_name,
-                // $imagePath,
-                // $request->gender,
-                // $request->address,
-                // $request->phone,
-                null,
-                null,
-                null,
-                null,
+                $photo,
+                $request->gender,
+                $request->address,
+                $request->phone,
                 $request->department,
                 $request->section,
                 $request->position,
                 $request->role,
-                $request->plant,
-                // $request->status,
-                // $request->group,
-                // $request->domicile
+                $request->status,
+                $request->group,
+                $request->domicile,
+                $request->branch_id
             );
 
             // Edit employee

@@ -4,17 +4,17 @@ namespace App\Repositories\Modules\PurchaseOrder;
 
 use Exception;
 
-use App\DTO\Modules\PurchaseOrderDTO;
+use App\DTO\Modules\PurchaseOrderDTOs\NewPODTO;
 use App\Models\Modules\PurchaseOrder;
 
 
 class AddPORepository {
     /**
      * Add Purchase Order
-     * @param PurchaseOrderDTO $purchaseOrderDTO
-     * @return PurchaseOrderDTO
+     * @param NewPODTO $purchaseOrderDTO
+     * @return PurchaseOrder
      */
-    public function addPurchaseOrder(PurchaseOrderDTO $PoDto) {
+    public function addPurchaseOrder(NewPODTO $PoDto) {
         try {
             $newPo = new PurchaseOrder();
             $newPo->nomor_po = $PoDto->getNomorPo();

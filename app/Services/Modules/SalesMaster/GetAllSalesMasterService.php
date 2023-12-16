@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 use App\Repositories\Modules\SalesMaster\GetAllSalesMasterRepository;
 
-use App\DTO\Modules\SalesMasterDTOs\SalesMasterInfoDTO;
-
 class GetAllSalesMasterService {
     public function __construct(
         private GetAllSalesMasterRepository $getAllSalesMasterRepository,
@@ -26,7 +24,7 @@ class GetAllSalesMasterService {
             $request->validate([
                 'page' => 'required|integer',
                 'limit' => 'required|integer',
-                'branch_id' => 'required|integer',
+                'branch_id' => 'nullable|integer',
             ]);
 
             $page = $request->page;

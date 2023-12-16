@@ -5,7 +5,7 @@ namespace App\Services\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
-use App\DTO\UserDTO;
+use App\DTO\UserDTOs\NewUserDTO;
 use Exception;
 
 use App\Repositories\Auth\RegisterRepository;
@@ -20,7 +20,7 @@ class RegisterService {
     /**
      * Register new user
      * @param Request $request
-     * @return UserDTO
+     * @return array
      */
     public function register(Request $request) {
         try {
@@ -35,55 +35,42 @@ class RegisterService {
                 // 'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'gender' => 'required|in:laki-laki,perempuan',
                 'address' => 'required',
-                'phone' => 'required|unique:users, phone',
+                'phone' => 'required|unique:users,phone',
                 'department' => 'required',
                 'section' => 'required',
                 'position' => 'required',
                 'role' => 'required',
-                'plant' => 'required',
                 'status' => 'required',
                 'group' => 'required',
                 'domicile' => 'required',
+                'branch_id' => 'required|exists:branches,id',
             ]);
 
-            // Upload photo
-            // $imagePath = "";
-            // if ($request->hasFile('photo')) {
-            //     $photo = $request->file('photo');
-            //     $photoNameLowercased = strtolower($photo->getClientOriginalName());
-            //     $photoNameUnderscored = str_replace(' ', '_', $photoNameLowercased);
-            //     $photoName = time() . '_' . $photoNameUnderscored;
-
-            //     $photo->move(public_path('images'), $photoName);
-
-            //     // Get image path
-            //     $imagePath = 'images/' . $photoName;
-            // }
+            // TODO: Upload photo
+            $photo = 'photo.jpg';
 
             // Hash password
             $hashedPassword = Hash::make($request->password);
 
-            $userDTO = new UserDTO(
-                null,
+            $userDTO = new NewUserDTO(
                 $request->email,
                 $hashedPassword,
                 $request->username,
                 $request->nik,
                 $request->nip,
                 $request->employee_name,
-                null,
-                // $imagePath,
+                $photo,
                 $request->gender,
                 $request->address,
                 $request->phone,
                 $request->department,
                 $request->section,
                 $request->position,
-                'user',
-                $request->plant,
+                $request->role,
                 $request->status,
                 $request->group,
                 $request->domicile,
+                $request->branch_id
             );
 
             // Add user to database

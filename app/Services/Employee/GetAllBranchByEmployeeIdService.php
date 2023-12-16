@@ -5,9 +5,6 @@ namespace App\Services\Employee;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\UserDTO;
-use App\DTO\BranchDTO;
-
 use App\Repositories\Employee\GetAllBranchByUserIdRepository;
 
 class GetAllBranchByEmployeeIdService {
@@ -17,7 +14,6 @@ class GetAllBranchByEmployeeIdService {
 
     /**
      * Get all branch by employee id
-     * @return UserDTO
      */
     public function getAllBranchByEmployeeId(Request $request) {
         try {

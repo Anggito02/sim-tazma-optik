@@ -5,8 +5,6 @@ namespace App\Services\Modules\PurchaseOrder;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\PurchaseOrderDTO;
-
 use App\Repositories\Modules\PurchaseOrder\DeletePORepository;
 
 class DeletePOService {
@@ -17,7 +15,7 @@ class DeletePOService {
     /**
      * Delete Purchase Order
      * @param Request $request
-     * @return PurchaseOrderDTO
+     * @return PurchaseOrder
      */
     public function deletePurchaseOrder(Request $request) {
         try {

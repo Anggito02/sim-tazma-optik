@@ -5,8 +5,6 @@ namespace App\Services\Employee;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\UserDTO;
-
 use App\Repositories\Employee\DeleteEmployeeRepository;
 
 class DeleteEmployeeService {
@@ -17,7 +15,6 @@ class DeleteEmployeeService {
     /**
      * Delete employee
      * @param Request $request
-     * @return UserDTO
      */
     public function deleteEmployee(Request $request) {
         try {

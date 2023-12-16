@@ -37,6 +37,7 @@ class User extends Authenticatable
         'status',
         'group',
         'domicile',
+        'branch_id'
     ];
 
     /**
