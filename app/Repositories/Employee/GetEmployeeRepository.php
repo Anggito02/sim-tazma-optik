@@ -62,12 +62,8 @@ class GetEmployeeRepository {
                 $employee->status,
                 $employee->group,
                 $employee->domicile,
-<<<<<<< HEAD
-                $employee->branch_id
-=======
                 $employee->branch_id,
                 $employee->nama_branch
->>>>>>> 29e2c5a3fdc74d2fae264c9670aeef780aa12f62
             );
 
             return $userDTO;
