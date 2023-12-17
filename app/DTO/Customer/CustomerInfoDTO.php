@@ -4,20 +4,39 @@ namespace App\DTO\Customer;
 
 class CustomerInfoDTO {
     public function __construct(
-        public int $id,
-        public string $nama_depan,
-        public string $nama_belakang,
-        public string $email,
-        public string $nomor_telepon,
-        public string $alamat,
-        public string $kota,
-        public int $usia,
-        public string $tanggal_lahir,
-        public string $gender,
-        public int $branch_id,
-        public string $branch_nama,
+        private int $id,
+        private string $nama_depan,
+        private string $nama_belakang,
+        private string $email,
+        private string $nomor_telepon,
+        private string $alamat,
+        private int $usia,
+        private string $tanggal_lahir,
+        private string $gender,
+        private int $branch_id,
+        private string $branch_nama,
+        private int $kabkota_id,
+        private string $nama_kabkota
     )
     {}
+
+    public function toArray(): array {
+        return [
+            'id' => $this->id,
+            'nama_depan' => $this->nama_depan,
+            'nama_belakang' => $this->nama_belakang,
+            'email' => $this->email,
+            'nomor_telepon' => $this->nomor_telepon,
+            'alamat' => $this->alamat,
+            'usia' => $this->usia,
+            'tanggal_lahir' => $this->tanggal_lahir,
+            'gender' => $this->gender,
+            'branch_id' => $this->branch_id,
+            'branch_nama' => $this->branch_nama,
+            'kabkota_id' => $this->kabkota_id,
+            'nama_kabkota' => $this->nama_kabkota
+        ];
+    }
 
     public function setId(int $id): void {
         $this->id = $id;
@@ -43,10 +62,6 @@ class CustomerInfoDTO {
         $this->alamat = $alamat;
     }
 
-    public function setKota(string $kota): void {
-        $this->kota = $kota;
-    }
-
     public function setUsia(int $usia): void {
         $this->usia = $usia;
     }
@@ -65,6 +80,14 @@ class CustomerInfoDTO {
 
     public function setBranchNama(string $branch_nama): void {
         $this->branch_nama = $branch_nama;
+    }
+
+    public function setKabkotaId(int $kabkota_id): void {
+        $this->kabkota_id = $kabkota_id;
+    }
+
+    public function setKabkotaNama(string $nama_kabkota): void {
+        $this->nama_kabkota = $nama_kabkota;
     }
 
     public function getId(): int {
@@ -91,10 +114,6 @@ class CustomerInfoDTO {
         return $this->alamat;
     }
 
-    public function getKota(): string {
-        return $this->kota;
-    }
-
     public function getUsia(): int {
         return $this->usia;
     }
@@ -113,6 +132,14 @@ class CustomerInfoDTO {
 
     public function getBranchNama(): string {
         return $this->branch_nama;
+    }
+
+    public function getKabkotaId(): int {
+        return $this->kabkota_id;
+    }
+
+    public function getKabkotaNama(): string {
+        return $this->nama_kabkota;
     }
 }
 

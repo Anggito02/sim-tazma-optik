@@ -4,16 +4,16 @@ namespace App\DTO\Customer;
 
 class NewCustomerDTO {
     public function __construct(
-        public string $nama_depan,
-        public string $nama_belakang,
-        public string $email,
-        public string $nomor_telepon,
-        public string $alamat,
-        public string $kota,
-        public int $usia,
-        public string $tanggal_lahir,
-        public string $gender,
-        public int $branch_id,
+        private string $nama_depan,
+        private string $nama_belakang,
+        private string $email,
+        private string $nomor_telepon,
+        private string $alamat,
+        private int $usia,
+        private string $tanggal_lahir,
+        private string $gender,
+        private int $branch_id,
+        private int $kabkota_id
     )
     {}
 
@@ -37,10 +37,6 @@ class NewCustomerDTO {
         $this->alamat = $alamat;
     }
 
-    public function setKota(string $kota): void {
-        $this->kota = $kota;
-    }
-
     public function setUsia(int $usia): void {
         $this->usia = $usia;
     }
@@ -55,6 +51,10 @@ class NewCustomerDTO {
 
     public function setBranchId(int $branch_id): void {
         $this->branch_id = $branch_id;
+    }
+
+    public function setKabkotaId(int $kabkota_id): void {
+        $this->kabkota_id = $kabkota_id;
     }
 
     public function getNamaDepan(): string {
@@ -77,10 +77,6 @@ class NewCustomerDTO {
         return $this->alamat;
     }
 
-    public function getKota(): string {
-        return $this->kota;
-    }
-
     public function getUsia(): int {
         return $this->usia;
     }
@@ -95,6 +91,10 @@ class NewCustomerDTO {
 
     public function getBranchId(): int {
         return $this->branch_id;
+    }
+
+    public function getKabkotaId(): int {
+        return $this->kabkota_id;
     }
 }
 

@@ -17,9 +17,15 @@ class GetCustomerRepository {
      */
     public function getCustomer(string $nomorTelepon) {
         try {
-            $customer = Customer::where('nomor_telepon', $nomorTelepon)->firstOrFail();
-
-            $customer->branch_nama = Branch::where('id', $customer->branch_id)->first()->nama_branch;
+            $customer = Customer::where('nomor_telepon', $nomorTelepon)
+                ->join('branches', 'customers.branch_id', '=', 'branches.id')
+                ->join('ref_kabkota', 'customers.kabkota_id', '=', 'ref_kabkota.ID_KK')
+                ->select(
+                    'customers.*',
+                    'branches.nama_branch',
+                    'ref_kabkota.nama_kabkota'
+                )
+                ->firstOrFail();
 
             if (!$customer) return $customer;
 
@@ -30,12 +36,13 @@ class GetCustomerRepository {
                 $customer->email,
                 $customer->nomor_telepon,
                 $customer->alamat,
-                $customer->kota,
                 $customer->usia,
                 $customer->tanggal_lahir,
                 $customer->gender,
                 $customer->branch_id,
-                $customer->branch_nama,
+                $customer->nama_branch,
+                $customer->kabkota_id,
+                $customer->nama_kabkota
             );
 
             return $customerInfoDTO;

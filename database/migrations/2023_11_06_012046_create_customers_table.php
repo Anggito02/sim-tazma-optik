@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('email', 100)->nullable(false);
             $table->string('nomor_telepon', 20)->nullable(false);
             $table->string('alamat', 100)->nullable(false);
-            $table->string('kota', 50)->nullable(false);
             $table->integer('usia')->nullable(false);
             $table->date('tanggal_lahir')->nullable(false);
             $table->enum('gender', ['laki-laki', 'perempuan'])->nullable(false);
@@ -26,6 +25,10 @@ return new class extends Migration
             // Foreign Key
             // Branch
             $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade')->onUpdate('cascade');
+
+            // KabKota
+            $table->integer('kabkota_id')->default(108);
+            $table->foreign('kabkota_id')->references('ID_KK')->on('ref_kabkota')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

@@ -22,11 +22,11 @@ class AddCustomerRepository {
             $newCustomer->email = $newCustomerDTO->getEmail();
             $newCustomer->nomor_telepon = $newCustomerDTO->getNomorTelepon();
             $newCustomer->alamat = $newCustomerDTO->getAlamat();
-            $newCustomer->kota = $newCustomerDTO->getKota();
             $newCustomer->usia = $newCustomerDTO->getUsia();
             $newCustomer->tanggal_lahir = $newCustomerDTO->getTanggalLahir();
             $newCustomer->gender = $newCustomerDTO->getGender();
             $newCustomer->branch_id = $newCustomerDTO->getBranchId();
+            $newCustomer->kabkota_id = $newCustomerDTO->getKabkotaId();
             $newCustomer->save();
 
             return $newCustomer;
