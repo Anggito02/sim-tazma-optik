@@ -90,6 +90,7 @@ class GetAllStockOpnameDetailRepository {
 
                 $stockOpnameDetailInfoDTO = new StockOpnameDetailInfoDTO(
                     $stockOpnameDetailInfo->id,
+                    $stockOpnameDetailInfo->stock_opname_id,
                     $stockOpnameDetailInfo->so_start,
                     $stockOpnameDetailInfo->so_end,
                     $so_duration,

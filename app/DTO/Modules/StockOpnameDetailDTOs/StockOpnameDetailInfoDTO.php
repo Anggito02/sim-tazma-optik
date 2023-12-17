@@ -5,6 +5,7 @@ namespace App\DTO\Modules\StockOpnameDetailDTOs;
 class StockOpnameDetailInfoDTO {
     public function __construct(
         private int $id,
+        private int $stock_opname_id,
         private string $so_start,
         private string $so_end,
         private string $so_duration,
