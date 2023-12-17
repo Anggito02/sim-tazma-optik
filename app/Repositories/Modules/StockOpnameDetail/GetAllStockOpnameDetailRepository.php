@@ -12,13 +12,11 @@ use App\Models\Modules\StockOpnameDetail;
 class GetAllStockOpnameDetailRepository {
     /**
      * Get all Stock Opname Detail
-     * @param int $page
-     * @param int $limit
-     * @param int $stockOpnameId
+     * @param StockOpnameDetailFilterDTO $SODetailFiterDTO
+     * @return StockOpnameDetailInfoDTO[]
      */
     public function getAllStockOpnameDetail(StockOpnameDetailFilterDTO $SODetailFilterDTO) {
         try {
-
             $activeFilter = [];
 
             $stock_opname_id_sql = $SODetailFilterDTO->getStockOpnameId() ? "stock_opname_id = " . $SODetailFilterDTO->getStockOpnameId() : null;
@@ -118,7 +116,6 @@ class GetAllStockOpnameDetailRepository {
             }
 
             return $stockOpnameDetailInfoDTOs;
-
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

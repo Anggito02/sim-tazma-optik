@@ -202,6 +202,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/stock-opname-branch/add', [StockOpnameBranchController::class, 'addStockOpnameBranch'])->name('addStockOpnameBranch');
 
     /* Stock Opname Branch Detail Controllers */
+    Route::get('/stock-opname-branch-detail/all', [StockOpnameBranchDetailController::class, 'getAllStockOpnameBranchDetail'])->name('getAllStockOpnameBranchDetail');
     Route::post('/stock-opname-branch-detail/add', [StockOpnameBranchDetailController::class, 'addStockOpnameBranchDetail'])->name('addStockOpnameBranchDetail');
     Route::put('/stock-opname-branch-detail/edit', [StockOpnameBranchDetailController::class, 'editStockOpnameBranchDetail'])->name('editStockOpnameBranchDetail');
     Route::put('/stock-opname-branch-detail/init-adjustment', [StockOpnameBranchDetailController::class, 'adjustStockOpnameBranchDetail'])->name('adjustStockOpnameBranchDetail');
