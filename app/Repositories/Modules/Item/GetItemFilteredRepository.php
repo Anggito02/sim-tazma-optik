@@ -29,7 +29,6 @@ class GetItemFilteredRepository {
             $harga_beli_sql = null;
             if (!$itemFilterDTO->harga_beli_until) {
                 $harga_beli_sql = "harga_beli >= $itemFilterDTO->harga_beli_from";
-                array_push($activeFilter, $harga_beli_sql);
             } elseif ($itemFilterDTO->harga_beli_until) {
                 $harga_beli_sql = "harga_beli BETWEEN $itemFilterDTO->harga_beli_from AND $itemFilterDTO->harga_beli_until";
             }
@@ -38,7 +37,6 @@ class GetItemFilteredRepository {
             $harga_jual_sql = null;
             if ($itemFilterDTO->harga_jual_from && !$itemFilterDTO->harga_jual_until) {
                 $harga_jual_sql = "harga_jual >= $itemFilterDTO->harga_jual_from";
-                array_push($activeFilter, $harga_jual_sql);
             } elseif ($itemFilterDTO->harga_jual_until) {
                 $harga_jual_sql = "harga_jual BETWEEN $itemFilterDTO->harga_jual_from AND $itemFilterDTO->harga_jual_until";
             }
