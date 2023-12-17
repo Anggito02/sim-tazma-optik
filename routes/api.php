@@ -13,6 +13,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CoaController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\KabKotaController;
 
 use App\Http\Controllers\Modules\ItemController;
 use App\Http\Controllers\Modules\PurchaseOrderController;
@@ -125,6 +126,9 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Customer Controllers */
     Route::get('/customer/one', [CustomerController::class, 'getCustomer'])->name('getCustomer');
     Route::post('/customer/add', [CustomerController::class, 'addCustomer'])->name('addCustomer');
+
+    /* Kabkota Controllers */
+    Route::get('/kabkota/all', [KabkotaController::class, 'getAllKabkota'])->name('getKabkota');
 
     /* Item Controllers */
     Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');

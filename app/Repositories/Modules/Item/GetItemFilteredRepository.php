@@ -12,7 +12,7 @@ use App\Models\Modules\Item;
 class GetItemFilteredRepository {
     /**
      * Get item filtered
-     * @param string ItemFilterDTO $itemFilterDTO
+     * @param ItemFilterDTO $itemFilterDTO
      * @return ItemInfoDTO[]
      */
     public function getItemFiltered(ItemFilterDTO $itemFilterDTO) {
