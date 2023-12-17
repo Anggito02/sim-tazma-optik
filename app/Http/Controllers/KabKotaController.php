@@ -6,36 +6,33 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Services\KabKota\AddKabKotaService;
+use App\Services\KabKota\GetAllKabKotaService;
 
 class KabKotaController extends Controller
 {
     // Service Providers Constructs
     public function __construct(
-        private AddKabKotaService $addKabKotaService
+        private GetAllKabKotaService $getAllKabKotaService
     ) {}
 
     /**
-     * Add Kab/Kota
+     * Get All Kab/Kota
      * @param Request $request
      * @return JsonResponse
      */
-    public function addKabKota(Request $request): JsonResponse
+    public function getAllKabKota(Request $request)
     {
         try {
-            $kabKota = $this->addKabKotaService->addKabKota($request);
+            $kabKotaInfo = $this->getAllKabKotaService->getAllKabKota($request);
 
             return response()->json([
-                'status' => 'success',
-                'message' => 'Kab/Kota added successfully',
-                'data' => $kabKota
-            ], 200);
+                'message' => 'Success',
+                'data' => $kabKotaInfo,
+            ]);
         } catch (Exception $error) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to add Kab/Kota',
-                'data' => $error->getMessage()
-            ], 400);
+                'message' => $error->getMessage(),
+            ], 500);
         }
     }
 }
