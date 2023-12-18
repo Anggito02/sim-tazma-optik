@@ -5,6 +5,8 @@ namespace App\Services\Modules\SalesMaster;
 use Exception;
 use Illuminate\Http\Request;
 
+use App\DTO\Modules\SalesMasterDTOs\SalesMasterFilterDTO;
+
 use App\Repositories\Modules\SalesMaster\GetAllSalesMasterRepository;
 
 class GetAllSalesMasterService {
@@ -28,12 +30,14 @@ class GetAllSalesMasterService {
                 'nomor_transaksi' => 'exists:sales_masters,nomor_transaksi',
             ]);
 
-            $page = $request->page;
-            $limit = $request->limit;
-            $branch_id = $request->branch_id;
-            $nomor_transaksi = $request->nomor_transaksi;
+            $salesMasterDTO = new SalesMasterFilterDTO(
+                $request->page,
+                $request->limit,
+                $request->branch_id,
+                $request->nomor_transaksi
+            );
 
-            $salesMasterInfoDTOs = $this->getAllSalesMasterRepository->getAllSalesMaster($page, $limit, $branch_id, $nomor_transaksi);
+            $salesMasterInfoDTOs = $this->getAllSalesMasterRepository->getAllSalesMaster($salesMasterDTO);
 
             $salesMasterInfoArrays = [];
 
