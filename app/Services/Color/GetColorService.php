@@ -20,10 +20,11 @@ class GetColorService {
      * @return ColorDTO
      */
     public function getColor(Request $request) {
+        dd($request);
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:colors,id',
             ]);
 
             $colorDTO = new ColorDTO(

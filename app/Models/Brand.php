@@ -18,4 +18,10 @@ class Brand extends Model
         'nama_brand',
         'deskripsi',
     ];
+
+    // Item
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

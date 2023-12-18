@@ -5,8 +5,6 @@ namespace App\Services\Employee;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\EmployeeDTO;
-
 use App\Repositories\Employee\GetAllEmployeeRepository;
 
 class GetAllEmployeeService {
@@ -17,19 +15,26 @@ class GetAllEmployeeService {
     /**
      * Get all employees
      * @param Request $request
-     * @return EmployeeDTO
      */
     public function getAllEmployees(Request $request) {
         try {
             // Validate request
             $request->validate([
-                'page' => 'required',
-                'limit' => 'required',
+                'page' => 'required|gt:0',
+                'limit' => 'required|gt:0',
             ]);
 
-            $employeeDTO = $this->employeeRepository->getAllEmployees($request->page, $request->limit);
+            $userDTOs = $this->employeeRepository->getAllEmployees($request->page, $request->limit);
 
-            return $employeeDTO;
+            $userArrays = [];
+
+            foreach ($userDTOs as $user) {
+                array_push($userArrays, $user->toArray());
+            }
+
+            // TODO: getting all user photo
+
+            return $userArrays;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

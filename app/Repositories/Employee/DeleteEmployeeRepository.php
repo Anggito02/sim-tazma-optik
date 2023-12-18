@@ -4,18 +4,16 @@ namespace App\Repositories\Employee;
 
 use Exception;
 
-use App\DTO\EmployeeDTO;
-use App\Models\Employee;
+use App\Models\User;
 
 class DeleteEmployeeRepository {
     /**
      * Delete employee
      * @param int $id
-     * @return EmployeeDTO
      */
     public function deleteEmployee(int $id) {
         try {
-            $employee = Employee::find($id);
+            $employee = User::find($id);
             $employee->delete();
 
             return $employee;

@@ -5,7 +5,8 @@ namespace App\Services\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
-use App\DTO\UserDTO;
+use App\DTO\AuthDTOs\LoginDTO;
+use App\DTO\AuthDTOs\LoginInfoDTO;
 use Exception;
 
 use App\Repositories\Auth\LoginRepository;
@@ -19,7 +20,7 @@ class LoginService {
     /**
      * Login new user
      * @param Request $request
-     * @return UserDTO
+     * @return LoginInfoDTO
      */
     public function login(Request $request) {
         try {
@@ -29,8 +30,7 @@ class LoginService {
                 'password' => 'required',
             ]);
 
-            $userDTO = new UserDTO(
-                null,
+            $userDTO = new LoginDTO(
                 $request->email,
                 $request->password,
             );
@@ -38,12 +38,10 @@ class LoginService {
             // Get user from database
             $validUserDTO = $this->loginRepository->login($userDTO);
 
-            return ([
-                'employee_name' => $validUserDTO->getEmployeeName(),
-                'email' => $validUserDTO->getEmail(),
-                'role' => $validUserDTO->getRole(),
-                'token' => $validUserDTO->getToken()
-            ]);
+            $userInfo = $validUserDTO->toArray();
+
+            return $userInfo;
+
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

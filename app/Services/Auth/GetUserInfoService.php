@@ -5,44 +5,29 @@ namespace App\Services\Auth;
 use Illuminate\Http\Request;
 
 use Exception;
-use App\DTO\UserDTO;
+use App\DTO\UserDTOs\UserInfoDTO;
 
-use App\Repositories\Auth\GetUserInfoRepository;
+use App\Repositories\Employee\GetEmployeeRepository;
 
 class GetUserInfoService {
     public function __construct(
+        private GetEmployeeRepository $getEmployeeRepository
     ) {}
 
     /**
      * Get user info by id
      * @param Request $request
-     * @return UserDTO
+     * @return UserInfoDTO
      */
     public function getUserInfo(Request $request) {
         try {
             $user_id = $request->user()->id;
-        $user_email = $request->user()->email;
-        $user_photo = $request->user()->photo;
-        $user_role = $request->user()->role;
 
-        $userDTO = new UserDTO(
-            $user_id,
-            $user_email,
-            null,
-            null,
-            null,
-            $user_photo,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            $user_role,
-            null
-        );
+            $employee = $this->getEmployeeRepository->getEmployee($user_id);
 
-        return $userDTO;
+            $employee = $employee->toArray();
+
+            return $employee;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }
