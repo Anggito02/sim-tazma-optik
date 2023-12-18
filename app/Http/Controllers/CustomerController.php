@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Services\Customer\GetCustomerService;
+use App\Services\Customer\GetAllCustomerService;
 use App\Services\Customer\AddCustomerService;
 
 class CustomerController extends Controller
@@ -14,6 +15,7 @@ class CustomerController extends Controller
     // Service Providers Constructs
     public function __construct(
         private GetCustomerService $getCustomerService,
+        private GetAllCustomerService $getAllCustomerService,
         private AddCustomerService $addCustomerService,
     ) {}
 
@@ -41,9 +43,33 @@ class CustomerController extends Controller
     }
 
     /**
+     * Get all customers
+     * @param Request $request
+     * @return JsonResponse
+    */
+    public function getAllCustomer(Request $request) {
+        try {
+            $customerDTOs = $this->getAllCustomerService->getAllCustomer($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Success get all customer',
+                'data' => $customerDTOs
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed get all customer',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+
+    /**
      * Add new customer
      * @param Request $request
-     * @return CustomerDTO
+     * @return Customer
      */
     public function addCustomer(Request $request) {
         try {

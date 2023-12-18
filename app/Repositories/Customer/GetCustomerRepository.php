@@ -5,7 +5,6 @@ namespace App\Repositories\Customer;
 use Exception;
 
 use App\Models\Customer;
-use App\Models\Branch;
 
 use App\DTO\Customer\CustomerInfoDTO;
 
