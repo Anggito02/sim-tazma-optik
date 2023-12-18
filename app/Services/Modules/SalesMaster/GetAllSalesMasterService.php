@@ -25,13 +25,15 @@ class GetAllSalesMasterService {
                 'page' => 'required|integer',
                 'limit' => 'required|integer',
                 'branch_id' => 'nullable|integer',
+                'nomor_transaksi' => 'exists:sales_masters,nomor_transaksi',
             ]);
 
             $page = $request->page;
             $limit = $request->limit;
             $branch_id = $request->branch_id;
+            $nomor_transaksi = $request->nomor_transaksi;
 
-            $salesMasterInfoDTOs = $this->getAllSalesMasterRepository->getAllSalesMaster($page, $limit, $branch_id);
+            $salesMasterInfoDTOs = $this->getAllSalesMasterRepository->getAllSalesMaster($page, $limit, $branch_id, $nomor_transaksi);
 
             $salesMasterInfoArrays = [];
 

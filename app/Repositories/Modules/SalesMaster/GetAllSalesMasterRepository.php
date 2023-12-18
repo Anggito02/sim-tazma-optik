@@ -14,13 +14,17 @@ class GetAllSalesMasterRepository {
      * @param int $page
      * @param int $limit
      * @param ?int $branch_id
+     * @param ?int $nomor_transaksi
      * @return SalesMasterInfoDTO[]
      */
-    public function getAllSalesMaster(int $page, int $limit, ?int $branch_id) {
+    public function getAllSalesMaster(int $page, int $limit, ?int $branch_id, ?string $nomor_transaksi) {
         try {
             $branch_filter = $branch_id === null || $branch_id == 1 ? "" : "sales_masters.branch_id = $branch_id";
 
+            $nomor_transaksi_filter = $nomor_transaksi === null ? "" : "sales_masters.nomor_transaksi = '$nomor_transaksi'";
+
             $salesMasters = SalesMaster::whereRaw($branch_filter ? $branch_filter : 1)
+                ->whereRaw($nomor_transaksi_filter ? $nomor_transaksi_filter : 1)
                 ->join('branches', 'sales_masters.branch_id', '=', 'branches.id')
                 ->join('users', 'sales_masters.employee_id', '=', 'users.id')
                 ->leftJoin('customers', 'sales_masters.customer_id', '=', 'customers.id')
