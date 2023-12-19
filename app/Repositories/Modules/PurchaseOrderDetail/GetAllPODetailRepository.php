@@ -44,7 +44,7 @@ class GetAllPODetailRepository {
                     $poDetail->harga_beli_satuan,
                     $poDetail->harga_jual_satuan,
                     $poDetail->diskon,
-                    $poDetail->kode_qr_po,
+                    $poDetail->kode_qr_po_detail,
                     $poDetail->qr_item_path,
                     $poDetail->purchase_order_id,
                     $poDetail->nomor_po,

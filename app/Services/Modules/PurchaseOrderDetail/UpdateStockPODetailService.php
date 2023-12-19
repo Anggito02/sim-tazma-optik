@@ -123,19 +123,19 @@ class UpdateStockPODetailService {
 
             // Make PO Detail QR for item
             $po_detail_qr_item_path = $this->makePODetailQRService->makePODetailQR(new PurchaseOrderDetailQRInfoDTO(
-                $request->purchase_order_id,
+                $request->id,
                 $itemDTO->getId(),
                 $itemDTO->getKodeItem()
             ));
 
             // Make Kode QR PO
-            $kode_qr_po = (string)rand(100, 999) . $request->item_id . '0' . $request->purchase_order_id;
+            $kode_qr_po_detail = (string)rand(100, 999) . $request->item_id . '0' . $request->id;
 
             $poDetailDTO = new UpdateStockPODetailDTO(
                 $request->id,
                 $request->received_qty,
                 $request->not_good_qty,
-                $kode_qr_po,
+                $kode_qr_po_detail,
                 $po_detail_qr_item_path,
                 $request->item_id,
                 $request->purchase_order_id,

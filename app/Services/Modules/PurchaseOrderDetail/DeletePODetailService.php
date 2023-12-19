@@ -33,7 +33,7 @@ class DeletePODetailService {
             // Delete Purchase Order Detail QR
             $poDetailQrPath = $this->getPODetailService->getPurchaseOrderDetail($id);
 
-            Storage::delete($poDetailQrPath);
+            if (!$poDetailQrPath) Storage::delete($poDetailQrPath);
 
             $poDetailDTO = $this->poDetailRepository->deletePurchaseOrderDetail($id);
 

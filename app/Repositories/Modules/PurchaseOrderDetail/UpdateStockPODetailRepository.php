@@ -19,7 +19,7 @@ class UpdateStockPODetailRepository {
 
             $poDetail->received_qty = $poDetailDto->getReceiveQty();
             $poDetail->not_good_qty = $poDetailDto->getNotGoodQty();
-            $poDetail->kode_qr_po = $poDetailDto->getKodeQrPo();
+            $poDetail->kode_qr_po_detail = $poDetailDto->getKodeQrPoDetail();
             $poDetail->qr_item_path = $poDetailDto->getQrItemPath();
             $poDetail->receive_order_id = $poDetailDto->getReceiveOrderId();
             $poDetail->save();

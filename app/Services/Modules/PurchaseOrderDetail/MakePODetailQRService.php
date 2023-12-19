@@ -24,7 +24,7 @@ class MakePODetailQRService {
                 ->size(500)
                 ->generate(json_encode($poDetailQRInfoDTO->getQRData()));
 
-            $qr_path = 'qr/po_detail/'. 'PO-' . $poDetailQRInfoDTO->getPoId() . '_' . 'Item-' . $poDetailQRInfoDTO->getItemId() . '.png';
+            $qr_path = 'qr/po_detail/'. 'POD-' . $poDetailQRInfoDTO->getPoDetailId() . '_' . 'Item-' . $poDetailQRInfoDTO->getItemId() . '.png';
 
             Storage::put($qr_path, $qr);
 

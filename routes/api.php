@@ -227,6 +227,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Sales Detail Controllers */
     Route::get('/sales-detail/all', [SalesDetailController::class, 'getAllSalesDetail'])->name('getAllSalesDetail');
     Route::post('/sales-detail/add', [SalesDetailController::class, 'addSalesDetail'])->name('addSalesDetail');
+    Route::post('/sales-detail/add/kode-qr-po', [SalesDetailController::class, 'addSalesDetailByKodeQRPO'])->name('addSalesDetailByKodeQRPO');
     Route::put('/sales-detail/edit', [SalesDetailController::class, 'editSalesDetail'])->name('editSalesDetail');
     Route::delete('/sales-detail/delete', [SalesDetailController::class, 'deleteSalesDetail'])->name('deleteSalesDetail');
 

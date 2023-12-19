@@ -7,7 +7,7 @@ class UpdateStockPODetailDTO {
         private int $id,
         private int $received_qty,
         private int $not_good_qty,
-        private ?string $kode_qr_po,
+        private ?string $kode_qr_po_detail,
         private ?string $qr_item_path,
 
         // Foreign Keys
@@ -34,8 +34,8 @@ class UpdateStockPODetailDTO {
         return $this->not_good_qty;
     }
 
-    public function getKodeQrPo(): ?string {
-        return $this->kode_qr_po;
+    public function getKodeQrPoDetail(): ?string {
+        return $this->kode_qr_po_detail;
     }
 
     public function getQrItemPath(): ?string {

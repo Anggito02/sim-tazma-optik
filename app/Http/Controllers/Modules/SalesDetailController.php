@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Services\Modules\SalesDetail\GetAllSalesDetailService;
 use App\Services\Modules\SalesDetail\AddSalesDetailService;
+use App\Services\Modules\SalesDetail\AddSalesDetailByKodeQRPOService;
 use App\Services\Modules\SalesDetail\EditSalesDetailService;
 use App\Services\Modules\SalesDetail\DeleteSalesDetailService;
 
@@ -16,6 +17,7 @@ class SalesDetailController extends Controller
     public function __construct(
         private GetAllSalesDetailService $getAllSalesDetailService,
         private AddSalesDetailService $addSalesDetailService,
+        private AddSalesDetailByKodeQRPOService $addSalesDetailByKodeQRPOService,
         private EditSalesDetailService $editSalesDetailService,
         private DeleteSalesDetailService $deleteSalesDetailService,
     )
@@ -33,12 +35,12 @@ class SalesDetailController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesDetailInfoArrays,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -54,12 +56,33 @@ class SalesDetailController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesDetailDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
+        }
+    }
+
+    /**
+     * Add Sales Detail By Kode QR PO
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addSalesDetailByKodeQRPO(Request $request) {
+        try {
+            $salesDetailDTO = $this->addSalesDetailByKodeQRPOService->addSalesDetail($request);
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $salesDetailDTO,
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 
@@ -75,12 +98,12 @@ class SalesDetailController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesDetailDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -96,12 +119,12 @@ class SalesDetailController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesDetailDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 }
