@@ -9,9 +9,13 @@ use App\DTO\Modules\SalesMasterDTOs\UpdateSalesMasterDTO;
 
 use App\Repositories\Modules\SalesMaster\UpdateSalesMasterRepository;
 
+use App\Repositories\Customer\UpdateCustomerDeleteableRepository;
+
 class UpdateSalesMasterService {
     public function __construct(
         private UpdateSalesMasterRepository $updateSalesMasterRepository,
+
+        private UpdateCustomerDeleteableRepository $updateCustomerDeleteableRepository
     )
     {}
 
@@ -35,6 +39,10 @@ class UpdateSalesMasterService {
                 'employee_id' => 'required|exists:users,id',
                 'customer_id' => 'nullable|exists:customers,id',
             ]);
+
+            if ($request->customer_id) {
+                $this->updateCustomerDeleteableRepository->updateCustomerDeleteable($request->customer_id, FALSE);
+            }
 
             $updateSalesMasterDTO = new UpdateSalesMasterDTO(
                 $request->id,

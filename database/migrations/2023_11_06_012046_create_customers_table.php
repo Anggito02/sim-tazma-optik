@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('usia')->nullable(false);
             $table->date('tanggal_lahir')->nullable(false);
             $table->enum('gender', ['laki-laki', 'perempuan'])->nullable(false);
+            $table->boolean('deleteable')->default(true);
 
             // Foreign Key
             // Branch

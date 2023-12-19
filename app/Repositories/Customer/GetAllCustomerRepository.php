@@ -73,6 +73,7 @@ class GetAllCustomerRepository {
                     $customer->usia,
                     $customer->tanggal_lahir,
                     $customer->gender,
+                    $customer->deleteable,
                     $customer->branch_id,
                     $customer->nama_branch,
                     $customer->kabkota_id,

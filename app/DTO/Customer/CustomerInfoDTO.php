@@ -13,6 +13,7 @@ class CustomerInfoDTO {
         private int $usia,
         private string $tanggal_lahir,
         private string $gender,
+        private bool $deleteable,
         private int $branch_id,
         private string $branch_nama,
         private int $kabkota_id,
@@ -22,19 +23,20 @@ class CustomerInfoDTO {
 
     public function toArray(): array {
         return [
-            'id' => $this->id,
-            'nama_depan' => $this->nama_depan,
-            'nama_belakang' => $this->nama_belakang,
-            'email' => $this->email,
-            'nomor_telepon' => $this->nomor_telepon,
-            'alamat' => $this->alamat,
-            'usia' => $this->usia,
-            'tanggal_lahir' => $this->tanggal_lahir,
-            'gender' => $this->gender,
-            'branch_id' => $this->branch_id,
-            'branch_nama' => $this->branch_nama,
-            'kabkota_id' => $this->kabkota_id,
-            'nama_kabkota' => $this->nama_kabkota
+            'id' => $this->getId(),
+            'nama_depan' => $this->getNamaDepan(),
+            'nama_belakang' => $this->getNamaBelakang(),
+            'email' => $this->getEmail(),
+            'nomor_telepon' => $this->getNomorTelepon(),
+            'alamat' => $this->getAlamat(),
+            'usia' => $this->getUsia(),
+            'tanggal_lahir' => $this->getTanggalLahir(),
+            'gender' => $this->getGender(),
+            'deleteable' => $this->getDeleteable(),
+            'branch_id' => $this->getBranchId(),
+            'branch_nama' => $this->getBranchNama(),
+            'kabkota_id' => $this->getKabkotaId(),
+            'nama_kabkota' => $this->getKabkotaNama()
         ];
     }
 
@@ -72,6 +74,10 @@ class CustomerInfoDTO {
 
     public function setGender(string $gender): void {
         $this->gender = $gender;
+    }
+
+    public function setDeleteable(bool $deleteable): void {
+        $this->deleteable = $deleteable;
     }
 
     public function setBranchId(int $branch_id): void {
@@ -124,6 +130,10 @@ class CustomerInfoDTO {
 
     public function getGender(): string {
         return $this->gender;
+    }
+
+    public function getDeleteable(): bool {
+        return $this->deleteable;
     }
 
     public function getBranchId(): int {

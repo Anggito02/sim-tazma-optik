@@ -10,6 +10,7 @@ use App\Services\Customer\GetCustomerService;
 use App\Services\Customer\GetAllCustomerService;
 use App\Services\Customer\AddCustomerService;
 use App\Services\Customer\EditCustomerService;
+use App\Services\Customer\DeleteCustomerService;
 
 class CustomerController extends Controller
 {
@@ -18,7 +19,8 @@ class CustomerController extends Controller
         private GetCustomerService $getCustomerService,
         private GetAllCustomerService $getAllCustomerService,
         private AddCustomerService $addCustomerService,
-        private EditCustomerService $editCustomerService
+        private EditCustomerService $editCustomerService,
+        private DeleteCustomerService $deleteCustomerService
     ) {}
 
     /**
@@ -109,6 +111,29 @@ class CustomerController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Failed edit customer',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Delete customer
+     * @param Request $request
+     * @return Customer
+     */
+    public function deleteCustomer(Request $request) {
+        try {
+            $customerDTO = $this->deleteCustomerService->deleteCustomer($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Success delete customer',
+                'data' => $customerDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed delete customer',
                 'data' => $error->getMessage()
             ], 400);
         }

@@ -128,6 +128,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::get('/customer/all', [CustomerController::class, 'getAllCustomer'])->name('getAllCustomer');
     Route::post('/customer/add', [CustomerController::class, 'addCustomer'])->name('addCustomer');
     Route::put('/customer/edit', [CustomerController::class, 'editCustomer'])->name('editCustomer');
+    Route::delete('/customer/delete', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
 
     /* Kabkota Controllers */
     Route::get('/kabkota/all', [KabkotaController::class, 'getAllKabkota'])->name('getKabkota');

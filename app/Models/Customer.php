@@ -21,6 +21,7 @@ class Customer extends Model
         'usia',
         'tanggal_lahir',
         'gender',
+        'deleteable',
 
         // Foreign Key
         // Branch
