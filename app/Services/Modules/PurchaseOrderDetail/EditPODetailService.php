@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 use App\DTO\Modules\PurchaseOrderDetail\EditPurchaseOrderDetailDTO;
 use App\Repositories\Modules\PurchaseOrderDetail\EditPODetailRepository;
 use App\Repositories\Modules\Item\UpdateItemDeleteableRepository;
+use App\Services\Modules\PurchaseOrderDetail\GetPODetailService;
 
 class EditPODetailService {
     public function __construct(
         private EditPODetailRepository $poDetailRepository,
         private UpdateItemDeleteableRepository $updateItemDeleteableRepository,
+        private GetPODetailService $getPODetailService
     ) {}
 
     /**
@@ -30,8 +32,6 @@ class EditPODetailService {
                 'harga_beli_satuan' => 'required|gte:0',
                 'harga_jual_satuan' => 'required|gte:0',
                 'diskon' => 'required|gte:0',
-
-                'item_id' => 'required|exists:items,id',
             ]);
 
             $poDetailDTO = new EditPurchaseOrderDetailDTO(
@@ -41,11 +41,13 @@ class EditPODetailService {
                 $request->harga_beli_satuan,
                 $request->harga_jual_satuan,
                 $request->diskon,
-                $request->item_id,
             );
 
+            // Get item id from po detail
+            $item_id = $this->getPODetailService->getPurchaseOrderDetail($request->id)->getItemId();
+
             // update item deleteable
-            $this->updateItemDeleteableRepository->updateItemDeleteable($request->item_id, FALSE);
+            $this->updateItemDeleteableRepository->updateItemDeleteable($item_id, FALSE);
 
             $poDetailDTO = $this->poDetailRepository->editPurchaseOrderDetail($poDetailDTO);
 

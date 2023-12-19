@@ -24,7 +24,8 @@ class GetAllPODetailRepository {
                 ->join('purchase_orders', 'purchase_order_details.purchase_order_id', '=', 'purchase_orders.id')
                 ->leftJoin('receive_orders', 'purchase_order_details.receive_order_id', '=', 'receive_orders.id')
                 ->select(
-                    'purchase_order_details.*', 'items.kode_item as kode_item',
+                    'purchase_order_details.*',
+                    'items.kode_item as kode_item',
                     'items.kode_item as kode_item',
                     'purchase_orders.nomor_po as nomor_po',
                     'receive_orders.nomor_receive_order as nomor_receive_order'
@@ -43,6 +44,7 @@ class GetAllPODetailRepository {
                     $poDetail->harga_beli_satuan,
                     $poDetail->harga_jual_satuan,
                     $poDetail->diskon,
+                    $poDetail->kode_qr_po,
                     $poDetail->qr_item_path,
                     $poDetail->purchase_order_id,
                     $poDetail->nomor_po,

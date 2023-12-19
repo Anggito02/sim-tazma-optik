@@ -22,6 +22,7 @@ class PurchaseOrderDetail extends Model
         'harga_beli_satuan',
         'harga_jual_satuan',
         'diskon',
+        'kode_qr_po_detail',
         'qr_item_path',
 
         // Foreign Keys

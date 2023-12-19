@@ -26,7 +26,7 @@ class GetCustomerRepository {
                 )
                 ->firstOrFail();
 
-            if (!$customer) return $customer;
+            if (!$customer) throw new Exception('Data customer tidak ditemukan');
 
             $customerInfoDTO = new CustomerInfoDTO(
                 $customer->id,

@@ -20,6 +20,7 @@ use App\Repositories\Modules\Item\StockIn\AddStockInProcedureRepository;
 use App\Repositories\Modules\Item\StockIn\UpdateStockInProcedureRepository;
 
 use App\Services\Modules\PurchaseOrderDetail\MakePODetailQRService;
+use App\Repositories\Modules\Item\UpdateItemDeleteableRepository;
 
 class UpdateStockPODetailService {
     public function __construct(
@@ -34,6 +35,7 @@ class UpdateStockPODetailService {
         private UpdateStockInProcedureRepository $updateStockInProcedureRepository,
 
         private MakePODetailQRService $makePODetailQRService,
+        private UpdateItemDeleteableRepository $updateItemDeleteableRepository
     ) {}
 
     /**
@@ -96,6 +98,9 @@ class UpdateStockPODetailService {
 
             $updatedItemDTO = $this->editItemRepository->editItem($updatedItemDTO);
 
+            // Edit item deleteable
+            $this->updateItemDeleteableRepository->updateItemDeleteable($request->item_id, FALSE);
+
             if ($this->checkStockInRepository->checkStockInExistence($updatedItemDTO->id, date('m'), date('Y'))) {
                 // update stok in
                 $this->updateStockInProcedureRepository->updateStockInProcedure(
@@ -123,10 +128,14 @@ class UpdateStockPODetailService {
                 $itemDTO->getKodeItem()
             ));
 
+            // Make Kode QR PO
+            $kode_qr_po = (string)rand(100, 999) . $request->item_id . '0' . $request->purchase_order_id;
+
             $poDetailDTO = new UpdateStockPODetailDTO(
                 $request->id,
                 $request->received_qty,
                 $request->not_good_qty,
+                $kode_qr_po,
                 $po_detail_qr_item_path,
                 $request->item_id,
                 $request->purchase_order_id,

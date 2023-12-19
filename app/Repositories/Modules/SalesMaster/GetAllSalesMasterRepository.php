@@ -56,6 +56,7 @@ class GetAllSalesMasterRepository {
                     'customers.nama_depan',
                     'customers.nama_belakang',
                 )
+                ->orderBy('sales_masters.id', 'desc')
                 ->paginate($salesMasterDTO->getLimit(), ['*'], 'page', $salesMasterDTO->getPage());
 
             $salesMasterInfoDTOs = [];
