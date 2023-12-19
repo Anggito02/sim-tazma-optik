@@ -39,7 +39,7 @@ class GetAllStockOpnameBranchRepository {
                     'stock_opname_branches.*',
                     'branches.nama_branch as nama_branch'
                 )
-                ->orderBy('tabggal_dibuat', 'DESC')
+                ->orderBy('tanggal_dibuat', 'DESC')
                 ->paginate($stockOpnameDTO->getLimit(), ['*'], 'page', $stockOpnameDTO->getPage());
 
             $stockOpnameBranchInfoDTOs = [];
