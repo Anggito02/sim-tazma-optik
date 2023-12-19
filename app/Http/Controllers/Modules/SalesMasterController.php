@@ -6,7 +6,8 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Services\Modules\SalesMaster\GetSalesMasterService;
+use App\Services\Modules\SalesMaster\GetSalesMasterByIdService;
+use App\Services\Modules\SalesMaster\GetSalesMasterByNoTransaksiService;
 use App\Services\Modules\SalesMaster\GetAllSalesMasterService;
 use App\Services\Modules\SalesMaster\AddSalesMasterService;
 use App\Services\Modules\SalesMaster\UpdateSalesMasterService;
@@ -15,7 +16,8 @@ use App\Services\Modules\SalesMaster\VerifySalesMasterService;
 class SalesMasterController extends Controller
 {
     public function __construct(
-        private GetSalesMasterService $getSalesMasterService,
+        private GetSalesMasterByIdService $getSalesMasterByIdService,
+        private GetSalesMasterByNoTransaksiService $getSalesMasterByNoTransaksiService,
         private GetAllSalesMasterService $getAllSalesMasterService,
         private AddSalesMasterService $addSalesMasterService,
         private UpdateSalesMasterService $updateSalesMasterService,
@@ -24,23 +26,44 @@ class SalesMasterController extends Controller
     {}
 
     /**
-     * Get Sales Master
+     * Get Sales Master by id
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getSalesMaster(Request $request) {
+    public function getSalesMasterById(Request $request) {
         try {
-            $salesMasterInfoDTO = $this->getSalesMasterService->getSalesMaster($request);
+            $salesMasterInfoDTO = $this->getSalesMasterByIdService->getSalesMaster($request);
 
             return response()->json([
                 'status' => 'success',
                 'data' => $salesMasterInfoDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
+        }
+    }
+
+    /**
+     * Get Sales Master by nomor transaksi
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getSalesMasterByNoTransaksi(Request $request) {
+        try {
+            $salesMasterInfoDTO = $this->getSalesMasterByNoTransaksiService->getSalesMaster($request);
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $salesMasterInfoDTO,
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 
@@ -56,12 +79,12 @@ class SalesMasterController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesMasterInfoDTOs,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -77,12 +100,12 @@ class SalesMasterController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesMasterDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -98,12 +121,12 @@ class SalesMasterController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesMasterDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -119,12 +142,12 @@ class SalesMasterController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesMaster,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 }

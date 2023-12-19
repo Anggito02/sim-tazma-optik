@@ -5,17 +5,17 @@ namespace App\Services\Modules\SalesMaster;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\Repositories\Modules\SalesMaster\GetSalesMasterRepository;
+use App\Repositories\Modules\SalesMaster\GetSalesMasterByNoTransaksiRepository;
 
-class GetSalesMasterService
+class GetSalesMasterByNoTransaksiService
 {
     public function __construct(
-        private GetSalesMasterRepository $getSalesMasterRepository
+        private GetSalesMasterByNoTransaksiRepository $getSalesMasterRepository
     )
     {}
 
     /**
-     * Get sales master
+     * Get sales master by nomor transaksi
      *
      * @param Request $request
      * @return array

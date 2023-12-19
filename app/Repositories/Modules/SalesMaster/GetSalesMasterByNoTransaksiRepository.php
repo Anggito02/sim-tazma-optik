@@ -8,9 +8,9 @@ use App\Models\Modules\SalesMaster;
 
 use App\DTO\Modules\SalesMasterDTOs\SalesMasterInfoDTO;
 
-class GetSalesMasterRepository {
+class GetSalesMasterByNoTransaksiRepository {
     /**
-     * Get sales master
+     * Get sales master by nomor transaksi
      *
      * @param string $nomor_transaksi
      * @return SalesMasterInfoDTO
@@ -45,7 +45,7 @@ class GetSalesMasterRepository {
             ->first();
 
             if (!$salesMaster) {
-                throw new Exception('Sales master not found');
+                throw new Exception('Sales master tidak ditemukan!');
             }
 
             $salesMasterInfoDTO = new SalesMasterInfoDTO(
