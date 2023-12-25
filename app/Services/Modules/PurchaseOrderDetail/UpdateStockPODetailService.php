@@ -19,7 +19,6 @@ use App\Repositories\Modules\Item\StockIn\CheckStockInRepository;
 use App\Repositories\Modules\Item\StockIn\AddStockInProcedureRepository;
 use App\Repositories\Modules\Item\StockIn\UpdateStockInProcedureRepository;
 
-use App\Services\Modules\PurchaseOrderDetail\MakePODetailQRService;
 use App\Repositories\Modules\Item\UpdateItemDeleteableRepository;
 
 class UpdateStockPODetailService {
@@ -34,7 +33,6 @@ class UpdateStockPODetailService {
         private AddStockInProcedureRepository $addStockInProcedureRepository,
         private UpdateStockInProcedureRepository $updateStockInProcedureRepository,
 
-        private MakePODetailQRService $makePODetailQRService,
         private UpdateItemDeleteableRepository $updateItemDeleteableRepository
     ) {}
 
@@ -121,13 +119,6 @@ class UpdateStockPODetailService {
                 );
             }
 
-            // Make PO Detail QR for item
-            $po_detail_qr_item_path = $this->makePODetailQRService->makePODetailQR(new PurchaseOrderDetailQRInfoDTO(
-                $request->id,
-                $itemDTO->getId(),
-                $itemDTO->getKodeItem()
-            ));
-
             // Make Kode QR PO
             $kode_qr_po_detail = (string)rand(100, 999) . $request->item_id . '0' . $request->id;
 
@@ -136,7 +127,6 @@ class UpdateStockPODetailService {
                 $request->received_qty,
                 $request->not_good_qty,
                 $kode_qr_po_detail,
-                $po_detail_qr_item_path,
                 $request->item_id,
                 $request->purchase_order_id,
                 $request->receive_order_id,

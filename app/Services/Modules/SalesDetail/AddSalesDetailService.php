@@ -42,18 +42,23 @@ class AddSalesDetailService {
         try {
             // Validate request
             $request->validate([
-                'kode_item' => 'required|string',
                 'sales_master_id' => 'required|exists:sales_masters,id',
-                'item_id' => 'required|exists:branch_items,id',
                 'branch_id' => 'required|exists:branches,id',
-                'po_detail_id' => 'required|exists:purchase_order_details,id',
+                'kode_qr_po_detail' => 'required|exists:purchase_order_details,kode_qr_po_detail'
             ]);
 
+            // Get QR details
+            preg_match('/^.{3}(.*?)(?=0|$)/', $request->kode_qr_po_detail, $matches);
+            $item_id = $matches[1];
+
+            preg_match('/0(.*)/', $request->kode_qr_po_detail, $matches);
+            $po_detail_id = $matches[1];
+
             // Get branch item
-            $branchItemId = $this->getBranchItemRepository->getBranchItem($request->branch_id, $request->item_id)->getId();
+            $branchItemId = $this->getBranchItemRepository->getBranchItem($request->branch_id, $item_id)->getId();
 
             // Check sales detail existence
-            $sales_detail_id = $this->checkSalesDetailExistence->checkSalesDetail($request->sales_master_id, $branchItemId, $request->po_detail_id);
+            $sales_detail_id = $this->checkSalesDetailExistence->checkSalesDetail($request->sales_master_id, $branchItemId, $po_detail_id);
 
             $salesDetailDTO = null;
             if ($sales_detail_id != 0) {
@@ -67,20 +72,21 @@ class AddSalesDetailService {
                     'harga_item' => $salesDetail->harga
                 ]));
             } else {
-                // Get item harga
-                $item = $this->getItemRepository->getItem($request->item_id);
+                // Get item harga and kode_item
+                $item = $this->getItemRepository->getItem($item_id);
 
+                $kode_item = $item->getKodeItem();
                 $harga_item = $item->getHargaJual();
 
                 // Update total harga
                 $this->updateTotalHargaProcedureRepository->updateTotalHargaProcedure($request->sales_master_id, $harga_item, 'penambahan');
 
                 $newSalesDetailDTO = new NewSalesDetailDTO(
-                    $request->kode_item,
+                    $kode_item,
                     $harga_item,
                     $request->sales_master_id,
                     $branchItemId,
-                    $request->po_detail_id,
+                    $po_detail_id,
                     1,
                 );
 

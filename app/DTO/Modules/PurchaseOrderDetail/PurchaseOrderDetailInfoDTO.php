@@ -13,7 +13,6 @@ class PurchaseOrderDetailInfoDTO {
         private int $harga_jual_satuan,
         private float $diskon,
         private ?string $kode_qr_po_detail,
-        private ?string $qr_item_path,
 
         // Foreign Keys
         // Purchase Order
@@ -41,7 +40,6 @@ class PurchaseOrderDetailInfoDTO {
             'harga_jual_satuan' => $this->getHargaJualSatuan(),
             'diskon' => $this->getDiskon(),
             'kode_qr_po_detail' => $this->getKodeQrPoDetail(),
-            'qr_item_path' => $this->getQrItemPath(),
 
             // Foreign Keys
             // Purchase Order
@@ -92,10 +90,6 @@ class PurchaseOrderDetailInfoDTO {
 
     public function getKodeQrPoDetail(): ?string {
         return $this->kode_qr_po_detail;
-    }
-
-    public function getQrItemPath(): ?string {
-        return $this->qr_item_path;
     }
 
     public function getPurchaseOrderId(): int {

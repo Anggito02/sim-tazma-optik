@@ -161,7 +161,6 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Purchase Order Detail Controllers */
     Route::get('/purchase-order-detail/one', [PurchaseOrderDetailController::class, 'getPODetail'])->name('getPODetail');
     Route::get('/purchase-order-detail/all', [PurchaseOrderDetailController::class, 'getAllPODetail'])->name('getAllPODetail');
-    Route::get('purchase-order-detail/qr', [PurchaseOrderDetailController::class, 'getPODetailQR'])->name('getPODetailQR');
     Route::post('/purchase-order-detail/add', [PurchaseOrderDetailController::class, 'addPODetail'])->name('addPODetail');
     Route::delete('/purchase-order-detail/delete', [PurchaseOrderDetailController::class, 'deletePODetail'])->name('deletePODetail');
     Route::put('/purchase-order-detail/edit', [PurchaseOrderDetailController::class, 'editPODetail'])->name('editPODetail');
@@ -229,7 +228,6 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Sales Detail Controllers */
     Route::get('/sales-detail/all', [SalesDetailController::class, 'getAllSalesDetail'])->name('getAllSalesDetail');
     Route::post('/sales-detail/add', [SalesDetailController::class, 'addSalesDetail'])->name('addSalesDetail');
-    Route::post('/sales-detail/add/kode-qr-po', [SalesDetailController::class, 'addSalesDetailByKodeQRPO'])->name('addSalesDetailByKodeQRPO');
     Route::put('/sales-detail/edit', [SalesDetailController::class, 'editSalesDetail'])->name('editSalesDetail');
     Route::delete('/sales-detail/delete', [SalesDetailController::class, 'deleteSalesDetail'])->name('deleteSalesDetail');
 
