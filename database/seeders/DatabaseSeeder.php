@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdjustmentBranchSeeder::class,
             AdjustmentVendorSeeder::class,
+            AdjustmentCustomerSeeder::class,
             VendorSeeder::class,
         ]);
 

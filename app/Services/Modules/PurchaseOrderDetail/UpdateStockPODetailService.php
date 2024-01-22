@@ -120,7 +120,7 @@ class UpdateStockPODetailService {
             }
 
             // Make Kode QR PO
-            $kode_qr_po_detail = (string)rand(100, 999) . $request->item_id . '0' . $request->id;
+            $kode_qr_po_detail = (string)rand(100, 999) . $request->item_id . '-' . $request->id;
 
             $poDetailDTO = new UpdateStockPODetailDTO(
                 $request->id,

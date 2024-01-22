@@ -48,11 +48,9 @@ class AddSalesDetailService {
             ]);
 
             // Get QR details
-            preg_match('/^.{3}(.*?)(?=0|$)/', $request->kode_qr_po_detail, $matches);
-            $item_id = $matches[1];
-
-            preg_match('/0(.*)/', $request->kode_qr_po_detail, $matches);
-            $po_detail_id = $matches[1];
+            $qr_details = explode("-", substr($request->kode_qr_po_detail, 3));
+            $item_id = $qr_details[0];
+            $po_detail_id = $qr_details[1];
 
             // Get branch item
             $branchItemId = $this->getBranchItemRepository->getBranchItem($request->branch_id, $item_id)->getId();
