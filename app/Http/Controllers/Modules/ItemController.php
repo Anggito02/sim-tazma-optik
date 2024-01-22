@@ -12,6 +12,7 @@ use App\Services\Modules\Item\DeleteItemService;
 use App\Services\Modules\Item\GetItemService;
 use App\Services\Modules\Item\GetItemFilteredService;
 use App\Services\Modules\Item\GetQRItemService;
+use App\Services\Modules\Item\GetItemByQrService;
 
 
 class ItemController extends Controller
@@ -23,7 +24,8 @@ class ItemController extends Controller
         private DeleteItemService $deleteItemService,
         private GetItemService $getItemService,
         private GetItemFilteredService $getItemFilteredService,
-        private GetQRItemService $getQRItemService
+        private GetQRItemService $getQRItemService,
+        private GetItemByQrService $getItemByQrService
     ) {}
 
     /**
@@ -34,6 +36,29 @@ class ItemController extends Controller
     public function getItem(Request $request) {
         try {
             $itemDTO = $this->getItemService->getItem($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Get item success',
+                'data' => $itemDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get item failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Get item by qr
+     * @param Request $request
+     * @return ItemInfoDTO
+     */
+    public function getItemByQr(Request $request) {
+        try {
+            $itemDTO = $this->getItemByQrService->getItem($request);
 
             return response()->json([
                 'status' => 'success',

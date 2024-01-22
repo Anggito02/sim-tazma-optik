@@ -134,6 +134,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::get('/kabkota/all', [KabkotaController::class, 'getAllKabkota'])->name('getKabkota');
 
     /* Item Controllers */
+    Route::get('/item/one/qr', [ItemController::class, 'getItemByQr'])->name('getItemByQr');
     Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
     Route::get('/item/filtered', [ItemController::class, 'getItemFiltered'])->name('getItemFiltered');
     Route::get('/item/qr', [ItemController::class, 'getQRItem'])->name('getQRItem');
