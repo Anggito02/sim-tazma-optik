@@ -52,6 +52,8 @@ class AddSalesDetailService {
             $item_id = $qr_details[0];
             $po_detail_id = $qr_details[1];
 
+            dd($item_id, $po_detail_id);
+
             // Get branch item
             $branchItemId = $this->getBranchItemRepository->getBranchItem($request->branch_id, $item_id)->getId();
 
