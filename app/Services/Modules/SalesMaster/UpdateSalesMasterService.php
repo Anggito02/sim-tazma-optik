@@ -33,12 +33,13 @@ class UpdateSalesMasterService {
                 'sistem_pembayaran' => 'required|string',
                 'nomor_kartu' => 'nullable|string',
                 'nomor_referensi' => 'nullable|string',
-                'dp' => 'required',
-                'status' => 'required|string|in:DP,Lunas',
+                'dp' => 'required|integer',
                 'branch_id' => 'required|exists:branches,id',
                 'employee_id' => 'required|exists:users,id',
                 'customer_id' => 'nullable|exists:customers,id',
             ]);
+
+            $status = $request->dp == 100 ? "Lunas" : "DP";
 
             if ($request->customer_id) {
                 $this->updateCustomerDeleteableRepository->updateCustomerDeleteable($request->customer_id, FALSE);
@@ -51,7 +52,7 @@ class UpdateSalesMasterService {
                 $request->nomor_kartu,
                 $request->nomor_referensi,
                 $request->dp,
-                $request->status,
+                $status,
                 $request->branch_id,
                 $request->employee_id,
                 $request->customer_id,

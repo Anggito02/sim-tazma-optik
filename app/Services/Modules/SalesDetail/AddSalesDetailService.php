@@ -66,8 +66,8 @@ class AddSalesDetailService {
                 $salesDetailDTO = $this->editSalesDetailService->editSalesDetail(new Request([
                     'id' => $sales_detail_id,
                     'sales_master_id' => $request->sales_master_id,
-                    'qty' => $salesDetail->qty + 1,
-                    'harga_item' => $salesDetail->harga
+                    'qty' => $salesDetail->getQty() + 1,
+                    'harga_item' => $salesDetail->getHarga()
                 ]));
             } else {
                 // Get item harga and kode_item

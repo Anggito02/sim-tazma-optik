@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\DTO\Modules\SalesMasterDTOs\VerifySalesMasterDTO;
 
 use App\Repositories\Modules\SalesMaster\VerifySalesMasterRepository;
+use App\Repositories\Modules\SalesMaster\GetSalesMasterByIdRepository;
 
 use App\Services\Modules\BranchItem\UpdateBranchStokService;
 use App\Repositories\Modules\SalesDetail\GetAllSalesDetailBranchItemRepository;
@@ -17,6 +18,7 @@ use App\Repositories\Modules\Kas\UpdateKasTotalRepository;
 class VerifySalesMasterService {
     public function __construct(
         private VerifySalesMasterRepository $verifySalesMasterRepository,
+        private GetSalesMasterByIdRepository $getSalesMasterByIdRepository,
 
         private UpdateBranchStokService $updateBranchStokService,
         private GetAllSalesDetailBranchItemRepository $getAllSalesDetailRepository,
@@ -39,16 +41,19 @@ class VerifySalesMasterService {
 
                 'nomor_kartu' => 'required_unless:sistem_pembayaran,TUNAI',
                 'nomor_referensi' => 'required_unless:sistem_pembayaran,TUNAI',
-
-                'total_tagihan' => 'required|integer|gt:0',
             ]);
+
+            // Get total_tagihan
+            $salesMaster = $this->getSalesMasterByIdRepository->getSalesMaster($request->id);
+
+            $total_tagihan = $salesMaster->getTotalTagihan();
 
             // Update kas if sistem_pembayaran is 'TUNAI'
             if ($request->sistem_pembayaran == 'TUNAI') {
                 $this->updateKasTotalRepository->updateKasTotal(
                     $request->branch_id,
                     date('Y-m-d H:i:s'),
-                    $request->total_tagihan,
+                    $total_tagihan,
                 );
             }
 

@@ -8,17 +8,17 @@ use Illuminate\Http\Request;
 use App\DTO\Modules\SalesDetailDTOs\EditSalesDetailDTO;
 
 use App\Repositories\Modules\SalesDetail\EditSalesDetailRepository;
+use App\Repositories\Modules\SalesDetail\GetSalesDetailRepository;
 use App\Repositories\Modules\BranchItem\GetBranchItemRepository;
 use App\Repositories\Modules\Item\GetItemRepository;
-use App\Repositories\Modules\SalesDetail\GetSalesDetailQtyRepository;
 use App\Repositories\Modules\SalesMaster\UpdateTotalHargaProcedureRepository;
 
 class EditSalesDetailService {
     public function __construct(
         private EditSalesDetailRepository $editSalesDetailRepository,
+        private GetSalesDetailRepository $getSalesDetailRepository,
         private GetBranchItemRepository $getBranchItemRepository,
         private GetItemRepository $getItemRepository,
-        private GetSalesDetailQtyRepository $getSalesDetailQtyRepository,
         private UpdateTotalHargaProcedureRepository $updateTotalHargaProcedureRepository,
     )
     {}
@@ -35,15 +35,17 @@ class EditSalesDetailService {
                 'id' => 'required|exists:sales_details,id',
                 'sales_master_id' => 'required|exists:sales_masters,id',
                 'qty' => 'required|integer',
-                'harga_item' => 'required|integer',
             ]);
 
-            // Sales detail current qty
-            $salesDetailQty = $this->getSalesDetailQtyRepository->getSalesDetailQty($request->id);
+            // Get sales detail info
+            $salesDetail = $this->getSalesDetailRepository->getSalesDetail($request->id);
+
+            $salesDetailQty = $salesDetail->getQty();
+            $salesDetailHarga = $salesDetail->getHarga();
 
             $selisihQty = abs($request->qty - $salesDetailQty);
 
-            $jumlah_perubahan = $selisihQty * $request->harga_item;
+            $jumlah_perubahan = $selisihQty * $salesDetailHarga;
             $tipe_perubahan = '';
             if ($request->qty > $salesDetailQty) {
                 $tipe_perubahan = 'penambahan';
