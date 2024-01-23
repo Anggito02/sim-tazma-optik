@@ -38,6 +38,7 @@ class SalesMasterInfoDTO {
             'dp' => $this->dp,
             'total_tagihan' => $this->total_tagihan,
             'status' => $this->status,
+            'verified' => $this->verified,
 
             'branch_id' => $this->branch_id,
             'nama_branch' => $this->nama_branch,
