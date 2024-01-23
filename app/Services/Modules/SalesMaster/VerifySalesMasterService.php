@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\DTO\Modules\SalesMasterDTOs\VerifySalesMasterDTO;
 
 use App\Repositories\Modules\SalesMaster\VerifySalesMasterRepository;
+use App\Repositories\Modules\SalesMaster\CheckSalesMasterVerifiedRepository;
 use App\Repositories\Modules\SalesMaster\GetSalesMasterByIdRepository;
 
 use App\Services\Modules\BranchItem\UpdateBranchStokService;
@@ -18,6 +19,7 @@ use App\Repositories\Modules\Kas\UpdateKasTotalRepository;
 class VerifySalesMasterService {
     public function __construct(
         private VerifySalesMasterRepository $verifySalesMasterRepository,
+        private CheckSalesMasterVerifiedRepository $checkSalesMasterVerifiedRepository,
         private GetSalesMasterByIdRepository $getSalesMasterByIdRepository,
 
         private UpdateBranchStokService $updateBranchStokService,
@@ -42,6 +44,9 @@ class VerifySalesMasterService {
                 'nomor_kartu' => 'required_unless:sistem_pembayaran,TUNAI',
                 'nomor_referensi' => 'required_unless:sistem_pembayaran,TUNAI',
             ]);
+
+            // Check if verify sales master is verified
+            $this->checkSalesMasterVerifiedRepository->isSalesMasterVerified($request->id);
 
             // Get total_tagihan
             $salesMaster = $this->getSalesMasterByIdRepository->getSalesMaster($request->id);

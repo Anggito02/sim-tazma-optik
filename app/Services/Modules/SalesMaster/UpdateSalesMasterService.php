@@ -30,7 +30,6 @@ class UpdateSalesMasterService {
             $request->validate([
                 'id' => 'required|integer',
                 'ref_sales_id' => 'required|integer',
-                'sistem_pembayaran' => 'required|string',
                 'nomor_kartu' => 'nullable|string',
                 'nomor_referensi' => 'nullable|string',
                 'dp' => 'required|integer',
@@ -48,7 +47,6 @@ class UpdateSalesMasterService {
             $updateSalesMasterDTO = new UpdateSalesMasterDTO(
                 $request->id,
                 $request->ref_sales_id,
-                $request->sistem_pembayaran,
                 $request->nomor_kartu,
                 $request->nomor_referensi,
                 $request->dp,

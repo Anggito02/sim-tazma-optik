@@ -6,7 +6,6 @@ class UpdateSalesMasterDTO {
     public function __construct(
         private int $id,
         private int $ref_sales_id,
-        private string $sistem_pembayaran,
         private ?string $nomor_kartu,
         private ?string $nomor_referensi,
         private float $dp,
@@ -26,11 +25,6 @@ class UpdateSalesMasterDTO {
     public function getRefSalesId(): int
     {
         return $this->ref_sales_id;
-    }
-
-    public function getSistemPembayaran(): string
-    {
-        return $this->sistem_pembayaran;
     }
 
     public function getNomorKartu(): ?string
