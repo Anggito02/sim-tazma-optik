@@ -44,14 +44,14 @@ class VerifySalesMasterService {
             // Get total_tagihan
             $salesMaster = $this->getSalesMasterByIdRepository->getSalesMaster($request->id);
 
+            $branch_id = $salesMaster->getBranchId();
             $total_tagihan = $salesMaster->getTotalTagihan();
-
             $sistem_pembayaran = $salesMaster->getSistemPembayaran();
 
             // Update kas if sistem_pembayaran is 'TUNAI'
             if ($sistem_pembayaran == 'TUNAI') {
                 $this->updateKasTotalRepository->updateKasTotal(
-                    $request->branch_id,
+                    $branch_id,
                     date('Y-m-d H:i:s'),
                     $total_tagihan,
                 );
@@ -59,8 +59,6 @@ class VerifySalesMasterService {
 
             // Get all sales detail
             $salesDetails = $this->getAllSalesDetailRepository->getAllSalesDetailBranchItem($request->id);
-
-            dd($salesDetails);
 
             // Update branch stok
             foreach ($salesDetails as $salesDetail) {
