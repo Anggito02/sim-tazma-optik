@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_item');
             $table->integer('harga');
+            $table->float('diskon')->default(0.00);
             $table->integer('qty')->default(1);
 
             $table->foreignId('sales_master_id')->constrained('sales_masters')->onDelete('cascade')->onUpdate('cascade');
