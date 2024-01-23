@@ -6,6 +6,7 @@ class NewSalesDetailDTO {
     public function __construct(
         private string $kode_item,
         private float $harga,
+        private float $diskon,
         private int $sales_master_id,
         private int $branch_item_id,
         private int $po_detail_id,
@@ -21,6 +22,11 @@ class NewSalesDetailDTO {
     public function getHarga(): float
     {
         return $this->harga;
+    }
+
+    public function getDiskon(): float
+    {
+        return $this->diskon;
     }
 
     public function getSalesMasterId(): int

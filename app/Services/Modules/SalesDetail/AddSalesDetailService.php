@@ -75,6 +75,7 @@ class AddSalesDetailService {
 
                 $kode_item = $item->getKodeItem();
                 $harga_item = $item->getHargaJual();
+                $diskon = $item->getDiskon();
 
                 // Update total harga
                 $this->updateTotalHargaProcedureRepository->updateTotalHargaProcedure($request->sales_master_id, $harga_item, 'penambahan');
@@ -82,6 +83,7 @@ class AddSalesDetailService {
                 $newSalesDetailDTO = new NewSalesDetailDTO(
                     $kode_item,
                     $harga_item,
+                    $diskon,
                     $request->sales_master_id,
                     $branchItemId,
                     $po_detail_id,
