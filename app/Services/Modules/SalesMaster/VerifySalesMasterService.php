@@ -6,8 +6,6 @@ use App\DTO\Modules\SalesMasterDTOs\SalesMasterInfoDTO;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\SalesMasterDTOs\VerifySalesMasterDTO;
-
 use App\Repositories\Modules\SalesMaster\VerifySalesMasterRepository;
 use App\Repositories\Modules\SalesMaster\CheckSalesMasterVerifiedRepository;
 use App\Repositories\Modules\SalesMaster\GetSalesMasterByIdRepository;
@@ -38,11 +36,6 @@ class VerifySalesMasterService {
             // Validate request
             $request->validate([
                 'id' => 'required|exists:sales_masters,id',
-                'branch_id' => 'required|exists:branches,id',
-                'sistem_pembayaran' => 'required|string',
-
-                'nomor_kartu' => 'required_unless:sistem_pembayaran,TUNAI',
-                'nomor_referensi' => 'required_unless:sistem_pembayaran,TUNAI',
             ]);
 
             // Check if verify sales master is verified
@@ -53,8 +46,10 @@ class VerifySalesMasterService {
 
             $total_tagihan = $salesMaster->getTotalTagihan();
 
+            $sistem_pembayaran = $salesMaster->getSistemPembayaran();
+
             // Update kas if sistem_pembayaran is 'TUNAI'
-            if ($request->sistem_pembayaran == 'TUNAI') {
+            if ($sistem_pembayaran == 'TUNAI') {
                 $this->updateKasTotalRepository->updateKasTotal(
                     $request->branch_id,
                     date('Y-m-d H:i:s'),
@@ -75,15 +70,8 @@ class VerifySalesMasterService {
                 ]));
             }
 
-            // Get updated sales master
-            $salesMasterVerifyInfo = new VerifySalesMasterDTO(
-                $request->id,
-                $request->sistem_pembayaran,
-                $request->nomor_kartu,
-                $request->nomor_referensi
-            );
-
-            $salesMaster = $this->verifySalesMasterRepository->verifySalesMaster($salesMasterVerifyInfo);
+            // verify sales master
+            $salesMaster = $this->verifySalesMasterRepository->verifySalesMaster($request->id);
 
             return $salesMaster;
         } catch (Exception $e) {

@@ -23,9 +23,6 @@ class UpdateSalesMasterRepository {
      */
     public function updateSalesMaster(UpdateSalesMasterDTO $updateSalesMasterDTO) {
         try {
-            // Check sales master verify status
-            $this->checkSalesMasterVerifiedRepository->isSalesMasterVerified($updateSalesMasterDTO->getId());
-
             $salesMaster = SalesMaster::find($updateSalesMasterDTO->getId());
 
             $salesMaster->ref_sales_id = $updateSalesMasterDTO->getRefSalesId();
