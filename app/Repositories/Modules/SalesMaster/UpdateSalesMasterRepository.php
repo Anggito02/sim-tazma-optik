@@ -26,6 +26,7 @@ class UpdateSalesMasterRepository {
             $salesMaster = SalesMaster::find($updateSalesMasterDTO->getId());
 
             $salesMaster->ref_sales_id = $updateSalesMasterDTO->getRefSalesId();
+            $salesMaster->sistem_pembayaran = $updateSalesMasterDTO->getSistemPembayaran();
             $salesMaster->nomor_kartu = $updateSalesMasterDTO->getNomorKartu();
             $salesMaster->nomor_referensi = $updateSalesMasterDTO->getNomorReferensi();
             $salesMaster->dp = $updateSalesMasterDTO->getDp();
