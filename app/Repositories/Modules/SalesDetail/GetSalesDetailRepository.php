@@ -30,6 +30,7 @@ class GetSalesDetailRepository
                 $sales_detail->id,
                 $sales_detail->kode_item,
                 $sales_detail->harga,
+                $sales_detail->diskon,
                 $sales_detail->qty,
                 $sales_detail->sales_master_id,
                 $sales_detail->branch_item_id,
