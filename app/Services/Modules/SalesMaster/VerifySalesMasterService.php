@@ -60,6 +60,8 @@ class VerifySalesMasterService {
             // Get all sales detail
             $salesDetails = $this->getAllSalesDetailRepository->getAllSalesDetailBranchItem($request->id);
 
+            dd($salesDetails);
+
             // Update branch stok
             foreach ($salesDetails as $salesDetail) {
                 $this->updateBranchStokService->updateBranchStok(new Request([
