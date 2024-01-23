@@ -12,6 +12,8 @@ class SalesDetailInfoDTO {
         private int $branch_item_id,
         private int $po_detail_id,
         private int $coa_id,
+
+        private float $diskon
     )
     {}
 
@@ -25,6 +27,8 @@ class SalesDetailInfoDTO {
             'branch_item_id' => $this->branch_item_id,
             'po_detail_id' => $this->po_detail_id,
             'coa_id' => $this->coa_id,
+
+            'diskon' => $this->diskon
         ];
     }
 
@@ -66,6 +70,11 @@ class SalesDetailInfoDTO {
     public function getCoaId(): int
     {
         return $this->coa_id;
+    }
+
+    public function getDiskon(): float
+    {
+        return $this->diskon;
     }
 }
 
