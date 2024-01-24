@@ -58,7 +58,15 @@ class AddSalesDetailService {
             // Check sales detail existence
             $sales_detail_id = $this->checkSalesDetailExistence->checkSalesDetail($request->sales_master_id, $branchItemId, $po_detail_id);
 
+            // Get item harga and kode_item and diskon
+            $item = $this->getItemRepository->getItem($item_id);
+
+            $kode_item = $item->getKodeItem();
+            $harga_item = $item->getHargaJual();
+            $diskon = $item->getDiskon();
+
             $salesDetailDTO = null;
+            // if sales detail is not new, add qty by 1
             if ($sales_detail_id != 0) {
                 // Get sales detail
                 $salesDetail = $this->getSalesDetailRepository->getSalesDetail($sales_detail_id);
@@ -69,17 +77,8 @@ class AddSalesDetailService {
                     'qty' => $salesDetail->getQty() + 1,
                     'harga_item' => $salesDetail->getHarga()
                 ]));
+            // if sales detail is new, add new sales detail
             } else {
-                // Get item harga and kode_item
-                $item = $this->getItemRepository->getItem($item_id);
-
-                $kode_item = $item->getKodeItem();
-                $harga_item = $item->getHargaJual();
-                $diskon = $item->getDiskon();
-
-                // Update total harga
-                $this->updateTotalHargaProcedureRepository->updateTotalHargaProcedure($request->sales_master_id, $harga_item, 'penambahan');
-
                 $newSalesDetailDTO = new NewSalesDetailDTO(
                     $kode_item,
                     $harga_item,
@@ -92,6 +91,9 @@ class AddSalesDetailService {
 
                 $salesDetailDTO = $this->addSalesDetailRepository->addSalesDetail($newSalesDetailDTO);
             }
+
+            // Update total harga
+            $this->updateTotalHargaProcedureRepository->updateTotalHargaProcedure($request->sales_master_id, $harga_item, 'penambahan');
 
             return $salesDetailDTO;
         } catch (Exception $e) {
