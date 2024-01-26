@@ -41,6 +41,9 @@ class GetSalesMasterByNoTransaksiRepository {
                     'sales_masters.customer_id',
                     'customers.nama_depan',
                     'customers.nama_belakang',
+                    'customers.nomor_telepon',
+                    'customers.alamat',
+                    'customers.email'
                 )
             ->first();
 
@@ -67,6 +70,9 @@ class GetSalesMasterByNoTransaksiRepository {
                 $salesMaster->customer_id,
                 $salesMaster->nama_depan,
                 $salesMaster->nama_belakang,
+                $salesMaster->nomor_telepon,
+                $salesMaster->alamat,
+                $salesMaster->email
             );
 
             return $salesMasterInfoDTO;

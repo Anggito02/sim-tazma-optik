@@ -41,6 +41,9 @@ class GetSalesMasterByIdRepository {
                     'sales_masters.customer_id',
                     'customers.nama_depan',
                     'customers.nama_belakang',
+                    'customers.alamat',
+                    'customers.nomor_telepon',
+                    'customers.email',
                 )
             ->first();
 
@@ -67,6 +70,9 @@ class GetSalesMasterByIdRepository {
                 $salesMaster->customer_id,
                 $salesMaster->nama_depan,
                 $salesMaster->nama_belakang,
+                $salesMaster->alamat,
+                $salesMaster->nomor_telepon,
+                $salesMaster->email
             );
 
             return $salesMasterInfoDTO;

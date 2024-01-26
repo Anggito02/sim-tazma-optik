@@ -23,6 +23,9 @@ class SalesMasterInfoDTO {
         private ?int $customer_id,
         private ?string $customer_nama_depan,
         private ?string $customer_nama_belakang,
+        private ?string $customer_nomor_telepon,
+        private ?string $customer_alamat,
+        private ?string $customer_email
     )
     {}
 
@@ -47,6 +50,9 @@ class SalesMasterInfoDTO {
             'customer_id' => $this->customer_id,
             'customer_nama_depan' => $this->customer_nama_depan,
             'customer_nama_belakang' => $this->customer_nama_belakang,
+            'customer_nomor_telepon' => $this->customer_nomor_telepon,
+            'customer_alamat' => $this->customer_alamat,
+            'customer_email' => $this->customer_email
         ];
     }
 
@@ -138,6 +144,21 @@ class SalesMasterInfoDTO {
     public function getCustomerNamaBelakang(): ?string
     {
         return $this->customer_nama_belakang;
+    }
+
+    public function getCustomerNomorTelepon(): ?string
+    {
+        return $this->customer_nomor_telepon;
+    }
+
+    public function getCustomerAlamat(): ?string
+    {
+        return $this->customer_alamat;
+    }
+
+    public function getCustomerEmail(): ?string
+    {
+        return $this->customer_email;
     }
 }
 
