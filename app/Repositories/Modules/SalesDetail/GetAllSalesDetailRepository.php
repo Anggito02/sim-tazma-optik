@@ -29,6 +29,7 @@ class GetAllSalesDetailRepository {
                     $salesDetail->kode_item,
                     $salesDetail->diskon,
                     $salesDetail->harga,
+                    $salesDetail->potongan_manual,
                     $salesDetail->qty,
                     $salesDetail->sales_master_id,
                     $salesDetail->branch_item_id,

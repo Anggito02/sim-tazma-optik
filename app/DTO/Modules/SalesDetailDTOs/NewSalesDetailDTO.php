@@ -7,6 +7,7 @@ class NewSalesDetailDTO {
         private string $kode_item,
         private float $harga,
         private float $diskon,
+        private ?int $potongan_manual,
         private int $sales_master_id,
         private int $branch_item_id,
         private int $po_detail_id,
@@ -22,6 +23,11 @@ class NewSalesDetailDTO {
     public function getHarga(): float
     {
         return $this->harga;
+    }
+
+    public function getPotonganManual(): ?int
+    {
+        return $this->potongan_manual;
     }
 
     public function getDiskon(): float

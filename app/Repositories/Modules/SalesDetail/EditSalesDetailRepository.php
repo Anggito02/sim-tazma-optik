@@ -20,6 +20,7 @@ class EditSalesDetailRepository {
             $salesDetail = SalesDetail::find($id);
 
             $salesDetail->qty = $editSalesDetailDTO->getQty();
+            $salesDetail->potongan_manual = $editSalesDetailDTO->getPotonganManual();
 
             $salesDetail->save();
 

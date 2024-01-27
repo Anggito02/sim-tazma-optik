@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode_item');
             $table->integer('harga');
+            $table->integer('potongan_manual')->default(0);
             $table->float('diskon')->default(0.00);
             $table->integer('qty')->default(1);
 

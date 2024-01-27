@@ -74,8 +74,7 @@ class AddSalesDetailService {
                 $salesDetailDTO = $this->editSalesDetailService->editSalesDetail(new Request([
                     'id' => $sales_detail_id,
                     'sales_master_id' => $request->sales_master_id,
-                    'qty' => $salesDetail->getQty() + 1,
-                    'harga_item' => $salesDetail->getHarga()
+                    'qty' => $salesDetail->getQty() + 1
                 ]));
             // if sales detail is new, add new sales detail
             } else {
@@ -83,6 +82,7 @@ class AddSalesDetailService {
                     $kode_item,
                     $harga_item,
                     $diskon,
+                    0,
                     $request->sales_master_id,
                     $branchItemId,
                     $po_detail_id,
@@ -90,10 +90,11 @@ class AddSalesDetailService {
                 );
 
                 $salesDetailDTO = $this->addSalesDetailRepository->addSalesDetail($newSalesDetailDTO);
+
+                // Update total harga
+                $this->updateTotalHargaProcedureRepository->updateTotalHargaProcedure($request->sales_master_id, $harga_item, 'penambahan');
             }
 
-            // Update total harga
-            $this->updateTotalHargaProcedureRepository->updateTotalHargaProcedure($request->sales_master_id, $harga_item, 'penambahan');
 
             return $salesDetailDTO;
         } catch (Exception $e) {

@@ -35,6 +35,7 @@ class EditSalesDetailService {
                 'id' => 'required|exists:sales_details,id',
                 'sales_master_id' => 'required|exists:sales_masters,id',
                 'qty' => 'required|integer',
+                'potongan_manual' => 'integer|gte:0'
             ]);
 
             // Get sales detail info
@@ -53,12 +54,29 @@ class EditSalesDetailService {
                 $tipe_perubahan = 'pengurangan';
             }
 
-            // Update total harga
+            // Update total harga for qty changes
             $this->updateTotalHargaProcedureRepository->updateTotalHargaProcedure($request->sales_master_id, $jumlah_perubahan, $tipe_perubahan);
+
+            // Calculate the Potongan Manual
+            // Get Potongan Manual before
+            $potongan_manual_before = $salesDetail->getPotonganManual();
+
+            $selisih = $request->potongan_manual - $potongan_manual_before;
+
+            if ($selisih > 0) {
+                $tipe_perubahan = 'pengurangan';
+            } else if ($selisih < 0) {
+                $selisih = $selisih * -1;
+                $tipe_perubahan = 'penambahan';
+            }
+
+            // Update total harga for qty changes
+            $this->updateTotalHargaProcedureRepository->updateTotalHargaProcedure($request->sales_master_id, $selisih, $tipe_perubahan);
 
             $editSalesDetailDTO = new EditSalesDetailDTO(
                 $request->id,
                 $request->qty,
+                $request->potongan_manual
             );
 
             $salesDetail = $this->editSalesDetailRepository->editSalesDetail($request->id, $editSalesDetailDTO);

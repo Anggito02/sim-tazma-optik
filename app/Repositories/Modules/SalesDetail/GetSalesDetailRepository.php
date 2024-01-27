@@ -29,8 +29,9 @@ class GetSalesDetailRepository
             $salesDetailDTO = new SalesDetailInfoDTO(
                 $sales_detail->id,
                 $sales_detail->kode_item,
-                $sales_detail->harga,
                 $sales_detail->diskon,
+                $sales_detail->harga,
+                $sales_detail->potongan_manual,
                 $sales_detail->qty,
                 $sales_detail->sales_master_id,
                 $sales_detail->branch_item_id,
