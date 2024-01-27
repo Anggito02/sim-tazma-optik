@@ -10,6 +10,7 @@ use App\DTO\Modules\SalesMasterDTOs\UpdateSalesMasterDTO;
 use App\Repositories\Modules\SalesMaster\CheckSalesMasterVerifiedRepository;
 use App\Repositories\Modules\SalesMaster\GetSalesMasterByIdRepository;
 use App\Repositories\Modules\SalesMaster\UpdateSalesMasterRepository;
+use App\Repositories\Modules\SalesMaster\UpdateTotalHargaProcedureRepository;
 
 use App\Services\Modules\BranchItem\UpdateBranchStokService;
 use App\Repositories\Modules\SalesDetail\GetAllSalesDetailBranchItemRepository;
@@ -22,6 +23,7 @@ class UpdateSalesMasterService {
         private CheckSalesMasterVerifiedRepository $checkSalesMasterVerifiedRepository,
         private GetSalesMasterByIdRepository $getSalesMasterByIdRepository,
         private UpdateSalesMasterRepository $updateSalesMasterRepository,
+        private UpdateTotalHargaProcedureRepository $updateTotalHargaProcedureRepository,
 
         private UpdateBranchStokService $updateBranchStokService,
         private GetAllSalesDetailBranchItemRepository $getAllSalesDetailRepository,
@@ -51,6 +53,17 @@ class UpdateSalesMasterService {
             ]);
 
             $status = $request->dp == 100 ? "Lunas" : "DP";
+
+            if ($request->ref_sales_id != 0 && $request->sistem_pembayaran == "TUNAI") {
+                // logic pelunasan
+                $salesMasterRef = $this->getSalesMasterByIdRepository->getSalesMaster($request->ref_sales_id);
+
+                $dp = $salesMasterRef->getDp();
+                $sisa_tagihan = $salesMasterRef->getTotalTagihan() * (100 - $dp) / 100;
+
+                // Update total_tagihan
+                $this->updateTotalHargaProcedureRepository->updateTotalHargaProcedure($request->id, $sisa_tagihan, "penambahan");
+            }
 
             if ($request->customer_id) {
                 $this->updateCustomerDeleteableRepository->updateCustomerDeleteable($request->customer_id, FALSE);

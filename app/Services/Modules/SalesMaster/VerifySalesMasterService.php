@@ -46,6 +46,7 @@ class VerifySalesMasterService {
 
             $branch_id = $salesMaster->getBranchId();
             $total_tagihan = $salesMaster->getTotalTagihan();
+            $dp = $salesMaster->getDp();
             $sistem_pembayaran = $salesMaster->getSistemPembayaran();
 
             // Update kas if sistem_pembayaran is 'TUNAI'
@@ -53,7 +54,7 @@ class VerifySalesMasterService {
                 $this->updateKasTotalRepository->updateKasTotal(
                     $branch_id,
                     date('Y-m-d H:i:s'),
-                    $total_tagihan,
+                    $total_tagihan*$dp/100,
                 );
             }
 
