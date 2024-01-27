@@ -225,6 +225,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/sales-master/add', [SalesMasterController::class, 'addSalesMaster'])->name('addSalesMaster');
     Route::put('/sales-master/edit', [SalesMasterController::class, 'updateSalesMaster'])->name('updateSalesMaster');
     Route::put('/sales-master/verify', [SalesMasterController::class, 'verifySalesMaster'])->name('verifySalesMaster');
+    Route::get('/sales-master/kas-in/all', [SalesMasterController::class, 'getAllSalesMasterKasIn'])->name('getAllSalesMasterKasIn');
 
     /* Sales Detail Controllers */
     Route::get('/sales-detail/all', [SalesDetailController::class, 'getAllSalesDetail'])->name('getAllSalesDetail');
