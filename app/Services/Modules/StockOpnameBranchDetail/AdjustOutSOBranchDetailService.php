@@ -9,14 +9,14 @@ use App\DTO\Modules\StockOpnameBranchDetailDTOs\AdjustInfoSOBranchDetailDTO;
 
 use App\Services\Modules\BranchItem\UpdateBranchStokService;
 
-class AdjustInSOBranchDetailService {
+class AdjustOutSOBranchDetailService {
     public function __construct(
         private UpdateBranchStokService $updareBranchStokService,
     )
     {}
 
     /**
-     * Make Adjust In Stock Opname Branch Detail
+     * Make Adjust Out Stock Opname Branch Detail
      * @param AdjustInfoSOBranchDetailDTO
      */
     public function makeAdjustmentSOBranchDetail(AdjustInfoSOBranchDetailDTO $adjustInfoSOBranchDetailDTO) {
@@ -26,7 +26,7 @@ class AdjustInSOBranchDetailService {
                 'item_id' => $adjustInfoSOBranchDetailDTO->getItemId(),
                 'branch_id' => $adjustInfoSOBranchDetailDTO->getBranchId(),
                 'jumlah_perubahan' => $adjustInfoSOBranchDetailDTO->getInOutQty(),
-                'jenis_perubahan' => 'penambahan',
+                'jenis_perubahan' => 'pengurangan',
             ]));
 
             return true;

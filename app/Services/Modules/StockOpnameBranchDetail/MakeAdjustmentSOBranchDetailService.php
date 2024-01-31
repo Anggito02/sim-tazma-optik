@@ -10,12 +10,14 @@ use App\DTO\Modules\StockOpnameBranchDetailDTOs\AdjustInfoSOBranchDetailDTO;
 use App\Repositories\Modules\StockOpnameBranchDetail\AdjustStockOpnameBranchDetailRepository;
 
 use App\Services\Modules\StockOpnameBranchDetail\AdjustInSOBranchDetailService;
+use App\Services\Modules\StockOpnameBranchDetail\AdjustOutSOBranchDetailService;
 
 class MakeAdjustmentSOBranchDetailService {
     public function __construct(
         private AdjustStockOpnameBranchDetailRepository $adjustStockOpnameBranchDetailRepository,
 
         private AdjustInSOBranchDetailService $adjustInSOBranchDetailService,
+        private AdjustOutSOBranchDetailService $adjustOutSOBranchDetailService
     )
     {}
 
@@ -50,10 +52,7 @@ class MakeAdjustmentSOBranchDetailService {
             if ($request->adjustment_type == 'IN') {
                 $adjustmentResult = $this->adjustInSOBranchDetailService->makeAdjustmentSOBranchDetail($adjustStockOpnameBranchDetailDTO);
             } else {
-                /**
-                 * TODO: Adjust Out SO Branch Detail
-                 * Waiting for Sales Module
-                 */
+                $adjustmentResult = $this->adjustOutSOBranchDetailService->makeAdjustmentSOBranchDetail($adjustStockOpnameBranchDetailDTO);
             }
 
             return $adjustmentResult;
