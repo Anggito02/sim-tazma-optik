@@ -8,12 +8,10 @@ use Illuminate\Support\Facades\Storage;
 
 
 use App\Repositories\Modules\PurchaseOrderDetail\DeletePODetailRepository;
-use App\Services\Modules\PurchaseOrderDetail\GetPODetailService;
 
 class DeletePODetailService {
     public function __construct(
-        private DeletePODetailRepository $poDetailRepository,
-        private GetPODetailService $getPODetailService
+        private DeletePODetailRepository $poDetailRepository
     ) {}
 
     /**
@@ -29,11 +27,6 @@ class DeletePODetailService {
             ]);
 
             $id = $request->id;
-
-            // Delete Purchase Order Detail QR
-            $poDetailQrPath = $this->getPODetailService->getPurchaseOrderDetail($id);
-
-            if (!$poDetailQrPath) Storage::delete($poDetailQrPath);
 
             $poDetailDTO = $this->poDetailRepository->deletePurchaseOrderDetail($id);
 
