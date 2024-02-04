@@ -32,6 +32,7 @@ class EditPODetailService {
                 'harga_beli_satuan' => 'required|gte:0',
                 'harga_jual_satuan' => 'required|gte:0',
                 'diskon' => 'required|gte:0',
+                'item_id' => 'required|exists:items,id',
             ]);
 
             $poDetailDTO = new EditPurchaseOrderDetailDTO(
@@ -43,11 +44,8 @@ class EditPODetailService {
                 $request->diskon,
             );
 
-            // Get item id from po detail
-            $item_id = $this->getPODetailService->getPurchaseOrderDetail($request->id)->getItemId();
-
             // update item deleteable
-            $this->updateItemDeleteableRepository->updateItemDeleteable($item_id, FALSE);
+            $this->updateItemDeleteableRepository->updateItemDeleteable($request->item_id, FALSE);
 
             $poDetailDTO = $this->poDetailRepository->editPurchaseOrderDetail($poDetailDTO);
 
