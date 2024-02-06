@@ -24,7 +24,7 @@ class EditCategoryService {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required|exists:_categories,id',
+                'id' => 'required|exists:categories,id',
                 'nama_kategori' => 'required',
             ]);
 
