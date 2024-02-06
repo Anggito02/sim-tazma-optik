@@ -5,7 +5,7 @@ namespace App\Services\Modules\VendorInvoice;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\VendorInvoiceDTO;
+use App\DTO\Modules\VendorInvoiceDTOs\VendorInvoiceInfoDTO;
 
 use App\Repositories\Modules\VendorInvoice\GetAllVendorInvoiceRepository;
 
@@ -17,7 +17,7 @@ class GetAllVendorInvoiceService {
     /**
      * Get all Vendor Invoice
      * @param Request $request
-     * @return VendorInvoiceDTO
+     * @return VendorInvoiceInfoDTO
      */
     public function getAllVendorInvoice(Request $request) {
         try {

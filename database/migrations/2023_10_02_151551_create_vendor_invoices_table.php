@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('nomor_invoice_vendor');
             $table->string('nomor_invoice_receive');
             $table->enum('iterasi_pembayaran', [1, 2, 3, 4]);
-            $table->string('bukti_pembayaran_1');
+            // $table->string('bukti_pembayaran_1');
             $table->boolean('status_pembayaran_1');
-            $table->string('bukti_pembayaran_2')->nullable();
+            // $table->string('bukti_pembayaran_2')->nullable();
             $table->boolean('status_pembayaran_2')->nullable();
-            $table->string('bukti_pembayaran_3')->nullable();
+            // $table->string('bukti_pembayaran_3')->nullable();
             $table->boolean('status_pembayaran_3')->nullable();
-            $table->string('bukti_pembayaran_4')->nullable();
+            // $table->string('bukti_pembayaran_4')->nullable();
             $table->boolean('status_pembayaran_4')->nullable();
             $table->enum('status_pembayaran', ['lunas', 'belum_lunas']);
 

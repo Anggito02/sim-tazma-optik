@@ -4,7 +4,7 @@ namespace App\Repositories\Modules\VendorInvoice;
 
 use Exception;
 
-use App\DTO\Modules\VendorInvoiceDTO;
+use App\DTO\Modules\VendorInvoiceDTOs\VendorInvoiceInfoDTO;
 use App\Models\Modules\VendorInvoice;
 
 class GetAllVendorInvoiceRepository {
@@ -12,36 +12,51 @@ class GetAllVendorInvoiceRepository {
      * Get all vendor invoice
      * @param int $page
      * @param int $limit
-     * @return VendorInvoiceDTO
+     * @return VendorInvoiceInfoDTO
      */
     public function getAllVendorInvoice(int $page, int $limit) {
         try {
             // use pagination
-            $vendorInvoices = VendorInvoice::paginate($limit, ['*'], 'page', $page);
+            $vendorInvoices = VendorInvoice::join('users as accepted_by', 'accepted_by.id', '=', 'vendor_invoices.accepted_by')
+                ->join('users as checked_by', 'checked_by.id', '=', 'vendor_invoices.checked_by')
+                ->join('users as approved_by', 'approved_by.id', '=', 'vendor_invoices.approved_by')
+                ->select(
+                    'vendor_invoices.*',
+                    'accepted_by.employee_name as accepted_by_name',
+                    'checked_by.employee_name as checked_by_name',
+                    'approved_by.employee_name as approved_by_name'
+                )
+                ->orderBy(
+                    'vendor_invoices.id',
+                    'desc'
+                )
+                ->paginate($limit, ['*'], 'page', $page);
 
             $vendorInvoiceDTOs = [];
             foreach ($vendorInvoices as $vendorInvoice) {
-                $vendorInvoiceDTO = new VendorInvoiceDTO(
+                $vendorInvoiceDTO = new VendorInvoiceInfoDTO(
                     $vendorInvoice->id,
                     $vendorInvoice->nomor_invoice_vendor,
-                    $vendorInvoice->tanggal_invoice_vendor,
-                    $vendorInvoice->status_pembayaran,
                     $vendorInvoice->nomor_invoice_receive,
                     $vendorInvoice->iterasi_pembayaran,
-                    $vendorInvoice->bukti_pembayaran_1,
+                    // $vendorInvoice->bukti_pembayaran_1,
                     $vendorInvoice->status_pembayaran_1,
-                    $vendorInvoice->bukti_pembayaran_2,
+                    // $vendorInvoice->bukti_pembayaran_2,
                     $vendorInvoice->status_pembayaran_2,
-                    $vendorInvoice->bukti_pembayaran_3,
+                    // $vendorInvoice->bukti_pembayaran_3,
                     $vendorInvoice->status_pembayaran_3,
-                    $vendorInvoice->bukti_pembayaran_4,
+                    // $vendorInvoice->bukti_pembayaran_4,
                     $vendorInvoice->status_pembayaran_4,
+                    $vendorInvoice->status_pembayaran,
                     $vendorInvoice->vendor_id,
                     $vendorInvoice->purchase_order_id,
                     $vendorInvoice->receive_order_id,
                     $vendorInvoice->accepted_by,
                     $vendorInvoice->checked_by,
-                    $vendorInvoice->approved_by
+                    $vendorInvoice->approved_by,
+                    $vendorInvoice->accepted_by_name,
+                    $vendorInvoice->checked_by_name,
+                    $vendorInvoice->approved_by_name
                 );
 
                 array_push($vendorInvoiceDTOs, $vendorInvoiceDTO);

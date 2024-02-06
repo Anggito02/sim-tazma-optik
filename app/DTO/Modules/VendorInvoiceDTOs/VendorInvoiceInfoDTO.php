@@ -1,22 +1,22 @@
 <?php
 
-namespace App\DTO\Modules;
+namespace App\DTO\Modules\VendorInvoiceDTOs;
 
-class VendorInvoiceDTO {
+class VendorInvoiceInfoDTO {
     public function __construct(
-        public ?int $id,
+        public int $id,
         public string $nomor_invoice_vendor,
         public string $nomor_invoice_receive,
         public int $iterasi_pembayaran,
-        public string $bukti_pembayaran_1,
+        // public string $bukti_pembayaran_1,
         public bool $status_pembayaran_1,
-        public ?string $bukti_pembayaran_2,
+        // public ?string $bukti_pembayaran_2,
         public ?bool $status_pembayaran_2,
-        public ?string $bukti_pembayaran_3,
+        // public ?string $bukti_pembayaran_3,
         public ?bool $status_pembayaran_3,
-        public ?string $bukti_pembayaran_4,
+        // public ?string $bukti_pembayaran_4,
         public ?bool $status_pembayaran_4,
-        public string $status_pembayaran,
+        public string $status_pembayaran_keseluruhan,
 
         // Foreign Key
         public int $vendor_id,
@@ -28,11 +28,23 @@ class VendorInvoiceDTO {
         public int $receive_order_id,
 
         // Employee
-        public ?int $accepted_by,
-        public ?int $checked_by,
-        public ?int $approved_by,
+        public int $accepted_by,
+        public int $checked_by,
+        public int $approved_by,
+
+        public string $accepted_by_name,
+        public string $checked_by_name,
+        public string $approved_by_name
     )
     {}
+
+    public function getId(): int {
+        return $this->id;
+    }
+
+    public function setId(int $id): void {
+        $this->id = $id;
+    }
 
     public function getNomorInvoiceVendor(): string {
         return $this->nomor_invoice_vendor;
@@ -58,13 +70,13 @@ class VendorInvoiceDTO {
         $this->iterasi_pembayaran = $iterasi_pembayaran;
     }
 
-    public function getBuktiPembayaran1(): string {
-        return $this->bukti_pembayaran_1;
-    }
+    // public function getBuktiPembayaran1(): string {
+    //     return $this->bukti_pembayaran_1;
+    // }
 
-    public function setBuktiPembayaran1(string $bukti_pembayaran_1): void {
-        $this->bukti_pembayaran_1 = $bukti_pembayaran_1;
-    }
+    // public function setBuktiPembayaran1(string $bukti_pembayaran_1): void {
+    //     $this->bukti_pembayaran_1 = $bukti_pembayaran_1;
+    // }
 
     public function getStatusPembayaran1(): bool {
         return $this->status_pembayaran_1;
@@ -74,13 +86,13 @@ class VendorInvoiceDTO {
         $this->status_pembayaran_1 = $status_pembayaran_1;
     }
 
-    public function getBuktiPembayaran2(): ?string {
-        return $this->bukti_pembayaran_2;
-    }
+    // public function getBuktiPembayaran2(): ?string {
+    //     return $this->bukti_pembayaran_2;
+    // }
 
-    public function setBuktiPembayaran2(?string $bukti_pembayaran_2): void {
-        $this->bukti_pembayaran_2 = $bukti_pembayaran_2;
-    }
+    // public function setBuktiPembayaran2(?string $bukti_pembayaran_2): void {
+    //     $this->bukti_pembayaran_2 = $bukti_pembayaran_2;
+    // }
 
     public function getStatusPembayaran2(): ?bool {
         return $this->status_pembayaran_2;
@@ -90,13 +102,13 @@ class VendorInvoiceDTO {
         $this->status_pembayaran_2 = $status_pembayaran_2;
     }
 
-    public function getBuktiPembayaran3(): ?string {
-        return $this->bukti_pembayaran_3;
-    }
+    // public function getBuktiPembayaran3(): ?string {
+    //     return $this->bukti_pembayaran_3;
+    // }
 
-    public function setBuktiPembayaran3(?string $bukti_pembayaran_3): void {
-        $this->bukti_pembayaran_3 = $bukti_pembayaran_3;
-    }
+    // public function setBuktiPembayaran3(?string $bukti_pembayaran_3): void {
+    //     $this->bukti_pembayaran_3 = $bukti_pembayaran_3;
+    // }
 
     public function getStatusPembayaran3(): ?bool {
         return $this->status_pembayaran_3;
@@ -106,13 +118,13 @@ class VendorInvoiceDTO {
         $this->status_pembayaran_3 = $status_pembayaran_3;
     }
 
-    public function getBuktiPembayaran4(): ?string {
-        return $this->bukti_pembayaran_4;
-    }
+    // public function getBuktiPembayaran4(): ?string {
+    //     return $this->bukti_pembayaran_4;
+    // }
 
-    public function setBuktiPembayaran4(?string $bukti_pembayaran_4): void {
-        $this->bukti_pembayaran_4 = $bukti_pembayaran_4;
-    }
+    // public function setBuktiPembayaran4(?string $bukti_pembayaran_4): void {
+    //     $this->bukti_pembayaran_4 = $bukti_pembayaran_4;
+    // }
 
     public function getStatusPembayaran4(): ?bool {
         return $this->status_pembayaran_4;
@@ -122,12 +134,12 @@ class VendorInvoiceDTO {
         $this->status_pembayaran_4 = $status_pembayaran_4;
     }
 
-    public function getStatusPembayaran(): string {
-        return $this->status_pembayaran;
+    public function getStatusPembayaranKeseluruhan(): string {
+        return $this->status_pembayaran_keseluruhan;
     }
 
-    public function setStatusPembayaran(string $status_pembayaran): void {
-        $this->status_pembayaran = $status_pembayaran;
+    public function setStatusPembayaranKeseluruhan(string $status_pembayaran_keseluruhan): void {
+        $this->status_pembayaran_keseluruhan = $status_pembayaran_keseluruhan;
     }
 
     public function getVendorId(): int {
@@ -154,28 +166,52 @@ class VendorInvoiceDTO {
         $this->receive_order_id = $receive_order_id;
     }
 
-    public function getAcceptedBy(): ?int {
+    public function getAcceptedBy(): int {
         return $this->accepted_by;
     }
 
-    public function setAcceptedBy(?int $accepted_by): void {
+    public function setAcceptedBy(int $accepted_by): void {
         $this->accepted_by = $accepted_by;
     }
 
-    public function getCheckedBy(): ?int {
+    public function getCheckedBy(): int {
         return $this->checked_by;
     }
 
-    public function setCheckedBy(?int $checked_by): void {
+    public function setCheckedBy(int $checked_by): void {
         $this->checked_by = $checked_by;
     }
 
-    public function getApprovedBy(): ?int {
+    public function getApprovedBy(): int {
         return $this->approved_by;
     }
 
-    public function setApprovedBy(?int $approved_by): void {
+    public function setApprovedBy(int $approved_by): void {
         $this->approved_by = $approved_by;
+    }
+
+    public function getAcceptedByName(): string {
+        return $this->accepted_by_name;
+    }
+
+    public function setAcceptedByName(string $accepted_by_name): void {
+        $this->accepted_by_name = $accepted_by_name;
+    }
+
+    public function getCheckedByName(): string {
+        return $this->checked_by_name;
+    }
+
+    public function setCheckedByName(string $checked_by_name): void {
+        $this->checked_by_name = $checked_by_name;
+    }
+
+    public function getApprovedByName(): string {
+        return $this->approved_by_name;
+    }
+
+    public function setApprovedByName(string $approved_by_name): void {
+        $this->approved_by_name = $approved_by_name;
     }
 }
 
