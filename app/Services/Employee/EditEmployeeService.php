@@ -26,7 +26,7 @@ class EditEmployeeService {
             $request->validate([
                 'id' => 'required|exists:users,id',
                 'email' => 'required|email',
-                'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'min:8', 'max:20'],
+                // 'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'min:8', 'max:20'],
                 'username' => 'required',
                 'nik' => 'required',
                 'nip' => 'required',
