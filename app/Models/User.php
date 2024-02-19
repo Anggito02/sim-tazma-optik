@@ -18,9 +18,24 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'username',
+        'nik',
+        'nip',
+        'employee_name',
+        'photo',
+        'gender',
+        'address',
+        'phone',
+        'department',
+        'section',
+        'position',
+        'role',
+        'plant',
+        'status',
+        'group',
+        'domicile',
     ];
 
     /**
@@ -42,4 +57,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /* ========== */
+    /* Other relationship */
+    /* ========== */
+
+    public function branch()
+    {
+        return $this->hasMany(Branch::class, 'employee_id_pic_branch');
+    }
+
+    public function vendorInvoices()
+    {
+        return $this->hasMany(VendorInvoice::class, 'employee_id');
+    }
+
+    public function salesMasters()
+    {
+        return $this->hasMany(SalesMaster::class, 'employee_id');
+    }
 }
