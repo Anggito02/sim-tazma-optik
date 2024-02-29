@@ -71,9 +71,9 @@ class AddStockOpnameDetailService {
                 $request->stock_opname_id,
             );
 
-            $this->addStockOpnameDetailRepository->addStockOpnameDetail($newStockOpnameDetailDTO);
+            $stock_opname_detail = $this->addStockOpnameDetailRepository->addStockOpnameDetail($newStockOpnameDetailDTO);
 
-            return $newStockOpnameDetailDTO;
+            return $stock_opname_detail;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }
