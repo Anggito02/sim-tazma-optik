@@ -10,10 +10,14 @@ use App\DTO\Modules\StockOpnameDetailDTOs\AdjustInfoSODetailDTO;
 use App\Services\Modules\StockOpnameDetail\AdjustInSODetailService;
 use App\Services\Modules\StockOpnameDetail\AdjustOutSODetailService;
 
+use App\Repositories\Modules\StockOpnameDetail\UpdateStatusSODetailRepository;
+
 class MakeAdjustmentSODetailService {
     public function __construct(
         private AdjustInSODetailService $adjustInSODetailService,
         private AdjustOutSODetailService $adjustOutSODetailService,
+
+        private UpdateStatusSODetailRepository $updateStatusSODetailRepository
     )
     {}
 
@@ -26,6 +30,7 @@ class MakeAdjustmentSODetailService {
         try {
             // Validate request
             $request->validate([
+                'so_detail_id' => 'required|exists:stock_opname_details,id',
                 'adjustment_type' => 'required|in:IN,OUT',
                 'adjustment_by' => 'required|exists:users,id',
 
@@ -47,6 +52,9 @@ class MakeAdjustmentSODetailService {
             } else {
                 $adjustmentResult = $this->adjustOutSODetailService->makeAdjustmentSODetail($adjustInfoDTO);
             }
+
+            // Update adjustment status
+            $this->updateStatusSODetailRepository->updateSODetailAdjustmentStatus($request->so_detail_id, false);
 
             return $adjustmentResult;
 

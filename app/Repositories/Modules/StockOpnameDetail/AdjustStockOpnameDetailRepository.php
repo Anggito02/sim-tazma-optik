@@ -20,7 +20,6 @@ class AdjustStockOpnameDetailRepository {
             $stockOpnameDetail->adjustment_date = $adjustStockOpnameDetailDTO->getAdjustmentDate();
             $stockOpnameDetail->adjustment_followup_note = $adjustStockOpnameDetailDTO->getAdjustmentFollowupNote();
             $stockOpnameDetail->adjustment_by = $adjustStockOpnameDetailDTO->getAdjustmentBy();
-            $stockOpnameDetail->adjustment_status = 'CLOSED';
             $stockOpnameDetail->save();
 
             return $stockOpnameDetail;
