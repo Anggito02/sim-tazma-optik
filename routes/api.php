@@ -194,10 +194,12 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/outgoing-detail/verify', [OutgoingDetailController::class, 'verifyOutgoingDetail'])->name('verifyOutgoingDetail');
 
     /* Stock Opname Master Controllers */
+    Route::get('/stock-opname-master/one', [StockOpnameMasterController::class, 'getStockOpname'])->name('getStockOpname');
     Route::get('/stock-opname-master/all', [StockOpnameMasterController::class, 'getAllStockOpname'])->name('getAllStockOpname');
     Route::post('/stock-opname-master/add', [StockOpnameMasterController::class, 'addStockOpname'])->name('addStockOpname');
 
     /* Stock Opname Detail Controllers */
+    Route::get('/stock-opname-detail/one', [StockOpnameDetailController::class, 'getStockOpnameDetail'])->name('getStockOpnameDetail');
     Route::get('/stock-opname-detail/all', [StockOpnameDetailController::class, 'getAllStockOpnameDetail'])->name('getAllStockOpnameDetail');
     Route::post('/stock-opname-detail/add', [StockOpnameDetailController::class, 'addStockOpnameDetail'])->name('addStockOpnameDetail');
     Route::put('/stock-opname-detail/edit', [StockOpnameDetailController::class, 'editStockOpnameDetail'])->name('editStockOpnameDetail');
@@ -205,10 +207,12 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/stock-opname-detail/make-adjustment', [StockOpnameDetailController::class, 'makeAdjustmentSODetail'])->name('makeAdjustmentSODetail');
 
     /* Stock Opname Branch Controllers */
+    Route::get('/stock-opname-branch/one', [StockOpnameBranchController::class, 'getStockOpnameBranch'])->name('getStockOpnameBranch');
     Route::get('/stock-opname-branch/all', [StockOpnameBranchController::class, 'getAllStockOpnameBranch'])->name('getAllStockOpnameBranch');
     Route::post('/stock-opname-branch/add', [StockOpnameBranchController::class, 'addStockOpnameBranch'])->name('addStockOpnameBranch');
 
     /* Stock Opname Branch Detail Controllers */
+    Route::get('/stock-opname-branch-detail/one', [StockOpnameBranchDetailController::class, 'getStockOpnameBranchDetail'])->name('getStockOpnameBranchDetail');
     Route::get('/stock-opname-branch-detail/all', [StockOpnameBranchDetailController::class, 'getAllStockOpnameBranchDetail'])->name('getAllStockOpnameBranchDetail');
     Route::post('/stock-opname-branch-detail/add', [StockOpnameBranchDetailController::class, 'addStockOpnameBranchDetail'])->name('addStockOpnameBranchDetail');
     Route::put('/stock-opname-branch-detail/edit', [StockOpnameBranchDetailController::class, 'editStockOpnameBranchDetail'])->name('editStockOpnameBranchDetail');
