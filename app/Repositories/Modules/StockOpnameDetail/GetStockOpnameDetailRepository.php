@@ -16,7 +16,7 @@ class GetStockOpnameDetailRepository {
      */
     public function getStockOpnameDetail(int $stockOpnameId) {
         try {
-            $stockOpnameDetailInfo = StockOpnameDetail::whereRaw('stock_opname_id = ' . $stockOpnameId)
+            $stockOpnameDetailInfo = StockOpnameDetail::whereRaw('stock_opname_details.id = ' . $stockOpnameId)
                 ->join('items', 'stock_opname_details.item_id', '=', 'items.id')
                 ->join('users as open_by', 'stock_opname_details.open_by', '=', 'open_by.id')
                 ->join('users as close_by', 'stock_opname_details.close_by', '=', 'close_by.id')
@@ -29,7 +29,7 @@ class GetStockOpnameDetailRepository {
                     'close_by.employee_name as close_by_name',
                     'adjustment_by.employee_name as adjustment_by_name',
                 )
-                ->get();
+                ->first();
 
 
             $so_start = date_create($stockOpnameDetailInfo->so_start);

@@ -15,7 +15,7 @@ class GetStockOpnameRepository {
      */
     public function getStockOpname(int $stockOpnameId) {
         try {
-            $stockOpname = StockOpnameMaster::where('id', $stockOpnameId)->get();
+            $stockOpname = StockOpnameMaster::where('id', $stockOpnameId)->first();
 
             $stockOpnameInfoDTO = new StockOpnameInfoDTO(
                 $stockOpname->id,

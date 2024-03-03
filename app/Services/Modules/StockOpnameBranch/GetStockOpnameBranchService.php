@@ -26,7 +26,7 @@ class GetStockOpnameBranchService {
                 'stock_opname_branch_id' => 'required|exists:stock_opname_masters,id',
             ]);
 
-            $stockOpnameBranchInfoDTO = $this->getStockOpnameBranchRepository->getStockOpnameBranch($request->stock_opname_id);
+            $stockOpnameBranchInfoDTO = $this->getStockOpnameBranchRepository->getStockOpnameBranch($request->stock_opname_branch_id);
 
             $stockOpnameBranchArray = $stockOpnameBranchInfoDTO->toArray();
 
