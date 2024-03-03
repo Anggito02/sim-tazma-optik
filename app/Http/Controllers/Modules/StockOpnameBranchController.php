@@ -6,16 +6,41 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Services\Modules\StockOpnameBranch\GetStockOpnameBranchService;
 use App\Services\Modules\StockOpnameBranch\GetAllStockOpnameBranchService;
 use App\Services\Modules\StockOpnameBranch\AddStockOpnameBranchService;
 
 class StockOpnameBranchController extends Controller
 {
     public function __construct(
+        private GetStockOpnameBranchService $getStockOpnameBranchService,
         private GetAllStockOpnameBranchService $getAllStockOpnameBranchService,
         private AddStockOpnameBranchService $addStockOpnameBranchService,
     )
     {}
+
+    /**
+     * Get Stock Opname Branch
+     * @param Request $request
+     *
+     */
+    public function getStockOpnameBranch(Request $request) {
+        try {
+            $stockOpnameBranchInfoDTO = $this->getStockOpnameBranchService->getStockOpnameBranch($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Get Stock OpnameBranch success',
+                'data' => $stockOpnameBranchInfoDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get Stock OpnameBranch failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
 
     /**
      * Get all Stock Opname Branch

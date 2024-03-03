@@ -6,20 +6,70 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Services\Modules\SalesMaster\GetSalesMasterByIdService;
+use App\Services\Modules\SalesMaster\GetSalesMasterByNoTransaksiService;
 use App\Services\Modules\SalesMaster\GetAllSalesMasterService;
 use App\Services\Modules\SalesMaster\AddSalesMasterService;
 use App\Services\Modules\SalesMaster\UpdateSalesMasterService;
 use App\Services\Modules\SalesMaster\VerifySalesMasterService;
 
+use App\Services\Modules\SalesMaster\GetAllSalesMasterKasInService;
+
 class SalesMasterController extends Controller
 {
     public function __construct(
+        private GetSalesMasterByIdService $getSalesMasterByIdService,
+        private GetSalesMasterByNoTransaksiService $getSalesMasterByNoTransaksiService,
         private GetAllSalesMasterService $getAllSalesMasterService,
         private AddSalesMasterService $addSalesMasterService,
         private UpdateSalesMasterService $updateSalesMasterService,
         private VerifySalesMasterService $verifySalesMasterService,
+
+        private GetAllSalesMasterKasInService $getAllSalesMasterKasInService
     )
     {}
+
+    /**
+     * Get Sales Master by id
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getSalesMasterById(Request $request) {
+        try {
+            $salesMasterInfoDTO = $this->getSalesMasterByIdService->getSalesMaster($request);
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $salesMasterInfoDTO,
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Get Sales Master by nomor transaksi
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getSalesMasterByNoTransaksi(Request $request) {
+        try {
+            $salesMasterInfoDTO = $this->getSalesMasterByNoTransaksiService->getSalesMaster($request);
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $salesMasterInfoDTO,
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 
     /**
      * Get All Sales Master
@@ -33,12 +83,12 @@ class SalesMasterController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesMasterInfoDTOs,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -54,12 +104,12 @@ class SalesMasterController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesMasterDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -75,12 +125,12 @@ class SalesMasterController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesMasterDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -96,12 +146,33 @@ class SalesMasterController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesMaster,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
+        }
+    }
+
+    /**
+     * Get All Sales Master Kas In
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllSalesMasterKasIn(Request $request) {
+        try {
+            $salesMasterKasInDTOs = $this->getAllSalesMasterKasInService->getAllSalesMasterKasIn($request);
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $salesMasterKasInDTOs,
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
         }
     }
 }

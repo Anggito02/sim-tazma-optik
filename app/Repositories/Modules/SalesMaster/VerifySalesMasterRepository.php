@@ -9,12 +9,13 @@ use App\Models\Modules\SalesMaster;
 class VerifySalesMasterRepository {
     /**
      * Verify Sales Master
-     * @param int $id
+     * @param int $sales_master_id
+     *
      * @return SalesMaster
      */
-    public function verifySalesMaster(int $id) {
+    public function verifySalesMaster(int $sales_master_id) {
         try {
-            $salesMaster = SalesMaster::find($id);
+            $salesMaster = SalesMaster::find($sales_master_id);
 
             $salesMaster->verified = true;
 

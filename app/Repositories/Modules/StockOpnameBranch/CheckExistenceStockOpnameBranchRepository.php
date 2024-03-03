@@ -16,6 +16,7 @@ class CheckExistenceStockOpnameBranchRepository {
     public function checkStockOpnameBranchExistence(NewStockOpnameBranchDTO $newStockOpnameBranchDTO) {
         $stockOpname = StockOpnameBranch::where('bulan', $newStockOpnameBranchDTO->getBulan())
             ->where('tahun', $newStockOpnameBranchDTO->getTahun())
+            ->where('branch_id', $newStockOpnameBranchDTO->getBranchId())
             ->first();
 
         if ($stockOpname) {

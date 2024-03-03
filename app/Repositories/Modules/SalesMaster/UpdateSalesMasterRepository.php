@@ -4,11 +4,18 @@ namespace App\Repositories\Modules\SalesMaster;
 
 use Exception;
 
+use App\Repositories\Modules\SalesMaster\CheckSalesMasterVerifiedRepository;
+
 use App\DTO\Modules\SalesMasterDTOs\UpdateSalesMasterDTO;
 
 use App\Models\Modules\SalesMaster;
 
 class UpdateSalesMasterRepository {
+    public function __construct(
+        private CheckSalesMasterVerifiedRepository $checkSalesMasterVerifiedRepository
+    )
+    {}
+
     /**
      * Update Sales Master
      * @param UpdateSalesMasterDTO $updateSalesMasterDTO

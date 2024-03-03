@@ -36,7 +36,7 @@ class GetPODetailRepository {
                 $poDetail->harga_beli_satuan,
                 $poDetail->harga_jual_satuan,
                 $poDetail->diskon,
-                $poDetail->qr_item_path,
+                $poDetail->kode_qr_po_detail,
                 $poDetail->purchase_order_id,
                 $poDetail->nomor_po,
                 $poDetail->receive_order_id,

@@ -4,9 +4,6 @@ namespace App\Services\Employee;
 
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-
-use App\DTO\UserDTO;
 
 use App\Repositories\Employee\GetEmployeeRepository;
 
@@ -18,7 +15,7 @@ class GetEmployeeService {
     /**
      * Get employee by id
      * @param Request $request
-     * @return UserDTO
+     * @return UserInfo[]
      */
     public function getEmployee(Request $request) {
         try {
@@ -29,20 +26,11 @@ class GetEmployeeService {
 
             $userDTO = $this->employeeRepository->getEmployee($request->id);
 
-            // get user photo
-            $imageContent = Storage::disk('public')->get($userDTO->photo);
+            $userArray = $userDTO->toArray();
 
-            // determine content type
-            $finfo = new \finfo(FILEINFO_MIME_TYPE);
-            $photoExtension = $finfo->buffer($imageContent);
+            // TODO: get user photo
 
-            // encode image
-            $base64Image = base64_encode($imageContent);
-
-            // create image data uri
-            $userDTO->photo = "data:$photoExtension;base64,$base64Image";
-
-            return $userDTO;
+            return $userArray;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

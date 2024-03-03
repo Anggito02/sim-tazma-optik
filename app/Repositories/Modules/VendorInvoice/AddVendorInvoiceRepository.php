@@ -4,30 +4,30 @@ namespace App\Repositories\Modules\VendorInvoice;
 
 use Exception;
 
-use App\DTO\Modules\VendorInvoiceDTO;
+use App\DTO\Modules\VendorInvoiceDTOs\NewVendorInvoiceDTO;
 use App\Models\Modules\VendorInvoice;
 
 class AddVendorInvoiceRepository {
     /**
      * Add Vendor Invoice
-     * @param VendorInvoiceDTO $vendorInvoiceDTO
-     * @return VendorInvoiceDTO
+     * @param NewVendorInvoiceDTO $vendorInvoiceDto
+     * @return NewVendorInvoiceDTO
      */
-    public function addVendorInvoice(VendorInvoiceDTO $vendorInvoiceDto) {
+    public function addVendorInvoice(NewVendorInvoiceDTO $vendorInvoiceDto) {
         try {
             $newVendorInvoice = new VendorInvoice();
             $newVendorInvoice->nomor_invoice_vendor = $vendorInvoiceDto->getNomorInvoiceVendor();
             $newVendorInvoice->nomor_invoice_receive = $vendorInvoiceDto->getNomorInvoiceReceive();
             $newVendorInvoice->iterasi_pembayaran = $vendorInvoiceDto->getIterasiPembayaran();
-            $newVendorInvoice->bukti_pembayaran_1 = $vendorInvoiceDto->getBuktiPembayaran1();
+            // $newVendorInvoice->bukti_pembayaran_1 = $vendorInvoiceDto->getBuktiPembayaran1();
             $newVendorInvoice->status_pembayaran_1 = $vendorInvoiceDto->getStatusPembayaran1();
-            $newVendorInvoice->bukti_pembayaran_2 = $vendorInvoiceDto->getBuktiPembayaran2();
+            // $newVendorInvoice->bukti_pembayaran_2 = $vendorInvoiceDto->getBuktiPembayaran2();
             $newVendorInvoice->status_pembayaran_2 = $vendorInvoiceDto->getStatusPembayaran2();
-            $newVendorInvoice->bukti_pembayaran_3 = $vendorInvoiceDto->getBuktiPembayaran3();
+            // $newVendorInvoice->bukti_pembayaran_3 = $vendorInvoiceDto->getBuktiPembayaran3();
             $newVendorInvoice->status_pembayaran_3 = $vendorInvoiceDto->getStatusPembayaran3();
-            $newVendorInvoice->bukti_pembayaran_4 = $vendorInvoiceDto->getBuktiPembayaran4();
+            // $newVendorInvoice->bukti_pembayaran_4 = $vendorInvoiceDto->getBuktiPembayaran4();
             $newVendorInvoice->status_pembayaran_4 = $vendorInvoiceDto->getStatusPembayaran4();
-            $newVendorInvoice->status_pembayaran = $vendorInvoiceDto->getStatusPembayaran();
+            $newVendorInvoice->status_pembayaran = $vendorInvoiceDto->getStatusPembayaranKeseluruhan();
 
             // Foreign Key
             // Vendor

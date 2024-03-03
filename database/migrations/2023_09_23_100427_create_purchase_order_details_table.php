@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('harga_beli_satuan');
             $table->bigInteger('harga_jual_satuan');
             $table->double('diskon');
-            $table->string('qr_item_path')->nullable();
+            $table->string('kode_qr_po_detail')->nullable(); // Jika qr tidak bisa di scan
 
             // Foreign Keys
             // Purchase Order

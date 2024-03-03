@@ -6,7 +6,9 @@ class SalesDetailInfoDTO {
     public function __construct(
         private int $id,
         private string $kode_item,
+        private float $diskon,
         private int $harga,
+        private ?int $potongan_manual,
         private int $qty,
         private int $sales_master_id,
         private int $branch_item_id,
@@ -19,7 +21,9 @@ class SalesDetailInfoDTO {
         return [
             'id' => $this->id,
             'kode_item' => $this->kode_item,
+            'diskon' => $this->diskon,
             'harga' => $this->harga,
+            'potongan_manual' => $this->potongan_manual,
             'qty' => $this->qty,
             'sales_master_id' => $this->sales_master_id,
             'branch_item_id' => $this->branch_item_id,
@@ -41,6 +45,16 @@ class SalesDetailInfoDTO {
     public function getHarga(): int
     {
         return $this->harga;
+    }
+
+    public function getPotonganManual(): ?int
+    {
+        return $this->potongan_manual;
+    }
+
+    public function getDiskon(): float
+    {
+        return $this->diskon;
     }
 
     public function getQty(): int
@@ -67,6 +81,7 @@ class SalesDetailInfoDTO {
     {
         return $this->coa_id;
     }
+
 }
 
 ?>

@@ -5,21 +5,34 @@ namespace App\Repositories\Modules\StockOpname;
 use Exception;
 
 use App\DTO\Modules\StockOpnameDTOs\StockOpnameInfoDTO;
+use App\DTO\Modules\StockOpnameDTOs\StockOpnameFilterDTO;
 use App\Models\Modules\StockOpnameMaster;
 
 class GetAllStockOpnameRepository {
     /**
      * Get All Stock Opname
-     * @param int $page
-     * @param int $limit
+     * @param StockOpnameFilterDTO $stockOpnameDTO
      * @return StockOpnameInfoDTO[]
      */
-    public function getAllStockOpname(int $page, int $limit) {
+    public function getAllStockOpname(StockOpnameFilterDTO $stockOpnameDTO) {
         try {
-            $stockOpnames = StockOpnameMaster::orderBy('tanggal_dibuat', 'desc')
-                ->offset(($page - 1) * $limit)
-                ->limit($limit)
-                ->get();
+            $activeFilter = [];
+
+            $bulanFilter = $stockOpnameDTO->getBulan() ? 'bulan=' . $stockOpnameDTO->getBulan() : null;
+            array_push($activeFilter, $bulanFilter);
+
+            $tahunFilter = $stockOpnameDTO->getTahun() ? 'tahun=' . $stockOpnameDTO->getTahun() : null;
+            array_push($activeFilter, $tahunFilter);
+
+            $activeFilter = array_filter($activeFilter, function ($filter) {
+                return $filter !== null;
+            });
+
+            $activeFilter = implode(' AND ', $activeFilter);
+
+            $stockOpnames = StockOpnameMaster::whereRaw($activeFilter ? $activeFilter : 1)
+                ->orderBy('tanggal_dibuat', 'DESC')
+                ->paginate($stockOpnameDTO->getLimit(), ['*'], 'page', $stockOpnameDTO->getPage());
 
             $stockOpnameInfoDTOs = [];
 

@@ -6,16 +6,41 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Services\Modules\StockOpname\GetStockOpnameService;
 use App\Services\Modules\StockOpname\GetAllStockOpnameService;
 use App\Services\Modules\StockOpname\AddStockOpnameService;
 
 class StockOpnameMasterController extends Controller
 {
     public function __construct(
+        private GetStockOpnameService $getStockOpnameService,
         private GetAllStockOpnameService $getAllStockOpnameService,
         private AddStockOpnameService $addStockOpnameService,
     )
     {}
+
+    /**
+     * Get Stock Opname
+     * @param Request $request
+     *
+     */
+    public function getStockOpname(Request $request) {
+        try {
+            $stockOpnameInfoDTO = $this->getStockOpnameService->getStockOpname($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Get Stock Opname success',
+                'data' => $stockOpnameInfoDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get Stock Opname failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
 
     /**
      * Get all Stock Opname

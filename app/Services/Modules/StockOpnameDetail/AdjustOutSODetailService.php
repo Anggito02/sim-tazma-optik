@@ -9,12 +9,14 @@ use App\DTO\Modules\StockOpnameDetailDTOs\AdjustInfoSODetailDTO;
 
 use App\Services\Modules\ItemOutgoing\AddItemOutgoingService;
 use App\Services\Modules\OutgoingDetail\AddOutgoingDetailService;
+use App\Services\Modules\OutgoingDetail\VerifyOutgoingDetailService;
 
 
 class AdjustOutSODetailService {
     public function __construct(
         private AddItemOutgoingService $addItemOutgoingService,
-        private AddOutgoingDetailService $addOutgoingDetailService
+        private AddOutgoingDetailService $addOutgoingDetailService,
+        private VerifyOutgoingDetailService $verifyOutgoingDetailService
     )
     {}
 
@@ -46,9 +48,17 @@ class AdjustOutSODetailService {
                 'verified_by' => $adjustment_by,
             ]));
 
+            $outgoingVerify = $this->verifyOutgoingDetailService->verifyOutgoingDetail(new Request([
+                'id' => $outgoingDetail->id,
+                'delivered_qty' => $in_out_qty,
+                'item_id' => $item_id,
+                'outgoing_id' => $itemOutgoing->id,
+            ]));
+
             return [
                 'item_outgoing' => $itemOutgoing,
                 'outgoing_detail' => $outgoingDetail,
+                'verify_outgoing_detail' => $outgoingVerify
             ];
 
         } catch (Exception $e) {

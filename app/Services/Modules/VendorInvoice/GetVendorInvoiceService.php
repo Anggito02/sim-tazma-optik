@@ -5,7 +5,7 @@ namespace App\Services\Modules\VendorInvoice;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\DTO\Modules\VendorInvoiceDTO;
+use App\DTO\Modules\VendorInvoiceDTOs\VendorInvoiceInfoDTO;
 
 use App\Repositories\Modules\VendorInvoice\GetVendorInvoiceRepository;
 
@@ -17,13 +17,13 @@ class GetVendorInvoiceService {
     /**
      * Get Vendor Invoice
      * @param Request $request
-     * @return VendorInvoiceDTO
+     * @return VendorInvoiceInfoDTO
      */
     public function getVendorInvoice(Request $request) {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required',
+                'id' => 'exists:vendor_invoices,id|required',
             ]);
 
             $id = $request->id;

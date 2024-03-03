@@ -10,7 +10,6 @@ class EditPurchaseOrderDetailDTO {
         private int $harga_beli_satuan,
         private int $harga_jual_satuan,
         private float $diskon,
-        private int $item_id,
     )
     {}
 
@@ -36,10 +35,6 @@ class EditPurchaseOrderDetailDTO {
 
     public function getDiskon(): float {
         return $this->diskon;
-    }
-
-    public function getItemId(): int {
-        return $this->item_id;
     }
 }
 

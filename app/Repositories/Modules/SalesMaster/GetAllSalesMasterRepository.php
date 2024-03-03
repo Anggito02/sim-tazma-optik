@@ -7,20 +7,31 @@ use Exception;
 use App\Models\Modules\SalesMaster;
 
 use App\DTO\Modules\SalesMasterDTOs\SalesMasterInfoDTO;
+use App\DTO\Modules\SalesMasterDTOs\SalesMasterFilterDTO;
 
 class GetAllSalesMasterRepository {
     /**
      * Get All Sales Master
-     * @param int $page
-     * @param int $limit
-     * @param int $branch_id
+     * @param SalesMasterFilterDTO $salesMasterDTO
      * @return SalesMasterInfoDTO[]
      */
-    public function getAllSalesMaster(int $page, int $limit, int $branch_id) {
+    public function getAllSalesMaster(SalesMasterFilterDTO $salesMasterDTO) {
         try {
-            $branch_filter = $branch_id == 0 || $branch_id == 1 ? "" : "sales_masters.branch_id = $branch_id";
+            $activeFilter = [];
 
-            $salesMasters = SalesMaster::whereRaw($branch_filter)
+            $branch_id_sql = $salesMasterDTO->getBranchId() ? "branches.id = " . $salesMasterDTO->getBranchId() : null;
+            array_push($activeFilter, $branch_id_sql);
+
+            $nomor_transaksi_sql = $salesMasterDTO->getNomorTransaksi() ? "sales_masters.nomor_transaksi = '{$salesMasterDTO->getNomorTransaksi()}'" : null;
+            array_push($activeFilter, $nomor_transaksi_sql);
+
+            $activeFilter = array_filter($activeFilter, function ($filter) {
+                return $filter !== null;
+            });
+
+            $activeFilter = implode(' AND ', $activeFilter);
+
+            $salesMasters = SalesMaster::whereRaw($activeFilter ? $activeFilter : 1)
                 ->join('branches', 'sales_masters.branch_id', '=', 'branches.id')
                 ->join('users', 'sales_masters.employee_id', '=', 'users.id')
                 ->leftJoin('customers', 'sales_masters.customer_id', '=', 'customers.id')
@@ -44,8 +55,12 @@ class GetAllSalesMasterRepository {
                     'sales_masters.customer_id',
                     'customers.nama_depan',
                     'customers.nama_belakang',
+                    'customers.nomor_telepon',
+                    'customers.alamat',
+                    'customers.email'
                 )
-                ->paginate($limit, ['*'], 'page', $page);
+                ->orderBy('sales_masters.id', 'desc')
+                ->paginate($salesMasterDTO->getLimit(), ['*'], 'page', $salesMasterDTO->getPage());
 
             $salesMasterInfoDTOs = [];
             foreach ($salesMasters as $salesMaster) {
@@ -69,6 +84,9 @@ class GetAllSalesMasterRepository {
                     $salesMaster->customer_id,
                     $salesMaster->nama_depan,
                     $salesMaster->nama_belakang,
+                    $salesMaster->nomor_telepon,
+                    $salesMaster->alamat,
+                    $salesMaster->email
                 );
 
                 array_push($salesMasterInfoDTOs, $salesMasterInfoDTO);

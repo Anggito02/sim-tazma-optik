@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 
 use App\DTO\Modules\StockOpnameDTOs\StockOpnameInfoDTO;
+use App\DTO\Modules\StockOpnameDTOs\StockOpnameFilterDTO;
 
 use App\Repositories\Modules\StockOpname\GetAllStockOpnameRepository;
 
@@ -23,13 +24,28 @@ class GetAllStockOpnameService {
         try {
             // Validate request
             $request->validate([
+                'bulan' => 'between:1,12',
+                'tahun' => 'digits:4',
                 'page' => 'required',
                 'limit' => 'required',
             ]);
 
-            $stockOpnameInfoDTO = $this->getAllStockOpnameRepository->getAllStockOpname($request->page, $request->limit);
+            $SOFilter = new StockOpnameFilterDTO(
+                $request->page,
+                $request->limit,
+                $request->bulan,
+                $request->tahun
+            );
 
-            return $stockOpnameInfoDTO;
+            $stockOpnameInfoDTO = $this->getAllStockOpnameRepository->getAllStockOpname($SOFilter);
+
+            $stockOpnameArrays = [];
+
+            foreach ($stockOpnameInfoDTO as $stockOpname) {
+                array_push($stockOpnameArrays, $stockOpname->toArray());
+            }
+
+            return $stockOpnameArrays;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

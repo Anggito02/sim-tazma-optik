@@ -16,7 +16,7 @@ class GetLatestKasRepository {
      */
     public function getLatestKas(int $branch_id) {
         try {
-            $latestKas = Kas::where('branch_id', $branch_id)
+            $latestKas = Kas::where('kas.branch_id', $branch_id)
                 ->join('branches', 'branches.id', '=', 'kas.branch_id')
                 ->join('users', 'users.id', '=', 'kas.employee_id')
                 ->select(
