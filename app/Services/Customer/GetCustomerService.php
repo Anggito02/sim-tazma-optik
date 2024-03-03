@@ -28,7 +28,9 @@ class GetCustomerService {
 
             $customerDTO = $this->customerRepository->getCustomer($request->nomor_telepon);
 
-            return $customerDTO;
+            $customerArray = $customerDTO->toArray();
+
+            return $customerArray;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

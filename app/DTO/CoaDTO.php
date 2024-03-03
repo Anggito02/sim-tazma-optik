@@ -7,7 +7,7 @@ class CoaDTO {
         public ?int $id,
         public string $kode_coa,
         public string $deskripsi,
-        public int $kategori,
+        public string $kategori,
     )
     {}
 
@@ -27,11 +27,11 @@ class CoaDTO {
         $this->deskripsi = $deskripsi;
     }
 
-    public function getKategori(): int {
+    public function getKategori(): string {
         return $this->kategori;
     }
 
-    public function setKategori(int $kategori): void {
+    public function setKategori(string $kategori): void {
         $this->kategori = $kategori;
     }
 }

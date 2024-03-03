@@ -6,6 +6,7 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Services\Modules\StockOpnameDetail\GetStockOpnameDetailService;
 use App\Services\Modules\StockOpnameDetail\GetAllStockOpnameDetailService;
 use App\Services\Modules\StockOpnameDetail\AddStockOpnameDetailService;
 use App\Services\Modules\StockOpnameDetail\EditStockOpnameDetailService;
@@ -16,6 +17,7 @@ class StockOpnameDetailController extends Controller
 {
     // Service Providers Constructs
     public function __construct(
+        private GetStockOpnameDetailService $getStockOpnameDetailService,
         private GetAllStockOpnameDetailService $getAllStockOpnameDetailService,
         private AddStockOpnameDetailService $addStockOpnameDetailService,
         private EditStockOpnameDetailService $editStockOpnameDetailService,
@@ -23,6 +25,26 @@ class StockOpnameDetailController extends Controller
         private MakeAdjustmentSODetailService $makeAdjustmentSODetailService,
     )
     {}
+
+    /**
+     * Get Stock Opname Detail
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getStockOpnameDetail(Request $request) {
+        try {
+            $stockOpnameDetailInfoDTO = $this->getStockOpnameDetailService->getStockOpnameDetail($request);
+
+            return response()->json([
+                'message' => 'Success',
+                'data' => $stockOpnameDetailInfoDTO,
+            ]);
+        } catch (Exception $error) {
+            return response()->json([
+                'message' => $error->getMessage(),
+            ], 500);
+        }
+    }
 
     /**
      * Get All Stock Opname Detail

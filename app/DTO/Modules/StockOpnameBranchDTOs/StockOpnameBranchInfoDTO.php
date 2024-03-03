@@ -4,14 +4,26 @@ namespace App\DTO\Modules\StockOpnameBranchDTOs;
 
 class StockOpnameBranchInfoDTO {
     public function __construct(
-        public int $id,
-        public string $tanggal_dibuat,
-        public string $bulan,
-        public string $tahun,
+        private int $id,
+        private string $tanggal_dibuat,
+        private string $bulan,
+        private string $tahun,
 
-        public int $branch_id,
+        private int $branch_id,
+        private string $nama_branch
     )
     {}
+
+    public function toArray(): array {
+        return [
+            'id' => $this->id,
+            'tanggal_dibuat' => $this->tanggal_dibuat,
+            'bulan' => $this->bulan,
+            'tahun' => $this->tahun,
+            'branch_id' => $this->branch_id,
+            'nama_branch' => $this->nama_branch
+        ];
+    }
 
     public function getId(): int {
         return $this->id;
@@ -31,6 +43,10 @@ class StockOpnameBranchInfoDTO {
 
     public function getBranchId(): int {
         return $this->branch_id;
+    }
+
+    public function getNamaBranch(): string {
+        return $this->nama_branch;
     }
 }
 

@@ -66,6 +66,7 @@ class GetAllPORepository {
                     'checked_by.employee_name as checked_by_name',
                     'approved_by.employee_name as approved_by_name'
                 )
+                ->orderby('tanggal_dibuat', 'desc')
                 ->paginate($poFilter->getLimit(), ['*'], 'page', $poFilter->getPage());
 
             $poDTOs = [];

@@ -27,12 +27,14 @@ class GetAllSalesDetailRepository {
                 $salesDetailInfoDTO = new SalesDetailInfoDTO(
                     $salesDetail->id,
                     $salesDetail->kode_item,
+                    $salesDetail->diskon,
                     $salesDetail->harga,
+                    $salesDetail->potongan_manual,
                     $salesDetail->qty,
                     $salesDetail->sales_master_id,
                     $salesDetail->branch_item_id,
                     $salesDetail->po_detail_id,
-                    $salesDetail->coa_id,
+                    $salesDetail->coa_id
                 );
 
                 array_push($salesDetailInfoDTOs, $salesDetailInfoDTO);

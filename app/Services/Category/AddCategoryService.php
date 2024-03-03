@@ -24,7 +24,7 @@ class AddCategoryService {
         try {
             // Validate request
             $request->validate([
-                'nama_kategori' => 'required|unique:_categories,nama_kategori',
+                'nama_kategori' => 'required|unique:categories,nama_kategori',
             ]);
 
             $CategoryDTO = new CategoryDTO(

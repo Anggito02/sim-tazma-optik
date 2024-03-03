@@ -5,9 +5,9 @@ namespace App\Services\Modules\SalesMaster;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\Repositories\Modules\SalesMaster\GetAllSalesMasterRepository;
+use App\DTO\Modules\SalesMasterDTOs\SalesMasterFilterDTO;
 
-use App\DTO\Modules\SalesMasterDTOs\SalesMasterInfoDTO;
+use App\Repositories\Modules\SalesMaster\GetAllSalesMasterRepository;
 
 class GetAllSalesMasterService {
     public function __construct(
@@ -26,14 +26,18 @@ class GetAllSalesMasterService {
             $request->validate([
                 'page' => 'required|integer',
                 'limit' => 'required|integer',
-                'branch_id' => 'required|integer',
+                'branch_id' => 'nullable|integer',
+                'nomor_transaksi' => 'exists:sales_masters,nomor_transaksi',
             ]);
 
-            $page = $request->page;
-            $limit = $request->limit;
-            $branch_id = $request->branch_id;
+            $salesMasterDTO = new SalesMasterFilterDTO(
+                $request->page,
+                $request->limit,
+                $request->branch_id,
+                $request->nomor_transaksi
+            );
 
-            $salesMasterInfoDTOs = $this->getAllSalesMasterRepository->getAllSalesMaster($page, $limit, $branch_id);
+            $salesMasterInfoDTOs = $this->getAllSalesMasterRepository->getAllSalesMaster($salesMasterDTO);
 
             $salesMasterInfoArrays = [];
 

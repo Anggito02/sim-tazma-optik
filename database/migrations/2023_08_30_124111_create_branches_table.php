@@ -17,10 +17,6 @@ return new class extends Migration
             $table->string('nama_branch');
             $table->string('alamat');
 
-            // Foreign Keys
-            // User
-            $table->foreignId('employee_id_pic_branch')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-
             $table->timestamps();
         });
     }

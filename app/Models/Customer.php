@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Modules\CustomerDiagnose;
+use App\Models\Modules\SalesMaster;
 
 class Customer extends Model
 {
@@ -19,10 +21,14 @@ class Customer extends Model
         'usia',
         'tanggal_lahir',
         'gender',
+        'deleteable',
 
         // Foreign Key
         // Branch
         'branch_id',
+
+        // KabKota
+        'kabkota_id',
     ];
 
     // Branch

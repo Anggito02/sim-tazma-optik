@@ -23,7 +23,6 @@ class UserSeeder extends Seeder {
             'section' => 'Software Engineer',
             'position' => 'Head of Software Engineer',
             'role' => 'administrator',
-            'plant' => 'Jakarta',
             'status' => true,
             'group' => 'IT',
             'domicile' => 'Jakarta'
@@ -44,7 +43,6 @@ class UserSeeder extends Seeder {
             'section' => 'Software Engineer',
             'position' => 'Senior Staff of Software Engineer',
             'role' => 'user',
-            'plant' => 'Jakarta',
             'status' => true,
             'group' => 'IT',
             'domicile' => 'Jakarta'
@@ -65,7 +63,6 @@ class UserSeeder extends Seeder {
             'section' => 'Software Engineer',
             'position' => 'Staff of Software Engineer',
             'role' => 'administrator',
-            'plant' => 'Jakarta',
             'status' => true,
             'group' => 'IT',
             'domicile' => 'Jakarta'
@@ -86,7 +83,6 @@ class UserSeeder extends Seeder {
             'section' => 'Software Engineer',
             'position' => 'Staff of Software Engineer',
             'role' => 'administrator',
-            'plant' => 'Jakarta',
             'status' => true,
             'group' => 'IT',
             'domicile' => 'Jakarta'
@@ -107,7 +103,6 @@ class UserSeeder extends Seeder {
             'section' => 'Software Engineer',
             'position' => 'Staff of Software Engineer',
             'role' => 'administrator',
-            'plant' => 'Jakarta',
             'status' => true,
             'group' => 'IT',
             'domicile' => 'Jakarta'

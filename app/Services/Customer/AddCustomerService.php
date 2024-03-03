@@ -26,12 +26,12 @@ class AddCustomerService {
                 'nama_depan' => 'required|min:3|max:50',
                 'nama_belakang' => 'required|min:3|max:50',
                 'email' => 'required|email:dns',
-                'nomor_telepon' => 'required|unique:customers,nomor_telepon|min:10|max:20',
+                'nomor_telepon' => 'required|unique:customers,nomor_telepon|digits_between:8,13',
                 'alamat' => 'required|min:3|max:100',
-                'kota' => 'required|min:3|max:50',
                 'tanggal_lahir' => 'required',
                 'gender' => 'required|in:laki-laki,perempuan',
                 'branch_id' => 'required|exists:branches,id',
+                'kabkota_id' => 'exists:ref_kabkota,ID_KK'
             ]);
 
             $newCustomerDTO = new NewCustomerDTO(
@@ -40,11 +40,11 @@ class AddCustomerService {
                 $request->email,
                 $request->nomor_telepon,
                 $request->alamat,
-                $request->kota,
-                date('Y') - date('Y', strtotime($request->tanggal_lahir)),
+                floor(abs(strtotime(date('Y-m-d'))-strtotime($request->tanggal_lahir))/(60*60*24*365)),
                 $request->tanggal_lahir,
                 $request->gender,
                 $request->branch_id,
+                $request->kabkota_id
             );
 
             $customerDTO = $this->customerRepository->addCustomer($newCustomerDTO);

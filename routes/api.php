@@ -13,6 +13,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CoaController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\KabKotaController;
 
 use App\Http\Controllers\Modules\ItemController;
 use App\Http\Controllers\Modules\PurchaseOrderController;
@@ -126,10 +127,14 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::get('/customer/one', [CustomerController::class, 'getCustomer'])->name('getCustomer');
     Route::get('/customer/all', [CustomerController::class, 'getAllCustomer'])->name('getAllCustomer');
     Route::post('/customer/add', [CustomerController::class, 'addCustomer'])->name('addCustomer');
-    Route::delete('/customer/delete', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
     Route::put('/customer/edit', [CustomerController::class, 'editCustomer'])->name('editCustomer');
+    Route::delete('/customer/delete', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
+
+    /* Kabkota Controllers */
+    Route::get('/kabkota/all', [KabkotaController::class, 'getAllKabkota'])->name('getKabkota');
 
     /* Item Controllers */
+    Route::get('/item/one/qr', [ItemController::class, 'getItemByQr'])->name('getItemByQr');
     Route::get('/item/one', [ItemController::class, 'getItem'])->name('getItem');
     Route::get('/item/filtered', [ItemController::class, 'getItemFiltered'])->name('getItemFiltered');
     Route::get('/item/qr', [ItemController::class, 'getQRItem'])->name('getQRItem');
@@ -157,7 +162,6 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Purchase Order Detail Controllers */
     Route::get('/purchase-order-detail/one', [PurchaseOrderDetailController::class, 'getPODetail'])->name('getPODetail');
     Route::get('/purchase-order-detail/all', [PurchaseOrderDetailController::class, 'getAllPODetail'])->name('getAllPODetail');
-    Route::get('purchase-order-detail/qr', [PurchaseOrderDetailController::class, 'getPODetailQR'])->name('getPODetailQR');
     Route::post('/purchase-order-detail/add', [PurchaseOrderDetailController::class, 'addPODetail'])->name('addPODetail');
     Route::delete('/purchase-order-detail/delete', [PurchaseOrderDetailController::class, 'deletePODetail'])->name('deletePODetail');
     Route::put('/purchase-order-detail/edit', [PurchaseOrderDetailController::class, 'editPODetail'])->name('editPODetail');
@@ -190,10 +194,12 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/outgoing-detail/verify', [OutgoingDetailController::class, 'verifyOutgoingDetail'])->name('verifyOutgoingDetail');
 
     /* Stock Opname Master Controllers */
+    Route::get('/stock-opname-master/one', [StockOpnameMasterController::class, 'getStockOpname'])->name('getStockOpname');
     Route::get('/stock-opname-master/all', [StockOpnameMasterController::class, 'getAllStockOpname'])->name('getAllStockOpname');
     Route::post('/stock-opname-master/add', [StockOpnameMasterController::class, 'addStockOpname'])->name('addStockOpname');
 
     /* Stock Opname Detail Controllers */
+    Route::get('/stock-opname-detail/one', [StockOpnameDetailController::class, 'getStockOpnameDetail'])->name('getStockOpnameDetail');
     Route::get('/stock-opname-detail/all', [StockOpnameDetailController::class, 'getAllStockOpnameDetail'])->name('getAllStockOpnameDetail');
     Route::post('/stock-opname-detail/add', [StockOpnameDetailController::class, 'addStockOpnameDetail'])->name('addStockOpnameDetail');
     Route::put('/stock-opname-detail/edit', [StockOpnameDetailController::class, 'editStockOpnameDetail'])->name('editStockOpnameDetail');
@@ -201,10 +207,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/stock-opname-detail/make-adjustment', [StockOpnameDetailController::class, 'makeAdjustmentSODetail'])->name('makeAdjustmentSODetail');
 
     /* Stock Opname Branch Controllers */
+    Route::get('/stock-opname-branch/one', [StockOpnameBranchController::class, 'getStockOpnameBranch'])->name('getStockOpnameBranch');
     Route::get('/stock-opname-branch/all', [StockOpnameBranchController::class, 'getAllStockOpnameBranch'])->name('getAllStockOpnameBranch');
     Route::post('/stock-opname-branch/add', [StockOpnameBranchController::class, 'addStockOpnameBranch'])->name('addStockOpnameBranch');
 
     /* Stock Opname Branch Detail Controllers */
+    Route::get('/stock-opname-branch-detail/one', [StockOpnameBranchDetailController::class, 'getStockOpnameBranchDetail'])->name('getStockOpnameBranchDetail');
+    Route::get('/stock-opname-branch-detail/all', [StockOpnameBranchDetailController::class, 'getAllStockOpnameBranchDetail'])->name('getAllStockOpnameBranchDetail');
     Route::post('/stock-opname-branch-detail/add', [StockOpnameBranchDetailController::class, 'addStockOpnameBranchDetail'])->name('addStockOpnameBranchDetail');
     Route::put('/stock-opname-branch-detail/edit', [StockOpnameBranchDetailController::class, 'editStockOpnameBranchDetail'])->name('editStockOpnameBranchDetail');
     Route::put('/stock-opname-branch-detail/init-adjustment', [StockOpnameBranchDetailController::class, 'adjustStockOpnameBranchDetail'])->name('adjustStockOpnameBranchDetail');
@@ -214,10 +223,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::post('/customer-diagnose/add', [CustomerDiagnoseController::class, 'addCustomerDiagnose'])->name('addCustomerDiagnose');
 
     /* Sales Master Controllers */
+    Route::get('/sales-master/one/id', [SalesMasterController::class, 'getSalesMasterById'])->name('getSalesMasterById');
+    Route::get('/sales-master/one/no-transaksi', [SalesMasterController::class, 'getSalesMasterByNoTransaksi'])->name('getSalesMasterByNoTransaksi');
     Route::get('/sales-master/all', [SalesMasterController::class, 'getAllSalesMaster'])->name('getAllSalesMaster');
     Route::post('/sales-master/add', [SalesMasterController::class, 'addSalesMaster'])->name('addSalesMaster');
     Route::put('/sales-master/edit', [SalesMasterController::class, 'updateSalesMaster'])->name('updateSalesMaster');
     Route::put('/sales-master/verify', [SalesMasterController::class, 'verifySalesMaster'])->name('verifySalesMaster');
+    Route::get('/sales-master/kas-in/all', [SalesMasterController::class, 'getAllSalesMasterKasIn'])->name('getAllSalesMasterKasIn');
 
     /* Sales Detail Controllers */
     Route::get('/sales-detail/all', [SalesDetailController::class, 'getAllSalesDetail'])->name('getAllSalesDetail');
@@ -228,6 +240,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     /* Kas Controllers */
     Route::get('/kas/all', [KasController::class, 'getAllKas'])->name('getAllKas');
     Route::post('/kas/add', [KasController::class, 'addNewDailyKas'])->name('addNewDailyKas');
+    Route::post('/kas/exist', [KasController::class, 'checkKasIfExist'])->name('checkKasIfExist');
 
     /* Pengeluaran Controllers */
     Route::get('/pengeluaran/all', [PengeluaranController::class, 'getAllPengeluaran'])->name('getAllPengeluaran');

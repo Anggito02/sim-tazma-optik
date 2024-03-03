@@ -5,7 +5,6 @@ namespace App\Repositories\Customer;
 use Exception;
 
 use App\Models\Customer;
-use App\Models\Branch;
 
 use App\DTO\Customer\CustomerInfoDTO;
 
@@ -17,11 +16,17 @@ class GetCustomerRepository {
      */
     public function getCustomer(string $nomorTelepon) {
         try {
-            $customer = Customer::where('nomor_telepon', $nomorTelepon)->firstOrFail();
+            $customer = Customer::where('nomor_telepon', $nomorTelepon)
+                ->join('branches', 'customers.branch_id', '=', 'branches.id')
+                ->join('ref_kabkota', 'customers.kabkota_id', '=', 'ref_kabkota.ID_KK')
+                ->select(
+                    'customers.*',
+                    'branches.nama_branch',
+                    'ref_kabkota.nama_kabkota'
+                )
+                ->firstOrFail();
 
-            $customer->branch_nama = Branch::where('id', $customer->branch_id)->first()->nama_branch;
-
-            if (!$customer) return $customer;
+            if (!$customer) throw new Exception('Data customer tidak ditemukan');
 
             $customerInfoDTO = new CustomerInfoDTO(
                 $customer->id,
@@ -30,12 +35,14 @@ class GetCustomerRepository {
                 $customer->email,
                 $customer->nomor_telepon,
                 $customer->alamat,
-                $customer->kota,
                 $customer->usia,
                 $customer->tanggal_lahir,
                 $customer->gender,
+                $customer->deleteable,
                 $customer->branch_id,
-                $customer->branch_nama,
+                $customer->nama_branch,
+                $customer->kabkota_id,
+                $customer->nama_kabkota
             );
 
             return $customerInfoDTO;

@@ -47,7 +47,7 @@ class AddPengeluaranService {
             }
 
             // Tarik modal dari kas
-            if ($request->bentuk_pengeluaran == 'TARIK_MODAL') {
+            if ($request->bentuk_pengeluaran == 'TARIK_MODAL' || $request->bentuk_pengeluaran == 'LAINNYA') {
                 $this->updateKasTotalRepository->updateKasTotal(
                     $request->branch_id,
                     date('Y-m-d H:i:s'),

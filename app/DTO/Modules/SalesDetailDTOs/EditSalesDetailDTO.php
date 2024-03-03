@@ -6,6 +6,7 @@ class EditSalesDetailDTO {
     public function __construct(
         private int $id,
         private int $qty,
+        private ?int $potongan_manual
     )
     {}
 
@@ -13,6 +14,7 @@ class EditSalesDetailDTO {
         return [
             'id' => $this->id,
             'qty' => $this->qty,
+            'potongan_manual' => $this->potongan_manual
         ];
     }
 
@@ -24,6 +26,11 @@ class EditSalesDetailDTO {
     public function getQty(): int
     {
         return $this->qty;
+    }
+
+    public function getPotonganManual(): ?int
+    {
+        return $this->potongan_manual;
     }
 }
 

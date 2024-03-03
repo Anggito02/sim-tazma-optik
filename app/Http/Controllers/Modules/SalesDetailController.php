@@ -33,12 +33,12 @@ class SalesDetailController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesDetailInfoArrays,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -54,12 +54,12 @@ class SalesDetailController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesDetailDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -75,12 +75,12 @@ class SalesDetailController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesDetailDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -96,12 +96,12 @@ class SalesDetailController extends Controller
             return response()->json([
                 'status' => 'success',
                 'data' => $salesDetailDTO,
-            ]);
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 }

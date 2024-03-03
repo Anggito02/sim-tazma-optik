@@ -19,7 +19,7 @@ use App\Repositories\Modules\Item\StockIn\CheckStockInRepository;
 use App\Repositories\Modules\Item\StockIn\AddStockInProcedureRepository;
 use App\Repositories\Modules\Item\StockIn\UpdateStockInProcedureRepository;
 
-use App\Services\Modules\PurchaseOrderDetail\MakePODetailQRService;
+use App\Repositories\Modules\Item\UpdateItemDeleteableRepository;
 
 class UpdateStockPODetailService {
     public function __construct(
@@ -33,7 +33,7 @@ class UpdateStockPODetailService {
         private AddStockInProcedureRepository $addStockInProcedureRepository,
         private UpdateStockInProcedureRepository $updateStockInProcedureRepository,
 
-        private MakePODetailQRService $makePODetailQRService,
+        private UpdateItemDeleteableRepository $updateItemDeleteableRepository
     ) {}
 
     /**
@@ -96,6 +96,9 @@ class UpdateStockPODetailService {
 
             $updatedItemDTO = $this->editItemRepository->editItem($updatedItemDTO);
 
+            // Edit item deleteable
+            $this->updateItemDeleteableRepository->updateItemDeleteable($request->item_id, FALSE);
+
             if ($this->checkStockInRepository->checkStockInExistence($updatedItemDTO->id, date('m'), date('Y'))) {
                 // update stok in
                 $this->updateStockInProcedureRepository->updateStockInProcedure(
@@ -116,18 +119,14 @@ class UpdateStockPODetailService {
                 );
             }
 
-            // Make PO Detail QR for item
-            $po_detail_qr_item_path = $this->makePODetailQRService->makePODetailQR(new PurchaseOrderDetailQRInfoDTO(
-                $request->purchase_order_id,
-                $itemDTO->getId(),
-                $itemDTO->getKodeItem()
-            ));
+            // Make Kode QR PO
+            $kode_qr_po_detail = (string)rand(100, 999) . $request->item_id . '-' . $request->id;
 
             $poDetailDTO = new UpdateStockPODetailDTO(
                 $request->id,
                 $request->received_qty,
                 $request->not_good_qty,
-                $po_detail_qr_item_path,
+                $kode_qr_po_detail,
                 $request->item_id,
                 $request->purchase_order_id,
                 $request->receive_order_id,

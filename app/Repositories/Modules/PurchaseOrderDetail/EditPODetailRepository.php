@@ -23,8 +23,6 @@ class EditPODetailRepository {
             $poDetail->harga_jual_satuan = $poDetailDto->getHargaJualSatuan();
             $poDetail->diskon = $poDetailDto->getDiskon();
 
-            $poDetail->item_id = $poDetailDto->getItemId();
-
             $poDetail->save();
 
             return $poDetail;
