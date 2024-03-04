@@ -23,10 +23,10 @@ class GetStockOpnameBranchDetailService {
         try {
             // Validate request
             $request->validate([
-                'stock_opname_branch_detail_id' => 'required|exists:stock_opname_details,id',
+                'stock_opname_branch_detail_id' => 'required|exists:stock_opname_branch_details,id',
             ]);
 
-            $stockOpnameBranchDetailInfoDTO = $this->getStockOpnameBranchDetailRepository->getStockOpnameBranchDetail($request->stock_opname_detail_id);
+            $stockOpnameBranchDetailInfoDTO = $this->getStockOpnameBranchDetailRepository->getStockOpnameBranchDetail($request->stock_opname_branch_detail_id);
 
             $stockOpnameBranchDetailInfo = $stockOpnameBranchDetailInfoDTO->toArray();
 

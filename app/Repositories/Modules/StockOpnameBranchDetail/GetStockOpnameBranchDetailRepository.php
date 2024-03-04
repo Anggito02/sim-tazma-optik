@@ -16,14 +16,14 @@ class GetStockOpnameBranchDetailRepository {
      */
     public function getStockOpnameBranchDetail(int $stockOpnameBranchId) {
         try {
-            $stockOpnameBranchDetailInfo = StockOpnameBranchDetail::whereRaw('stock_opname_id = ' . $stockOpnameBranchId)
+            $stockOpnameBranchDetailInfo = StockOpnameBranchDetail::whereRaw('stock_opname_branch_details.id = ' . $stockOpnameBranchId)
                 ->join('branches', 'stock_opname_branch_details.branch_id', '=', 'branches.id')
-                ->join('items', 'stock_opname_details.item_id', '=', 'items.id')
-                ->join('users as open_by', 'stock_opname_details.open_by', '=', 'open_by.id')
-                ->join('users as close_by', 'stock_opname_details.close_by', '=', 'close_by.id')
-                ->leftJoin('users as adjustment_by', 'stock_opname_details.adjustment_by', '=', 'adjustment_by.id')
+                ->join('items', 'stock_opname_branch_details.item_id', '=', 'items.id')
+                ->join('users as open_by', 'stock_opname_branch_details.open_by', '=', 'open_by.id')
+                ->join('users as close_by', 'stock_opname_branch_details.close_by', '=', 'close_by.id')
+                ->leftJoin('users as adjustment_by', 'stock_opname_branch_details.adjustment_by', '=', 'adjustment_by.id')
                 ->select(
-                    'stock_opname_details.*',
+                    'stock_opname_branch_details.*',
                     'items.kode_item as kode_item',
                     'items.jenis_item as jenis_item',
                     'open_by.employee_name as open_by_name',
@@ -31,7 +31,7 @@ class GetStockOpnameBranchDetailRepository {
                     'adjustment_by.employee_name as adjustment_by_name',
                     'branches.nama_branch as nama_branch'
                 )
-                ->get();
+                ->first();
 
 
             $so_start = date_create($stockOpnameBranchDetailInfo->so_start);
@@ -55,15 +55,15 @@ class GetStockOpnameBranchDetailRepository {
                 $stockOpnameBranchDetailInfo->adjustment_followup_note,
                 $stockOpnameBranchDetailInfo->adjustment_by,
                 $stockOpnameBranchDetailInfo->adjustment_by_name,
+                $stockOpnameBranchDetailInfo->branch_id,
+                $stockOpnameBranchDetailInfo->nama_branch,
                 $stockOpnameBranchDetailInfo->item_id,
                 $stockOpnameBranchDetailInfo->kode_item,
                 $stockOpnameBranchDetailInfo->jenis_item,
                 $stockOpnameBranchDetailInfo->open_by,
                 $stockOpnameBranchDetailInfo->open_by_name,
                 $stockOpnameBranchDetailInfo->close_by,
-                $stockOpnameBranchDetailInfo->close_by_name,
-                $stockOpnameBranchDetailInfo->branch_id,
-                $stockOpnameBranchDetailInfo->nama_branch
+                $stockOpnameBranchDetailInfo->close_by_name
             );
 
             return $stockOpnameBranchDetailInfoDTO;
