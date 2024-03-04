@@ -13,7 +13,7 @@ class UpdateStatusSOBranchDetailRepository {
      * @param string $is_open
      * @return StockOpnameDetail
      */
-    public function updateSODetailAdjustment(int $so_detail_id, bool $is_open) {
+    public function updateSODetailAdjustmentStatus(int $so_detail_id, bool $is_open) {
         try {
             $stockOpnameDetail = StockOpnameDetail::find($so_detail_id);
 
