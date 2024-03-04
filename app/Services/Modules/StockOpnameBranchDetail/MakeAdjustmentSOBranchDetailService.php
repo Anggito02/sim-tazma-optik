@@ -34,6 +34,7 @@ class MakeAdjustmentSOBranchDetailService {
         try {
             // Validate request
             $request->validate([
+                'so_branch_detail_id' => 'required|exists:stock_opname_branch_details,id',
                 'adjustment_type' => 'required|in:IN,OUT',
                 'adjustment_by' => 'required|exists:users,id',
 
@@ -59,7 +60,7 @@ class MakeAdjustmentSOBranchDetailService {
                 $adjustmentResult = $this->adjustOutSOBranchDetailService->makeAdjustmentSOBranchDetail($adjustStockOpnameBranchDetailDTO);
             }
 
-            $this->updateStatusSOBranchDetailRepository->updateSODetailAdjustmentStatus($adjustmentResult, false);
+            $this->updateStatusSOBranchDetailRepository->updateSODetailAdjustmentStatus($request->so_branch_detail_id, false);
 
             return $adjustmentResult;
         } catch (Exception $error) {
