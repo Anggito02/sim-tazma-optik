@@ -25,12 +25,14 @@ class GetAllBranchItemRepository {
             $jenis_item_sql = $branchItemFilter->getJenisItem() ? 'jenis_item = "'.$branchItemFilter->getJenisItem().'"' : null;
             array_push($activeFilter, $jenis_item_sql);
 
-            if ($activeFilter != []) {
-                $activeFilter = implode(' AND ', $activeFilter);
-            }
+            $activeFilter = array_filter($activeFilter, function ($filter) {
+                return $filter != null;
+            });
+
+            $activeFilter = implode(' AND ', $activeFilter);
 
             // use pagination
-            $branchItems = BranchItem::whereRaw($activeFilter ? "($activeFilter)" : null)
+            $branchItems = BranchItem::whereRaw($activeFilter ? $activeFilter : 1)
                 ->join('items', 'branch_items.item_id', '=', 'items.id')
                 ->join('branches', 'branch_items.branch_id', '=', 'branches.id')->select('branch_items.*', 'items.jenis_item as jenis_item', 'items.kode_item as kode_item', 'items.stok as stok_global', 'branches.kode_branch as kode_branch', 'branches.nama_branch as nama_branch')->paginate($branchItemFilter->getLimit(), ['*'], 'page', $branchItemFilter->getPage());
 
