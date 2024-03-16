@@ -19,13 +19,15 @@ class GetAllBranchItemRepository {
             // Check if filter is active
             $activeFilter = [];
 
-            $branch_id_sql = $branchItemFilter->getBranchId() ? "branch_id = ".$branchItemFilter->getBranchId()."" : null;
+            $branch_id_sql = $branchItemFilter->getBranchId() ? "branch_id = ".$branchItemFilter->getBranchId() : null;
             array_push($activeFilter, $branch_id_sql);
 
-            $jenis_item_sql = $branchItemFilter->getJenisItem() ? "jenis_item = '".$branchItemFilter->getJenisItem()."'" : null;
+            $jenis_item_sql = $branchItemFilter->getJenisItem() ? 'jenis_item = "'.$branchItemFilter->getJenisItem().'"' : null;
             array_push($activeFilter, $jenis_item_sql);
 
-            $activeFilter = implode(" AND ", $activeFilter);
+            if ($activeFilter != []) {
+                $activeFilter = implode(' AND ', $activeFilter);
+            }
 
             // use pagination
             $branchItems = BranchItem::whereRaw($activeFilter)
