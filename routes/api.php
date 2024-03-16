@@ -175,6 +175,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/vendor-invoice/edit', [VendorInvoiceController::class, 'editVendorInvoice'])->name('editVendorInvoice');
 
     /* Branch Item Controllers */
+    Route::get('/branch-item/one', [BranchItemController::class, 'getBranchItem'])->name('getBranchItem');
     Route::get('/branch-item/all', [BranchItemController::class, 'getAllBranchItem'])->name('getAllBranchItem');
     Route::post('/branch-item/add', [BranchItemController::class, 'addBranchItem'])->name('addBranchItem');
     Route::put('/branch-item/update-stok', [BranchItemController::class, 'updateBranchStok'])->name('updateBranchStok');

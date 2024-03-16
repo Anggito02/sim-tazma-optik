@@ -6,6 +6,7 @@ use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Services\Modules\BranchItem\GetBranchItemService;
 use App\Services\Modules\BranchItem\GetAllBranchItemService;
 use App\Services\Modules\BranchItem\AddBranchItemService;
 use App\Services\Modules\BranchItem\UpdateBranchStokService;
@@ -14,10 +15,34 @@ class BranchItemController extends Controller
 {
     // Service Providers Constructs
     public function __construct(
+        private GetBranchItemService $getBranchItemService,
         private GetAllBranchItemService $getAllBranchItemService,
         private AddBranchItemService $addBranchItemService,
         private UpdateBranchStokService $updateBranchStokService
     ) {}
+
+    /**
+     * Get branch item
+     * @param Request $request
+     * @return BranchItemInfoDTO
+     */
+    public function getBranchItem(Request $request) {
+        try {
+            $branchItemDTO = $this->getBranchItemService->getBranchItem($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Get branch item success',
+                'data' => $branchItemDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Get branch item failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
 
     /**
      * Get all branch item
