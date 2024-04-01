@@ -23,6 +23,7 @@ use App\Http\Controllers\Modules\VendorInvoiceController;
 use App\Http\Controllers\Modules\BranchItemController;
 use App\Http\Controllers\Modules\ItemOutgoingController;
 use App\Http\Controllers\Modules\OutgoingDetailController;
+use App\Http\Controllers\Modules\BranchOutgoingController;
 use App\Http\Controllers\Modules\StockOpnameMasterController;
 use App\Http\Controllers\Modules\StockOpnameDetailController;
 use App\Http\Controllers\Modules\StockOpnameBranchController;
@@ -193,6 +194,13 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/outgoing-detail/edit', [OutgoingDetailController::class, 'editOutgoingDetail'])->name('editOutgoingDetail');
     Route::delete('/outgoing-delete/delete', [OutgoingDetailController::class, 'deleteOutgoingDetail'])->name('deleteOutgoingDetail');
     Route::put('/outgoing-detail/verify', [OutgoingDetailController::class, 'verifyOutgoingDetail'])->name('verifyOutgoingDetail');
+
+    /* Branch Outgoing Controllers */
+    Route::get('/branch-outgoing/one', [BranchOutgoingController::class, 'getBranchOutgoing'])->name('getBranchOutgoing');
+    Route::get('/branch-outgoing/all', [BranchOutgoingController::class, 'getAllBranchOutgoing'])->name('getAllBranchOutgoing');
+    Route::post('/branch-outgoing/add', [BranchOutgoingController::class, 'addBranchOutgoing'])->name('addBranchOutgoing');
+    Route::put('/branch-outgoing/edit', [BranchOutgoingController::class, 'editBranchOutgoing'])->name('editBranchOutgoing');
+    Route::delete('/branch-outgoing/delete', [BranchOutgoingController::class, 'deleteBranchOutgoing'])->name('deleteBranchOutgoing');
 
     /* Stock Opname Master Controllers */
     Route::get('/stock-opname-master/one', [StockOpnameMasterController::class, 'getStockOpname'])->name('getStockOpname');
