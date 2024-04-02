@@ -26,7 +26,8 @@ class StockLogProcedureRepository {
         string $bentuk_perubahan,
         int $item_id,
         ?int $receive_order_id,
-        ?int $outgoing_id
+        ?int $outgoing_id,
+        ?int $retur_id
         ) {
         try {
             if ($receive_order_id == null) {
@@ -45,7 +46,8 @@ class StockLogProcedureRepository {
                 '$bentuk_perubahan',
                 $item_id,
                 $receive_order_id,
-                $outgoing_id
+                $outgoing_id,
+                $retur_id
             )";
             DB::statement($sqlStatement);
 

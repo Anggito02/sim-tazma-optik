@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services\Modules\OutgoingDetail;
+namespace App\Services\Modules\ReturDetail;
 
 use App\DTO\ItemDTOs\UpdateItemDTO;
 use Exception;
 use Illuminate\Http\Request;
 
-use App\Repositories\Modules\OutgoingDetail\VerifyOutgoingDetailRepository;
+use App\Repositories\Modules\ReturDetail\VerifyReturDetailRepository;
 
 use App\Repositories\Modules\Item\GetItemRepository;
 use App\Repositories\Modules\Item\EditItemRepository;
@@ -16,16 +16,16 @@ use App\Repositories\Modules\Item\StockOut\CheckStockOutRepository;
 use App\Repositories\Modules\Item\StockOut\AddStockOutProcedureRepository;
 use App\Repositories\Modules\Item\StockOut\UpdateStockOutProcedureRepository;
 
-use App\Repositories\Modules\ItemOutgoing\GetItemOutgoingRepository;
+use App\Repositories\Modules\Retur\GetReturRepository;
 
 use App\Repositories\Modules\BranchItem\CheckBranchItemExistenceRepository;
 
 use App\Services\Modules\BranchItem\AddBranchItemService;
 use App\Services\Modules\BranchItem\UpdateBranchStokService;
 
-class VerifyOutgoingDetailService {
+class VerifyReturDetailService {
     public function __construct(
-        private VerifyOutgoingDetailRepository $outgoingDetailRepository,
+        private VerifyReturDetailRepository $returDetailRepository,
 
         private GetItemRepository $getItemRepository,
         private EditItemRepository $editItemRepository,
@@ -34,7 +34,7 @@ class VerifyOutgoingDetailService {
         private AddStockOutProcedureRepository $addStockOutProcedureRepository,
         private UpdateStockOutProcedureRepository $updateStockOutProcedureRepository,
 
-        private GetItemOutgoingRepository $getItemOutgoingRepository,
+        private GetReturRepository $getReturRepository,
         private CheckBranchItemExistenceRepository $checkBranchItemExistenceRepository,
 
         private AddBranchItemService $addBranchItemService,
@@ -43,25 +43,35 @@ class VerifyOutgoingDetailService {
     {}
 
     /**
-     * Verify outgoing detail
+     * Verify retur detail
      * @param Request $request
-     * @return OutgoingDetailInfoDTO
+     * @return ReturDetailInfoDTO
      */
-    public function verifyOutgoingDetail(Request $request) {
+    public function verifyReturDetail(Request $request) {
         try {
             // Validate request
             $request->validate([
-                'id' => 'required|exists:outgoing_details,id',
+                'id' => 'required|exists:retur_details,id',
                 'delivered_qty' => 'required|numeric|min:1',
                 'item_id' => 'required|exists:items,id',
-                'outgoing_id' => 'required|exists:item_outgoings,id',
+                'retur_id' => 'required|exists:item_returs,id',
             ]);
+
+            // Get retur
+            $retur = $this->getReturRepository->getRetur($request->retur_id);
+            $branch_id = $retur->getBranchId();
+
+            // Get branch item
+            $branch_item = $this->checkBranchItemExistenceRepository->checkBranchItemExistence($branch_id, $request->item_id);
+            if (!$branch_item) {
+                throw new Exception('Item not found in branch');
+            }
 
             // Get Item
             $itemDTO = $this->getItemRepository->getItem($request->item_id);
 
             $stok_sebelum = $itemDTO->getStok();
-            $stok_sesudah = $itemDTO->getStok() - $request->delivered_qty;
+            $stok_sesudah = $itemDTO->getStok() + $request->delivered_qty;
 
             // Update item stock
             $itemDTO = $this->editItemRepository->editItem(new UpdateItemDTO(
@@ -92,11 +102,11 @@ class VerifyOutgoingDetailService {
                 $stok_sebelum,
                 $stok_sesudah,
                 $request->delivered_qty,
-                'pengurangan',
+                'penambahan',
                 $request->item_id,
                 null,
-                $request->outgoing_id,
-                null
+                null,
+                $request->retur_id
             );
 
             // Add/Update Global Stock Out Log
@@ -120,33 +130,17 @@ class VerifyOutgoingDetailService {
                 );
             }
 
-            // Add/Update branch item
-            // Get branch id from outgoing id
-            $outgoingDTO = $this->getItemOutgoingRepository->getItemOutgoing($request->outgoing_id);
-            $branch_id = $outgoingDTO->branch_id;
-
-            // Check branch item existence
-            $branchItemExistence = $this->checkBranchItemExistenceRepository->checkBranchItemExistence($branch_id, $request->item_id);
-
-            if (!$branchItemExistence) {
-                // Add branch item
-                $this->addBranchItemService->addBranchItem(new Request([
-                    'item_id' => $request->item_id,
-                    'branch_id' => $branch_id,
-                ]));
-            }
-
             // Update branch item
             $this->updateBranchStokService->updateBranchStok(new Request([
                 'item_id' => $request->item_id,
                 'branch_id' => $branch_id,
                 'jumlah_perubahan' => $request->delivered_qty,
-                'jenis_perubahan' => 'penambahan'
+                'jenis_perubahan' => 'pengurangan'
             ]));
 
-            $outgoingDetailDTO = $this->outgoingDetailRepository->verifyOutgoingDetail($request->id);
+            $returDetailDTO = $this->returDetailRepository->verifyReturDetail($request->id);
 
-            return $outgoingDetailDTO;
+            return $returDetailDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

@@ -25,6 +25,8 @@ use App\Http\Controllers\Modules\ItemOutgoingController;
 use App\Http\Controllers\Modules\OutgoingDetailController;
 use App\Http\Controllers\Modules\BranchOutgoingController;
 use App\Http\Controllers\Modules\BranchOutgoingDetailController;
+use App\Http\Controllers\Modules\ReturController;
+use App\Http\Controllers\Modules\ReturDetailController;
 use App\Http\Controllers\Modules\StockOpnameMasterController;
 use App\Http\Controllers\Modules\StockOpnameDetailController;
 use App\Http\Controllers\Modules\StockOpnameBranchController;
@@ -209,6 +211,20 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
     Route::put('/branch-outgoing-detail/edit', [BranchOutgoingDetailController::class, 'editBranchOutgoingDetail'])->name('editBranchOutgoingDetail');
     Route::delete('/branch-outgoing-detail/delete', [BranchOutgoingDetailController::class, 'deleteBranchOutgoingDetail'])->name('deleteBranchOutgoingDetail');
     Route::put('/branch-outgoing-detail/verify', [BranchOutgoingDetailController::class, 'verifyBranchOutgoingDetail'])->name('verifyBranchOutgoingDetail');
+
+    /* Retur Controllers */
+    Route::get('/retur/one', [ReturController::class, 'getRetur'])->name('getRetur');
+    Route::get('/retur/all', [ReturController::class, 'getAllRetur'])->name('getAllRetur');
+    Route::post('/retur/add', [ReturController::class, 'addRetur'])->name('addRetur');
+    Route::put('/retur/edit', [ReturController::class, 'editRetur'])->name('editRetur');
+    Route::delete('/retur/delete', [ReturController::class, 'deleteRetur'])->name('deleteRetur');
+
+    /* Retur Detail Controllers */
+    Route::get('/retur-detail/all', [ReturDetailController::class, 'getAllReturDetail'])->name('getAllReturDetail');
+    Route::post('/retur-detail/add', [ReturDetailController::class, 'addReturDetail'])->name('addReturDetail');
+    Route::put('/retur-detail/edit', [ReturDetailController::class, 'editReturDetail'])->name('editReturDetail');
+    Route::delete('/retur-detail/delete', [ReturDetailController::class, 'deleteReturDetail'])->name('deleteReturDetail');
+    Route::put('/retur-detail/verify', [ReturDetailController::class, 'verifyReturDetail'])->name('verifyReturDetail');
 
     /* Stock Opname Master Controllers */
     Route::get('/stock-opname-master/one', [StockOpnameMasterController::class, 'getStockOpname'])->name('getStockOpname');

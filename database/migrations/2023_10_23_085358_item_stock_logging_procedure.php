@@ -21,7 +21,8 @@ return new class extends Migration
                 IN bentuk_perubahan VARCHAR(255),
                 IN item_id BIGINT,
                 IN receive_order_id BIGINT,
-                IN outgoing_id BIGINT
+                IN outgoing_id BIGINT,
+                IN retur_id BIGINT
             )
             BEGIN
                 INSERT INTO item_stock_loggings (
@@ -32,7 +33,8 @@ return new class extends Migration
                     bentuk_perubahan,
                     item_id,
                     receive_order_id,
-                    outgoing_id
+                    outgoing_id,
+                    retur_id
                 )
                 VALUES (
                     tanggal_berubah,
@@ -42,7 +44,8 @@ return new class extends Migration
                     bentuk_perubahan,
                     item_id,
                     receive_order_id,
-                    outgoing_id
+                    outgoing_id,
+                    retur_id
                 );
             END;
         ');
