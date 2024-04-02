@@ -68,6 +68,7 @@ class UpdateStockPODetailService {
                 'penambahan',
                 $request->item_id,
                 $request->receive_order_id,
+                null,
                 null
             );
 

@@ -30,7 +30,7 @@ return new class extends Migration
             $table->foreignId('outgoing_id')->nullable()->constrained('item_outgoings')->onDelete('cascade')->onUpdate('cascade');
 
             // Retur
-            $table->foreignId('retur_id')->nullable()->constrained('item_returs')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('retur_id')->nullable()->constrained('returs')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
 

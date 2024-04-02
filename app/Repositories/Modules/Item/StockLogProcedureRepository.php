@@ -38,6 +38,10 @@ class StockLogProcedureRepository {
                 $outgoing_id = 'NULL';
             }
 
+            if ($retur_id == null) {
+                $retur_id = 'NULL';
+            }
+
             $sqlStatement = "CALL item_stock_logging_procedure(
                 '$tanggal_berubah',
                 $stok_lama,

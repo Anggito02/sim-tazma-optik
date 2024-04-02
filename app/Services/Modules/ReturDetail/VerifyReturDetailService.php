@@ -54,7 +54,7 @@ class VerifyReturDetailService {
                 'id' => 'required|exists:retur_details,id',
                 'delivered_qty' => 'required|numeric|min:1',
                 'item_id' => 'required|exists:items,id',
-                'retur_id' => 'required|exists:item_returs,id',
+                'retur_id' => 'required|exists:returs,id',
             ]);
 
             // Get retur
