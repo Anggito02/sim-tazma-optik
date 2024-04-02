@@ -12,7 +12,7 @@ class GenerateOutgoingNumberService {
     ) {}
 
     /**
-     * Generate po number
+     * Generate outgoing number
      * @return string
      */
     public function generateOutgoingNumber() {
