@@ -4,15 +4,15 @@ namespace App\Services\Modules\BranchOutgoing;
 
 use Exception;
 
-use App\Repositories\Modules\BranchOutgoing\GetLatestOutgoingNumberRepository;
+use App\Repositories\Modules\BranchOutgoing\GetLatestBranchOutgoingNumberRepository;
 
 class GenerateOutgoingNumberService {
     public function __construct(
-        private GetLatestOutgoingNumberRepository $getLatestOutgoingNumberRepository
+        private GetLatestBranchOutgoingNumberRepository $getLatestOutgoingNumberRepository
     ) {}
 
     /**
-     * Generate po number
+     * Generate outgoing number
      * @return string
      */
     public function generateOutgoingNumber() {

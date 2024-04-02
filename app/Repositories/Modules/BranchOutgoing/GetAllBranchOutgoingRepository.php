@@ -26,7 +26,7 @@ class GetAllBranchOutgoingRepository {
                 ->leftJoin('users as received_by', 'branch_outgoings.received_by', '=', 'received_by.id')
                 ->select(
                     'branch_outgoings.id as id',
-                    'branch_outgoings.nomor_outgoing as nomor_outgoing',
+                    'branch_outgoings.nomor_branch_outgoing as nomor_branch_outgoing',
                     'branch_outgoings.tanggal_outgoing as tanggal_outgoing',
                     'branch_outgoings.tanggal_pengiriman as tanggal_pengiriman',
 
@@ -60,7 +60,7 @@ class GetAllBranchOutgoingRepository {
             foreach ($branchOutgoings as $branchOutgoing) {
                 $branchOutgoingInfoDTO = new BranchOutgoingInfoDTO(
                     $branchOutgoing->id,
-                    $branchOutgoing->nomor_outgoing,
+                    $branchOutgoing->nomor_branch_outgoing,
                     $branchOutgoing->tanggal_outgoing,
                     $branchOutgoing->tanggal_pengiriman,
 

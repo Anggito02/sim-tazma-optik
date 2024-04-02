@@ -16,7 +16,7 @@ class GetBranchOutgoingRepository {
     public function getBranchOutgoing(int $id) {
         try {
             $branchOutgoing = BranchOutgoing::join('branches as branches_from', 'branch_outgoings.branch_from_id', '=', 'branches_from.id')
-            ->join('branches as branches_to', 'branch_outgoings.branch_to', '=', 'branches_to.id')
+            ->join('branches as branches_to', 'branch_outgoings.branch_to_id', '=', 'branches_to.id')
             ->join('users as known_by', 'branch_outgoings.known_by', '=', 'known_by.id')
             ->join('users as checked_by', 'branch_outgoings.checked_by', '=', 'checked_by.id')
             ->join('users as approved_by', 'branch_outgoings.approved_by', '=', 'approved_by.id')
@@ -24,7 +24,7 @@ class GetBranchOutgoingRepository {
             ->leftJoin('users as received_by', 'branch_outgoings.received_by', '=', 'received_by.id')
             ->select(
                 'branch_outgoings.id as id',
-                'branch_outgoings.nomor_outgoing as nomor_outgoing',
+                'branch_outgoings.nomor_branch_outgoing as nomor_branch_outgoing',
                 'branch_outgoings.tanggal_outgoing as tanggal_outgoing',
                 'branch_outgoings.tanggal_pengiriman as tanggal_pengiriman',
 
@@ -32,7 +32,7 @@ class GetBranchOutgoingRepository {
                 'branches_from.nama_branch as nama_branch_from',
                 'branches_from.kode_branch as kode_branch_from',
 
-                'branch_outgoings.branch_to as branch_to',
+                'branch_outgoings.branch_to_id as branch_to',
                 'branches_to.kode_branch as kode_branch_to',
                 'branches_to.nama_branch as nama_branch_to',
 
@@ -56,7 +56,7 @@ class GetBranchOutgoingRepository {
 
             $branchOutgoingInfoDTO = new BranchOutgoingInfoDTO(
                 $branchOutgoing->id,
-                $branchOutgoing->nomor_outgoing,
+                $branchOutgoing->nomor_branch_outgoing,
                 $branchOutgoing->tanggal_outgoing,
                 $branchOutgoing->tanggal_pengiriman,
 

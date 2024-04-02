@@ -16,7 +16,7 @@ class AddBranchOutgoingRepository {
     public function addBranchOutgoing(NewBranchOutgoingDTO $newBranchOutgoingDTO) {
         try {
             $branchOutgoing = BranchOutgoing::create([
-                'nomor_outgoing' => $newBranchOutgoingDTO->getNomorOutgoing(),
+                'nomor_branch_outgoing' => $newBranchOutgoingDTO->getNomorOutgoing(),
                 'tanggal_outgoing' => $newBranchOutgoingDTO->getTanggalOutgoing(),
                 'tanggal_pengiriman' => $newBranchOutgoingDTO->getTanggalPengiriman(),
 

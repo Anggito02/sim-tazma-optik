@@ -5,7 +5,7 @@ namespace App\Repositories\Modules\BranchOutgoing;
 use App\Models\Modules\BranchOutgoing;
 use Exception;
 
-class GetLatestOutgoingNumberRepository {
+class GetLatestBranchOutgoingNumberRepository {
     /**
      * Get latest outgoing number
      * @return string
