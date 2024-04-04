@@ -9,6 +9,9 @@ class EditBranchOutgoingDetailDTO {
 
         public int $item_id,
 
+        public int $branch_from_id,
+        public int $branch_to_id,
+
         public int $verified_by,
     )
     {}
@@ -23,6 +26,14 @@ class EditBranchOutgoingDetailDTO {
 
     public function getItemId(): int {
         return $this->item_id;
+    }
+
+    public function getBranchFromId(): int {
+        return $this->branch_from_id;
+    }
+
+    public function getBranchToId(): int {
+        return $this->branch_to_id;
     }
 
     public function getVerifiedBy(): int {

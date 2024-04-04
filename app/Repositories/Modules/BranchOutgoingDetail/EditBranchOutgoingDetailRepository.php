@@ -20,6 +20,8 @@ class EditBranchOutgoingDetailRepository {
                 ->update([
                     'delivered_qty' => $editBranchOutgoingDetailDTO->getDeliveredQty(),
                     'item_id' => $editBranchOutgoingDetailDTO->getItemId(),
+                    'branch_from_id' => $editBranchOutgoingDetailDTO->getBranchFromId(),
+                    'branch_to_id' => $editBranchOutgoingDetailDTO->getBranchToId(),
                     'verified_by' => $editBranchOutgoingDetailDTO->getVerifiedBy(),
                 ]);
 
