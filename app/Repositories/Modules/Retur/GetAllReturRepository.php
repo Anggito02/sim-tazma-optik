@@ -18,7 +18,6 @@ class GetAllReturRepository {
         try {
             // use pagination
             $returs = Retur::join('branches', 'returs.branch_id', '=', 'branches.id')
-                ->join('users as known_by', 'returs.known_by', '=', 'known_by.id')
                 ->join('users as checked_by', 'returs.checked_by', '=', 'checked_by.id')
                 ->join('users as approved_by', 'returs.approved_by', '=', 'approved_by.id')
                 ->join('users as delivered_by', 'returs.delivered_by', '=', 'delivered_by.id')
