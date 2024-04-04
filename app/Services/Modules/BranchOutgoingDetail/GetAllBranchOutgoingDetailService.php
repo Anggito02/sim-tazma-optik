@@ -27,7 +27,7 @@ class GetAllBranchOutgoingDetailService {
                 'branch_outgoing_id' => 'required|exists:branch_outgoings,id',
             ]);
 
-            $branchOutgoingDetailDTOs = $this->branchOutgoingDetailRepository->getAllBranchOutgoingDetail($request->outgoing_id);
+            $branchOutgoingDetailDTOs = $this->branchOutgoingDetailRepository->getAllBranchOutgoingDetail($request->branch_outgoing_id);
 
             return $branchOutgoingDetailDTOs;
         } catch (Exception $error) {
