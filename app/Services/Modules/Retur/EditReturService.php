@@ -28,7 +28,6 @@ class EditReturService {
 
                 'branch_id' => 'required|exists:branches,id',
 
-                'known_by' => 'required|exists:users,id',
                 'checked_by' => 'required|exists:users,id',
                 'approved_by' => 'required|exists:users,id',
                 'delivered_by' => 'required|exists:users,id',
@@ -41,7 +40,6 @@ class EditReturService {
 
                 $request->branch_id,
 
-                $request->known_by,
                 $request->checked_by,
                 $request->approved_by,
                 $request->delivered_by,

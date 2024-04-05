@@ -9,10 +9,10 @@ class EditReturDTO {
 
         public int $branch_id,
 
-        public ?int $received_by,
         public int $checked_by,
         public int $approved_by,
         public int $delivered_by,
+        public ?int $received_by,
     )
     {}
 
