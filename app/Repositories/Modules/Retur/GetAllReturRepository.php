@@ -59,6 +59,9 @@ class GetAllReturRepository {
                     $retur->kode_branch,
                     $retur->nama_branch,
 
+                    $retur->received_by,
+                    $retur->received_by_nama,
+
                     $retur->checked_by,
                     $retur->checked_by_nama,
 
@@ -67,9 +70,6 @@ class GetAllReturRepository {
 
                     $retur->delivered_by,
                     $retur->delivered_by_nama,
-
-                    $retur->received_by,
-                    $retur->received_by_nama,
                 );
 
                 array_push($returInfoDTOs, $returInfoDTO);
