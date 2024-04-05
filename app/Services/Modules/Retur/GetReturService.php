@@ -22,7 +22,7 @@ class GetReturService {
     public function getRetur(Request $request) {
         // Validate request
         $request->validate([
-            'id' => 'required|exists:item_outgoings,id'
+            'id' => 'required|exists:returs,id'
         ]);
 
         $id = $request->id;
