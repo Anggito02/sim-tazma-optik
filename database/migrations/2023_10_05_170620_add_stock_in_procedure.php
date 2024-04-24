@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         DB::unprepared('
-            CREATE PROCEDURE IF NOT EXISTS add_stock_in_procedure(
+            CREATE PROCEDURE add_stock_in_procedure(
                 IN kode_item VARCHAR(255),
                 IN bulan INT,
                 IN tahun INT,

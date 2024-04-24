@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         DB::unprepared("
-            CREATE PROCEDURE IF NOT EXISTS update_total_harga_sales_master_procedure (
+            CREATE PROCEDURE  update_total_harga_sales_master_procedure (
                 IN sales_master_id BIGINT,
                 IN jumlah_perubahan INT,
                 IN tipe_perubahan ENUM('penambahan', 'pengurangan')
