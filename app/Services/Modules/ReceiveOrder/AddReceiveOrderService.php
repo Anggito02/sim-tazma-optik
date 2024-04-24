@@ -29,14 +29,14 @@ class AddReceiveOrderService {
         try {
             // Validate request
             $request->validate([
-                'purchase_order_id' => 'required',
+                'purchase_order_id' => 'required|exists:purchase_orders,id',
                 'received_by' => 'required',
                 'checked_by' => 'required',
                 'approved_by' => 'required'
             ]);
 
             // Change purchase order status_penerimaan to TRUE
-            $editPOService = $this->editPOService->editPurchaseOrderStatusPenerimaan(
+            $this->editPOService->editPurchaseOrderStatusPenerimaan(
                 new Request([
                     'id' => $request->purchase_order_id,
                     'status_penerimaan' => true

@@ -95,7 +95,8 @@ class VerifyOutgoingDetailService {
                 'pengurangan',
                 $request->item_id,
                 null,
-                $request->outgoing_id
+                $request->outgoing_id,
+                null
             );
 
             // Add/Update Global Stock Out Log

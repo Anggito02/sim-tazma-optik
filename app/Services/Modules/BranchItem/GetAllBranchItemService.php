@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 
 use App\DTO\Modules\BranchItemDTOs\BranchItemInfoDTO;
+use App\DTO\Modules\BranchItemDTOs\BranchItemFilterDTO;
 
 use App\Repositories\Modules\BranchItem\GetAllBranchItemRepository;
 
@@ -25,9 +26,19 @@ class GetAllBranchItemService {
             $request->validate([
                 'page' => 'required',
                 'limit' => 'required',
+
+                'branch_id' => 'exists:branches,id',
+                'jenis_item' => 'in:frame,lensa,aksesoris',
             ]);
 
-            $branchItemDTO = $this->branchItemRepository->getAllBranchItem($request->page, $request->limit);
+            $branchItemFilterDTO = new BranchItemFilterDTO(
+                $request->page,
+                $request->limit,
+                $request->branch_id,
+                $request->jenis_item
+            );
+
+            $branchItemDTO = $this->branchItemRepository->getAllBranchItem($branchItemFilterDTO);
 
             return $branchItemDTO;
         } catch (Exception $error) {

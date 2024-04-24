@@ -12,12 +12,16 @@ use App\Repositories\Modules\StockOpnameBranchDetail\AdjustStockOpnameBranchDeta
 use App\Services\Modules\StockOpnameBranchDetail\AdjustInSOBranchDetailService;
 use App\Services\Modules\StockOpnameBranchDetail\AdjustOutSOBranchDetailService;
 
+use App\Repositories\Modules\StockOpnameBranchDetail\UpdateStatusSOBranchDetailRepository;
+
 class MakeAdjustmentSOBranchDetailService {
     public function __construct(
         private AdjustStockOpnameBranchDetailRepository $adjustStockOpnameBranchDetailRepository,
 
         private AdjustInSOBranchDetailService $adjustInSOBranchDetailService,
-        private AdjustOutSOBranchDetailService $adjustOutSOBranchDetailService
+        private AdjustOutSOBranchDetailService $adjustOutSOBranchDetailService,
+
+        private UpdateStatusSOBranchDetailRepository $updateStatusSOBranchDetailRepository
     )
     {}
 
@@ -30,6 +34,7 @@ class MakeAdjustmentSOBranchDetailService {
         try {
             // Validate request
             $request->validate([
+                'so_branch_detail_id' => 'required|exists:stock_opname_branch_details,id',
                 'adjustment_type' => 'required|in:IN,OUT',
                 'adjustment_by' => 'required|exists:users,id',
 
@@ -54,6 +59,8 @@ class MakeAdjustmentSOBranchDetailService {
             } else {
                 $adjustmentResult = $this->adjustOutSOBranchDetailService->makeAdjustmentSOBranchDetail($adjustStockOpnameBranchDetailDTO);
             }
+
+            $this->updateStatusSOBranchDetailRepository->updateSODetailAdjustmentStatus($request->so_branch_detail_id, false);
 
             return $adjustmentResult;
         } catch (Exception $error) {
