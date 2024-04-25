@@ -2,8 +2,9 @@
 
 namespace App\DTO\Modules\CustomerDiagnoseDTOs;
 
-class NewCustomerDiagnoseDTO {
+class EditCustomerDiagnoseDTO {
     public function __construct(
+        public int $id,
         public string $tanggal_diagnosa,
         public string $keluhan,
 

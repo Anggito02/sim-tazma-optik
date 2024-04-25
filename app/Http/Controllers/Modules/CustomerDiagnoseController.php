@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Services\Modules\CustomerDiagnose\AddCustomerDiagnoseService;
+use App\Services\Modules\CustomerDiagnose\EditCustomerDiagnoseService;
 use App\Services\Modules\CustomerDiagnose\GetCustomerDiagnoseFilteredService;
 
 class CustomerDiagnoseController extends Controller
@@ -14,7 +15,8 @@ class CustomerDiagnoseController extends Controller
     // Service Providers Constructs
     public function __construct(
         private AddCustomerDiagnoseService $addCustomerDiagnoseService,
-        private GetCustomerDiagnoseFilteredService $getCustomerDiagnoseFilteredService
+        private GetCustomerDiagnoseFilteredService $getCustomerDiagnoseFilteredService,
+        private EditCustomerDiagnoseService $editCustomerDiagnoseService
     ) {}
 
     /**
@@ -58,6 +60,29 @@ class CustomerDiagnoseController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Get customer diagnose failed',
+                'data' => $error->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Edit customer diagnose
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function editCustomerDiagnose(Request $request) {
+        try {
+            $customerDiagnoseDTO = $this->editCustomerDiagnoseService->editCustomerDiagnose($request);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Edit customer diagnose success',
+                'data' => $customerDiagnoseDTO
+            ], 200);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Edit customer diagnose failed',
                 'data' => $error->getMessage()
             ], 400);
         }
