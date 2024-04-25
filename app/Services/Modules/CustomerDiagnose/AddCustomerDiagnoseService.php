@@ -23,7 +23,6 @@ class AddCustomerDiagnoseService {
         try {
             // Validate request
             $request->validate([
-                'tanggal_diagnosa' => 'required',
                 'keluhan' => 'required|min:3|max:100',
                 'visus_tanpa_koreksi_R' => 'nullable|min:3|max:10',
                 'visus_tanpa_koreksi_L' => 'nullable|min:3|max:10',
@@ -47,13 +46,13 @@ class AddCustomerDiagnoseService {
 
                 // Branch
                 'branch_check_location_id' => 'required|exists:branches,id',
-
-                // Employee
-                'diagnosed_by' => 'required|exists:users,id',
             ]);
 
+            $tanggal_diagnosa = date('Y-m-d');
+            $diagnosed_by = $request->user()->id;
+
             $newCustomerDiagnoseDTO = new NewCustomerDiagnoseDTO(
-                $request->tanggal_diagnosa,
+                $tanggal_diagnosa,
                 $request->keluhan,
                 $request->visus_tanpa_koreksi_R,
                 $request->visus_tanpa_koreksi_L,
@@ -72,7 +71,7 @@ class AddCustomerDiagnoseService {
                 $request->catatan,
                 $request->customer_id,
                 $request->branch_check_location_id,
-                $request->diagnosed_by,
+                $diagnosed_by,
             );
 
             $customerDiagnose = $this->customerDiagnoseRepository->addCustomerDiagnose($newCustomerDiagnoseDTO);
