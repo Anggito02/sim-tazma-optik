@@ -3,7 +3,6 @@
 namespace App\Repositories\Modules\CustomerDiagnose;
 
 use Exception;
-use Illuminate\Support\Facades\DB;
 
 use App\DTO\Modules\CustomerDiagnoseDTOs\NewCustomerDiagnoseDTO;
 
