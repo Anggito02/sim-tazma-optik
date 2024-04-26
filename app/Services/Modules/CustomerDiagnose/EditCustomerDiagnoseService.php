@@ -53,7 +53,7 @@ class EditCustomerDiagnoseService {
             $diagnosed_by = $request->user()->id;
 
             $newCustomerDiagnoseDTO = new EditCustomerDiagnoseDTO(
-                $request->id,
+                $request->customer_diagnose_id,
                 $tanggal_diagnosa,
                 $request->keluhan,
                 $request->visus_tanpa_koreksi_R,
