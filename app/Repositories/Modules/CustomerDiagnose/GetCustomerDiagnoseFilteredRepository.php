@@ -71,11 +71,11 @@ class GetCustomerDiagnoseFilteredRepository {
                     $customerDiagnose->oculus_dextra_add_R,
                     $customerDiagnose->oculus_dextra_visus_R,
 
-                    $customerDiagnose->oculus_dextra_sph_L,
-                    $customerDiagnose->oculus_dextra_cyl_L,
+                    $customerDiagnose->oculus_sinistra_sph_L,
+                    $customerDiagnose->oculus_sinistra_cyl_L,
                     $customerDiagnose->axis_L,
-                    $customerDiagnose->oculus_dextra_add_L,
-                    $customerDiagnose->oculus_dextra_visus_L,
+                    $customerDiagnose->oculus_sinistra_add_L,
+                    $customerDiagnose->oculus_sinistra_visus_L,
 
                     $customerDiagnose->PD,
                     $customerDiagnose->diagnosa,
