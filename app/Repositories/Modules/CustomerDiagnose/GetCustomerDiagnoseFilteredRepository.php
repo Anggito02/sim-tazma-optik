@@ -51,10 +51,9 @@ class GetCustomerDiagnoseFilteredRepository {
                 ->leftJoin('customers', 'customers.id', '=', 'customer_diagnoses.customer_id')
                 ->leftJoin('branches', 'branches.id', '=', 'customer_diagnoses.branch_check_location_id')
                 ->leftJoin('users', 'users.id', '=', 'customer_diagnoses.diagnosed_by')
-                ->select('customer_diagnoses.*', 'customers.nama_depan as customer_nama_depan', 'customers.nama_belakang as customer_nama_belakang', 'customers.nomor_telepon', 'branches.kode_branch as branch_check_location_kode', 'branches.nama_branch as branch_check_location_nama', 'users.employee_name as diagnosed_by_nama')
+                ->select('customer_diagnoses.*', 'customers.nama_depan as customer_nama_depan', 'customers.nama_belakang as customer_nama_belakang', 'customers.nomor_telepon as customer_nomor_telepon', 'branches.kode_branch as branch_check_location_kode', 'branches.nama_branch as branch_check_location_nama', 'users.employee_name as diagnosed_by_nama')
                 ->orderBy('customer_diagnoses.tanggal_diagnosa', 'desc')
                 ->paginate($customerDiagnoseFilterDTO->getLimit(), ['*'], 'page', $customerDiagnoseFilterDTO->getPage());
-
 
             $customerDiagnoseDTOs = [];
 
