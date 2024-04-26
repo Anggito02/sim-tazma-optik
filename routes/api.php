@@ -254,6 +254,7 @@ Route::middleware(['auth:sanctum', 'isAdministrator'])->group(function() {
 
     /* Customer Diagnose Controllers */
     Route::post('/customer-diagnose/add', [CustomerDiagnoseController::class, 'addCustomerDiagnose'])->name('addCustomerDiagnose');
+    Route::get('/customer-diagnose/one', [CustomerDiagnoseController::class, 'getCustomerDiagnose'])->name('getCustomerDiagnose');
     Route::get('/customer-diagnose/filtered', [CustomerDiagnoseController::class, 'getCustomerDiagnoseFiltered'])->name('getCustomerDiagnoseFiltered');
     Route::put('/customer-diagnose/edit', [CustomerDiagnoseController::class, 'editCustomerDiagnose'])->name('editCustomerDiagnose');
 
