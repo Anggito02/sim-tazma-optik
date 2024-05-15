@@ -74,7 +74,8 @@ class AddSalesDetailService {
                 $salesDetailDTO = $this->editSalesDetailService->editSalesDetail(new Request([
                     'id' => $sales_detail_id,
                     'sales_master_id' => $request->sales_master_id,
-                    'qty' => $salesDetail->getQty() + 1
+                    'qty' => $salesDetail->getQty() + 1,
+                    'potongan_manual' => $salesDetail->getPotonganManual()
                 ]));
             // if sales detail is new, add new sales detail
             } else {
