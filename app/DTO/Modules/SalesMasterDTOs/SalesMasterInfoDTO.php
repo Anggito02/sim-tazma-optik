@@ -13,6 +13,7 @@ class SalesMasterInfoDTO {
         private ?string $nomor_referensi,
         private ?float $dp,
         private ?int $total_tagihan,
+        private ?int $potongan_manual,
         private ?string $status,
         private bool $verified,
 
@@ -40,6 +41,7 @@ class SalesMasterInfoDTO {
             'nomor_referensi' => $this->nomor_referensi,
             'dp' => $this->dp,
             'total_tagihan' => $this->total_tagihan,
+            'potongan_manual' => $this->potongan_manual,
             'status' => $this->status,
             'verified' => $this->verified,
 
@@ -99,6 +101,11 @@ class SalesMasterInfoDTO {
     public function getTotalTagihan(): ?int
     {
         return $this->total_tagihan;
+    }
+
+    public function getPotonganManual(): ?int
+    {
+        return $this->potongan_manual;
     }
 
     public function getStatus(): ?string

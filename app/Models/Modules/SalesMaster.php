@@ -18,6 +18,7 @@ class SalesMaster extends Model
         'nomor_referensi',
         'dp',
         'total_tagihan',
+        'potongan_manual',
         'status',
         'branch_id',
         'employee_id',

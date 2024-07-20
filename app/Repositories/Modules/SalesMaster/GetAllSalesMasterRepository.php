@@ -45,6 +45,7 @@ class GetAllSalesMasterRepository {
                     'sales_masters.nomor_referensi',
                     'sales_masters.dp',
                     'sales_masters.total_tagihan',
+                    'sales_masters.potongan_manual',
                     'sales_masters.status',
                     'sales_masters.verified',
 
@@ -74,6 +75,7 @@ class GetAllSalesMasterRepository {
                     $salesMaster->nomor_referensi,
                     $salesMaster->dp,
                     $salesMaster->total_tagihan,
+                    $salesMaster->potongan_manual,
                     $salesMaster->status,
                     $salesMaster->verified,
 

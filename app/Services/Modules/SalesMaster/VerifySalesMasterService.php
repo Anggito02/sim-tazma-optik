@@ -36,6 +36,7 @@ class VerifySalesMasterService {
             // Validate request
             $request->validate([
                 'id' => 'required|exists:sales_masters,id',
+                'potongan_manual' => 'integer|min:0'
             ]);
 
             // Check if verify sales master is verified
@@ -72,7 +73,7 @@ class VerifySalesMasterService {
             }
 
             // verify sales master
-            $salesMaster = $this->verifySalesMasterRepository->verifySalesMaster($request->id);
+            $salesMaster = $this->verifySalesMasterRepository->verifySalesMaster($request->id, $request->potongan_manual);
 
             return $salesMaster;
         } catch (Exception $e) {
